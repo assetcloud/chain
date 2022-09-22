@@ -3,9 +3,9 @@ package eth_test
 import (
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/system/address/eth"
-	"github.com/33cn/chain33/system/crypto/secp256k1"
+	"github.com/33cn/chain/common/address"
+	"github.com/33cn/chain/system/address/eth"
+	"github.com/33cn/chain/system/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 

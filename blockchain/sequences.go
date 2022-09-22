@@ -5,8 +5,8 @@
 package blockchain
 
 import (
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
 )
 
 //GetBlockSequences 通过记录的block序列号获取blockd序列存储的信息

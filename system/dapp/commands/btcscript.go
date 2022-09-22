@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/33cn/chain33/rpc/jsonclient"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -69,7 +69,7 @@ func getWalletRecoveryAddr(cmd *cobra.Command, args []string) {
 	}
 	var res string
 	rpcAddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain33.GetWalletRecoverAddress", req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain.GetWalletRecoverAddress", req, &res)
 	ctx.RunWithoutMarshal()
 }
 
@@ -141,6 +141,6 @@ func signWalletRecoveryTx(cmd *cobra.Command, args []string) {
 
 	var res string
 	rpcAddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain33.SignWalletRecoverTx", req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain.SignWalletRecoverTx", req, &res)
 	ctx.RunWithoutMarshal()
 }

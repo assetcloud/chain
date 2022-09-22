@@ -3,7 +3,7 @@ os: Visual Studio 2019
 
 build: off
 
-clone_folder: c:\gopath\src\github.com\33cn\chain33
+clone_folder: c:\gopath\src\github.com\assetcloud\chain
 
 environment:
   GOPATH: c:\gopath
@@ -18,6 +18,6 @@ test_script:
   - go version
   - go env
   - go env -w CGO_ENABLED=0
-  - go build -o build/chain33.exe github.com/33cn/chain33/cmd/chain33
-  - go build -o build/chain33-cli.exe github.com/33cn/chain33/cmd/cli
+  - go build -o build/chain.exe github.com/assetcloud/chain/cmd/chain
+  - go build -o build/chain-cli.exe github.com/assetcloud/chain/cmd/cli
 

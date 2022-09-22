@@ -12,9 +12,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/assetcloud/chain/common/log/log15"
 )
 
 //FloatDiff const
@@ -41,7 +41,7 @@ func AutoTestLogFormat() log15.Format {
 
 }
 
-//RunChain33Cli invoke chain33 client
+//RunChain33Cli invoke chain client
 func RunChain33Cli(para []string) (string, error) {
 
 	rawOut, err := exec.Command(CliCmd, para[0:]...).CombinedOutput()

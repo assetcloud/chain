@@ -6,14 +6,14 @@ package executor
 import (
 	"testing"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	nty "github.com/33cn/chain33/system/dapp/none/types"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/chain/client"
+	"github.com/33cn/chain/common"
+	"github.com/33cn/chain/common/address"
+	"github.com/33cn/chain/common/db"
+	"github.com/33cn/chain/queue"
+	nty "github.com/33cn/chain/system/dapp/none/types"
+	"github.com/33cn/chain/types"
+	"github.com/33cn/chain/util"
 	"github.com/stretchr/testify/require"
 )
 

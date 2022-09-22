@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
 	farm "github.com/dgryski/go-farm"
 	lru "github.com/hashicorp/golang-lru"
 )

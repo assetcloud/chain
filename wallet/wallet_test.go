@@ -12,16 +12,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/wallet/bipwallet"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/store"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/wallet/bipwallet"
+	wcom "github.com/assetcloud/chain/wallet/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -32,7 +32,7 @@ func init() {
 }
 
 func initEnv() (*Wallet, queue.Module, queue.Queue, string) {
-	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
 	wallet := New(cfg)

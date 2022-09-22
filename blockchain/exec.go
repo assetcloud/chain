@@ -5,9 +5,9 @@
 package blockchain
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 )
 
 //执行区块将变成一个私有的函数

@@ -6,12 +6,12 @@
 package commands
 
 import (
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/util"
 
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	mty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	mty "github.com/assetcloud/chain/system/dapp/manage/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -72,7 +72,7 @@ func configTx(cmd *cobra.Command, args []string) {
 		Payload:    types.MustPBToJSON(v),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -113,7 +113,7 @@ func configApply(cmd *cobra.Command, args []string) {
 		Payload:    types.MustPBToJSON(apply),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -151,7 +151,7 @@ func configApprove(cmd *cobra.Command, args []string) {
 		Payload:    types.MustPBToJSON(v),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 
 }
@@ -185,7 +185,7 @@ func queryConfig(cmd *cobra.Command, args []string) {
 	params.Payload = types.MustPBToJSON(req)
 
 	var res types.ReplyConfig
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.Query", params, &res)
 	ctx.Run()
 }
 
@@ -218,7 +218,7 @@ func queryConfigID(cmd *cobra.Command, args []string) {
 	params.Payload = types.MustPBToJSON(req)
 
 	var res mty.ConfigStatus
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.Query", params, &res)
 	ctx.Run()
 }
 
@@ -265,6 +265,6 @@ func listConfigItem(cmd *cobra.Command, args []string) {
 	params.Payload = types.MustPBToJSON(req)
 
 	var rep mty.ReplyQueryConfigList
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", params, &rep)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.Query", params, &rep)
 	ctx.Run()
 }

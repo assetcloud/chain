@@ -15,9 +15,9 @@ import (
 
 	"fmt"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/types/chaincfg"
 	tml "github.com/BurntSushi/toml"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/types/chaincfg"
 )
 
 //Create ...
@@ -177,8 +177,8 @@ func (c *Chain33Config) setDefaultConfig() {
 		c.S("cfg."+key, cfg)
 	}
 	//防止报error 错误，不影响功能
-	if !c.HasConf("cfg.chain33") {
-		c.S("cfg.chain33", "")
+	if !c.HasConf("cfg.chain") {
+		c.S("cfg.chain", "")
 	}
 	if !c.HasConf("cfg.local") {
 		c.S("cfg.local", "")

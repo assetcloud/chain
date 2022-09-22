@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/33cn/chain33/system/mempool"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/system/mempool"
+	"github.com/assetcloud/chain/types"
 )
 
 func TestNewMempool(t *testing.T) {

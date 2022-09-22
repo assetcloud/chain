@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.23.0
 // 	protoc        v3.9.1
-// source: ticket.chain33.proto
+// source: ticket.chain.proto
 
 package ticket
 

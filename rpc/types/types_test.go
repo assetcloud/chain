@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

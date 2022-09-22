@@ -5,8 +5,8 @@
 package executor
 
 import (
-	nty "github.com/33cn/chain33/system/dapp/none/types"
-	"github.com/33cn/chain33/types"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/types"
 )
 
 // ExecLocal_CommitDelayTx exec local commit delay tx

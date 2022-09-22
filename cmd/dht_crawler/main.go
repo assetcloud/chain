@@ -17,12 +17,12 @@ import (
 )
 
 // Run：
-//dht_crawler -proto "/chain33-0/kad/1.0.0" -node "/ip4/ip/tcp/port/pid"
+//dht_crawler -proto "/chain-0/kad/1.0.0" -node "/ip4/ip/tcp/port/pid"
 
-//dhtprotoId="/chain33-0/kad/1.0.0"
+//dhtprotoId="/chain-0/kad/1.0.0"
 var (
 	//dht 协议ID，需要根据具体区块链网络进行配置
-	dhtProtoID = flag.String("proto", "/chain33-0/kad/1.0.0", "dht protocol id,such as:/chain33-0/kad/1.0.0")
+	dhtProtoID = flag.String("proto", "/chain-0/kad/1.0.0", "dht protocol id,such as:/chain-0/kad/1.0.0")
 	//扫描的引导节点
 	startNodes = flag.String("node", "", "bootstrap nodes")
 	//扫描数据输出
@@ -111,7 +111,7 @@ func outputData(host core.Host, filePath, allpeerfile, jsonfile string) {
 	if err != nil {
 		panic(err)
 	}
-	f.WriteString("chain33  peers topology{ \n")
+	f.WriteString("chain  peers topology{ \n")
 	for p, rtPeers := range peerMap {
 		pinfo := host.Peerstore().PeerInfo(p)
 		allPeers[p] = &pinfo
@@ -129,7 +129,7 @@ func outputData(host core.Host, filePath, allpeerfile, jsonfile string) {
 	if err != nil {
 		panic(err)
 	}
-	f.WriteString(fmt.Sprintf("chain33 all peers:%d{ \n", len(allPeers)))
+	f.WriteString(fmt.Sprintf("chain all peers:%d{ \n", len(allPeers)))
 
 	for p, info := range allPeers {
 		f.WriteString(fmt.Sprintf("%v ---> %v;\n", p, info.Addrs))

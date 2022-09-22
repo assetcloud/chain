@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	l "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	l "github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	"github.com/stretchr/testify/require"

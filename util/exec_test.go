@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/chain/types"
 )
 
 const length = 1e4

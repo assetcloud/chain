@@ -5,9 +5,9 @@
 package executor
 
 import (
-	dbm "github.com/33cn/chain33/common/db"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/assetcloud/chain/common/db"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
 )
 
 func init() {

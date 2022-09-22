@@ -8,13 +8,13 @@ import (
 	"errors"
 	"time"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/assetcloud/chain/queue"
 
 	"strings"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	pb "github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	pb "github.com/assetcloud/chain/types"
 	"golang.org/x/net/context"
 )
 

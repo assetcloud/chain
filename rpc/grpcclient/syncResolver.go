@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/resolver"
 )

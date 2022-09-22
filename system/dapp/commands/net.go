@@ -5,9 +5,9 @@
 package commands
 
 import (
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -50,7 +50,7 @@ func peerInfo(cmd *cobra.Command, args []string) {
 	var res rpctypes.PeerList
 	p2pty, _ := cmd.Flags().GetString("type")
 	req := types.P2PGetPeerReq{P2PType: p2pty}
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetPeerInfo", &req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetPeerInfo", &req, &res)
 	ctx.Run()
 }
 
@@ -67,7 +67,7 @@ func IsClockSyncCmd() *cobra.Command {
 func isClockSync(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res bool
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.IsNtpClockSync", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.IsNtpClockSync", nil, &res)
 	ctx.Run()
 }
 
@@ -84,7 +84,7 @@ func IsSyncCmd() *cobra.Command {
 func isSync(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res bool
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.IsSync", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.IsSync", nil, &res)
 	ctx.Run()
 }
 
@@ -104,7 +104,7 @@ func netInfo(cmd *cobra.Command, args []string) {
 	p2pty, _ := cmd.Flags().GetString("type")
 	req := types.P2PGetNetInfoReq{P2PType: p2pty}
 	var res rpctypes.NodeNetinfo
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetNetInfo", &req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetNetInfo", &req, &res)
 	ctx.Run()
 }
 
@@ -122,7 +122,7 @@ func NetProtocolsCmd() *cobra.Command {
 func netProtocols(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res types.NetProtocolInfos
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.NetProtocols", &types.ReqNil{}, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.NetProtocols", &types.ReqNil{}, &res)
 	ctx.Run()
 }
 
@@ -139,7 +139,7 @@ func GetFatalFailureCmd() *cobra.Command {
 func fatalFailure(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res int64
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetFatalFailure", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetFatalFailure", nil, &res)
 	ctx.Run()
 }
 
@@ -156,7 +156,7 @@ func GetTimeStausCmd() *cobra.Command {
 func timestatus(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.TimeStatus
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetTimeStatus", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetTimeStatus", nil, &res)
 	ctx.Run()
 }
 
@@ -234,7 +234,7 @@ func addblacklist(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.AddBlacklist", &peer, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.AddBlacklist", &peer, &res)
 	ctx.Run()
 }
 
@@ -254,7 +254,7 @@ func delblacklist(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.DelBlacklist", &peer, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.DelBlacklist", &peer, &res)
 	ctx.Run()
 
 }
@@ -262,7 +262,7 @@ func delblacklist(cmd *cobra.Command, args []string) {
 func showblacklist(cmd *cobra.Command, args []string) {
 	var res = new([]*types.BlackInfo)
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ShowBlacklist", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.ShowBlacklist", nil, &res)
 	ctx.Run()
 
 }
@@ -292,7 +292,7 @@ func dialPeer(cmd *cobra.Command, args []string) {
 	var res interface{}
 	setpeer.Seed = isseed
 	setpeer.PeerAddr = peerAddr
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.DialPeer", &setpeer, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.DialPeer", &setpeer, &res)
 	ctx.Run()
 }
 
@@ -317,6 +317,6 @@ func closePeer(cmd *cobra.Command, args []string) {
 	var setpeer types.SetPeer
 	var res interface{}
 	setpeer.Pid = pid
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ClosePeer", &setpeer, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.ClosePeer", &setpeer, &res)
 	ctx.Run()
 }

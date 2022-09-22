@@ -3,10 +3,10 @@ package executor_test
 import (
 	"testing"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/testnode"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 

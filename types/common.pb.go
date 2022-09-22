@@ -931,7 +931,7 @@ type VersionInfo struct {
 
 	Title   string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	App     string `protobuf:"bytes,2,opt,name=app,proto3" json:"app,omitempty"`
-	Chain33 string `protobuf:"bytes,3,opt,name=chain33,proto3" json:"chain33,omitempty"`
+	Chain string `protobuf:"bytes,3,opt,name=chain,proto3" json:"chain,omitempty"`
 	LocalDb string `protobuf:"bytes,4,opt,name=localDb,proto3" json:"localDb,omitempty"`
 	ChainID int32  `protobuf:"varint,5,opt,name=chainID,proto3" json:"chainID,omitempty"`
 }
@@ -984,7 +984,7 @@ func (x *VersionInfo) GetApp() string {
 
 func (x *VersionInfo) GetChain33() string {
 	if x != nil {
-		return x.Chain33
+		return x.Chain
 	}
 	return ""
 }

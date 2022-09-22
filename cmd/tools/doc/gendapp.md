@@ -1,40 +1,40 @@
 
-# chain33 gendapp
+# chain gendapp
 根据定义的合约protobuf原型文件，自动生成chain33 dapp基本代码
 
 ### 编译
 ```
 //本地存在chain33代码，该步骤可省略
-$ go get github.com/33cn/chain33
+$ go get github.com/assetcloud/chain
 //编译chain33 tools
-$ go build -i -o $GOPATH/bin/chain33-tool github.com/33cn/chain33/cmd/tools
+$ go build -i -o $GOPATH/bin/chain-tool github.com/assetcloud/chain/cmd/tools
 ```
 
 ### 使用
 ```
 //查看命令使用方法
-$ chain33-tool gendapp --help
+$ chain-tool gendapp --help
 Usage:
   tools gendapp [flags]
 
 Flags:
   -h, --help            help for gendapp
   -n, --name string     dapp name
-  -o, --output string   go package for output (default github.com/33cn/plugin/plugin/dapp/)
+  -o, --output string   go package for output (default github.com/assetcloud/plugin/plugin/dapp/)
   -p, --proto string    dapp protobuf file path
 ```
 * -n 指定合约名字，不能含有空格和特殊字符
 * -p 指定合约的protobuf文件
 * -o 生成代码的输出目录路径，此处是go包路径，及相对于$GOPATH/src的路径，
-默认为官方项目路径（$GOPATH/src/github.com/33cn/plugin/plugin/dapp/)
+默认为官方项目路径（$GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/)
 
 举例:
 ```
 // 默认路径生成名为demo的合约代码
-$ chain33-tool gendapp -n demo -p ./demo.proto
+$ chain-tool gendapp -n demo -p ./demo.proto
 
 // 指定输出包路径
-$ chain33-tool gendapp -n demo -p ./demo.proto -o github.com/33cn/chain33/plugin/dapp/
+$ chain-tool gendapp -n demo -p ./demo.proto -o github.com/assetcloud/chain/plugin/dapp/
 
 ```
 ### proto规范
@@ -101,5 +101,5 @@ $ cd proto && make
 ##### 后续开发   
 在生成代码基础上，需要实现交易创建，执行，及所需rpc服务<br/>
 初次开发可以参考官方简单计算器合约
-[开发步骤](https://github.com/33cn/chain33/blob/master/cmd/tools/doc/gencalculator.md)
+[开发步骤](https://github.com/assetcloud/chain/blob/master/cmd/tools/doc/gencalculator.md)
 

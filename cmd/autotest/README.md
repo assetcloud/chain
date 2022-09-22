@@ -41,7 +41,7 @@ $ make autotest dapp=all
 配置文件为toml格式，用于指定具体的测试用例文件
 ```
 # 指定内部调用chain33-cli程序文件
-cliCmd = "./chain33-cli"
+cliCmd = "./chain-cli"
 
 # 进行用例check时，主要根据交易hash查询回执，多次查询失败总超时，单位秒
 checkTimeout = 60
@@ -124,7 +124,7 @@ package autotest
 //导入autotest开发依赖，主要是types包
 import (
 	"reflect"
-	. "github.com/33cn/chain33/cmd/autotest/types"
+	. "github.com/assetcloud/chain/cmd/autotest/types"
 )
 
 //声明coins的AutoTest结构，其成员皆为coins将实现的用例类型

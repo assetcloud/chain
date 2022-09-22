@@ -1,10 +1,10 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 //LocalDB 本地数据库，类似localdb，不加入区块链的状态。

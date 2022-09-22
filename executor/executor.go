@@ -12,19 +12,19 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/33cn/chain33/client/api"
-	dbm "github.com/33cn/chain33/common/db"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	drivers "github.com/33cn/chain33/system/dapp"
+	"github.com/assetcloud/chain/client/api"
+	dbm "github.com/assetcloud/chain/common/db"
+	clog "github.com/assetcloud/chain/common/log"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/pluginmgr"
+	"github.com/assetcloud/chain/rpc/grpcclient"
+	drivers "github.com/assetcloud/chain/system/dapp"
 
 	// register drivers
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
-	typ "github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
+	typ "github.com/assetcloud/chain/types"
 )
 
 var elog = log.New("module", "execs")

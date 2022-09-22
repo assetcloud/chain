@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 )
 
 //ErrBytesFormat 错误的bytes 类型

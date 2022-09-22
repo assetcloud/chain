@@ -5,9 +5,9 @@
 package wallet
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
+	wcom "github.com/assetcloud/chain/wallet/common"
 )
 
 // ProcRecvMsg 处理消息循环

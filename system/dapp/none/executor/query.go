@@ -7,8 +7,8 @@ package executor
 import (
 	"encoding/hex"
 
-	ntypes "github.com/33cn/chain33/system/dapp/none/types"
-	"github.com/33cn/chain33/types"
+	ntypes "github.com/assetcloud/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/types"
 )
 
 // Query_GetDelayTxInfo query delay tx delay begin height

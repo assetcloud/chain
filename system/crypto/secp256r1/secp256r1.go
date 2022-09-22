@@ -9,9 +9,9 @@ import (
 	"errors"
 	"fmt"
 
-	cert "github.com/33cn/chain33/system/crypto/common"
-	"github.com/33cn/chain33/system/crypto/common/authority"
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	cert "github.com/assetcloud/chain/system/crypto/common"
+	"github.com/assetcloud/chain/system/crypto/common/authority"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 	"github.com/golang/protobuf/proto"
 
 	"crypto/ecdsa"
@@ -19,7 +19,7 @@ import (
 	"crypto/rand"
 	"math/big"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/crypto"
 )
 
 const (

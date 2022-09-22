@@ -3,12 +3,12 @@ package btc_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/system/address/btc"
-	"github.com/33cn/chain33/system/crypto/sm2"
+	"github.com/33cn/chain/common"
+	"github.com/33cn/chain/common/address"
+	"github.com/33cn/chain/system/address/btc"
+	"github.com/33cn/chain/system/crypto/sm2"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/chain/util"
 	"github.com/stretchr/testify/require"
 )
 

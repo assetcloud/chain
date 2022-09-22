@@ -5,9 +5,9 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/system/dapp"
-	mty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/system/dapp"
+	mty "github.com/assetcloud/chain/system/dapp/manage/types"
+	"github.com/assetcloud/chain/types"
 )
 
 //ExecLocal_Apply local apply

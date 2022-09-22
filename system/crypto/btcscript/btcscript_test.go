@@ -9,20 +9,20 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	nty "github.com/33cn/chain33/system/dapp/none/types"
+	"github.com/33cn/chain/common"
+	nty "github.com/33cn/chain/system/dapp/none/types"
 
-	"github.com/33cn/chain33/client/mocks"
-	cryptocli "github.com/33cn/chain33/common/crypto/client"
+	"github.com/33cn/chain/client/mocks"
+	cryptocli "github.com/33cn/chain/common/crypto/client"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcutil"
 
-	"github.com/33cn/chain33/system/crypto/btcscript/script"
-	_ "github.com/33cn/chain33/system/dapp/init"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/chain/system/crypto/btcscript/script"
+	_ "github.com/33cn/chain/system/dapp/init"
+	"github.com/33cn/chain/types"
+	"github.com/33cn/chain/util"
 	"github.com/stretchr/testify/require"
 )
 

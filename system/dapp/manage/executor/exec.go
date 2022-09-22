@@ -5,10 +5,10 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/system/dapp"
-	mty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/system/dapp"
+	mty "github.com/assetcloud/chain/system/dapp/manage/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/pkg/errors"
 )
 

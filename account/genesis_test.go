@@ -7,10 +7,10 @@ package account
 import (
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 
 	//"fmt"
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 	"github.com/stretchr/testify/require"
 )
 

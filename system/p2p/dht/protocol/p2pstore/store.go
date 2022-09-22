@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	types2 "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	types2 "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
 	kb "github.com/libp2p/go-libp2p-kbucket"
 )
 

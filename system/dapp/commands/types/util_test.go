@@ -7,8 +7,8 @@ package types
 import (
 	"testing"
 
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/types"
+	rpctypes "github.com/33cn/chain/rpc/types"
+	"github.com/33cn/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -70,7 +70,7 @@ func TestDecodeAccount(t *testing.T) {
 func TestCreateRawTx(t *testing.T) {
 	paraName := ""
 	cfg := &rpctypes.ChainConfigInfo{
-		Title:         "chain33",
+		Title:         "chain",
 		CoinExec:      types.DefaultCoinsExec,
 		CoinSymbol:    types.DefaultCoinsSymbol,
 		CoinPrecision: types.DefaultCoinPrecision,

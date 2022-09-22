@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.8
 // +build go1.8
 
 // package cli RunChain33函数会加载各个模块，组合成区块链程序
@@ -21,39 +22,39 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 
-	cryptocli "github.com/33cn/chain33/common/crypto/client"
+	cryptocli "github.com/assetcloud/chain/common/crypto/client"
 
-	"github.com/33cn/chain33/p2p"
+	"github.com/assetcloud/chain/p2p"
 
-	"github.com/33cn/chain33/metrics"
+	"github.com/assetcloud/chain/metrics"
 
 	"time"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/blockchain"
+	"github.com/assetcloud/chain/util"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/limits"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/consensus"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/mempool"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/limits"
+	clog "github.com/assetcloud/chain/common/log"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/common/version"
+	"github.com/assetcloud/chain/consensus"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/mempool"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/rpc"
+	"github.com/assetcloud/chain/store"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/wallet"
 	"google.golang.org/grpc/grpclog"
 )
 
 var (
 	cpuNum      = runtime.NumCPU()
 	configPath  = flag.String("f", "", "configfile")
-	datadir     = flag.String("datadir", "", "data dir of chain33, include logs and datas")
+	datadir     = flag.String("datadir", "", "data dir of chain, include logs and datas")
 	versionCmd  = flag.Bool("v", false, "version")
 	fixtime     = flag.Bool("fixtime", false, "fix time")
 	waitPid     = flag.Bool("waitpid", false, "p2p stuck until seed save info wallet & wallet unlock")
@@ -65,7 +66,7 @@ var (
 	startHeight = flag.Int64("startheight", 0, "export block start height")
 )
 
-//RunChain33 : run Chain33
+//RunChain33 : run Chain
 func RunChain33(name, defCfg string) {
 	flag.Parse()
 	if *versionCmd {
@@ -74,7 +75,7 @@ func RunChain33(name, defCfg string) {
 	}
 	if *configPath == "" {
 		if name == "" {
-			*configPath = "chain33.toml"
+			*configPath = "chain.toml"
 		} else {
 			*configPath = name + ".toml"
 		}
@@ -156,7 +157,7 @@ func RunChain33(name, defCfg string) {
 	version.SetLocalDBVersion(cfg.Store.LocalDBVersion)
 	version.SetStoreDBVersion(cfg.Store.StoreDBVersion)
 	version.SetAppVersion(cfg.Version)
-	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " chain33:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
+	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " chain:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
 	log.Info("loading queue")
 	q := queue.New("channel")
 	q.SetConfig(chain33Cfg)

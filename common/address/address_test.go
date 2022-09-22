@@ -11,11 +11,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/system/address/btc"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/system/address/btc"
 
-	"github.com/33cn/chain33/common/crypto"
-	_ "github.com/33cn/chain33/system/crypto/init"
+	"github.com/assetcloud/chain/common/crypto"
+	_ "github.com/assetcloud/chain/system/crypto/init"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -1,9 +1,9 @@
 package mempool
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/mempool"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/mempool"
+	"github.com/assetcloud/chain/types"
 )
 
 // New new mempool queue module

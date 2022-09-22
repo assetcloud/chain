@@ -17,7 +17,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/protobuf/encoding/protojson"

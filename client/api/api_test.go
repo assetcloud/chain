@@ -9,12 +9,12 @@ import (
 
 	"google.golang.org/grpc/codes"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	qmocks "github.com/33cn/chain33/queue/mocks"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/queue"
+	qmocks "github.com/assetcloud/chain/queue/mocks"
+	"github.com/assetcloud/chain/rpc"
+	"github.com/assetcloud/chain/rpc/grpcclient"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc/status"

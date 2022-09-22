@@ -7,8 +7,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/cmd/tools/strategy"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/strategy"
+	"github.com/assetcloud/chain/cmd/tools/types"
 	"github.com/spf13/cobra"
 )
 

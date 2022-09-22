@@ -5,31 +5,31 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	types2 "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	types2 "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 )
 
 const (
-	fetchActivePeer = "/chain33/fetch-active-peer/1.0.0"
-	fetchShardPeer  = "/chain33/fetch-shard-peer/1.0.0"
-	fetchChunk      = "/chain33/fetch-chunk/1.0.0"
-	//storeChunk      = "/chain33/store-chunk/1.0.0"
-	getHeader      = "/chain33/headers/1.0.0"
-	getChunkRecord = "/chain33/chunk-record/1.0.0"
-	fullNode       = "/chain33/full-node/1.0.0"
-	fetchPeerAddr  = "/chain33/fetch-peer-addr/1.0.0"
+	fetchActivePeer = "/chain/fetch-active-peer/1.0.0"
+	fetchShardPeer  = "/chain/fetch-shard-peer/1.0.0"
+	fetchChunk      = "/chain/fetch-chunk/1.0.0"
+	//storeChunk      = "/chain/store-chunk/1.0.0"
+	getHeader      = "/chain/headers/1.0.0"
+	getChunkRecord = "/chain/chunk-record/1.0.0"
+	fullNode       = "/chain/full-node/1.0.0"
+	fetchPeerAddr  = "/chain/fetch-peer-addr/1.0.0"
 	// Deprecated: old version, use getHeader instead
-	getHeaderOld = "/chain33/headerinfoReq/1.0.0"
+	getHeaderOld = "/chain/headerinfoReq/1.0.0"
 
 	// 异步接口
-	requestPeerAddr          = "/chain33/request-peer-addr/1.0.0"
-	responsePeerAddr         = "/chain33/response-peer-addr/1.0.0"
-	requestPeerInfoForChunk  = "/chain33/request-peer-info-for-chunk/1.0.0"
-	responsePeerInfoForChunk = "/chain33/response-peer-info-for-chunk/1.0.0"
+	requestPeerAddr          = "/chain/request-peer-addr/1.0.0"
+	responsePeerAddr         = "/chain/response-peer-addr/1.0.0"
+	requestPeerInfoForChunk  = "/chain/request-peer-info-for-chunk/1.0.0"
+	responsePeerInfoForChunk = "/chain/response-peer-info-for-chunk/1.0.0"
 )
 
 const maxConcurrency = 10

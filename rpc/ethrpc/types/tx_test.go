@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common/crypto"
-	ctypes "github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/crypto"
+	ctypes "github.com/assetcloud/chain/types"
 	"github.com/ethereum/go-ethereum/common"
 	etypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/assert"

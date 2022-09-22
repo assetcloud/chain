@@ -14,21 +14,21 @@ set -o pipefail
 PWD=$(cd "$(dirname "$0")" && pwd)
 export PATH="$PWD:$PATH"
 
-CLI="./chain33-cli"
+CLI="./chain-cli"
 
 sedfix=""
 if [ "$(uname)" == "Darwin" ]; then
     sedfix=".bak"
 fi
 
-chain33Config="chain33.test.toml"
+chain33Config="chain.test.toml"
 chain33BlockTime=1
 autoTestCheckTimeout=10
 
 function config_chain33() {
 
     # shellcheck disable=SC2015
-    echo "# config chain33 solo test"
+    echo "# config chain solo test"
     # update test environment
     sed -i $sedfix 's/^Title.*/Title="local"/g' ${chain33Config}
     # grep -q '^TestNet' ${chain33Config} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config} || sed -i '/^Title/a TestNet=true' ${chain33Config}
@@ -63,7 +63,7 @@ function config_autotest() {
         #pre config auto test
         {
 
-            echo 'cliCmd="./chain33-cli"'
+            echo 'cliCmd="./chain-cli"'
             echo "checkTimeout=${autoTestCheckTimeout}"
         } >${autotestTempConfig}
 
@@ -81,9 +81,9 @@ function config_autotest() {
 
 function start_chain33() {
 
-    echo "# start solo chain33"
+    echo "# start solo chain"
     rm -rf ../local/datadir ../local/logs ../local/grpc33.log
-    ./chain33 -f chain33.test.toml >/dev/null 2>&1 &
+    ./chain -f chain.test.toml >/dev/null 2>&1 &
     local SLEEP=1
     sleep ${SLEEP}
 
@@ -172,7 +172,7 @@ function start_autotest() {
 function stop_chain33() {
 
     rv=$?
-    echo "=========== #stop chain33 ============="
+    echo "=========== #stop chain ============="
     ${CLI} close || true
     #wait close
     sleep ${chain33BlockTime}

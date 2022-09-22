@@ -8,15 +8,15 @@ import (
 	"flag"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/rpc"
+	"github.com/assetcloud/chain/types"
 )
 
 var (
-	configPath = flag.String("f", "../cmd/chain33/chain33.test.toml", "configfile")
+	configPath = flag.String("f", "../cmd/chain/chain.test.toml", "configfile")
 
 	jrpcaddr = "localhost:8801"
 	jrpcsite = "http://localhost:8801"

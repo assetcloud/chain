@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
 	"github.com/decred/base58"
 	lru "github.com/hashicorp/golang-lru"
 )

@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/types"
 )
 
 // ReduceChain 精简chain

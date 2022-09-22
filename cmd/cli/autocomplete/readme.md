@@ -2,33 +2,33 @@
 ## 安装
 
 ```
-$ sudo install chain33-cli.bash  /usr/share/bash-completion/completions/chain33-cli
+$ sudo install chain-cli.bash  /usr/share/bash-completion/completions/chain-cli
 ```
 
 不安装
 ```
-. chain33-cli.bash
+. chain-cli.bash
 ```
 
 ```
 # 重新开个窗口就有用了
-$ ./chain33/chain33-cli 
+$ ./chain/chain-cli 
 account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
 ## 演示
 ```
-linj@linj-TM1701:~$ ./chain33/chain33-cli 
+linj@linj-TM1701:~$ ./chain/chain-cli 
 account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./chain33/chain33-cli b
+linj@linj-TM1701:~$ ./chain/chain-cli b
 block  bty    
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty 
+linj@linj-TM1701:~$ ./chain/chain-cli bty 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty t
+linj@linj-TM1701:~$ ./chain/chain-cli bty t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty transfer -
+linj@linj-TM1701:~$ ./chain/chain-cli bty transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```
 

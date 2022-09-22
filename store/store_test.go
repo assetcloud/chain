@@ -10,13 +10,13 @@ import (
 	"os"
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/assetcloud/chain/system"
 )
 
 func init() {
@@ -25,7 +25,7 @@ func init() {
 
 func initEnv() (queue.Queue, queue.Module) {
 	var q = queue.New("channel")
-	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
 	s := New(cfg)
 	s.SetQueueClient(q.Client())
 	return q, s
@@ -275,7 +275,7 @@ var storecfg1 = &types.Store{Name: "mavl", Driver: "leveldb", DbPath: "/tmp/stor
 
 func TestNewMavl(t *testing.T) {
 	os.RemoveAll(storecfg1.DbPath)
-	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
 	store := New(cfg)
 	assert.NotNil(t, store)
 }

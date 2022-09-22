@@ -9,10 +9,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -78,7 +78,7 @@ func queryTxByAddr(cmd *cobra.Command, args []string) {
 		Index:     index,
 	}
 	var res rpctypes.ReplyTxInfos
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetTxByAddr", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetTxByAddr", &params, &res)
 	ctx.Run()
 }
 
@@ -130,7 +130,7 @@ func queryTxFeeByAddr(cmd *cobra.Command, args []string) {
 	params.Payload = types.MustPBToJSON(req)
 
 	var res types.AddrTxFeeInfos
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.Query", params, &res)
 	ctx.Run()
 }
 
@@ -167,7 +167,7 @@ func queryTx(cmd *cobra.Command, args []string) {
 		Hash: hash,
 	}
 	var res rpctypes.TransactionDetail
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.QueryTransaction", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.QueryTransaction", params, &res)
 	ctx.SetResultCbExt(parseQueryTxRes)
 	ctx.RunExt(cfg)
 }
@@ -225,7 +225,7 @@ func getTxsByHashes(cmd *cobra.Command, args []string) {
 	}
 
 	var res rpctypes.TransactionDetails
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetTxByHashes", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetTxByHashes", params, &res)
 	ctx.SetResultCbExt(parseQueryTxsByHashesRes)
 	ctx.RunExt(cfg)
 }
@@ -280,7 +280,7 @@ func getTxHexByHash(cmd *cobra.Command, args []string) {
 		Hash: txHash,
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetHexTxByHash", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetHexTxByHash", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -308,7 +308,7 @@ func decodeTx(cmd *cobra.Command, args []string) {
 	}
 
 	var res rpctypes.ReplyTxList
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.DecodeRawTransaction", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.DecodeRawTransaction", &params, &res)
 	ctx.SetResultCb(parseReplyTxList)
 	ctx.Run()
 }
@@ -347,7 +347,7 @@ func viewAddress(cmd *cobra.Command, args []string) {
 	}
 
 	var res types.AddrOverview
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetAddrOverview", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetAddrOverview", &params, &res)
 	ctx.SetResultCbExt(parseAddrOverview)
 	cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 	if err != nil {
@@ -426,6 +426,6 @@ func reWriteRawTx(cmd *cobra.Command, args []string) {
 		Index:  index,
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ReWriteRawTx", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.ReWriteRawTx", params, nil)
 	ctx.RunWithoutMarshal()
 }

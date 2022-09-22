@@ -9,16 +9,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/33cn/chain33/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 	"github.com/pkg/errors"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -71,7 +71,7 @@ func dumpKey(cmd *cobra.Command, args []string) {
 		Data: addr,
 	}
 	var res types.ReplyString
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.DumpPrivkey", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.DumpPrivkey", &params, &res)
 	ctx.Run()
 }
 
@@ -88,7 +88,7 @@ func GetAccountListCmd() *cobra.Command {
 func listAccount(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.WalletAccounts
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetAccounts", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetAccounts", nil, &res)
 	ctx.SetResultCbExt(parseListAccountRes)
 	cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 	if err != nil {
@@ -161,7 +161,7 @@ func balance(cmd *cobra.Command, args []string) {
 	if execer == "" && height == -1 {
 		req := types.ReqAllExecBalance{Addr: addr}
 		var res rpctypes.AllExecBalance
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetAllExecBalance", &req, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetAllExecBalance", &req, &res)
 		ctx.SetResultCbExt(parseGetAllBalanceRes)
 		cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 		if err != nil {
@@ -180,7 +180,7 @@ func balance(cmd *cobra.Command, args []string) {
 			IsDetail: false,
 		}
 		var res rpctypes.Headers
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetHeaders", &params, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetHeaders", &params, &res)
 		_, err := ctx.RunResult()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -193,7 +193,7 @@ func balance(cmd *cobra.Command, args []string) {
 	if execer == "" {
 		req := types.ReqAllExecBalance{Addr: addr, StateHash: stateHash}
 		var res rpctypes.AllExecBalance
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetAllExecBalance", &req, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetAllExecBalance", &req, &res)
 		ctx.SetResultCbExt(parseGetAllBalanceRes)
 		cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 		if err != nil {
@@ -217,7 +217,7 @@ func balance(cmd *cobra.Command, args []string) {
 		StateHash: stateHash,
 	}
 	var res []*rpctypes.Account
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBalance", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetBalance", &params, &res)
 	ctx.SetResultCbExt(parseGetBalanceRes)
 	cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 	if err != nil {
@@ -296,7 +296,7 @@ func importKey(cmd *cobra.Command, args []string) {
 		AddressID: addressType,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ImportPrivkey", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.ImportPrivkey", &params, &res)
 	ctx.SetResultCbExt(parseImportKeyRes)
 	ctx.RunExt(cfg)
 }
@@ -343,7 +343,7 @@ func createAccount(cmd *cobra.Command, args []string) {
 		AddressID: addressType,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.NewAccount", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.NewAccount", &params, &res)
 	ctx.SetResultCbExt(parseCreateAccountRes)
 	ctx.RunExt(cfg)
 }
@@ -381,7 +381,7 @@ func getRandAccount(cmd *cobra.Command, args []string) {
 		Lang: lang,
 	}
 	var res types.AccountInfo
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.NewRandAccount", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.NewRandAccount", &params, &res)
 	ctx.Run()
 }
 
@@ -503,7 +503,7 @@ func getAccount(cmd *cobra.Command, args []string) {
 	}
 	var res types.WalletAccount
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetAccount", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetAccount", &params, &res)
 	ctx.SetResultCbExt(parseSetLabelRes)
 	ctx.RunExt(cfg)
 }
@@ -524,7 +524,7 @@ func setLabel(cmd *cobra.Command, args []string) {
 		Label: label,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.SetLabl", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.SetLabl", &params, &res)
 	ctx.SetResultCbExt(parseSetLabelRes)
 	ctx.RunExt(cfg)
 }
@@ -577,7 +577,7 @@ func dumpKeys(cmd *cobra.Command, args []string) {
 		Passwd:   pwd,
 	}
 	var res types.Reply
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.DumpPrivkeysFile", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.DumpPrivkeysFile", &params, &res)
 	ctx.Run()
 }
 
@@ -590,6 +590,6 @@ func importKeys(cmd *cobra.Command, args []string) {
 		Passwd:   pwd,
 	}
 	var res types.Reply
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ImportPrivkeysFile", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.ImportPrivkeysFile", &params, &res)
 	ctx.Run()
 }

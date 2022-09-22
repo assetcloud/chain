@@ -9,9 +9,9 @@ import (
 
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/chain/common/address"
+	_ "github.com/33cn/chain/system"
+	"github.com/33cn/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 

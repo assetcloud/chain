@@ -15,14 +15,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	coinstypes "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
 	"github.com/BurntSushi/toml"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	coinstypes "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 )
 
 var (
@@ -127,7 +127,7 @@ func scanWrite(cfg *types.Chain33Config) {
 		}
 
 		var replyTxInfos rpctypes.ReplyTxInfos
-		err = rpc.Call("Chain33.GetTxByAddr", paramsReqAddr, &replyTxInfos)
+		err = rpc.Call("Chain.GetTxByAddr", paramsReqAddr, &replyTxInfos)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			continue
@@ -146,7 +146,7 @@ func scanWrite(cfg *types.Chain33Config) {
 		for _, hash := range txHashes {
 			paramsQuery := rpctypes.QueryParm{Hash: hash}
 			var transactionDetail rpctypes.TransactionDetail
-			err = rpc.Call("Chain33.QueryTransaction", paramsQuery, &transactionDetail)
+			err = rpc.Call("Chain.QueryTransaction", paramsQuery, &transactionDetail)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				continue
@@ -204,12 +204,12 @@ func scanWrite(cfg *types.Chain33Config) {
 				Expire: "0",
 			}
 			var signed string
-			rpc.Call("Chain33.SignRawTx", paramsReqSignRawTx, &signed)
+			rpc.Call("Chain.SignRawTx", paramsReqSignRawTx, &signed)
 			paramsRaw := rpctypes.RawParm{
 				Data: signed,
 			}
 			var sent string
-			rpc.Call("Chain33.SendTransaction", paramsRaw, &sent)
+			rpc.Call("Chain.SendTransaction", paramsRaw, &sent)
 			f, err := os.OpenFile(heightFile, os.O_RDWR, 0666)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)

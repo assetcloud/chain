@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/assetcloud/chain/queue"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/protocol"
@@ -44,7 +44,7 @@ func InitAllProtocol(env *P2PEnv) {
 	}
 }
 
-// EventHandler chain33 internal event handler
+// EventHandler chain internal event handler
 type EventHandler struct {
 	CallBack EventHandlerFunc
 	Inline   bool

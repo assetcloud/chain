@@ -5,8 +5,8 @@
 package dappcode
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/gencode/base"
+	"github.com/assetcloud/chain/cmd/tools/types"
 )
 
 func init() {
@@ -40,7 +40,7 @@ import (
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
 	"${IMPORTPATH}/${EXECNAME}/executor"
 	"${IMPORTPATH}/${EXECNAME}/rpc"
-	"github.com/33cn/chain33/pluginmgr"
+	"github.com/assetcloud/chain/pluginmgr"
 )
 
 /*  

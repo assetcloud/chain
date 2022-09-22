@@ -5,8 +5,8 @@
 package commands
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/gencode/base"
+	"github.com/assetcloud/chain/cmd/tools/types"
 )
 
 func init() {

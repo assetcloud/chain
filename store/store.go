@@ -6,9 +6,9 @@
 package store
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/store"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/store"
+	"github.com/assetcloud/chain/types"
 )
 
 // New new store queue module

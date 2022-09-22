@@ -3,9 +3,9 @@ package web3
 import (
 	"testing"
 
-	clientMocks "github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	ctypes "github.com/33cn/chain33/types"
+	clientMocks "github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/queue"
+	ctypes "github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 

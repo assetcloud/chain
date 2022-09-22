@@ -5,13 +5,13 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/system/dapp"
-	mty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/account"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/system/dapp"
+	mty "github.com/assetcloud/chain/system/dapp/manage/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 )

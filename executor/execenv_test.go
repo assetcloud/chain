@@ -8,20 +8,20 @@ import (
 	"testing"
 	"time"
 
-	drivers "github.com/33cn/chain33/system/dapp"
+	drivers "github.com/assetcloud/chain/system/dapp"
 
 	"strings"
 
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadDriverFork(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
-	exec, _ := initEnv(types.MergeCfg(types.ReadFile("../cmd/chain33/chain33.fork.toml"), new))
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
+	exec, _ := initEnv(types.MergeCfg(types.ReadFile("../cmd/chain/chain.fork.toml"), new))
 	cfg := exec.client.GetConfig()
 	execInit(cfg)
 	drivers.Register(cfg, "notAllow", newAllowApp, 0)
@@ -36,7 +36,7 @@ func TestLoadDriverFork(t *testing.T) {
 	tx2 := types.CloneTx(tx)
 	tx2.Execer = []byte("user.p.test.notAllow")
 	// local fork值 为0, 测试不出fork前的情况
-	//types.SetTitleOnlyForTest("chain33")
+	//types.SetTitleOnlyForTest("chain")
 	t.Log("get fork value", cfg.GetFork("ForkCacheDriver"), cfg.GetTitle())
 	cases := []struct {
 		height     int64

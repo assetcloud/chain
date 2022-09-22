@@ -28,15 +28,15 @@ package consensus
 	GO版本：	  go1.8.4
 	步骤：
 		//  1.编译版本
-		cd $GOPATH/src/gitlab.33.cn/chain33
-		git clone git@gitlab.33.cn:chain33/chain33.git
-		cd chain33
+		cd $GOPATH/src/gitlab.33.cn/chain
+		git clone git@gitlab.33.cn:chain/chain.git
+		cd chain
 		go build
 
 		//	2.从管理机上拷贝可执行文件到各个节点
-		scp chain33 ubuntu@172.31.8.229:/home/ubuntu/
-		scp chain33 ubuntu@172.31.15.241:/home/ubuntu/
-		scp chain33 ubuntu@172.31.4.182:/home/ubuntu/
+		scp chain ubuntu@172.31.8.229:/home/ubuntu/
+		scp chain ubuntu@172.31.15.241:/home/ubuntu/
+		scp chain ubuntu@172.31.4.182:/home/ubuntu/
 
 		// 3.在各个节点上，依次修改chain33.toml
 			name="raft"
@@ -49,7 +49,7 @@ package consensus
 			readOnlyPeersURL="http://172.31.2.210:9021,http://172.31.2.252:9021"
             addPeersURL=""
        // 4.然后依次启动种子节点，raft集群相关节点
-       ./chain33 或者写个启动脚本
+       ./chain 或者写个启动脚本
 
        // 5.动态增删节点
              动态加入节点
@@ -58,7 +58,7 @@ package consensus
 		    	    注意：前者为要加入的nodeId 值，后面http地址为要加入的peerUrl地址，将peerURL依次追加到addPeersURL中,
    	                      用逗号分隔,一次只能添加一个节点
 		    	2.）然后在chain33.toml配置文件中，写好相关参数，启动chain33即可,
-                    chain33.toml配置文件可依据前一个节点的配置
+                    chain.toml配置文件可依据前一个节点的配置
                     修改如下参数:
                      nodeId=x             //第几个节点
                     isNewJoinNode=true    //是否为新增节点
@@ -122,16 +122,16 @@ package consensus
 	GO版本：	  go1.9.2
 	步骤：
 		//  1.编译版本
-		cd $GOPATH/src/gitlab.33.cn/chain33
-		git clone git@gitlab.33.cn:chain33/chain33.git
-		cd chain33
+		cd $GOPATH/src/gitlab.33.cn/chain
+		git clone git@gitlab.33.cn:chain/chain.git
+		cd chain
 		go build
 
 		//	2.从管理机上拷贝可执行文件到各个节点
-		scp chain33 ubuntu@192.168.0.117:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.119:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.120:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.121:/home/ubuntu/
+		scp chain ubuntu@192.168.0.117:/home/ubuntu/
+		scp chain ubuntu@192.168.0.119:/home/ubuntu/
+		scp chain ubuntu@192.168.0.120:/home/ubuntu/
+		scp chain ubuntu@192.168.0.121:/home/ubuntu/
 
 		// 3.在各个节点上，依次修改chain33.toml中[consensus]项
 			name="tendermint"
@@ -151,7 +151,7 @@ package consensus
 			createEmptyBlocksInterval=0
 			seeds=["192.168.0.117:46656","192.168.0.119:46656","192.168.0.120:46656","192.168.0.121:46656"]
        // 4.然后依次启动种子节点，tendermint集群相关节点
-       ./chain33 或者写个启动脚本
+       ./chain 或者写个启动脚本
        // 5.动态增删节点
              动态加入节点
 		    	1.）将新生成的priv_validator.json文件和其他Validator节点的genesis.json和chain33.toml拷贝到待加入集群的节点工作目录下，然后启动chain33。

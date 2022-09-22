@@ -9,10 +9,10 @@
 package manage
 
 import (
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/system/dapp/manage/commands"
-	"github.com/33cn/chain33/system/dapp/manage/executor"
-	"github.com/33cn/chain33/system/dapp/manage/types"
+	"github.com/assetcloud/chain/pluginmgr"
+	"github.com/assetcloud/chain/system/dapp/manage/commands"
+	"github.com/assetcloud/chain/system/dapp/manage/executor"
+	"github.com/assetcloud/chain/system/dapp/manage/types"
 )
 
 func init() {

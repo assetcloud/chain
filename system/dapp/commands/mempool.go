@@ -5,10 +5,10 @@
 package commands
 
 import (
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/system/dapp/commands/types"
-	ctypes "github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/system/dapp/commands/types"
+	ctypes "github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -51,7 +51,7 @@ func listMempoolTxs(cmd *cobra.Command, args []string) {
 		IsAll: isAll,
 	}
 	var res rpctypes.ReplyTxList
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetMempool", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetMempool", params, &res)
 	ctx.SetResultCb(parseListMempoolTxsRes)
 	ctx.Run()
 }
@@ -78,7 +78,7 @@ func GetLastMempoolCmd() *cobra.Command {
 func lastMempoolTxs(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.ReplyTxList
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetLastMemPool", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetLastMemPool", nil, &res)
 	ctx.SetResultCb(parselastMempoolTxsRes)
 	ctx.Run()
 }
@@ -105,7 +105,7 @@ func GetProperFeeCmd() *cobra.Command {
 func properFee(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.ReplyProperFee
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetProperFee", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetProperFee", nil, &res)
 	ctx.SetResultCb(nil)
 	ctx.Run()
 }

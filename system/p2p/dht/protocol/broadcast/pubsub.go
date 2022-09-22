@@ -8,12 +8,12 @@ import (
 	"encoding/hex"
 	"runtime"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/golang/snappy"
 	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
-	net "github.com/33cn/chain33/system/p2p/dht/extension"
+	net "github.com/assetcloud/chain/system/p2p/dht/extension"
 )
 
 const (

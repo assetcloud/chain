@@ -36,7 +36,7 @@ message CommitDelayTxLog {
 
 ##### 交易构造接口及参数
 
-- 创建交易通用json rpc接口，Chain33.CreateTransaction
+- 创建交易通用json rpc接口，Chain.CreateTransaction
 - execer: "none"
 - actionName: "CommitDelayTx"
 - payload: [CommitDelayTx](README.md#交易请求)

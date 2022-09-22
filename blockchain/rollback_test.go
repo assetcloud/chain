@@ -10,16 +10,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 
 func TestRollbackblock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain33/chain33.fork.toml"), new))
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
+	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain/chain.fork.toml"), new))
 	cfg.SetDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 	mfg := cfg.GetModuleConfig()
 	mfg.BlockChain.RollbackBlock = 0
@@ -39,7 +39,7 @@ func TestRollbackblock(t *testing.T) {
 
 func TestNeedRollback(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	cfg := types.NewChain33Config(new)
 	cfg.SetDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 	mock33 := testnode.NewWithConfig(cfg, nil)

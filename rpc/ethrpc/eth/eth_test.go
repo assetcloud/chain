@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"math/rand"
 
-	clientMocks "github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	etypes "github.com/33cn/chain33/rpc/ethrpc/types"
-	"github.com/33cn/chain33/system/dapp/coins/types"
-	ctypes "github.com/33cn/chain33/types"
+	clientMocks "github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/queue"
+	etypes "github.com/assetcloud/chain/rpc/ethrpc/types"
+	"github.com/assetcloud/chain/system/dapp/coins/types"
+	ctypes "github.com/assetcloud/chain/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/common/math"
@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	chain33crypto "github.com/33cn/chain33/common/crypto"
+	chain33crypto "github.com/assetcloud/chain/common/crypto"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 

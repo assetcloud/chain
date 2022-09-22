@@ -5,8 +5,8 @@
 package blockchain
 
 import (
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
 )
 
 //GetBlockByHashes 通过blockhash 获取对应的block信息

@@ -9,8 +9,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
 )
 
 func isAllowKeyWrite(e *executor, key, realExecer []byte, tx *types.Transaction, index int) bool {

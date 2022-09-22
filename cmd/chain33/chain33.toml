@@ -1,4 +1,4 @@
-Title="chain33"
+Title="chain"
 TestNet=true
 FixTime=false
 # 配置主币的名称: 比特元链bty, 部分未配置的平行链需要配置为 bty， 新的平行链配置 para或其他， 不配置panic
@@ -23,7 +23,7 @@ evmChainID=3999
 loglevel = "debug"
 logConsoleLevel = "info"
 # 日志文件名，可带目录，所有生成的日志文件都放到此目录下
-logFile = "logs/chain33.log"
+logFile = "logs/chain.log"
 # 单个日志文件的最大值（单位：兆）
 maxFileSize = 300
 # 最多保存的历史日志文件个数

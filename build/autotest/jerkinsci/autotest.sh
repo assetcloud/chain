@@ -21,7 +21,7 @@ if [[ ${PROJECT_NAME} == "" ]]; then
 fi
 
 NODE3="${PROJECT_NAME}_autotest_1"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+CLI="docker exec ${NODE3} /root/chain-cli"
 TEMP_CI_DIR=ci-"${PROJECT_NAME}"
 
 sedfix=""
@@ -29,7 +29,7 @@ if [ "$(uname)" == "Darwin" ]; then
     sedfix=".bak"
 fi
 
-chain33Config="chain33.test.toml"
+chain33Config="chain.test.toml"
 chain33BlockTime=1
 autoTestConfig="autotest.toml"
 autoTestCheckTimeout=10
@@ -37,7 +37,7 @@ autoTestCheckTimeout=10
 function config_chain33() {
 
     # shellcheck disable=SC2015
-    echo "# config chain33 solo test"
+    echo "# config chain solo test"
     # update test environment
     sed -i $sedfix 's/^Title.*/Title="local"/g' ${chain33Config}
     # grep -q '^TestNet' ${chain33Config} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config} || sed -i '/^Title/a TestNet=true' ${chain33Config}
@@ -160,7 +160,7 @@ function main() {
         rm -rf ./"$TEMP_CI_DIR"
     fi
     mkdir "$TEMP_CI_DIR" && cd "$TEMP_CI_DIR"
-    mv ../autotest ../*.toml ./ && mv ../chain33* ./
+    mv ../autotest ../*.toml ./ && mv ../chain* ./
     cp ../compose-autotest.yml ../Dockerfile-autotest ./
 
     config_chain33

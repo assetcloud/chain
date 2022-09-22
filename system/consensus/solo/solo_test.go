@@ -19,30 +19,30 @@ import (
 	"testing"
 	"time"
 
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
 
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/system/crypto/none"
-	"github.com/33cn/chain33/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/system/crypto/none"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
 	"google.golang.org/grpc"
 
-	"github.com/33cn/chain33/common"
-	log "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc/grpcclient"
+	"github.com/assetcloud/chain/common"
+	log "github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/rpc/grpcclient"
 	"github.com/decred/base58"
 	b58 "github.com/mr-tron/base58"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/assert"
 
 	//加载系统内置store, 不要依赖plugin
-	_ "github.com/33cn/chain33/system/dapp/init"
-	_ "github.com/33cn/chain33/system/mempool/init"
-	_ "github.com/33cn/chain33/system/store/init"
-	//_ "github.com/33cn/plugin/plugin/store/kvmvcc"
+	_ "github.com/assetcloud/chain/system/dapp/init"
+	_ "github.com/assetcloud/chain/system/mempool/init"
+	_ "github.com/assetcloud/chain/system/store/init"
+	//_ "github.com/assetcloud/plugin/plugin/store/kvmvcc"
 )
 
 // 执行： go test -cover
@@ -114,7 +114,7 @@ func BenchmarkSendTx(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
 				tx := util.CreateNoneTxWithTxHeight(cfg, priv, types.LowAllowPackHeight/2)
-				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Chain33.SendTransaction","params":[{"data":"%v"}]}`,
+				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Chain.SendTransaction","params":[{"data":"%v"}]}`,
 					common.ToHex(types.Encode(tx)))
 
 				resp, _ := http.Post("http://localhost:8801", "application/json", bytes.NewBufferString(poststr))

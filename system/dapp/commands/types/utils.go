@@ -11,16 +11,16 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/system/crypto/sm2"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/system/crypto/sm2"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/pkg/errors"
 
 	// TODO: 暂时将插件中的类型引用起来，后续需要修改
@@ -81,7 +81,7 @@ func SendToAddress(rpcAddr string, from string, to string, amount int64, note st
 	}
 
 	var res rpctypes.ReplyHash
-	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain33.SendToAddress", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain.SendToAddress", params, &res)
 	ctx.Run()
 }
 
@@ -290,7 +290,7 @@ func GetChainConfig(rpcAddr string) (*rpctypes.ChainConfigInfo, error) {
 		return nil, errors.Wrap(err, "new json client")
 	}
 	var res rpctypes.ChainConfigInfo
-	err = rpc.Call("Chain33.GetChainConfig", nil, &res)
+	err = rpc.Call("Chain.GetChainConfig", nil, &res)
 	if err != nil {
 		return nil, errors.Wrapf(err, "get chain config")
 	}
@@ -309,6 +309,6 @@ func SendCreateTxRPC(cmd *cobra.Command, exec, actionName string, req types.Mess
 	}
 
 	var res string
-	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain33.CreateTransaction", pm, &res)
+	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain.CreateTransaction", pm, &res)
 	ctx.RunWithoutMarshal()
 }

@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	dbm "github.com/33cn/chain33/common/db"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/testnode"
+	dbm "github.com/assetcloud/chain/common/db"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

@@ -18,15 +18,15 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/33cn/chain33/client"
-	l "github.com/33cn/chain33/common/log"
-	p2p2 "github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	cprotocol "github.com/33cn/chain33/system/p2p/dht/protocol"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/wallet"
+	"github.com/33cn/chain/client"
+	l "github.com/33cn/chain/common/log"
+	p2p2 "github.com/33cn/chain/p2p"
+	"github.com/33cn/chain/queue"
+	cprotocol "github.com/33cn/chain/system/p2p/dht/protocol"
+	p2pty "github.com/33cn/chain/system/p2p/dht/types"
+	"github.com/33cn/chain/types"
+	"github.com/33cn/chain/util"
+	"github.com/33cn/chain/wallet"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -442,7 +442,7 @@ func Test_genAddrInfos(t *testing.T) {
 }
 func Test_p2p(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.ReadFile("../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../../../cmd/chain/chain.test.toml"))
 	q := queue.New("channel")
 	datadir := util.ResetDatadir(cfg.GetModuleConfig(), "$TEMP/")
 	cfg.GetModuleConfig().Log.LogFile = ""

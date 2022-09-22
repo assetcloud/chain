@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build go1.8
 // +build go1.8
 
 // package main 用于测试数据库中的MAVL节点数目
@@ -13,12 +14,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	mavl "github.com/33cn/chain33/system/store/mavl/db"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
+	clog "github.com/assetcloud/chain/common/log"
+	log "github.com/assetcloud/chain/common/log/log15"
+	mavl "github.com/assetcloud/chain/system/store/mavl/db"
+	"github.com/assetcloud/chain/types"
 )
 
 var (

@@ -12,12 +12,12 @@ import (
 	"fmt"
 	"math/big"
 
-	cert "github.com/33cn/chain33/system/crypto/common"
-	"github.com/33cn/chain33/system/crypto/common/authority"
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	cert "github.com/assetcloud/chain/system/crypto/common"
+	"github.com/assetcloud/chain/system/crypto/common/authority"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 	"github.com/golang/protobuf/proto"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/crypto"
 	"github.com/tjfoc/gmsm/sm2"
 )
 

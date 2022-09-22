@@ -16,10 +16,10 @@ import (
 	"reflect"
 	"time"
 
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/system/crypto/common/authority/core"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/system/crypto/common/authority/core"
 
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 
 	"github.com/tjfoc/gmsm/sm2"
 )

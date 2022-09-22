@@ -15,13 +15,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/common/difficulty"
-	"github.com/33cn/chain33/common/utils"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/common/difficulty"
+	"github.com/assetcloud/chain/common/utils"
+	"github.com/assetcloud/chain/common/version"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 //var

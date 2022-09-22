@@ -3,9 +3,9 @@ package peer
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/extension"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/p2p/dht/extension"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 

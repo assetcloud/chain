@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 )
 

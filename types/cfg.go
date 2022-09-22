@@ -5,8 +5,8 @@
 package types
 
 import (
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
 )
 
 // Config 配置信息

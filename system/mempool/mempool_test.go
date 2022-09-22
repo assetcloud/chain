@@ -10,29 +10,29 @@ import (
 	"math/rand"
 	"testing"
 
-	nty "github.com/33cn/chain33/system/dapp/none/types"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/golang/protobuf/proto"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/common/limits"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	_ "github.com/33cn/chain33/system/consensus/init"
-	_ "github.com/33cn/chain33/system/crypto/init"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	_ "github.com/33cn/chain33/system/dapp/init"
-	_ "github.com/33cn/chain33/system/store/init"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/blockchain"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/common/limits"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/store"
+	_ "github.com/assetcloud/chain/system/consensus/init"
+	_ "github.com/assetcloud/chain/system/crypto/init"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	_ "github.com/assetcloud/chain/system/dapp/init"
+	_ "github.com/assetcloud/chain/system/store/init"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -148,7 +148,7 @@ func getprivkey(key string) crypto.PrivKey {
 }
 
 func initEnv3() (queue.Queue, queue.Module, queue.Module, *Mempool) {
-	cfg := types.NewChain33Config(types.ReadFile("../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../../cmd/chain/chain.test.toml"))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -174,7 +174,7 @@ func initEnv(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain33/chain33.test.toml"), types.ReadFile("../../cmd/chain33/chain33.fork.toml")))
+	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.test.toml"), types.ReadFile("../../cmd/chain/chain.fork.toml")))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -196,7 +196,7 @@ func initEnv4(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain33/chain33.fork.toml"), types.ReadFile("testdata/chain33.test.toml")))
+	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.fork.toml"), types.ReadFile("testdata/chain.test.toml")))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)

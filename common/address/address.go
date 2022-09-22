@@ -10,7 +10,7 @@ import (
 	"crypto/sha256"
 	"errors"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 	"github.com/decred/base58"
 	lru "github.com/hashicorp/golang-lru"
 )

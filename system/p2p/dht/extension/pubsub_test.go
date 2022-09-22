@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
+	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
 
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/stretchr/testify/require"

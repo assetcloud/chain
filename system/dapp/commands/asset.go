@@ -9,12 +9,12 @@ import (
 	"os"
 	"strings"
 
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpcTypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpcTypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -81,7 +81,7 @@ func assetBalance(cmd *cobra.Command, args []string) {
 			IsDetail: false,
 		}
 		var res rpcTypes.Headers
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetHeaders", &params, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetHeaders", &params, &res)
 		_, err := ctx.RunResult()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -101,7 +101,7 @@ func assetBalance(cmd *cobra.Command, args []string) {
 		AssetSymbol: assetSymbol,
 	}
 	var res []*rpcTypes.Account
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBalance", &params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.GetBalance", &params, &res)
 	ctx.SetResultCbExt(parseGetBalanceRes)
 	cfg, err := commandtypes.GetChainConfig(rpcLaddr)
 	if err != nil {
@@ -153,7 +153,7 @@ func CreateAssetSendToExec(cmd *cobra.Command, args []string, fromExec string) {
 		Payload:    types.MustPBToJSON(payload),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -197,7 +197,7 @@ func CreateAssetWithdraw(cmd *cobra.Command, args []string, fromExec string) {
 		Payload:    types.MustPBToJSON(payload),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -233,7 +233,7 @@ func CreateAssetTransfer(cmd *cobra.Command, args []string, fromExec string) {
 		Payload:    types.MustPBToJSON(payload),
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 

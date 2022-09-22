@@ -7,8 +7,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/cmd/tools/strategy"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/strategy"
+	"github.com/assetcloud/chain/cmd/tools/types"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,7 @@ import (
 func CreatePluginCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "createplugin",
-		Short: "Create chain33 plugin project mode",
+		Short: "Create chain plugin project mode",
 		Run:   createPlugin,
 	}
 	addCreatePluginFlag(cmd)

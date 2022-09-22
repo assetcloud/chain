@@ -3,9 +3,9 @@ package metrics
 import (
 	"time"
 
-	chain33log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/metrics/influxdb"
-	"github.com/33cn/chain33/types"
+	chain33log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/metrics/influxdb"
+	"github.com/assetcloud/chain/types"
 	go_metrics "github.com/rcrowley/go-metrics"
 )
 
@@ -20,7 +20,7 @@ type influxDBPara struct {
 }
 
 var (
-	log = chain33log.New("module", "chain33 metrics")
+	log = chain33log.New("module", "chain metrics")
 )
 
 //StartMetrics 根据配置文件相关参数启动m

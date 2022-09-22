@@ -12,11 +12,11 @@ const (
 	CpftMainGo = `package main
 
 import (
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/assetcloud/chain/system"
 	_ "${PROJECTPATH}/plugin"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/cli"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util/cli"
 )
 
 func main() {
@@ -252,7 +252,7 @@ ForkTradeAsset= -1
 
 	// 生成项目Makefile文件的模板 Makefile
 	CpftMakefile = `
-CHAIN33=github.com/33cn/chain33
+CHAIN33=github.com/assetcloud/chain
 CHAIN33_PATH=vendor/${CHAIN33}
 all: vendor proto build
 
@@ -276,7 +276,7 @@ update:
 	cp -Rf vendor/${CHAIN33}/vendor/* vendor/
 	rm -rf vendor/${CHAIN33}/vendor
 	govendor init
-	go build -i -o tool github.com/33cn/plugin/vendor/github.com/33cn/chain33/cmd/tools
+	go build -i -o tool github.com/assetcloud/plugin/vendor/github.com/assetcloud/chain/cmd/tools
 	./tool import --path "plugin" --packname "${PROJECTPATH}/plugin" --conf "plugin/plugin.toml"
 
 updatevendor:
@@ -313,36 +313,36 @@ go:
 	CpftPluginToml = `
 # type字段仅支持 consensus  dapp store mempool
 [dapp-ticket]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/ticket"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/ticket"
 
 [consensus-ticket]
-gitrepo = "github.com/33cn/plugin/plugin/consensus/ticket"
+gitrepo = "github.com/assetcloud/plugin/plugin/consensus/ticket"
 
 [dapp-retrieve]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/retrieve"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/retrieve"
 
 [dapp-hashlock]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/hashlock"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/hashlock"
 
 [dapp-token]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/token"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/token"
 
 [dapp-trade]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/trade"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/trade"
 
 [mempool-price]
-gitrepo = "github.com/33cn/plugin/plugin/mempool/price"
+gitrepo = "github.com/assetcloud/plugin/plugin/mempool/price"
 
 [mempool-score]
-gitrepo = "github.com/33cn/plugin/plugin/mempool/score"
+gitrepo = "github.com/assetcloud/plugin/plugin/mempool/score"
 `
 	// 项目 cli/main.go 文件模板
 	CpftCliMain = `package main
 
 import (
 	_ "${PROJECTPATH}/plugin"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/util/cli"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/util/cli"
 )
 
 func main() {
@@ -364,7 +364,7 @@ func Cmd() *cobra.Command {
 	CpftDappPlugin = `package ${PROJECTNAME}
 
 import (
-	"github.com/33cn/chain33/pluginmgr"
+	"github.com/assetcloud/chain/pluginmgr"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/commands"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/executor"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/types"
@@ -386,8 +386,8 @@ func init() {
 
 import (
 	log "github.com/inconshreveable/log15"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
 )
 
 var clog = log.New("module", "execs.${EXECNAME}")
@@ -463,7 +463,7 @@ message ${ACTIONNAME}None {
 	CpftDappTypefile = `package types
 
 import (
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 var (

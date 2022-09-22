@@ -9,7 +9,7 @@ package basen_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/wallet/bipwallet/basen"
+	"github.com/assetcloud/chain/wallet/bipwallet/basen"
 	"github.com/stretchr/testify/assert"
 )
 

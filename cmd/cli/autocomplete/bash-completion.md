@@ -63,8 +63,8 @@ compgen: 用法: compgen [-abcdefgjksuv] [-o 选项]  [-A 动作] [-G 全局模�
 complete 演示
 ```
 # 是不是很简单
-$ complete -W "account block bty trade token" chain33-cli
-linj@linj-TM1701:~$ chain33-cli t
+$ complete -W "account block bty trade token" chain-cli
+linj@linj-TM1701:~$ chain-cli t
 token  trade  
 
 # 再次打击
@@ -98,11 +98,11 @@ complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [
 ```
 
 ```
-linj@linj-TM1701:~$ chain33-cli account 
+linj@linj-TM1701:~$ chain-cli account 
 
-declare -a COMP_WORDS='([0]="chain33-cli" [1]="account" [2]="")'
+declare -a COMP_WORDS='([0]="chain-cli" [1]="account" [2]="")'
 declare -- COMP_CWORD="2"
-declare -- COMP_LINE="chain33-cli account "
+declare -- COMP_LINE="chain-cli account "
 declare -- COMP_WORDBREAKS=" 	
 \"'><=;|&(:"
 declare -- COMP_KEY="9"
@@ -112,7 +112,7 @@ declare -- COMP_TYPE="9"
 
 ### 演示程序1 子命令补全
 
-chain33-cli 参数补全
+chain-cli 参数补全
 ```
 #!/bin/bash
 # 通过chain33-cli 的help 找到一级的子命令
@@ -126,27 +126,27 @@ function _subcmd() {
   return 0
 }
 
-# 用 _subcmd 补全 chain33-cli
+# 用 _subcmd 补全 chain-cli
 # _subcmd 通过当前光标所在的输入参数过滤可选的子命令
-complete -F _subcmd chain33-cli
+complete -F _subcmd chain-cli
 ```
 
 试用一下
 ```
 linj@linj-TM1701:~$ . subcmd.bash  
-linj@linj-TM1701:~$ ./chain33/chain33-cli 
+linj@linj-TM1701:~$ ./chain/chain-cli 
 account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./chain33/chain33-cli t
+linj@linj-TM1701:~$ ./chain/chain-cli t
 ticket  token   trade   tx      
 ```
 
 ### 生效
 
 ```
-linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/chain33-cli
+linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/chain-cli
 # 重新开个窗口就有用了
-linj@linj-TM1701:~$ ./chain33/chain33-cli 
+linj@linj-TM1701:~$ ./chain/chain-cli 
 account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
@@ -154,19 +154,19 @@ block     close     config    exec      help      net       relay     seed      
 ### 给chain33-cli 做个 bash-completion
 
 
- 地址: https://gitlab.33.cn/linj/chain33-cli-completion
+ 地址: https://gitlab.33.cn/linj/chain-cli-completion
 
 演示
 ```
-linj@linj-TM1701:~$ ./chain33/chain33-cli 
+linj@linj-TM1701:~$ ./chain/chain-cli 
 account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./chain33/chain33-cli b
+linj@linj-TM1701:~$ ./chain/chain-cli b
 block  bty    
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty 
+linj@linj-TM1701:~$ ./chain/chain-cli bty 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty t
+linj@linj-TM1701:~$ ./chain/chain-cli bty t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./chain33/chain33-cli bty transfer -
+linj@linj-TM1701:~$ ./chain/chain-cli bty transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```

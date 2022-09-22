@@ -5,9 +5,9 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/common"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 )
 
 // ExecLocal exec local

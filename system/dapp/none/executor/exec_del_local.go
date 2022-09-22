@@ -4,7 +4,7 @@
 
 package executor
 
-import "github.com/33cn/chain33/types"
+import "github.com/assetcloud/chain/types"
 
 /*
  * 实现区块回退时本地执行的数据清除

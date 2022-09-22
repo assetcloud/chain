@@ -1,10 +1,10 @@
 package blockchain
 
 import (
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 func (chain *BlockChain) procLocalDB(msgtype int64, msg *queue.Message, reqnum chan struct{}) bool {

@@ -1,4 +1,4 @@
-module github.com/33cn/chain33
+module github.com/assetcloud/chain
 
 go 1.16
 

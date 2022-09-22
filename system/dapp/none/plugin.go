@@ -6,8 +6,8 @@
 package none
 
 import (
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/system/dapp/none/executor"
+	"github.com/assetcloud/chain/pluginmgr"
+	"github.com/assetcloud/chain/system/dapp/none/executor"
 )
 
 func init() {

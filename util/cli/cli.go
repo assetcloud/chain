@@ -10,13 +10,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/system/dapp/commands"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/common/version"
+	"github.com/assetcloud/chain/pluginmgr"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/system/dapp/commands"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 
@@ -26,18 +26,18 @@ func Run(RPCAddr, ParaName, name string) {
 	log.SetLogLevel("error")
 	configPath := ""
 	for i, arg := range os.Args[:] {
-		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf chain33.toml 可以配置读入cli配置文件路径
+		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf chain.toml 可以配置读入cli配置文件路径
 			configPath = os.Args[i+1]
 			break
 		}
-		if strings.HasPrefix(arg, "--conf=") { // --conf="chain33.toml"
+		if strings.HasPrefix(arg, "--conf=") { // --conf="chain.toml"
 			configPath = strings.TrimPrefix(arg, "--conf=")
 			break
 		}
 	}
 	if configPath == "" {
 		if name == "" {
-			configPath = "chain33.toml"
+			configPath = "chain.toml"
 		} else {
 			configPath = name + ".toml"
 		}
@@ -73,9 +73,9 @@ func Run(RPCAddr, ParaName, name string) {
 				panic(err)
 			}
 			//		rpc, _ := jsonrpc.NewJSONClient(rpcLaddr)
-			//		rpc.Call("Chain33.CloseQueue", nil, nil)
+			//		rpc.Call("Chain.CloseQueue", nil, nil)
 			var res rpctypes.Reply
-			ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CloseQueue", nil, &res)
+			ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CloseQueue", nil, &res)
 			ctx.Run()
 		},
 	}

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/golang/protobuf/proto"

@@ -10,18 +10,18 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/33cn/chain33/common/merkle"
+	"github.com/33cn/chain/common/merkle"
 
 	"strings"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	qmocks "github.com/33cn/chain33/queue/mocks"
-	_ "github.com/33cn/chain33/system/crypto/secp256k1"
-	_ "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/chain/common"
+	"github.com/33cn/chain/common/address"
+	log "github.com/33cn/chain/common/log/log15"
+	"github.com/33cn/chain/queue"
+	qmocks "github.com/33cn/chain/queue/mocks"
+	_ "github.com/33cn/chain/system/crypto/secp256k1"
+	_ "github.com/33cn/chain/system/dapp/coins/types"
+	"github.com/33cn/chain/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -55,15 +55,15 @@ func TestMakeStringLower(t *testing.T) {
 }
 
 func TestResetDatadir(t *testing.T) {
-	cfg, _ := types.InitCfg("../cmd/chain33/chain33.toml")
+	cfg, _ := types.InitCfg("../cmd/chain/chain.toml")
 	datadir := ResetDatadir(cfg, "$TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/chain33/chain33.toml")
+	cfg, _ = types.InitCfg("../cmd/chain/chain.toml")
 	datadir = ResetDatadir(cfg, "/TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/chain33/chain33.toml")
+	cfg, _ = types.InitCfg("../cmd/chain/chain.toml")
 	datadir = ResetDatadir(cfg, "~/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 }
@@ -279,9 +279,9 @@ func (t *testClient) Wait(in *queue.Message) (*queue.Message, error) {
 
 func TestExecBlock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	str = strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	str = strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	str += fmt.Sprintf("\n[fork.sub.coins]\nEnable=0\nForkFriendExecer=0")
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain33/chain33.system.fork.toml"), str))
+	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain/chain.system.fork.toml"), str))
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)

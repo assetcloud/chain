@@ -7,5 +7,5 @@ package init
 
 import (
 	//初始化
-	_ "github.com/33cn/chain33/system/consensus/solo"
+	_ "github.com/assetcloud/chain/system/consensus/solo"
 )

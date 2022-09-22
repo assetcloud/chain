@@ -12,7 +12,7 @@ import (
 
 	"unsafe"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 //消息队列的主要作用是解耦合，让各个模块相对的独立运行。
@@ -219,7 +219,7 @@ func (client *client) CloseQueue() (*types.Reply, error) {
 	if client.q.isClosed() {
 		return &types.Reply{IsOk: true}, nil
 	}
-	qlog.Debug("queue", "msg", "closing chain33")
+	qlog.Debug("queue", "msg", "closing chain")
 	client.q.interrupt <- struct{}{}
 	//	close(client.q.interupt)
 	return &types.Reply{IsOk: true}, nil

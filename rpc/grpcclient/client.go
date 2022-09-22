@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 )
@@ -17,7 +17,7 @@ var mu sync.Mutex
 
 var defaultClient types.Chain33Client
 
-//NewMainChainClient 创建一个平行链的 主链 grpc chain33 客户端
+//NewMainChainClient 创建一个平行链的 主链 grpc chain 客户端
 func NewMainChainClient(cfg *types.Chain33Config, grpcaddr string) (types.Chain33Client, error) {
 	mu.Lock()
 	defer mu.Unlock()

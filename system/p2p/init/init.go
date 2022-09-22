@@ -6,5 +6,5 @@
 package init
 
 import (
-	_ "github.com/33cn/chain33/system/p2p/dht" //基于libp2p dht网络
+	_ "github.com/assetcloud/chain/system/p2p/dht" //基于libp2p dht网络
 )

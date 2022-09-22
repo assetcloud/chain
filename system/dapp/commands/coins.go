@@ -14,8 +14,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 

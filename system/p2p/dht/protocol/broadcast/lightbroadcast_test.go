@@ -7,9 +7,9 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
+	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
 	blankhost "github.com/libp2p/go-libp2p-blankhost"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"

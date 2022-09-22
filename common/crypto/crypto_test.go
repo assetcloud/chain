@@ -10,11 +10,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/system/crypto/ed25519"
-	_ "github.com/33cn/chain33/system/crypto/init"
-	"github.com/33cn/chain33/system/crypto/none"
-	"github.com/33cn/chain33/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/system/crypto/ed25519"
+	_ "github.com/assetcloud/chain/system/crypto/init"
+	"github.com/assetcloud/chain/system/crypto/none"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
 	"github.com/stretchr/testify/require"
 )
 

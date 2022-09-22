@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

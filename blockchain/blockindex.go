@@ -9,8 +9,8 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/33cn/chain33/common/difficulty"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/difficulty"
+	"github.com/assetcloud/chain/types"
 )
 
 type blockNode struct {

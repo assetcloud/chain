@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	db "github.com/33cn/chain33/common/db"
+	db "github.com/assetcloud/chain/common/db"
 	lru "github.com/hashicorp/golang-lru"
 
 	mock "github.com/stretchr/testify/mock"

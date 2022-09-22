@@ -7,7 +7,7 @@ package table
 import (
 	"testing"
 
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 )
 

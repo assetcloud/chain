@@ -17,11 +17,11 @@ export PATH="$PWD:$PATH"
 
 PROJECT_NAME="${1}"
 
-NODE3="autotest-chain33"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+NODE3="autotest-chain"
+CLI="docker exec ${NODE3} /root/chain-cli"
 
 NODE2="autotest-chain32"
-CLI2="docker exec ${NODE2} /root/chain33-cli"
+CLI2="docker exec ${NODE2} /root/chain-cli"
 
 sedfix=""
 if [ "$(uname)" == "Darwin" ]; then
@@ -30,24 +30,24 @@ fi
 
 function init() {
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' chain33.toml
-    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' chain33.toml
+    sed -i $sedfix 's/^Title.*/Title="local"/g' chain.toml
+    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' chain.toml
 
     # p2p
-    sed -i $sedfix 's/^seeds=.*/seeds=["chain33:13802","chain32:13802"]/g' chain33.toml
-    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain33.toml
-    sed -i $sedfix '0,/^enable=.*/s//enable=true/' chain33.toml
-    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' chain33.toml
-    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' chain33.toml
-    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' chain33.toml
+    sed -i $sedfix 's/^seeds=.*/seeds=["chain:13802","chain32:13802"]/g' chain.toml
+    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain.toml
+    sed -i $sedfix '0,/^enable=.*/s//enable=true/' chain.toml
+    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' chain.toml
+    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' chain.toml
+    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' chain.toml
 
     # rpc
-    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:8801"/g' chain33.toml
-    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' chain33.toml
-    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' chain33.toml
+    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:8801"/g' chain.toml
+    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' chain.toml
+    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' chain.toml
 
     # wallet
-    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' chain33.toml
+    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' chain.toml
 
 }
 
@@ -218,7 +218,7 @@ function stop_chain33() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
-    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./chain33* ./*.toml ./autotest
+    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./chain* ./*.toml ./autotest
     echo "=========== #remove related images ============"
     docker rmi "${PROJECT_NAME}"_autotest || true
     exit ${rv}

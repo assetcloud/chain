@@ -3,7 +3,7 @@ package skiplist
 import (
 	"container/list"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 //Scorer 接口实现 Value的 Score 功能

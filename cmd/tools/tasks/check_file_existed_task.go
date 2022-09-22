@@ -5,7 +5,7 @@
 package tasks
 
 import (
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/assetcloud/chain/cmd/tools/util"
 )
 
 // CheckFileExistedTask 检测文件是否存在

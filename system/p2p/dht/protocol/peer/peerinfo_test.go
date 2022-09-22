@@ -12,13 +12,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common/utils"
+	"github.com/assetcloud/chain/common/utils"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/extension"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/p2p/dht/extension"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/metrics"
@@ -54,7 +54,7 @@ func initEnv(t *testing.T, q queue.Queue) (*Protocol, context.CancelFunc) {
 		t.Fatal(err)
 	}
 
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[p2pty.DHTTypeName], mcfg)
 	kademliaDHT1, err := dht.New(context.Background(), host1)

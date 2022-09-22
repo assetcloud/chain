@@ -8,9 +8,9 @@ package consensus
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/consensus"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/consensus"
+	"github.com/assetcloud/chain/types"
 )
 
 // New new consensus queue module

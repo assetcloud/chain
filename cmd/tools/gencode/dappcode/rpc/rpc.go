@@ -5,8 +5,8 @@
 package rpc
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/gencode/base"
+	"github.com/assetcloud/chain/cmd/tools/types"
 )
 
 func init() {
@@ -54,7 +54,7 @@ var (
 
 import (
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	rpctypes "github.com/33cn/chain33/rpc/types"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
 )
 
 /* 

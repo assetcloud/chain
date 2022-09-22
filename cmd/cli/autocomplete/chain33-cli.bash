@@ -74,6 +74,6 @@ function _chain33() {
 
 }
 
-# 用 _subcmd 补全 chain33-cli
+# 用 _subcmd 补全 chain-cli
 # _subcmd 通过当前光标所在的输入参数过滤可选的子命令
-complete -F _chain33 chain33-cli guodun
+complete -F _chain33 chain-cli guodun

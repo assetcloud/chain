@@ -10,11 +10,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/gencode"
-	"github.com/33cn/chain33/cmd/tools/types"
-	util2 "github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/cmd/tools/gencode"
+	"github.com/assetcloud/chain/cmd/tools/types"
+	util2 "github.com/assetcloud/chain/util"
 
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/assetcloud/chain/cmd/tools/util"
 )
 
 // GenDappCodeTask 通过生成好的pb.go和预先设计的模板，生成反射程序源码

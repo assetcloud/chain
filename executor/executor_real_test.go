@@ -13,14 +13,14 @@ import (
 
 	"sync"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/merkle"
-	_ "github.com/33cn/chain33/system"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/merkle"
+	_ "github.com/assetcloud/chain/system"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 

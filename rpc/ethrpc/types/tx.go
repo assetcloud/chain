@@ -7,15 +7,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/chain33/system/crypto/secp256k1eth"
+	"github.com/assetcloud/chain/system/crypto/secp256k1eth"
 
-	"github.com/33cn/chain33/common/address"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/system/address/eth"
-	dtypes "github.com/33cn/chain33/system/dapp/coins/types"
+	"github.com/assetcloud/chain/common/address"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/system/address/eth"
+	dtypes "github.com/assetcloud/chain/system/dapp/coins/types"
 	"github.com/ethereum/go-ethereum/common"
 
-	ctypes "github.com/33cn/chain33/types"
+	ctypes "github.com/assetcloud/chain/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	etypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -275,7 +275,7 @@ func paraseChain33TxPayload(execer string, payload []byte, blockHash common.Hash
 
 }
 
-//TxsToEthTxs chain33 txs format transfer to eth txs format
+//TxsToEthTxs chain txs format transfer to eth txs format
 func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transaction, cfg *ctypes.Chain33Config, full bool) (txs []interface{}, fee int64, err error) {
 	for index, itx := range ctxs {
 		fee += itx.GetFee()
@@ -303,7 +303,7 @@ func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transacti
 	return txs, fee, nil
 }
 
-//TxDetailsToEthReceipts chain33 txdetails transfer to eth tx receipts
+//TxDetailsToEthReceipts chain txdetails transfer to eth tx receipts
 func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash common.Hash, cfg *ctypes.Chain33Config) (txs Transactions, receipts []*Receipt, err error) {
 	for index, detail := range txDetails.GetTxs() {
 		if detail.GetTx() == nil {

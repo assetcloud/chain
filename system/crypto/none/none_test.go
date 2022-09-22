@@ -7,7 +7,7 @@ package none
 import (
 	"testing"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/crypto"
 	"github.com/stretchr/testify/require"
 )
 

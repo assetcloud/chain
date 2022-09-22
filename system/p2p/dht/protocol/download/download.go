@@ -5,9 +5,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 
@@ -21,8 +21,8 @@ func init() {
 
 const (
 	// Deprecated: old version, use downloadBlock instead
-	downloadBlockOld = "/chain33/downloadBlockReq/1.0.0"
-	downloadBlock    = "/chain33/download-block/1.0.0"
+	downloadBlockOld = "/chain/downloadBlockReq/1.0.0"
+	downloadBlock    = "/chain/download-block/1.0.0"
 )
 
 // Protocol ...

@@ -7,7 +7,7 @@ package util
 import (
 	"math/big"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 //CalcBitMap subs are align with subData,get the bases' tx's bitmap from subs result

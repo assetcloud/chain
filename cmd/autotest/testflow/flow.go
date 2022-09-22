@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/cmd/autotest/types"
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/assetcloud/chain/cmd/autotest/types"
+	"github.com/assetcloud/chain/common/log/log15"
 )
 
 //TestOperator 测试操作符

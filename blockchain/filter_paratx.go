@@ -8,8 +8,8 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/33cn/chain33/common/merkle"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/merkle"
+	"github.com/assetcloud/chain/types"
 )
 
 var (

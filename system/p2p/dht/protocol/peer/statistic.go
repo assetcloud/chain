@@ -1,14 +1,14 @@
 package peer
 
 import (
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p-core/network"
 )
 
 const (
 	//p2p statistical information
-	statisticalInfo = "/chain33/statistical/1.0.0"
+	statisticalInfo = "/chain/statistical/1.0.0"
 )
 
 //handlerStreamStatistical 返回当前连接的节点信息以及网络带宽信息

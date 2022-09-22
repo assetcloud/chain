@@ -71,7 +71,7 @@ func TestMergeLevel2Error(t *testing.T) {
 }
 
 func TestMergeToml(t *testing.T) {
-	newcfg := MergeCfg(ReadFile("../cmd/chain33/bityuan.toml"), bityuancfg)
+	newcfg := MergeCfg(ReadFile("../cmd/chain/bityuan.toml"), bityuancfg)
 	cfg1, err := initCfgString(newcfg)
 	assert.Nil(t, err)
 	cfg2, err := initCfgString(readFile("testdata/bityuan.toml"))

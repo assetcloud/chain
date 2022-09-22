@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/33cn/chain33/common/log/log15"
-	chain33Type "github.com/33cn/chain33/system/dapp/commands/types"
+	"github.com/assetcloud/chain/common/log/log15"
+	chain33Type "github.com/assetcloud/chain/system/dapp/commands/types"
 )
 
 //CaseFunc interface for testCase

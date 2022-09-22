@@ -15,9 +15,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 
-	log "github.com/33cn/chain33/common/log/log15"
+	log "github.com/assetcloud/chain/common/log/log15"
 )
 
 //消息队列：
@@ -97,7 +97,7 @@ func New(name string) Queue {
 		for {
 			select {
 			case <-q.done:
-				qlog.Info("closing chain33 callback")
+				qlog.Info("closing chain callback")
 				return
 			case msg := <-q.callback:
 				if msg.callback != nil {
@@ -137,11 +137,11 @@ func (q *queue) Start() {
 	// Block until a signal is received.
 	select {
 	case <-q.done:
-		qlog.Info("closing chain33 done")
+		qlog.Info("closing chain done")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case <-q.interrupt:
-		qlog.Info("closing chain33")
+		qlog.Info("closing chain")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case s := <-c:

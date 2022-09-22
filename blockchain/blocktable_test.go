@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/common/merkle"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/blockchain"
+	"github.com/assetcloud/chain/common/merkle"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

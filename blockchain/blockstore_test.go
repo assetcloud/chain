@@ -6,12 +6,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	qmocks "github.com/33cn/chain33/queue/mocks"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	qmocks "github.com/assetcloud/chain/queue/mocks"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

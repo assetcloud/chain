@@ -12,20 +12,20 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/client"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/blockchain"
+	"github.com/assetcloud/chain/client"
+	clog "github.com/assetcloud/chain/common/log"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/store"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 )
 
 var height = flag.Int64("height", 1, "exec block height")
-var datadir = flag.String("datadir", "", "data dir of chain33, include logs and datas")
-var configPath = flag.String("f", "chain33.toml", "configfile")
+var datadir = flag.String("datadir", "", "data dir of chain, include logs and datas")
+var configPath = flag.String("f", "chain.toml", "configfile")
 
 func resetDatadir(cfg *types.Config, datadir string) {
 	// Check in case of paths like "/something/~/something/"

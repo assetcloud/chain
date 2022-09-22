@@ -9,15 +9,15 @@ import (
 	"bytes"
 	"errors"
 
-	cryptocli "github.com/33cn/chain33/common/crypto/client"
-	"github.com/33cn/chain33/system/crypto/btcscript/script"
-	"github.com/33cn/chain33/system/crypto/secp256k1"
-	nty "github.com/33cn/chain33/system/dapp/none/types"
-	"github.com/33cn/chain33/types"
+	cryptocli "github.com/assetcloud/chain/common/crypto/client"
+	"github.com/assetcloud/chain/system/crypto/btcscript/script"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/types"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/crypto"
 )
 
 //const

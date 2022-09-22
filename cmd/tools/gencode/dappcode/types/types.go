@@ -5,8 +5,8 @@
 package types
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/gencode/base"
+	"github.com/assetcloud/chain/cmd/tools/types"
 )
 
 func init() {
@@ -46,8 +46,8 @@ var (
 	typesContent = `package types
 
 import (
-log "github.com/33cn/chain33/common/log/log15"
-"github.com/33cn/chain33/types"
+log "github.com/assetcloud/chain/common/log/log15"
+"github.com/assetcloud/chain/types"
 "reflect"
 )
 

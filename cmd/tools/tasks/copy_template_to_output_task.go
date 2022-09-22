@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/types"
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/assetcloud/chain/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/util"
 )
 
 //CopyTemplateToOutputTask ...

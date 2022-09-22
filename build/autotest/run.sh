@@ -18,7 +18,7 @@ function copyAutoTestConfig() {
     #pre config auto test
     {
 
-        echo 'cliCmd="./chain33-cli"'
+        echo 'cliCmd="./chain-cli"'
         echo "checkTimeout=60"
     } >"${AutoTestConfigFile}"
 
@@ -56,9 +56,9 @@ function copyAutoTestConfig() {
 
 function copyChain33() {
 
-    echo "# copy chain33 bin to path \"$1\", make sure build chain33"
-    cp ../chain33 ../chain33-cli ../chain33.toml "$1"
-    cp "${CHAIN33_PATH}"/cmd/chain33/chain33.test.toml "$1"
+    echo "# copy chain bin to path \"$1\", make sure build chain"
+    cp ../chain ../chain-cli ../chain.toml "$1"
+    cp "${CHAIN33_PATH}"/cmd/chain/chain.test.toml "$1"
 }
 
 function copyAll() {

@@ -8,11 +8,11 @@ package solo
 import (
 	"time"
 
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	drivers "github.com/33cn/chain33/system/consensus"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/queue"
+	drivers "github.com/assetcloud/chain/system/consensus"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 )
 
 var slog = log.New("module", "solo")

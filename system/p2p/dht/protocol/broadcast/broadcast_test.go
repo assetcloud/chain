@@ -13,19 +13,19 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	net "github.com/33cn/chain33/system/p2p/dht/extension"
+	net "github.com/assetcloud/chain/system/p2p/dht/extension"
 	"github.com/libp2p/go-libp2p"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/multiformats/go-multiaddr"
 
-	"github.com/33cn/chain33/client"
-	commlog "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	prototypes "github.com/33cn/chain33/system/p2p/dht/protocol"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	commlog "github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/p2p"
+	"github.com/assetcloud/chain/queue"
+	prototypes "github.com/assetcloud/chain/system/p2p/dht/protocol"
+	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -53,7 +53,7 @@ func newHost(port int32) core.Host {
 }
 
 func newTestEnv(q queue.Queue) (*prototypes.P2PEnv, context.CancelFunc) {
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	q.SetConfig(cfg)
 	go q.Start()
 

@@ -1128,160 +1128,160 @@ var file_rpc_proto_depIdxs = []int32{
 	10, // 2: types.delayTx.tx:type_name -> types.Transaction
 	6,  // 3: types.ReqSignWalletRecoverTx.walletRecoverParam:type_name -> types.ReqGetWalletRecoverAddr
 	11, // 4: types.Replies.replyList:type_name -> types.Reply
-	12, // 5: types.chain33.GetBlocks:input_type -> types.ReqBlocks
-	13, // 6: types.chain33.GetLastHeader:input_type -> types.ReqNil
-	14, // 7: types.chain33.CreateRawTransaction:input_type -> types.CreateTx
-	15, // 8: types.chain33.CreateRawTxGroup:input_type -> types.CreateTransactionGroup
-	16, // 9: types.chain33.QueryTransaction:input_type -> types.ReqHash
-	10, // 10: types.chain33.SendTransactionSync:input_type -> types.Transaction
-	10, // 11: types.chain33.SendTransaction:input_type -> types.Transaction
-	17, // 12: types.chain33.SendTransactions:input_type -> types.Transactions
-	18, // 13: types.chain33.GetTransactionByAddr:input_type -> types.ReqAddr
-	19, // 14: types.chain33.GetTransactionByHashes:input_type -> types.ReqHashes
-	20, // 15: types.chain33.GetMemPool:input_type -> types.ReqGetMempool
-	13, // 16: types.chain33.GetAccounts:input_type -> types.ReqNil
-	21, // 17: types.chain33.GetAccount:input_type -> types.ReqGetAccount
-	22, // 18: types.chain33.NewAccount:input_type -> types.ReqNewAccount
-	23, // 19: types.chain33.WalletTransactionList:input_type -> types.ReqWalletTransactionList
-	24, // 20: types.chain33.ImportPrivkey:input_type -> types.ReqWalletImportPrivkey
-	25, // 21: types.chain33.SendToAddress:input_type -> types.ReqWalletSendToAddress
-	26, // 22: types.chain33.SetTxFee:input_type -> types.ReqWalletSetFee
-	27, // 23: types.chain33.SetLabl:input_type -> types.ReqWalletSetLabel
-	28, // 24: types.chain33.MergeBalance:input_type -> types.ReqWalletMergeBalance
-	29, // 25: types.chain33.SetPasswd:input_type -> types.ReqWalletSetPasswd
-	13, // 26: types.chain33.Lock:input_type -> types.ReqNil
-	30, // 27: types.chain33.UnLock:input_type -> types.WalletUnLock
-	13, // 28: types.chain33.GetLastMemPool:input_type -> types.ReqNil
-	31, // 29: types.chain33.GetProperFee:input_type -> types.ReqProperFee
-	13, // 30: types.chain33.GetWalletStatus:input_type -> types.ReqNil
-	16, // 31: types.chain33.GetBlockOverview:input_type -> types.ReqHash
-	18, // 32: types.chain33.GetAddrOverview:input_type -> types.ReqAddr
-	32, // 33: types.chain33.GetBlockHash:input_type -> types.ReqInt
-	33, // 34: types.chain33.GenSeed:input_type -> types.GenSeedLang
-	34, // 35: types.chain33.GetSeed:input_type -> types.GetSeedByPw
-	35, // 36: types.chain33.SaveSeed:input_type -> types.SaveSeedByPw
-	36, // 37: types.chain33.GetBalance:input_type -> types.ReqBalance
-	37, // 38: types.chain33.QueryChain:input_type -> types.ChainExecutor
-	37, // 39: types.chain33.ExecWallet:input_type -> types.ChainExecutor
-	37, // 40: types.chain33.QueryConsensus:input_type -> types.ChainExecutor
-	38, // 41: types.chain33.CreateTransaction:input_type -> types.CreateTxIn
-	16, // 42: types.chain33.GetHexTxByHash:input_type -> types.ReqHash
-	39, // 43: types.chain33.DumpPrivkey:input_type -> types.ReqString
-	40, // 44: types.chain33.DumpPrivkeysFile:input_type -> types.ReqPrivkeysFile
-	40, // 45: types.chain33.ImportPrivkeysFile:input_type -> types.ReqPrivkeysFile
-	13, // 46: types.chain33.Version:input_type -> types.ReqNil
-	13, // 47: types.chain33.IsSync:input_type -> types.ReqNil
-	41, // 48: types.chain33.GetPeerInfo:input_type -> types.P2PGetPeerReq
-	42, // 49: types.chain33.NetInfo:input_type -> types.P2PGetNetInfoReq
-	13, // 50: types.chain33.IsNtpClockSync:input_type -> types.ReqNil
-	13, // 51: types.chain33.GetFatalFailure:input_type -> types.ReqNil
-	13, // 52: types.chain33.GetLastBlockSequence:input_type -> types.ReqNil
-	16, // 53: types.chain33.GetSequenceByHash:input_type -> types.ReqHash
-	19, // 54: types.chain33.GetBlockByHashes:input_type -> types.ReqHashes
-	43, // 55: types.chain33.GetBlockBySeq:input_type -> types.Int64
-	13, // 56: types.chain33.CloseQueue:input_type -> types.ReqNil
-	44, // 57: types.chain33.GetAllExecBalance:input_type -> types.ReqAllExecBalance
-	45, // 58: types.chain33.SignRawTx:input_type -> types.ReqSignRawTx
-	46, // 59: types.chain33.CreateNoBalanceTransaction:input_type -> types.NoBalanceTx
-	47, // 60: types.chain33.QueryRandNum:input_type -> types.ReqRandHash
-	48, // 61: types.chain33.GetFork:input_type -> types.ReqKey
-	49, // 62: types.chain33.CreateNoBalanceTxs:input_type -> types.NoBalanceTxs
-	50, // 63: types.chain33.GetParaTxByTitle:input_type -> types.ReqParaTxByTitle
-	51, // 64: types.chain33.LoadParaTxByTitle:input_type -> types.ReqHeightByTitle
-	52, // 65: types.chain33.GetParaTxByHeight:input_type -> types.ReqParaTxByHeight
-	12, // 66: types.chain33.GetHeaders:input_type -> types.ReqBlocks
-	13, // 67: types.chain33.GetServerTime:input_type -> types.ReqNil
-	13, // 68: types.chain33.GetCryptoList:input_type -> types.ReqNil
-	13, // 69: types.chain33.GetAddressDrivers:input_type -> types.ReqNil
-	5,  // 70: types.chain33.SendDelayTransaction:input_type -> types.delayTx
-	6,  // 71: types.chain33.GetWalletRecoverAddress:input_type -> types.ReqGetWalletRecoverAddr
-	7,  // 72: types.chain33.SignWalletRecoverTx:input_type -> types.ReqSignWalletRecoverTx
-	13, // 73: types.chain33.GetChainConfig:input_type -> types.ReqNil
-	39, // 74: types.chain33.ConvertExectoAddr:input_type -> types.ReqString
-	13, // 75: types.chain33.GetCoinSymbol:input_type -> types.ReqNil
-	53, // 76: types.chain33.ReWriteTx:input_type -> types.ReWriteRawTx
-	12, // 77: types.chain33.GetBlockSequences:input_type -> types.ReqBlocks
-	54, // 78: types.chain33.AddPushSubscribe:input_type -> types.PushSubscribeReq
-	13, // 79: types.chain33.ListPushes:input_type -> types.ReqNil
-	39, // 80: types.chain33.GetPushSeqLastNum:input_type -> types.ReqString
-	55, // 81: types.chain33.SubEvent:input_type -> types.ReqSubscribe
-	11, // 82: types.chain33.GetBlocks:output_type -> types.Reply
-	56, // 83: types.chain33.GetLastHeader:output_type -> types.Header
-	57, // 84: types.chain33.CreateRawTransaction:output_type -> types.UnsignTx
-	57, // 85: types.chain33.CreateRawTxGroup:output_type -> types.UnsignTx
-	58, // 86: types.chain33.QueryTransaction:output_type -> types.TransactionDetail
-	11, // 87: types.chain33.SendTransactionSync:output_type -> types.Reply
-	11, // 88: types.chain33.SendTransaction:output_type -> types.Reply
-	9,  // 89: types.chain33.SendTransactions:output_type -> types.Replies
-	59, // 90: types.chain33.GetTransactionByAddr:output_type -> types.ReplyTxInfos
-	60, // 91: types.chain33.GetTransactionByHashes:output_type -> types.TransactionDetails
-	61, // 92: types.chain33.GetMemPool:output_type -> types.ReplyTxList
-	62, // 93: types.chain33.GetAccounts:output_type -> types.WalletAccounts
-	63, // 94: types.chain33.GetAccount:output_type -> types.WalletAccount
-	63, // 95: types.chain33.NewAccount:output_type -> types.WalletAccount
-	64, // 96: types.chain33.WalletTransactionList:output_type -> types.WalletTxDetails
-	63, // 97: types.chain33.ImportPrivkey:output_type -> types.WalletAccount
-	65, // 98: types.chain33.SendToAddress:output_type -> types.ReplyHash
-	11, // 99: types.chain33.SetTxFee:output_type -> types.Reply
-	63, // 100: types.chain33.SetLabl:output_type -> types.WalletAccount
-	66, // 101: types.chain33.MergeBalance:output_type -> types.ReplyHashes
-	11, // 102: types.chain33.SetPasswd:output_type -> types.Reply
-	11, // 103: types.chain33.Lock:output_type -> types.Reply
-	11, // 104: types.chain33.UnLock:output_type -> types.Reply
-	61, // 105: types.chain33.GetLastMemPool:output_type -> types.ReplyTxList
-	67, // 106: types.chain33.GetProperFee:output_type -> types.ReplyProperFee
-	68, // 107: types.chain33.GetWalletStatus:output_type -> types.WalletStatus
-	69, // 108: types.chain33.GetBlockOverview:output_type -> types.BlockOverview
-	70, // 109: types.chain33.GetAddrOverview:output_type -> types.AddrOverview
-	65, // 110: types.chain33.GetBlockHash:output_type -> types.ReplyHash
-	71, // 111: types.chain33.GenSeed:output_type -> types.ReplySeed
-	71, // 112: types.chain33.GetSeed:output_type -> types.ReplySeed
-	11, // 113: types.chain33.SaveSeed:output_type -> types.Reply
-	72, // 114: types.chain33.GetBalance:output_type -> types.Accounts
-	11, // 115: types.chain33.QueryChain:output_type -> types.Reply
-	11, // 116: types.chain33.ExecWallet:output_type -> types.Reply
-	11, // 117: types.chain33.QueryConsensus:output_type -> types.Reply
-	57, // 118: types.chain33.CreateTransaction:output_type -> types.UnsignTx
-	73, // 119: types.chain33.GetHexTxByHash:output_type -> types.HexTx
-	74, // 120: types.chain33.DumpPrivkey:output_type -> types.ReplyString
-	11, // 121: types.chain33.DumpPrivkeysFile:output_type -> types.Reply
-	11, // 122: types.chain33.ImportPrivkeysFile:output_type -> types.Reply
-	75, // 123: types.chain33.Version:output_type -> types.VersionInfo
-	11, // 124: types.chain33.IsSync:output_type -> types.Reply
-	76, // 125: types.chain33.GetPeerInfo:output_type -> types.PeerList
-	77, // 126: types.chain33.NetInfo:output_type -> types.NodeNetInfo
-	11, // 127: types.chain33.IsNtpClockSync:output_type -> types.Reply
-	78, // 128: types.chain33.GetFatalFailure:output_type -> types.Int32
-	43, // 129: types.chain33.GetLastBlockSequence:output_type -> types.Int64
-	43, // 130: types.chain33.GetSequenceByHash:output_type -> types.Int64
-	79, // 131: types.chain33.GetBlockByHashes:output_type -> types.BlockDetails
-	80, // 132: types.chain33.GetBlockBySeq:output_type -> types.BlockSeq
-	11, // 133: types.chain33.CloseQueue:output_type -> types.Reply
-	81, // 134: types.chain33.GetAllExecBalance:output_type -> types.AllExecBalance
-	82, // 135: types.chain33.SignRawTx:output_type -> types.ReplySignRawTx
-	82, // 136: types.chain33.CreateNoBalanceTransaction:output_type -> types.ReplySignRawTx
-	65, // 137: types.chain33.QueryRandNum:output_type -> types.ReplyHash
-	43, // 138: types.chain33.GetFork:output_type -> types.Int64
-	82, // 139: types.chain33.CreateNoBalanceTxs:output_type -> types.ReplySignRawTx
-	83, // 140: types.chain33.GetParaTxByTitle:output_type -> types.ParaTxDetails
-	84, // 141: types.chain33.LoadParaTxByTitle:output_type -> types.ReplyHeightByTitle
-	83, // 142: types.chain33.GetParaTxByHeight:output_type -> types.ParaTxDetails
-	85, // 143: types.chain33.GetHeaders:output_type -> types.Headers
-	0,  // 144: types.chain33.GetServerTime:output_type -> types.serverTime
-	2,  // 145: types.chain33.GetCryptoList:output_type -> types.cryptoList
-	4,  // 146: types.chain33.GetAddressDrivers:output_type -> types.addressDrivers
-	11, // 147: types.chain33.SendDelayTransaction:output_type -> types.Reply
-	74, // 148: types.chain33.GetWalletRecoverAddress:output_type -> types.ReplyString
-	82, // 149: types.chain33.SignWalletRecoverTx:output_type -> types.ReplySignRawTx
-	8,  // 150: types.chain33.GetChainConfig:output_type -> types.ChainConfigInfo
-	74, // 151: types.chain33.ConvertExectoAddr:output_type -> types.ReplyString
-	74, // 152: types.chain33.GetCoinSymbol:output_type -> types.ReplyString
-	57, // 153: types.chain33.ReWriteTx:output_type -> types.UnsignTx
-	86, // 154: types.chain33.GetBlockSequences:output_type -> types.BlockSequences
-	87, // 155: types.chain33.AddPushSubscribe:output_type -> types.ReplySubscribePush
-	88, // 156: types.chain33.ListPushes:output_type -> types.PushSubscribes
-	43, // 157: types.chain33.GetPushSeqLastNum:output_type -> types.Int64
-	89, // 158: types.chain33.SubEvent:output_type -> types.PushData
+	12, // 5: types.chain.GetBlocks:input_type -> types.ReqBlocks
+	13, // 6: types.chain.GetLastHeader:input_type -> types.ReqNil
+	14, // 7: types.chain.CreateRawTransaction:input_type -> types.CreateTx
+	15, // 8: types.chain.CreateRawTxGroup:input_type -> types.CreateTransactionGroup
+	16, // 9: types.chain.QueryTransaction:input_type -> types.ReqHash
+	10, // 10: types.chain.SendTransactionSync:input_type -> types.Transaction
+	10, // 11: types.chain.SendTransaction:input_type -> types.Transaction
+	17, // 12: types.chain.SendTransactions:input_type -> types.Transactions
+	18, // 13: types.chain.GetTransactionByAddr:input_type -> types.ReqAddr
+	19, // 14: types.chain.GetTransactionByHashes:input_type -> types.ReqHashes
+	20, // 15: types.chain.GetMemPool:input_type -> types.ReqGetMempool
+	13, // 16: types.chain.GetAccounts:input_type -> types.ReqNil
+	21, // 17: types.chain.GetAccount:input_type -> types.ReqGetAccount
+	22, // 18: types.chain.NewAccount:input_type -> types.ReqNewAccount
+	23, // 19: types.chain.WalletTransactionList:input_type -> types.ReqWalletTransactionList
+	24, // 20: types.chain.ImportPrivkey:input_type -> types.ReqWalletImportPrivkey
+	25, // 21: types.chain.SendToAddress:input_type -> types.ReqWalletSendToAddress
+	26, // 22: types.chain.SetTxFee:input_type -> types.ReqWalletSetFee
+	27, // 23: types.chain.SetLabl:input_type -> types.ReqWalletSetLabel
+	28, // 24: types.chain.MergeBalance:input_type -> types.ReqWalletMergeBalance
+	29, // 25: types.chain.SetPasswd:input_type -> types.ReqWalletSetPasswd
+	13, // 26: types.chain.Lock:input_type -> types.ReqNil
+	30, // 27: types.chain.UnLock:input_type -> types.WalletUnLock
+	13, // 28: types.chain.GetLastMemPool:input_type -> types.ReqNil
+	31, // 29: types.chain.GetProperFee:input_type -> types.ReqProperFee
+	13, // 30: types.chain.GetWalletStatus:input_type -> types.ReqNil
+	16, // 31: types.chain.GetBlockOverview:input_type -> types.ReqHash
+	18, // 32: types.chain.GetAddrOverview:input_type -> types.ReqAddr
+	32, // 33: types.chain.GetBlockHash:input_type -> types.ReqInt
+	33, // 34: types.chain.GenSeed:input_type -> types.GenSeedLang
+	34, // 35: types.chain.GetSeed:input_type -> types.GetSeedByPw
+	35, // 36: types.chain.SaveSeed:input_type -> types.SaveSeedByPw
+	36, // 37: types.chain.GetBalance:input_type -> types.ReqBalance
+	37, // 38: types.chain.QueryChain:input_type -> types.ChainExecutor
+	37, // 39: types.chain.ExecWallet:input_type -> types.ChainExecutor
+	37, // 40: types.chain.QueryConsensus:input_type -> types.ChainExecutor
+	38, // 41: types.chain.CreateTransaction:input_type -> types.CreateTxIn
+	16, // 42: types.chain.GetHexTxByHash:input_type -> types.ReqHash
+	39, // 43: types.chain.DumpPrivkey:input_type -> types.ReqString
+	40, // 44: types.chain.DumpPrivkeysFile:input_type -> types.ReqPrivkeysFile
+	40, // 45: types.chain.ImportPrivkeysFile:input_type -> types.ReqPrivkeysFile
+	13, // 46: types.chain.Version:input_type -> types.ReqNil
+	13, // 47: types.chain.IsSync:input_type -> types.ReqNil
+	41, // 48: types.chain.GetPeerInfo:input_type -> types.P2PGetPeerReq
+	42, // 49: types.chain.NetInfo:input_type -> types.P2PGetNetInfoReq
+	13, // 50: types.chain.IsNtpClockSync:input_type -> types.ReqNil
+	13, // 51: types.chain.GetFatalFailure:input_type -> types.ReqNil
+	13, // 52: types.chain.GetLastBlockSequence:input_type -> types.ReqNil
+	16, // 53: types.chain.GetSequenceByHash:input_type -> types.ReqHash
+	19, // 54: types.chain.GetBlockByHashes:input_type -> types.ReqHashes
+	43, // 55: types.chain.GetBlockBySeq:input_type -> types.Int64
+	13, // 56: types.chain.CloseQueue:input_type -> types.ReqNil
+	44, // 57: types.chain.GetAllExecBalance:input_type -> types.ReqAllExecBalance
+	45, // 58: types.chain.SignRawTx:input_type -> types.ReqSignRawTx
+	46, // 59: types.chain.CreateNoBalanceTransaction:input_type -> types.NoBalanceTx
+	47, // 60: types.chain.QueryRandNum:input_type -> types.ReqRandHash
+	48, // 61: types.chain.GetFork:input_type -> types.ReqKey
+	49, // 62: types.chain.CreateNoBalanceTxs:input_type -> types.NoBalanceTxs
+	50, // 63: types.chain.GetParaTxByTitle:input_type -> types.ReqParaTxByTitle
+	51, // 64: types.chain.LoadParaTxByTitle:input_type -> types.ReqHeightByTitle
+	52, // 65: types.chain.GetParaTxByHeight:input_type -> types.ReqParaTxByHeight
+	12, // 66: types.chain.GetHeaders:input_type -> types.ReqBlocks
+	13, // 67: types.chain.GetServerTime:input_type -> types.ReqNil
+	13, // 68: types.chain.GetCryptoList:input_type -> types.ReqNil
+	13, // 69: types.chain.GetAddressDrivers:input_type -> types.ReqNil
+	5,  // 70: types.chain.SendDelayTransaction:input_type -> types.delayTx
+	6,  // 71: types.chain.GetWalletRecoverAddress:input_type -> types.ReqGetWalletRecoverAddr
+	7,  // 72: types.chain.SignWalletRecoverTx:input_type -> types.ReqSignWalletRecoverTx
+	13, // 73: types.chain.GetChainConfig:input_type -> types.ReqNil
+	39, // 74: types.chain.ConvertExectoAddr:input_type -> types.ReqString
+	13, // 75: types.chain.GetCoinSymbol:input_type -> types.ReqNil
+	53, // 76: types.chain.ReWriteTx:input_type -> types.ReWriteRawTx
+	12, // 77: types.chain.GetBlockSequences:input_type -> types.ReqBlocks
+	54, // 78: types.chain.AddPushSubscribe:input_type -> types.PushSubscribeReq
+	13, // 79: types.chain.ListPushes:input_type -> types.ReqNil
+	39, // 80: types.chain.GetPushSeqLastNum:input_type -> types.ReqString
+	55, // 81: types.chain.SubEvent:input_type -> types.ReqSubscribe
+	11, // 82: types.chain.GetBlocks:output_type -> types.Reply
+	56, // 83: types.chain.GetLastHeader:output_type -> types.Header
+	57, // 84: types.chain.CreateRawTransaction:output_type -> types.UnsignTx
+	57, // 85: types.chain.CreateRawTxGroup:output_type -> types.UnsignTx
+	58, // 86: types.chain.QueryTransaction:output_type -> types.TransactionDetail
+	11, // 87: types.chain.SendTransactionSync:output_type -> types.Reply
+	11, // 88: types.chain.SendTransaction:output_type -> types.Reply
+	9,  // 89: types.chain.SendTransactions:output_type -> types.Replies
+	59, // 90: types.chain.GetTransactionByAddr:output_type -> types.ReplyTxInfos
+	60, // 91: types.chain.GetTransactionByHashes:output_type -> types.TransactionDetails
+	61, // 92: types.chain.GetMemPool:output_type -> types.ReplyTxList
+	62, // 93: types.chain.GetAccounts:output_type -> types.WalletAccounts
+	63, // 94: types.chain.GetAccount:output_type -> types.WalletAccount
+	63, // 95: types.chain.NewAccount:output_type -> types.WalletAccount
+	64, // 96: types.chain.WalletTransactionList:output_type -> types.WalletTxDetails
+	63, // 97: types.chain.ImportPrivkey:output_type -> types.WalletAccount
+	65, // 98: types.chain.SendToAddress:output_type -> types.ReplyHash
+	11, // 99: types.chain.SetTxFee:output_type -> types.Reply
+	63, // 100: types.chain.SetLabl:output_type -> types.WalletAccount
+	66, // 101: types.chain.MergeBalance:output_type -> types.ReplyHashes
+	11, // 102: types.chain.SetPasswd:output_type -> types.Reply
+	11, // 103: types.chain.Lock:output_type -> types.Reply
+	11, // 104: types.chain.UnLock:output_type -> types.Reply
+	61, // 105: types.chain.GetLastMemPool:output_type -> types.ReplyTxList
+	67, // 106: types.chain.GetProperFee:output_type -> types.ReplyProperFee
+	68, // 107: types.chain.GetWalletStatus:output_type -> types.WalletStatus
+	69, // 108: types.chain.GetBlockOverview:output_type -> types.BlockOverview
+	70, // 109: types.chain.GetAddrOverview:output_type -> types.AddrOverview
+	65, // 110: types.chain.GetBlockHash:output_type -> types.ReplyHash
+	71, // 111: types.chain.GenSeed:output_type -> types.ReplySeed
+	71, // 112: types.chain.GetSeed:output_type -> types.ReplySeed
+	11, // 113: types.chain.SaveSeed:output_type -> types.Reply
+	72, // 114: types.chain.GetBalance:output_type -> types.Accounts
+	11, // 115: types.chain.QueryChain:output_type -> types.Reply
+	11, // 116: types.chain.ExecWallet:output_type -> types.Reply
+	11, // 117: types.chain.QueryConsensus:output_type -> types.Reply
+	57, // 118: types.chain.CreateTransaction:output_type -> types.UnsignTx
+	73, // 119: types.chain.GetHexTxByHash:output_type -> types.HexTx
+	74, // 120: types.chain.DumpPrivkey:output_type -> types.ReplyString
+	11, // 121: types.chain.DumpPrivkeysFile:output_type -> types.Reply
+	11, // 122: types.chain.ImportPrivkeysFile:output_type -> types.Reply
+	75, // 123: types.chain.Version:output_type -> types.VersionInfo
+	11, // 124: types.chain.IsSync:output_type -> types.Reply
+	76, // 125: types.chain.GetPeerInfo:output_type -> types.PeerList
+	77, // 126: types.chain.NetInfo:output_type -> types.NodeNetInfo
+	11, // 127: types.chain.IsNtpClockSync:output_type -> types.Reply
+	78, // 128: types.chain.GetFatalFailure:output_type -> types.Int32
+	43, // 129: types.chain.GetLastBlockSequence:output_type -> types.Int64
+	43, // 130: types.chain.GetSequenceByHash:output_type -> types.Int64
+	79, // 131: types.chain.GetBlockByHashes:output_type -> types.BlockDetails
+	80, // 132: types.chain.GetBlockBySeq:output_type -> types.BlockSeq
+	11, // 133: types.chain.CloseQueue:output_type -> types.Reply
+	81, // 134: types.chain.GetAllExecBalance:output_type -> types.AllExecBalance
+	82, // 135: types.chain.SignRawTx:output_type -> types.ReplySignRawTx
+	82, // 136: types.chain.CreateNoBalanceTransaction:output_type -> types.ReplySignRawTx
+	65, // 137: types.chain.QueryRandNum:output_type -> types.ReplyHash
+	43, // 138: types.chain.GetFork:output_type -> types.Int64
+	82, // 139: types.chain.CreateNoBalanceTxs:output_type -> types.ReplySignRawTx
+	83, // 140: types.chain.GetParaTxByTitle:output_type -> types.ParaTxDetails
+	84, // 141: types.chain.LoadParaTxByTitle:output_type -> types.ReplyHeightByTitle
+	83, // 142: types.chain.GetParaTxByHeight:output_type -> types.ParaTxDetails
+	85, // 143: types.chain.GetHeaders:output_type -> types.Headers
+	0,  // 144: types.chain.GetServerTime:output_type -> types.serverTime
+	2,  // 145: types.chain.GetCryptoList:output_type -> types.cryptoList
+	4,  // 146: types.chain.GetAddressDrivers:output_type -> types.addressDrivers
+	11, // 147: types.chain.SendDelayTransaction:output_type -> types.Reply
+	74, // 148: types.chain.GetWalletRecoverAddress:output_type -> types.ReplyString
+	82, // 149: types.chain.SignWalletRecoverTx:output_type -> types.ReplySignRawTx
+	8,  // 150: types.chain.GetChainConfig:output_type -> types.ChainConfigInfo
+	74, // 151: types.chain.ConvertExectoAddr:output_type -> types.ReplyString
+	74, // 152: types.chain.GetCoinSymbol:output_type -> types.ReplyString
+	57, // 153: types.chain.ReWriteTx:output_type -> types.UnsignTx
+	86, // 154: types.chain.GetBlockSequences:output_type -> types.BlockSequences
+	87, // 155: types.chain.AddPushSubscribe:output_type -> types.ReplySubscribePush
+	88, // 156: types.chain.ListPushes:output_type -> types.PushSubscribes
+	43, // 157: types.chain.GetPushSeqLastNum:output_type -> types.Int64
+	89, // 158: types.chain.SubEvent:output_type -> types.PushData
 	82, // [82:159] is the sub-list for method output_type
 	5,  // [5:82] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
@@ -1452,11 +1452,11 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// Chain33Client is the client API for Chain33 service.
+// Chain33Client is the client API for Chain service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type Chain33Client interface {
-	// chain33 对外提供服务的接口
+	// chain 对外提供服务的接口
 	//区块链接口
 	GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error)
 	//获取最新的区块头
@@ -1615,7 +1615,7 @@ func NewChain33Client(cc grpc.ClientConnInterface) Chain33Client {
 
 func (c *chain33Client) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlocks", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlocks", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1624,7 +1624,7 @@ func (c *chain33Client) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...gr
 
 func (c *chain33Client) GetLastHeader(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Header, error) {
 	out := new(Header)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastHeader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetLastHeader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1633,7 +1633,7 @@ func (c *chain33Client) GetLastHeader(ctx context.Context, in *ReqNil, opts ...g
 
 func (c *chain33Client) CreateRawTransaction(ctx context.Context, in *CreateTx, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateRawTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CreateRawTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1642,7 +1642,7 @@ func (c *chain33Client) CreateRawTransaction(ctx context.Context, in *CreateTx, 
 
 func (c *chain33Client) CreateRawTxGroup(ctx context.Context, in *CreateTransactionGroup, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateRawTxGroup", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CreateRawTxGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1651,7 +1651,7 @@ func (c *chain33Client) CreateRawTxGroup(ctx context.Context, in *CreateTransact
 
 func (c *chain33Client) QueryTransaction(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*TransactionDetail, error) {
 	out := new(TransactionDetail)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/QueryTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1660,7 +1660,7 @@ func (c *chain33Client) QueryTransaction(ctx context.Context, in *ReqHash, opts 
 
 func (c *chain33Client) SendTransactionSync(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendTransactionSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SendTransactionSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1669,7 +1669,7 @@ func (c *chain33Client) SendTransactionSync(ctx context.Context, in *Transaction
 
 func (c *chain33Client) SendTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SendTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1678,7 +1678,7 @@ func (c *chain33Client) SendTransaction(ctx context.Context, in *Transaction, op
 
 func (c *chain33Client) SendTransactions(ctx context.Context, in *Transactions, opts ...grpc.CallOption) (*Replies, error) {
 	out := new(Replies)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendTransactions", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SendTransactions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1687,7 +1687,7 @@ func (c *chain33Client) SendTransactions(ctx context.Context, in *Transactions, 
 
 func (c *chain33Client) GetTransactionByAddr(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*ReplyTxInfos, error) {
 	out := new(ReplyTxInfos)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetTransactionByAddr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetTransactionByAddr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1696,7 +1696,7 @@ func (c *chain33Client) GetTransactionByAddr(ctx context.Context, in *ReqAddr, o
 
 func (c *chain33Client) GetTransactionByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*TransactionDetails, error) {
 	out := new(TransactionDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetTransactionByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetTransactionByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1705,7 +1705,7 @@ func (c *chain33Client) GetTransactionByHashes(ctx context.Context, in *ReqHashe
 
 func (c *chain33Client) GetMemPool(ctx context.Context, in *ReqGetMempool, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1714,7 +1714,7 @@ func (c *chain33Client) GetMemPool(ctx context.Context, in *ReqGetMempool, opts 
 
 func (c *chain33Client) GetAccounts(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletAccounts, error) {
 	out := new(WalletAccounts)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAccounts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1723,7 +1723,7 @@ func (c *chain33Client) GetAccounts(ctx context.Context, in *ReqNil, opts ...grp
 
 func (c *chain33Client) GetAccount(ctx context.Context, in *ReqGetAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1732,7 +1732,7 @@ func (c *chain33Client) GetAccount(ctx context.Context, in *ReqGetAccount, opts 
 
 func (c *chain33Client) NewAccount(ctx context.Context, in *ReqNewAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/NewAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/NewAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1741,7 +1741,7 @@ func (c *chain33Client) NewAccount(ctx context.Context, in *ReqNewAccount, opts 
 
 func (c *chain33Client) WalletTransactionList(ctx context.Context, in *ReqWalletTransactionList, opts ...grpc.CallOption) (*WalletTxDetails, error) {
 	out := new(WalletTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/WalletTransactionList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/WalletTransactionList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1750,7 +1750,7 @@ func (c *chain33Client) WalletTransactionList(ctx context.Context, in *ReqWallet
 
 func (c *chain33Client) ImportPrivkey(ctx context.Context, in *ReqWalletImportPrivkey, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/ImportPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ImportPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1759,7 +1759,7 @@ func (c *chain33Client) ImportPrivkey(ctx context.Context, in *ReqWalletImportPr
 
 func (c *chain33Client) SendToAddress(ctx context.Context, in *ReqWalletSendToAddress, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendToAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SendToAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1768,7 +1768,7 @@ func (c *chain33Client) SendToAddress(ctx context.Context, in *ReqWalletSendToAd
 
 func (c *chain33Client) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetTxFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SetTxFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1777,7 +1777,7 @@ func (c *chain33Client) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts 
 
 func (c *chain33Client) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetLabl", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SetLabl", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1786,7 +1786,7 @@ func (c *chain33Client) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts
 
 func (c *chain33Client) MergeBalance(ctx context.Context, in *ReqWalletMergeBalance, opts ...grpc.CallOption) (*ReplyHashes, error) {
 	out := new(ReplyHashes)
-	err := c.cc.Invoke(ctx, "/types.chain33/MergeBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/MergeBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1795,7 +1795,7 @@ func (c *chain33Client) MergeBalance(ctx context.Context, in *ReqWalletMergeBala
 
 func (c *chain33Client) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetPasswd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SetPasswd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1804,7 +1804,7 @@ func (c *chain33Client) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, o
 
 func (c *chain33Client) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/Lock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/Lock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1813,7 +1813,7 @@ func (c *chain33Client) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallO
 
 func (c *chain33Client) UnLock(ctx context.Context, in *WalletUnLock, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/UnLock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/UnLock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1822,7 +1822,7 @@ func (c *chain33Client) UnLock(ctx context.Context, in *WalletUnLock, opts ...gr
 
 func (c *chain33Client) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetLastMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1831,7 +1831,7 @@ func (c *chain33Client) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...
 
 func (c *chain33Client) GetProperFee(ctx context.Context, in *ReqProperFee, opts ...grpc.CallOption) (*ReplyProperFee, error) {
 	out := new(ReplyProperFee)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetProperFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetProperFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1840,7 +1840,7 @@ func (c *chain33Client) GetProperFee(ctx context.Context, in *ReqProperFee, opts
 
 func (c *chain33Client) GetWalletStatus(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletStatus, error) {
 	out := new(WalletStatus)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetWalletStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetWalletStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1849,7 +1849,7 @@ func (c *chain33Client) GetWalletStatus(ctx context.Context, in *ReqNil, opts ..
 
 func (c *chain33Client) GetBlockOverview(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*BlockOverview, error) {
 	out := new(BlockOverview)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlockOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1858,7 +1858,7 @@ func (c *chain33Client) GetBlockOverview(ctx context.Context, in *ReqHash, opts 
 
 func (c *chain33Client) GetAddrOverview(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*AddrOverview, error) {
 	out := new(AddrOverview)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAddrOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetAddrOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1867,7 +1867,7 @@ func (c *chain33Client) GetAddrOverview(ctx context.Context, in *ReqAddr, opts .
 
 func (c *chain33Client) GetBlockHash(ctx context.Context, in *ReqInt, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlockHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1876,7 +1876,7 @@ func (c *chain33Client) GetBlockHash(ctx context.Context, in *ReqInt, opts ...gr
 
 func (c *chain33Client) GenSeed(ctx context.Context, in *GenSeedLang, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.chain33/GenSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GenSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1885,7 +1885,7 @@ func (c *chain33Client) GenSeed(ctx context.Context, in *GenSeedLang, opts ...gr
 
 func (c *chain33Client) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1894,7 +1894,7 @@ func (c *chain33Client) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...gr
 
 func (c *chain33Client) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SaveSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SaveSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1903,7 +1903,7 @@ func (c *chain33Client) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...
 
 func (c *chain33Client) GetBalance(ctx context.Context, in *ReqBalance, opts ...grpc.CallOption) (*Accounts, error) {
 	out := new(Accounts)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1912,7 +1912,7 @@ func (c *chain33Client) GetBalance(ctx context.Context, in *ReqBalance, opts ...
 
 func (c *chain33Client) QueryChain(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryChain", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/QueryChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1921,7 +1921,7 @@ func (c *chain33Client) QueryChain(ctx context.Context, in *ChainExecutor, opts 
 
 func (c *chain33Client) ExecWallet(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/ExecWallet", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ExecWallet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1930,7 +1930,7 @@ func (c *chain33Client) ExecWallet(ctx context.Context, in *ChainExecutor, opts 
 
 func (c *chain33Client) QueryConsensus(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryConsensus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/QueryConsensus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1939,7 +1939,7 @@ func (c *chain33Client) QueryConsensus(ctx context.Context, in *ChainExecutor, o
 
 func (c *chain33Client) CreateTransaction(ctx context.Context, in *CreateTxIn, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CreateTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1948,7 +1948,7 @@ func (c *chain33Client) CreateTransaction(ctx context.Context, in *CreateTxIn, o
 
 func (c *chain33Client) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*HexTx, error) {
 	out := new(HexTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetHexTxByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetHexTxByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1957,7 +1957,7 @@ func (c *chain33Client) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ..
 
 func (c *chain33Client) DumpPrivkey(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.chain33/DumpPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/DumpPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1966,7 +1966,7 @@ func (c *chain33Client) DumpPrivkey(ctx context.Context, in *ReqString, opts ...
 
 func (c *chain33Client) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/DumpPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/DumpPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1975,7 +1975,7 @@ func (c *chain33Client) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFil
 
 func (c *chain33Client) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/ImportPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ImportPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1984,7 +1984,7 @@ func (c *chain33Client) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysF
 
 func (c *chain33Client) Version(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*VersionInfo, error) {
 	out := new(VersionInfo)
-	err := c.cc.Invoke(ctx, "/types.chain33/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1993,7 +1993,7 @@ func (c *chain33Client) Version(ctx context.Context, in *ReqNil, opts ...grpc.Ca
 
 func (c *chain33Client) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/IsSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/IsSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2002,7 +2002,7 @@ func (c *chain33Client) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.Cal
 
 func (c *chain33Client) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts ...grpc.CallOption) (*PeerList, error) {
 	out := new(PeerList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetPeerInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetPeerInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2011,7 +2011,7 @@ func (c *chain33Client) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts
 
 func (c *chain33Client) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts ...grpc.CallOption) (*NodeNetInfo, error) {
 	out := new(NodeNetInfo)
-	err := c.cc.Invoke(ctx, "/types.chain33/NetInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/NetInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2020,7 +2020,7 @@ func (c *chain33Client) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts 
 
 func (c *chain33Client) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/IsNtpClockSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/IsNtpClockSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2029,7 +2029,7 @@ func (c *chain33Client) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...
 
 func (c *chain33Client) GetFatalFailure(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int32, error) {
 	out := new(Int32)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetFatalFailure", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetFatalFailure", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2038,7 +2038,7 @@ func (c *chain33Client) GetFatalFailure(ctx context.Context, in *ReqNil, opts ..
 
 func (c *chain33Client) GetLastBlockSequence(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastBlockSequence", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetLastBlockSequence", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2047,7 +2047,7 @@ func (c *chain33Client) GetLastBlockSequence(ctx context.Context, in *ReqNil, op
 
 func (c *chain33Client) GetSequenceByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetSequenceByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetSequenceByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2056,7 +2056,7 @@ func (c *chain33Client) GetSequenceByHash(ctx context.Context, in *ReqHash, opts
 
 func (c *chain33Client) GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error) {
 	out := new(BlockDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlockByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2065,7 +2065,7 @@ func (c *chain33Client) GetBlockByHashes(ctx context.Context, in *ReqHashes, opt
 
 func (c *chain33Client) GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error) {
 	out := new(BlockSeq)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockBySeq", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlockBySeq", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2074,7 +2074,7 @@ func (c *chain33Client) GetBlockBySeq(ctx context.Context, in *Int64, opts ...gr
 
 func (c *chain33Client) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/CloseQueue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CloseQueue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2083,7 +2083,7 @@ func (c *chain33Client) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc
 
 func (c *chain33Client) GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error) {
 	out := new(AllExecBalance)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAllExecBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetAllExecBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2092,7 +2092,7 @@ func (c *chain33Client) GetAllExecBalance(ctx context.Context, in *ReqAllExecBal
 
 func (c *chain33Client) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/SignRawTx", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SignRawTx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2101,7 +2101,7 @@ func (c *chain33Client) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ..
 
 func (c *chain33Client) CreateNoBalanceTransaction(ctx context.Context, in *NoBalanceTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateNoBalanceTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CreateNoBalanceTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2110,7 +2110,7 @@ func (c *chain33Client) CreateNoBalanceTransaction(ctx context.Context, in *NoBa
 
 func (c *chain33Client) QueryRandNum(ctx context.Context, in *ReqRandHash, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryRandNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/QueryRandNum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2119,7 +2119,7 @@ func (c *chain33Client) QueryRandNum(ctx context.Context, in *ReqRandHash, opts 
 
 func (c *chain33Client) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetFork", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetFork", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2128,7 +2128,7 @@ func (c *chain33Client) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.Ca
 
 func (c *chain33Client) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateNoBalanceTxs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/CreateNoBalanceTxs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2137,7 +2137,7 @@ func (c *chain33Client) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs
 
 func (c *chain33Client) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTitle, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2146,7 +2146,7 @@ func (c *chain33Client) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTit
 
 func (c *chain33Client) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTitle, opts ...grpc.CallOption) (*ReplyHeightByTitle, error) {
 	out := new(ReplyHeightByTitle)
-	err := c.cc.Invoke(ctx, "/types.chain33/LoadParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/LoadParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2155,7 +2155,7 @@ func (c *chain33Client) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTi
 
 func (c *chain33Client) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHeight, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetParaTxByHeight", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetParaTxByHeight", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2164,7 +2164,7 @@ func (c *chain33Client) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHe
 
 func (c *chain33Client) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error) {
 	out := new(Headers)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetHeaders", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetHeaders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2173,7 +2173,7 @@ func (c *chain33Client) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...g
 
 func (c *chain33Client) GetServerTime(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ServerTime, error) {
 	out := new(ServerTime)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetServerTime", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetServerTime", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2182,7 +2182,7 @@ func (c *chain33Client) GetServerTime(ctx context.Context, in *ReqNil, opts ...g
 
 func (c *chain33Client) GetCryptoList(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*CryptoList, error) {
 	out := new(CryptoList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetCryptoList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetCryptoList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2191,7 +2191,7 @@ func (c *chain33Client) GetCryptoList(ctx context.Context, in *ReqNil, opts ...g
 
 func (c *chain33Client) GetAddressDrivers(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*AddressDrivers, error) {
 	out := new(AddressDrivers)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAddressDrivers", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetAddressDrivers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2200,7 +2200,7 @@ func (c *chain33Client) GetAddressDrivers(ctx context.Context, in *ReqNil, opts 
 
 func (c *chain33Client) SendDelayTransaction(ctx context.Context, in *DelayTx, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendDelayTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SendDelayTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2209,7 +2209,7 @@ func (c *chain33Client) SendDelayTransaction(ctx context.Context, in *DelayTx, o
 
 func (c *chain33Client) GetWalletRecoverAddress(ctx context.Context, in *ReqGetWalletRecoverAddr, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetWalletRecoverAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetWalletRecoverAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2218,7 +2218,7 @@ func (c *chain33Client) GetWalletRecoverAddress(ctx context.Context, in *ReqGetW
 
 func (c *chain33Client) SignWalletRecoverTx(ctx context.Context, in *ReqSignWalletRecoverTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/SignWalletRecoverTx", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/SignWalletRecoverTx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2227,7 +2227,7 @@ func (c *chain33Client) SignWalletRecoverTx(ctx context.Context, in *ReqSignWall
 
 func (c *chain33Client) GetChainConfig(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ChainConfigInfo, error) {
 	out := new(ChainConfigInfo)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetChainConfig", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetChainConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2236,7 +2236,7 @@ func (c *chain33Client) GetChainConfig(ctx context.Context, in *ReqNil, opts ...
 
 func (c *chain33Client) ConvertExectoAddr(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.chain33/ConvertExectoAddr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ConvertExectoAddr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2245,7 +2245,7 @@ func (c *chain33Client) ConvertExectoAddr(ctx context.Context, in *ReqString, op
 
 func (c *chain33Client) GetCoinSymbol(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetCoinSymbol", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetCoinSymbol", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2254,7 +2254,7 @@ func (c *chain33Client) GetCoinSymbol(ctx context.Context, in *ReqNil, opts ...g
 
 func (c *chain33Client) ReWriteTx(ctx context.Context, in *ReWriteRawTx, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/ReWriteTx", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ReWriteTx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2263,7 +2263,7 @@ func (c *chain33Client) ReWriteTx(ctx context.Context, in *ReWriteRawTx, opts ..
 
 func (c *chain33Client) GetBlockSequences(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*BlockSequences, error) {
 	out := new(BlockSequences)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockSequences", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetBlockSequences", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2272,7 +2272,7 @@ func (c *chain33Client) GetBlockSequences(ctx context.Context, in *ReqBlocks, op
 
 func (c *chain33Client) AddPushSubscribe(ctx context.Context, in *PushSubscribeReq, opts ...grpc.CallOption) (*ReplySubscribePush, error) {
 	out := new(ReplySubscribePush)
-	err := c.cc.Invoke(ctx, "/types.chain33/AddPushSubscribe", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/AddPushSubscribe", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2281,7 +2281,7 @@ func (c *chain33Client) AddPushSubscribe(ctx context.Context, in *PushSubscribeR
 
 func (c *chain33Client) ListPushes(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*PushSubscribes, error) {
 	out := new(PushSubscribes)
-	err := c.cc.Invoke(ctx, "/types.chain33/ListPushes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/ListPushes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2290,7 +2290,7 @@ func (c *chain33Client) ListPushes(ctx context.Context, in *ReqNil, opts ...grpc
 
 func (c *chain33Client) GetPushSeqLastNum(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetPushSeqLastNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.chain/GetPushSeqLastNum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2298,7 +2298,7 @@ func (c *chain33Client) GetPushSeqLastNum(ctx context.Context, in *ReqString, op
 }
 
 func (c *chain33Client) SubEvent(ctx context.Context, in *ReqSubscribe, opts ...grpc.CallOption) (Chain33_SubEventClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Chain33_serviceDesc.Streams[0], "/types.chain33/SubEvent", opts...)
+	stream, err := c.cc.NewStream(ctx, &_Chain33_serviceDesc.Streams[0], "/types.chain/SubEvent", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2329,9 +2329,9 @@ func (x *chain33SubEventClient) Recv() (*PushData, error) {
 	return m, nil
 }
 
-// Chain33Server is the server API for Chain33 service.
+// Chain33Server is the server API for Chain service.
 type Chain33Server interface {
-	// chain33 对外提供服务的接口
+	// chain 对外提供服务的接口
 	//区块链接口
 	GetBlocks(context.Context, *ReqBlocks) (*Reply, error)
 	//获取最新的区块头
@@ -2730,7 +2730,7 @@ func _Chain33_GetBlocks_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlocks",
+		FullMethod: "/types.chain/GetBlocks",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlocks(ctx, req.(*ReqBlocks))
@@ -2748,7 +2748,7 @@ func _Chain33_GetLastHeader_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastHeader",
+		FullMethod: "/types.chain/GetLastHeader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetLastHeader(ctx, req.(*ReqNil))
@@ -2766,7 +2766,7 @@ func _Chain33_CreateRawTransaction_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateRawTransaction",
+		FullMethod: "/types.chain/CreateRawTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CreateRawTransaction(ctx, req.(*CreateTx))
@@ -2784,7 +2784,7 @@ func _Chain33_CreateRawTxGroup_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateRawTxGroup",
+		FullMethod: "/types.chain/CreateRawTxGroup",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CreateRawTxGroup(ctx, req.(*CreateTransactionGroup))
@@ -2802,7 +2802,7 @@ func _Chain33_QueryTransaction_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryTransaction",
+		FullMethod: "/types.chain/QueryTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).QueryTransaction(ctx, req.(*ReqHash))
@@ -2820,7 +2820,7 @@ func _Chain33_SendTransactionSync_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendTransactionSync",
+		FullMethod: "/types.chain/SendTransactionSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SendTransactionSync(ctx, req.(*Transaction))
@@ -2838,7 +2838,7 @@ func _Chain33_SendTransaction_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendTransaction",
+		FullMethod: "/types.chain/SendTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SendTransaction(ctx, req.(*Transaction))
@@ -2856,7 +2856,7 @@ func _Chain33_SendTransactions_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendTransactions",
+		FullMethod: "/types.chain/SendTransactions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SendTransactions(ctx, req.(*Transactions))
@@ -2874,7 +2874,7 @@ func _Chain33_GetTransactionByAddr_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetTransactionByAddr",
+		FullMethod: "/types.chain/GetTransactionByAddr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetTransactionByAddr(ctx, req.(*ReqAddr))
@@ -2892,7 +2892,7 @@ func _Chain33_GetTransactionByHashes_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetTransactionByHashes",
+		FullMethod: "/types.chain/GetTransactionByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetTransactionByHashes(ctx, req.(*ReqHashes))
@@ -2910,7 +2910,7 @@ func _Chain33_GetMemPool_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetMemPool",
+		FullMethod: "/types.chain/GetMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetMemPool(ctx, req.(*ReqGetMempool))
@@ -2928,7 +2928,7 @@ func _Chain33_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAccounts",
+		FullMethod: "/types.chain/GetAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetAccounts(ctx, req.(*ReqNil))
@@ -2946,7 +2946,7 @@ func _Chain33_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAccount",
+		FullMethod: "/types.chain/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetAccount(ctx, req.(*ReqGetAccount))
@@ -2964,7 +2964,7 @@ func _Chain33_NewAccount_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/NewAccount",
+		FullMethod: "/types.chain/NewAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).NewAccount(ctx, req.(*ReqNewAccount))
@@ -2982,7 +2982,7 @@ func _Chain33_WalletTransactionList_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/WalletTransactionList",
+		FullMethod: "/types.chain/WalletTransactionList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).WalletTransactionList(ctx, req.(*ReqWalletTransactionList))
@@ -3000,7 +3000,7 @@ func _Chain33_ImportPrivkey_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ImportPrivkey",
+		FullMethod: "/types.chain/ImportPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ImportPrivkey(ctx, req.(*ReqWalletImportPrivkey))
@@ -3018,7 +3018,7 @@ func _Chain33_SendToAddress_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendToAddress",
+		FullMethod: "/types.chain/SendToAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SendToAddress(ctx, req.(*ReqWalletSendToAddress))
@@ -3036,7 +3036,7 @@ func _Chain33_SetTxFee_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetTxFee",
+		FullMethod: "/types.chain/SetTxFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SetTxFee(ctx, req.(*ReqWalletSetFee))
@@ -3054,7 +3054,7 @@ func _Chain33_SetLabl_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetLabl",
+		FullMethod: "/types.chain/SetLabl",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SetLabl(ctx, req.(*ReqWalletSetLabel))
@@ -3072,7 +3072,7 @@ func _Chain33_MergeBalance_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/MergeBalance",
+		FullMethod: "/types.chain/MergeBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).MergeBalance(ctx, req.(*ReqWalletMergeBalance))
@@ -3090,7 +3090,7 @@ func _Chain33_SetPasswd_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetPasswd",
+		FullMethod: "/types.chain/SetPasswd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SetPasswd(ctx, req.(*ReqWalletSetPasswd))
@@ -3108,7 +3108,7 @@ func _Chain33_Lock_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/Lock",
+		FullMethod: "/types.chain/Lock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).Lock(ctx, req.(*ReqNil))
@@ -3126,7 +3126,7 @@ func _Chain33_UnLock_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/UnLock",
+		FullMethod: "/types.chain/UnLock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).UnLock(ctx, req.(*WalletUnLock))
@@ -3144,7 +3144,7 @@ func _Chain33_GetLastMemPool_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastMemPool",
+		FullMethod: "/types.chain/GetLastMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetLastMemPool(ctx, req.(*ReqNil))
@@ -3162,7 +3162,7 @@ func _Chain33_GetProperFee_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetProperFee",
+		FullMethod: "/types.chain/GetProperFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetProperFee(ctx, req.(*ReqProperFee))
@@ -3180,7 +3180,7 @@ func _Chain33_GetWalletStatus_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetWalletStatus",
+		FullMethod: "/types.chain/GetWalletStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetWalletStatus(ctx, req.(*ReqNil))
@@ -3198,7 +3198,7 @@ func _Chain33_GetBlockOverview_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockOverview",
+		FullMethod: "/types.chain/GetBlockOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlockOverview(ctx, req.(*ReqHash))
@@ -3216,7 +3216,7 @@ func _Chain33_GetAddrOverview_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAddrOverview",
+		FullMethod: "/types.chain/GetAddrOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetAddrOverview(ctx, req.(*ReqAddr))
@@ -3234,7 +3234,7 @@ func _Chain33_GetBlockHash_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockHash",
+		FullMethod: "/types.chain/GetBlockHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlockHash(ctx, req.(*ReqInt))
@@ -3252,7 +3252,7 @@ func _Chain33_GenSeed_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GenSeed",
+		FullMethod: "/types.chain/GenSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GenSeed(ctx, req.(*GenSeedLang))
@@ -3270,7 +3270,7 @@ func _Chain33_GetSeed_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetSeed",
+		FullMethod: "/types.chain/GetSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetSeed(ctx, req.(*GetSeedByPw))
@@ -3288,7 +3288,7 @@ func _Chain33_SaveSeed_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SaveSeed",
+		FullMethod: "/types.chain/SaveSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SaveSeed(ctx, req.(*SaveSeedByPw))
@@ -3306,7 +3306,7 @@ func _Chain33_GetBalance_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBalance",
+		FullMethod: "/types.chain/GetBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBalance(ctx, req.(*ReqBalance))
@@ -3324,7 +3324,7 @@ func _Chain33_QueryChain_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryChain",
+		FullMethod: "/types.chain/QueryChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).QueryChain(ctx, req.(*ChainExecutor))
@@ -3342,7 +3342,7 @@ func _Chain33_ExecWallet_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ExecWallet",
+		FullMethod: "/types.chain/ExecWallet",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ExecWallet(ctx, req.(*ChainExecutor))
@@ -3360,7 +3360,7 @@ func _Chain33_QueryConsensus_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryConsensus",
+		FullMethod: "/types.chain/QueryConsensus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).QueryConsensus(ctx, req.(*ChainExecutor))
@@ -3378,7 +3378,7 @@ func _Chain33_CreateTransaction_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateTransaction",
+		FullMethod: "/types.chain/CreateTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CreateTransaction(ctx, req.(*CreateTxIn))
@@ -3396,7 +3396,7 @@ func _Chain33_GetHexTxByHash_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetHexTxByHash",
+		FullMethod: "/types.chain/GetHexTxByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetHexTxByHash(ctx, req.(*ReqHash))
@@ -3414,7 +3414,7 @@ func _Chain33_DumpPrivkey_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/DumpPrivkey",
+		FullMethod: "/types.chain/DumpPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).DumpPrivkey(ctx, req.(*ReqString))
@@ -3432,7 +3432,7 @@ func _Chain33_DumpPrivkeysFile_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/DumpPrivkeysFile",
+		FullMethod: "/types.chain/DumpPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).DumpPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
@@ -3450,7 +3450,7 @@ func _Chain33_ImportPrivkeysFile_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ImportPrivkeysFile",
+		FullMethod: "/types.chain/ImportPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ImportPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
@@ -3468,7 +3468,7 @@ func _Chain33_Version_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/Version",
+		FullMethod: "/types.chain/Version",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).Version(ctx, req.(*ReqNil))
@@ -3486,7 +3486,7 @@ func _Chain33_IsSync_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/IsSync",
+		FullMethod: "/types.chain/IsSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).IsSync(ctx, req.(*ReqNil))
@@ -3504,7 +3504,7 @@ func _Chain33_GetPeerInfo_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetPeerInfo",
+		FullMethod: "/types.chain/GetPeerInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetPeerInfo(ctx, req.(*P2PGetPeerReq))
@@ -3522,7 +3522,7 @@ func _Chain33_NetInfo_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/NetInfo",
+		FullMethod: "/types.chain/NetInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).NetInfo(ctx, req.(*P2PGetNetInfoReq))
@@ -3540,7 +3540,7 @@ func _Chain33_IsNtpClockSync_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/IsNtpClockSync",
+		FullMethod: "/types.chain/IsNtpClockSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).IsNtpClockSync(ctx, req.(*ReqNil))
@@ -3558,7 +3558,7 @@ func _Chain33_GetFatalFailure_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetFatalFailure",
+		FullMethod: "/types.chain/GetFatalFailure",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetFatalFailure(ctx, req.(*ReqNil))
@@ -3576,7 +3576,7 @@ func _Chain33_GetLastBlockSequence_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastBlockSequence",
+		FullMethod: "/types.chain/GetLastBlockSequence",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetLastBlockSequence(ctx, req.(*ReqNil))
@@ -3594,7 +3594,7 @@ func _Chain33_GetSequenceByHash_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetSequenceByHash",
+		FullMethod: "/types.chain/GetSequenceByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetSequenceByHash(ctx, req.(*ReqHash))
@@ -3612,7 +3612,7 @@ func _Chain33_GetBlockByHashes_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockByHashes",
+		FullMethod: "/types.chain/GetBlockByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlockByHashes(ctx, req.(*ReqHashes))
@@ -3630,7 +3630,7 @@ func _Chain33_GetBlockBySeq_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockBySeq",
+		FullMethod: "/types.chain/GetBlockBySeq",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlockBySeq(ctx, req.(*Int64))
@@ -3648,7 +3648,7 @@ func _Chain33_CloseQueue_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CloseQueue",
+		FullMethod: "/types.chain/CloseQueue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CloseQueue(ctx, req.(*ReqNil))
@@ -3666,7 +3666,7 @@ func _Chain33_GetAllExecBalance_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAllExecBalance",
+		FullMethod: "/types.chain/GetAllExecBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetAllExecBalance(ctx, req.(*ReqAllExecBalance))
@@ -3684,7 +3684,7 @@ func _Chain33_SignRawTx_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SignRawTx",
+		FullMethod: "/types.chain/SignRawTx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SignRawTx(ctx, req.(*ReqSignRawTx))
@@ -3702,7 +3702,7 @@ func _Chain33_CreateNoBalanceTransaction_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateNoBalanceTransaction",
+		FullMethod: "/types.chain/CreateNoBalanceTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CreateNoBalanceTransaction(ctx, req.(*NoBalanceTx))
@@ -3720,7 +3720,7 @@ func _Chain33_QueryRandNum_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryRandNum",
+		FullMethod: "/types.chain/QueryRandNum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).QueryRandNum(ctx, req.(*ReqRandHash))
@@ -3738,7 +3738,7 @@ func _Chain33_GetFork_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetFork",
+		FullMethod: "/types.chain/GetFork",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetFork(ctx, req.(*ReqKey))
@@ -3756,7 +3756,7 @@ func _Chain33_CreateNoBalanceTxs_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateNoBalanceTxs",
+		FullMethod: "/types.chain/CreateNoBalanceTxs",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).CreateNoBalanceTxs(ctx, req.(*NoBalanceTxs))
@@ -3774,7 +3774,7 @@ func _Chain33_GetParaTxByTitle_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetParaTxByTitle",
+		FullMethod: "/types.chain/GetParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetParaTxByTitle(ctx, req.(*ReqParaTxByTitle))
@@ -3792,7 +3792,7 @@ func _Chain33_LoadParaTxByTitle_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/LoadParaTxByTitle",
+		FullMethod: "/types.chain/LoadParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).LoadParaTxByTitle(ctx, req.(*ReqHeightByTitle))
@@ -3810,7 +3810,7 @@ func _Chain33_GetParaTxByHeight_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetParaTxByHeight",
+		FullMethod: "/types.chain/GetParaTxByHeight",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetParaTxByHeight(ctx, req.(*ReqParaTxByHeight))
@@ -3828,7 +3828,7 @@ func _Chain33_GetHeaders_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetHeaders",
+		FullMethod: "/types.chain/GetHeaders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetHeaders(ctx, req.(*ReqBlocks))
@@ -3846,7 +3846,7 @@ func _Chain33_GetServerTime_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetServerTime",
+		FullMethod: "/types.chain/GetServerTime",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetServerTime(ctx, req.(*ReqNil))
@@ -3864,7 +3864,7 @@ func _Chain33_GetCryptoList_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetCryptoList",
+		FullMethod: "/types.chain/GetCryptoList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetCryptoList(ctx, req.(*ReqNil))
@@ -3882,7 +3882,7 @@ func _Chain33_GetAddressDrivers_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAddressDrivers",
+		FullMethod: "/types.chain/GetAddressDrivers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetAddressDrivers(ctx, req.(*ReqNil))
@@ -3900,7 +3900,7 @@ func _Chain33_SendDelayTransaction_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendDelayTransaction",
+		FullMethod: "/types.chain/SendDelayTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SendDelayTransaction(ctx, req.(*DelayTx))
@@ -3918,7 +3918,7 @@ func _Chain33_GetWalletRecoverAddress_Handler(srv interface{}, ctx context.Conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetWalletRecoverAddress",
+		FullMethod: "/types.chain/GetWalletRecoverAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetWalletRecoverAddress(ctx, req.(*ReqGetWalletRecoverAddr))
@@ -3936,7 +3936,7 @@ func _Chain33_SignWalletRecoverTx_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SignWalletRecoverTx",
+		FullMethod: "/types.chain/SignWalletRecoverTx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).SignWalletRecoverTx(ctx, req.(*ReqSignWalletRecoverTx))
@@ -3954,7 +3954,7 @@ func _Chain33_GetChainConfig_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetChainConfig",
+		FullMethod: "/types.chain/GetChainConfig",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetChainConfig(ctx, req.(*ReqNil))
@@ -3972,7 +3972,7 @@ func _Chain33_ConvertExectoAddr_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ConvertExectoAddr",
+		FullMethod: "/types.chain/ConvertExectoAddr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ConvertExectoAddr(ctx, req.(*ReqString))
@@ -3990,7 +3990,7 @@ func _Chain33_GetCoinSymbol_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetCoinSymbol",
+		FullMethod: "/types.chain/GetCoinSymbol",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetCoinSymbol(ctx, req.(*ReqNil))
@@ -4008,7 +4008,7 @@ func _Chain33_ReWriteTx_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ReWriteTx",
+		FullMethod: "/types.chain/ReWriteTx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ReWriteTx(ctx, req.(*ReWriteRawTx))
@@ -4026,7 +4026,7 @@ func _Chain33_GetBlockSequences_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockSequences",
+		FullMethod: "/types.chain/GetBlockSequences",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetBlockSequences(ctx, req.(*ReqBlocks))
@@ -4044,7 +4044,7 @@ func _Chain33_AddPushSubscribe_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/AddPushSubscribe",
+		FullMethod: "/types.chain/AddPushSubscribe",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).AddPushSubscribe(ctx, req.(*PushSubscribeReq))
@@ -4062,7 +4062,7 @@ func _Chain33_ListPushes_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ListPushes",
+		FullMethod: "/types.chain/ListPushes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).ListPushes(ctx, req.(*ReqNil))
@@ -4080,7 +4080,7 @@ func _Chain33_GetPushSeqLastNum_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetPushSeqLastNum",
+		FullMethod: "/types.chain/GetPushSeqLastNum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Chain33Server).GetPushSeqLastNum(ctx, req.(*ReqString))
@@ -4110,7 +4110,7 @@ func (x *chain33SubEventServer) Send(m *PushData) error {
 }
 
 var _Chain33_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "types.chain33",
+	ServiceName: "types.chain",
 	HandlerType: (*Chain33Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -6,11 +6,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet"
-	"github.com/33cn/chain33/wallet/bipwallet"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/wallet"
+	"github.com/assetcloud/chain/wallet/bipwallet"
 
 	"net/http"
 	_ "net/http/pprof"

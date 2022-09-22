@@ -9,24 +9,24 @@ import (
 	"fmt"
 	"time"
 
-	slog "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/pluginmgr"
+	slog "github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/pluginmgr"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/assetcloud/chain/queue"
 	"google.golang.org/grpc"
 
 	//"sync"
 	"testing"
 	//"time"
-	"github.com/33cn/chain33/client"
+	"github.com/assetcloud/chain/client"
 	"github.com/stretchr/testify/require"
 
 	"strings"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
-	pb "github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
+	pb "github.com/assetcloud/chain/types"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -715,7 +715,7 @@ func TestGrpc_QueryRandNum(t *testing.T) {
 
 func TestGrpc_GetFork(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	cfg := types.NewChain33Config(newstr)
 	cfg.SetDappFork("para", "fork100", 100)
 	Init(cfg)
@@ -901,7 +901,7 @@ func mockblockchain(t *testing.T, client queue.Client) {
 
 func TestGrpc_SubEvent(t *testing.T) {
 	c := queue.New("mytest")
-	chain33Cfg := types.NewChain33Config(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	chain33Cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
 	c.SetConfig(chain33Cfg)
 	go mockblockchain(t, c.Client())
 	rpcCfg = new(types.RPC)

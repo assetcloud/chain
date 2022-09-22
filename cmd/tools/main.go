@@ -7,8 +7,8 @@ package main
 import (
 	"os"
 
-	"github.com/33cn/chain33/cmd/tools/commands"
-	"github.com/33cn/chain33/common/log"
+	"github.com/assetcloud/chain/cmd/tools/commands"
+	"github.com/assetcloud/chain/common/log"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +33,7 @@ func addCommands(rootCmd *cobra.Command) {
 func runCommands() {
 	rootCmd := &cobra.Command{
 		Use:   "tools",
-		Short: "chain33 tools",
+		Short: "chain tools",
 	}
 	addCommands(rootCmd)
 

@@ -10,11 +10,11 @@ import (
 	"math/big"
 	"sync/atomic"
 
-	"github.com/33cn/chain33/client/api"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/difficulty"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/client/api"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/difficulty"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 )
 
 //ProcessBlock 处理共识模块过来的blockdetail，peer广播过来的block，以及从peer同步过来的block

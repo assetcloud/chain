@@ -13,8 +13,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/common/difficulty"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/difficulty"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ps "github.com/libp2p/go-libp2p-pubsub"
 )

@@ -1,4 +1,4 @@
-#image: chain33-build:latest
+#image: chain-build:latest
 
 before_script:
     - export GO_PROJECT_NAMESPACE="$GOPATH/src/gitlab.33.cn/$CI_PROJECT_NAMESPACE"
@@ -23,7 +23,7 @@ stages:
 go_fmt:
     stage: build
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make checkgofmt
         - make fmt
@@ -34,7 +34,7 @@ go_fmt:
 go_lint:
     stage: build
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make linter
     only:
@@ -44,7 +44,7 @@ go_lint:
 go_test:
     stage: test
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make docker-compose-down DAPP=all
         - make test
@@ -81,7 +81,7 @@ code_coverage:
 deploy:
     stage: deploy
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make build_ci
         - make docker-compose
@@ -93,7 +93,7 @@ deploy:
 deploy_relay:
     stage: deploy
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make build_ci
         - make docker-compose PROJ=relay DAPP=relay
@@ -104,7 +104,7 @@ deploy_relay:
 deploy_paracross:
     stage: deploy
     tags:
-        - 33cn
+        - assetcloud
     script:
         - make build_ci
         - make docker-compose PROJ=paracross DAPP=paracross
@@ -115,7 +115,7 @@ deploy_paracross:
 fork_test:
     stage: fork_test
     tags:
-        - 33cn
+        - assetcloud
     script:
          - if [ -n "${onceEveryday}" ]; then
          - make build_ci
@@ -129,7 +129,7 @@ fork_test:
 fork_test_privacy:
     stage: fork_test
     tags:
-        - 33cn
+        - assetcloud
     script:
          - if [ -n "${onceEveryday}" ]; then
          - make build_ci
@@ -143,7 +143,7 @@ fork_test_privacy:
 fork_test_paracross:
     stage: fork_test
     tags:
-        - 33cn
+        - assetcloud
     script:
          - if [ -n "${onceEveryday}" ]; then
          - make build_ci
@@ -158,7 +158,7 @@ fork_test_paracross:
 fork_test_all:
     stage: fork_test
     tags:
-        - 33cn
+        - assetcloud
     script:
          - if [ -n "${onceEveryday}" ]; then
          - make build_ci
@@ -173,7 +173,7 @@ fork_test_all:
 deploy_test_all:
     stage: fork_test
     tags:
-        - 33cn
+        - assetcloud
     script:
          - if [ -n "${onceEveryday}" ]; then
          - make build_ci
@@ -188,7 +188,7 @@ deploy_test_all:
 autotest:
     stage: autotest
     tags:
-        - 33cn
+        - assetcloud
     script:
         - if [ -n "${onceEveryday}" ]; then
         - make build_ci

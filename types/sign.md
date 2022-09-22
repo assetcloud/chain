@@ -36,5 +36,5 @@ type Signature struct {
 
 
 #### 相关文档
-- 加密模块介绍, chain33/common/crypto/README.md
-- 地址模块介绍, chain33/common/address/README.md
+- 加密模块介绍, chain/common/crypto/README.md
+- 地址模块介绍, chain/common/address/README.md

@@ -9,8 +9,8 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/crypto"
 )
 
 // Hash 获取block的hash值

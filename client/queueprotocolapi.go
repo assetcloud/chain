@@ -5,8 +5,8 @@
 package client
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 // QueueProtocolAPI 消息通道交互API接口定义
@@ -119,7 +119,7 @@ type QueueProtocolAPI interface {
 	// --------------- store interfaces end
 
 	// +++++++++++++++ other interfaces begin
-	// close chain33
+	// close chain
 	CloseQueue() (*types.Reply, error)
 	// --------------- other interfaces end
 	// types.EventAddBlockSeqCB

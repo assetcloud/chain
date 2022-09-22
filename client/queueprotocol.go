@@ -10,13 +10,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/assetcloud/chain/common/log/log15"
 
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/version"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 const (
@@ -643,7 +643,7 @@ func (q *QueueProtocol) Version() (*types.VersionInfo, error) {
 	return &types.VersionInfo{
 		Title:   q.client.GetConfig().GetTitle(),
 		App:     version.GetAppVersion(),
-		Chain33: version.GetVersion(),
+		Chain:   version.GetVersion(),
 		LocalDb: version.GetLocalDBVersion(),
 		ChainID: q.client.GetConfig().GetChainID(),
 	}, nil

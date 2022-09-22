@@ -10,11 +10,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/client/mocks"
+	"github.com/assetcloud/chain/client/mocks"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	ps "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	"github.com/stretchr/testify/require"

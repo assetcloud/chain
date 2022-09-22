@@ -5,13 +5,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/util"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 // CheckExpireValid 检查交易过期有效性，过期返回false，未过期返回true

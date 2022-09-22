@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 const defaultBlockHashCacheSize = 10000 //区块哈希缓存个数暂时采用固定值，约0.4MB内存占用

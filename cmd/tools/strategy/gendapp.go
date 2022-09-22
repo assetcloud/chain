@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/tasks"
-	"github.com/33cn/chain33/cmd/tools/types"
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/assetcloud/chain/cmd/tools/tasks"
+	"github.com/assetcloud/chain/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/util"
 )
 
 type genDappStrategy struct {
@@ -25,8 +25,8 @@ type genDappStrategy struct {
 }
 
 func (ad *genDappStrategy) Run() error {
-	fmt.Println("Begin generate chain33 dapp code.")
-	defer fmt.Println("End generate chain33 dapp code.")
+	fmt.Println("Begin generate chain dapp code.")
+	defer fmt.Println("End generate chain dapp code.")
 	if !ad.initMember() {
 		return fmt.Errorf("InitError")
 	}
@@ -59,7 +59,7 @@ func (ad *genDappStrategy) initMember() bool {
 
 	// 默认输出到plugin项目的plugin/dapp/目录下
 	if outDir == "" {
-		outDir = filepath.Join("github.com", "33cn", "plugin", "plugin", "dapp")
+		outDir = filepath.Join("github.com", "assetcloud", "plugin", "plugin", "dapp")
 	}
 	//兼容win 反斜杠路径
 	packPath := strings.Replace(filepath.Join(outDir), string(filepath.Separator), "/", -1)

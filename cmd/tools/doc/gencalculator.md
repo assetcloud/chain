@@ -77,12 +77,12 @@ service calculator {
 
 ### 代码生成
 ##### 生成基本代码
->使用chain33-tool，工具使用参考[文档](https://github.com/33cn/chain33/blob/master/cmd/tools/doc/gendapp.md)
+>使用chain33-tool，工具使用参考[文档](https://github.com/assetcloud/chain/blob/master/cmd/tools/doc/gendapp.md)
 ```
 //本例默认将calculator生成至官方plugin项目dapp目录下
-$ cd $GOPATH/src/github.com/33cn/chain33/cmd/tools && go build -o tool
+$ cd $GOPATH/src/github.com/assetcloud/chain/cmd/tools && go build -o tool
 $ ./tool gendapp -n calculator -p doc/calculator.proto
-$ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator && ls
+$ cd $GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/calculator && ls
 ```
 
 ##### 生成pb.go文件
@@ -90,7 +90,7 @@ pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的�
 具体可以查看chain33项目go.mod文件，github.com/golang/protobuf库的版本
 ```
 //进入生成合约的目录
-$ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator
+$ cd $GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/calculator
 //执行脚本生成calculator.pb.go
 $ cd proto && make
 ```
@@ -316,12 +316,12 @@ func (j *Jrpc)QueryCalcCount(in *ptypes.ReqQueryCalcCount, result *interface{}) 
 >涉及框架基础库使用，包括相关类型和网络组件
 ```go
 import (
-	"github.com/33cn/chain33/rpc/jsonclient"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	calculatortypes "github.com/33cn/plugin/plugin/dapp/calculator/types"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	calculatortypes "github.com/assetcloud/plugin/plugin/dapp/calculator/types"
 )
 ```
 ##### 创建交易命令(commands/commands.go)
@@ -357,7 +357,7 @@ func createAdd(cmd *cobra.Command, args []string) {
 	}
 	var res string
 	//调用框架CreateTransaction接口构建原始交易
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", chain33Req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.CreateTransaction", chain33Req, &res)
 	ctx.RunWithoutMarshal()
 }
 ```
@@ -392,7 +392,7 @@ func queryCalcCountCmd() *cobra.Command {
  	var res interface{}
  	res = &calculatortypes.ReplyQueryCalcCount{}
  	//调用框架Query rpc接口, 通过框架调用，需要指定query对应的函数名称，具体参数见Query4Jrpc结构
- 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", chain33Req, &res)
+ 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain.Query", chain33Req, &res)
  	//调用合约内部rpc接口, 注意合约自定义的rpc接口是以合约名称作为rpc服务，这里为calculator
  	//ctx := jsonclient.NewRPCCtx(rpcLaddr, "calculator.QueryCalcCount", req, &res)
  	ctx.Run()
@@ -420,14 +420,14 @@ func Cmd() *cobra.Command {
 >需要在此文件import目录，新增calculator包导入
 ```go
 import (
- 	_ "github.com/33cn/plugin/plugin/dapp/calculator" //init calculator
+ 	_ "github.com/assetcloud/plugin/plugin/dapp/calculator" //init calculator
 )
  ```
 
 ##### 编译
 >直接通过官方makefile文件
 ```
-$ cd $GOPATH/src/github.com/33cn/plugin && make
+$ cd $GOPATH/src/github.com/assetcloud/plugin && make
 ```
 
 #### 测试
@@ -437,20 +437,20 @@ $ cd $GOPATH/src/github.com/33cn/plugin && make
 编译后可以运行节点，进行钱包相关配置，即可发送合约交易进行功能性测试，本例相关命令行
 ```bash
 # 通过curl方式调用rpc接口构建Add原始交易
-curl -kd '{"method":"Chain33.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:8801
+curl -kd '{"method":"Chain.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:8801
 # 通过chain33-cli构建Add原始交易
-./chain33-cli calculator add -a 1 -s 1
+./chain-cli calculator add -a 1 -s 1
 
 # queryCount接口类似
 curl -kd '{"method":"calculator.QueryCalcCount", "params":[{"action":"Add"}]}' http://localhost:8801
-./chain33-cli calculator query_count -a Add
+./chain-cli calculator query_count -a Add
 ``` 
 
 #### 进阶
 ##### 计算器
 基于 [本例代码](https://github.com/bysomeone/plugin/tree/dapp-example-calculator) 实现减法等交易行为
 ##### 其他例子
-官方 [plugin项目](https://github.com/33cn/plugin) 提供了丰富的插件，可以参考学习
+官方 [plugin项目](https://github.com/assetcloud/plugin) 提供了丰富的插件，可以参考学习
 
 
 

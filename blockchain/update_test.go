@@ -8,12 +8,12 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	client "github.com/33cn/chain33/queue"
-	clientMocks "github.com/33cn/chain33/queue/mocks"
+	client "github.com/assetcloud/chain/queue"
+	clientMocks "github.com/assetcloud/chain/queue/mocks"
 )
 
 func TestUpgradePlugin(t *testing.T) {

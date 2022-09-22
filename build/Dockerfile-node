@@ -2,12 +2,12 @@ FROM ubuntu:16.04
 
 WORKDIR /data
 
-RUN mkdir -p /etc/bityuan/chain33
-ADD  ./chain33 /usr/local/bin
-ADD  ./chain33-cli /usr/local/bin
-ADD  ./chain33.toml /etc/bityuan/chain33
+RUN mkdir -p /etc/bityuan/chain
+ADD  ./chain /usr/local/bin
+ADD  ./chain-cli /usr/local/bin
+ADD  ./chain.toml /etc/bityuan/chain
 
 EXPOSE 13802
 
-CMD ["chain33", "-f", "/etc/bityuan/chain33/chain33.toml", "-datadir", "/data"]
+CMD ["chain", "-f", "/etc/bityuan/chain/chain.toml", "-datadir", "/data"]
 

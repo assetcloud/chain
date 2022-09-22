@@ -7,7 +7,7 @@ package types
 import (
 	"testing"
 
-	"github.com/33cn/chain33/system/crypto/secp256k1"
+	"github.com/33cn/chain/system/crypto/secp256k1"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -35,7 +35,7 @@ func TestChainConfig(t *testing.T) {
 
 //测试实际的配置文件
 func TestSubConfig(t *testing.T) {
-	cfg, err := initSubModuleString(readFile("testdata/chain33.toml"))
+	cfg, err := initSubModuleString(readFile("testdata/chain.toml"))
 	assert.Equal(t, 0, len(cfg.Consensus))
 	assert.Equal(t, 2, len(cfg.Store))
 	assert.Equal(t, 1, len(cfg.Exec))
@@ -44,12 +44,12 @@ func TestSubConfig(t *testing.T) {
 }
 
 func TestConfInit(t *testing.T) {
-	cfg := NewChain33Config(ReadFile("testdata/chain33.toml"))
+	cfg := NewChain33Config(ReadFile("testdata/chain.toml"))
 	assert.True(t, cfg.IsEnable("TxHeight"))
 }
 
 func TestConfigNoInit(t *testing.T) {
-	cfg := NewChain33ConfigNoInit(ReadFile("testdata/chain33.toml"))
+	cfg := NewChain33ConfigNoInit(ReadFile("testdata/chain.toml"))
 	assert.False(t, cfg.IsEnable("TxHeight"))
 	cfg.DisableCheckFork(true)
 	cfg.chain33CfgInit(cfg.GetModuleConfig())

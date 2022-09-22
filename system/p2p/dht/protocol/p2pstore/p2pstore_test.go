@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	types2 "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	types2 "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/discovery"
@@ -262,7 +262,7 @@ func initMockBlockchain(q queue.Queue) <-chan *queue.Message {
 }
 
 func makeProtocol(name string, q queue.Queue, h host.Host) *Protocol {
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	mcfg := &types2.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[types2.DHTTypeName], mcfg)
 	mcfg.DisableFindLANPeers = true

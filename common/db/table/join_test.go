@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"testing"
 
-	protodata "github.com/33cn/chain33/common/db/table/proto"
-	"github.com/33cn/chain33/util"
+	protodata "github.com/assetcloud/chain/common/db/table/proto"
+	"github.com/assetcloud/chain/util"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 func TestJoin(t *testing.T) {

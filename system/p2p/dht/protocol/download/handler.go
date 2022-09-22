@@ -6,9 +6,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	"github.com/assetcloud/chain/types"
 	"github.com/google/uuid"
 	"github.com/libp2p/go-libp2p-core/network"
 )

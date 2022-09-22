@@ -7,10 +7,10 @@ package types
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/system/crypto/ed25519"
-	"github.com/33cn/chain33/system/crypto/secp256k1"
-	"github.com/33cn/chain33/system/crypto/secp256k1eth"
-	"github.com/33cn/chain33/system/crypto/sm2"
+	"github.com/assetcloud/chain/system/crypto/ed25519"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/system/crypto/secp256k1eth"
+	"github.com/assetcloud/chain/system/crypto/sm2"
 )
 
 var slash = []byte("-")

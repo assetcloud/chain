@@ -3,8 +3,8 @@ package blockchain
 import (
 	"testing"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 func TestCheckClockDrift(t *testing.T) {

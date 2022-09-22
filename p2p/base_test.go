@@ -6,8 +6,8 @@ package p2p
 import (
 	"testing"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -43,7 +43,7 @@ func TestRegisterLoad(t *testing.T) {
 
 func TestEvent(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	go q.Start()

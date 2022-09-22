@@ -8,7 +8,7 @@ package types
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 )
 
 // action类型id和name，这些常量可以自定义修改

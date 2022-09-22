@@ -12,11 +12,11 @@ import (
 	"strings"
 	"time"
 
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
 	"github.com/pkg/errors"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/types"
 	"github.com/spf13/cobra"
 )
 

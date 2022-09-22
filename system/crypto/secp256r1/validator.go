@@ -16,13 +16,13 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/33cn/chain33/system/crypto/common/authority/core"
+	"github.com/assetcloud/chain/system/crypto/common/authority/core"
 
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 
 	"crypto/ecdsa"
 
-	log "github.com/33cn/chain33/common/log/log15"
+	log "github.com/assetcloud/chain/common/log/log15"
 )
 
 var authLogger = log.New("module", "crypto")

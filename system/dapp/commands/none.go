@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	cmdtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	nonetypes "github.com/33cn/chain33/system/dapp/none/types"
+	cmdtypes "github.com/assetcloud/chain/system/dapp/commands/types"
+	nonetypes "github.com/assetcloud/chain/system/dapp/none/types"
 	"github.com/spf13/cobra"
 )
 

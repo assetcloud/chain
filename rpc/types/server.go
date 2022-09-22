@@ -7,10 +7,10 @@ package types
 import (
 	"net/rpc"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/account"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"google.golang.org/grpc"
 )
 

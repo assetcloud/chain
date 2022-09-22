@@ -84,7 +84,7 @@ func initChainBityuanV3() {
 }
 
 func TestInitChainParam(t *testing.T) {
-	cfg := NewChain33Config(MergeCfg(ReadFile("../cmd/chain33/chain33.toml"), ReadFile("../cmd/chain33/chain33.fork.toml")))
+	cfg := NewChain33Config(MergeCfg(ReadFile("../cmd/chain/chain.toml"), ReadFile("../cmd/chain/chain.fork.toml")))
 	forkid := cfg.GetFork("ForkChainParamV1")
 	assert.Equal(t, cfg.GetP(0), getP(cfg, 0))
 	assert.Equal(t, cfg.GetP(forkid-1), getP(cfg, forkid-1))

@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 
 	"github.com/kevinms/leakybucket-go"
 	"github.com/libp2p/go-libp2p-core/control"

@@ -10,7 +10,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 

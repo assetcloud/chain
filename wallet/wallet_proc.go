@@ -16,15 +16,15 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	dbm "github.com/33cn/chain33/common/db"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet/bipwallet"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/assetcloud/chain/account"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	dbm "github.com/assetcloud/chain/common/db"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/wallet/bipwallet"
+	wcom "github.com/assetcloud/chain/wallet/common"
 )
 
 // ProcSignRawTx 用钱包对交易进行签名

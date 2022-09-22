@@ -7,8 +7,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/cmd/tools/strategy"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/strategy"
+	"github.com/assetcloud/chain/cmd/tools/types"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +28,7 @@ func addGenDappFlag(cmd *cobra.Command) {
 	cmd.MarkFlagRequired("name")
 	cmd.Flags().StringP("proto", "p", "", "dapp protobuf file path")
 	cmd.MarkFlagRequired("proto")
-	cmd.Flags().StringP("output", "o", "", "go package for output (default github.com/33cn/plugin/plugin/dapp/)")
+	cmd.Flags().StringP("output", "o", "", "go package for output (default github.com/assetcloud/plugin/plugin/dapp/)")
 
 }
 

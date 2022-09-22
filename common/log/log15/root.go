@@ -7,7 +7,7 @@ package log15
 import (
 	"os"
 
-	"github.com/33cn/chain33/common/log/log15/term"
+	"github.com/assetcloud/chain/common/log/log15/term"
 	colorable "github.com/mattn/go-colorable"
 )
 

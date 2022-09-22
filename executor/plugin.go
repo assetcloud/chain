@@ -7,8 +7,8 @@ package executor
 import (
 	"sync"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/types"
 )
 
 //plugin 主要用于处理 execlocal 和 execdellocal 时候的全局kv的处理

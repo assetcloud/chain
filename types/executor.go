@@ -15,7 +15,7 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/dynamicpb"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 	"github.com/golang/protobuf/proto"
 )
 

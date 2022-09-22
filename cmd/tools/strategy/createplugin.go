@@ -10,10 +10,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/util"
 
-	"github.com/33cn/chain33/cmd/tools/tasks"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/assetcloud/chain/cmd/tools/tasks"
+	"github.com/assetcloud/chain/cmd/tools/types"
 	"github.com/pkg/errors"
 )
 
@@ -34,8 +34,8 @@ type createPluginStrategy struct {
 }
 
 func (c *createPluginStrategy) Run() error {
-	fmt.Println("Begin run chain33 create plugin project mode.")
-	defer fmt.Println("Run chain33 create plugin project mode finish.")
+	fmt.Println("Begin run chain create plugin project mode.")
+	defer fmt.Println("Run chain create plugin project mode finish.")
 	if err := c.initMember(); err != nil {
 		return err
 	}
@@ -48,7 +48,7 @@ func (c *createPluginStrategy) initMember() error {
 		return errors.New("Can't find GOPATH")
 	}
 	c.gopath = gopath
-	c.outRootPath = filepath.Join(gopath, "/src/github.com/33cn")
+	c.outRootPath = filepath.Join(gopath, "/src/github.com/assetcloud")
 	c.projName, _ = c.getParam(types.KeyProjectName)
 	c.execName, _ = c.getParam(types.KeyExecutorName)
 	c.className, _ = c.getParam(types.KeyClassName)

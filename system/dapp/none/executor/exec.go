@@ -5,9 +5,9 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/common"
-	nty "github.com/33cn/chain33/system/dapp/none/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/types"
 )
 
 // Exec_CommitDelayTx exec commit dealy transaction

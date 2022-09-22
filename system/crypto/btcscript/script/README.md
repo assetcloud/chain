@@ -26,7 +26,7 @@
 
 #### rpc接口
 
-##### chain33.GetWalletRecoverAddress
+##### chain.GetWalletRecoverAddress
 
 > 请求结构 ReqGetWalletRecoverAddr
 
@@ -47,7 +47,7 @@
 
 
 
-##### chain33.SignWalletRecoverTx
+##### chain.SignWalletRecoverTx
 
 > 请求结构 ReqSignWalletRecoverTx
 

@@ -10,7 +10,7 @@ import "executor.proto";
 import "push_tx_receipt.proto";
 
 package types;
-option go_package = "github.com/33cn/chain33/types";
+option go_package = "github.com/assetcloud/chain/types";
 
 message serverTime {
     int64 currentTimestamp = 1;
@@ -75,8 +75,8 @@ message Replies {
     repeated Reply replyList = 1;
 }
 
-service chain33 {
-    // chain33 对外提供服务的接口
+service chain {
+    // chain 对外提供服务的接口
     //区块链接口
     rpc GetBlocks(ReqBlocks) returns (Reply) {}
     //获取最新的区块头

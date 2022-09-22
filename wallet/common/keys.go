@@ -7,7 +7,7 @@ package common
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 )
 
 const (

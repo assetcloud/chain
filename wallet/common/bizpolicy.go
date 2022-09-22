@@ -5,9 +5,9 @@
 package common
 
 import (
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/types"
 )
 
 // WalletBizPolicy 细分钱包业务逻辑的街口

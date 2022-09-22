@@ -11,15 +11,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/api"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	_ "github.com/33cn/chain33/system"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/client/api"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/store"
+	_ "github.com/assetcloud/chain/system"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -285,7 +285,7 @@ func TestExecutorErrAPIEnv(t *testing.T) {
 	assert.Equal(t, true, api.IsAPIEnvError(err))
 }
 func TestCheckTx(t *testing.T) {
-	exec, q := initEnv(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	exec, q := initEnv(types.ReadFile("../cmd/chain/chain.test.toml"))
 	cfg := exec.client.GetConfig()
 
 	store := store.New(cfg)

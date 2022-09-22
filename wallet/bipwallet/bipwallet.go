@@ -9,15 +9,15 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types"
-	bip32 "github.com/33cn/chain33/wallet/bipwallet/go-bip32"
-	bip39 "github.com/33cn/chain33/wallet/bipwallet/go-bip39"
-	bip44 "github.com/33cn/chain33/wallet/bipwallet/go-bip44"
-	"github.com/33cn/chain33/wallet/bipwallet/transformer"
-	_ "github.com/33cn/chain33/wallet/bipwallet/transformer/btcbase" //register
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/types"
+	bip32 "github.com/assetcloud/chain/wallet/bipwallet/go-bip32"
+	bip39 "github.com/assetcloud/chain/wallet/bipwallet/go-bip39"
+	bip44 "github.com/assetcloud/chain/wallet/bipwallet/go-bip44"
+	"github.com/assetcloud/chain/wallet/bipwallet/transformer"
+	_ "github.com/assetcloud/chain/wallet/bipwallet/transformer/btcbase" //register
 )
 
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md

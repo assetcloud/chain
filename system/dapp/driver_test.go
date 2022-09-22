@@ -6,10 +6,10 @@ import (
 
 	"sync"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/chain/client/mocks"
+	"github.com/33cn/chain/rpc/grpcclient"
+	"github.com/33cn/chain/types"
+	"github.com/33cn/chain/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -104,7 +104,7 @@ func TestDriverAPI(t *testing.T) {
 	demo.SetExecutorAPI(api, gcli)
 	assert.NotNil(t, demo.GetAPI())
 	assert.NotNil(t, demo.GetExecutorAPI())
-	cfg.SetTitleOnlyForTest("chain33")
+	cfg.SetTitleOnlyForTest("chain")
 	assert.Equal(t, "parentHash", string(demo.GetParentHash()))
 	assert.Equal(t, "parentHash", string(demo.GetLastHash()))
 	cfg.SetTitleOnlyForTest("user.p.wzw.")

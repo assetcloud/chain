@@ -2,7 +2,7 @@
 // Copyright Fuzamei Corp. 2018 All Rights Reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-// Package rpc chain33 RPC模块包含JSONRpc以及grpc
+// Package rpc chain RPC模块包含JSONRpc以及grpc
 package client
 
 import (
@@ -10,18 +10,18 @@ import (
 	"encoding/hex"
 	"time"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common/crypto"
 
-	"github.com/33cn/chain33/system/crypto/btcscript"
-	"github.com/33cn/chain33/system/crypto/btcscript/script"
+	"github.com/assetcloud/chain/system/crypto/btcscript"
+	"github.com/assetcloud/chain/system/crypto/btcscript/script"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/account"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 )
 
 var log = log15.New("module", "rpc_client")
@@ -447,7 +447,7 @@ func (c *ChannelClient) getWalletRecoverScript(param *types.ReqGetWalletRecoverA
 	return wrScript, ctrPub, nil
 }
 
-// GetWalletRecoverAddr get wallet recover chain33 address
+// GetWalletRecoverAddr get wallet recover chain address
 func (c *ChannelClient) GetWalletRecoverAddr(req *types.ReqGetWalletRecoverAddr) (*types.ReplyString, error) {
 
 	if len(req.GetCtrPubKey()) <= 0 || len(req.GetRecoverPubKeys()) <= 0 ||

@@ -9,21 +9,21 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/33cn/chain33/queue"
-	rpcclient "github.com/33cn/chain33/rpc/client"
+	"github.com/assetcloud/chain/queue"
+	rpcclient "github.com/assetcloud/chain/rpc/client"
 
 	"github.com/stretchr/testify/require"
 
 	"encoding/hex"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	_ "github.com/33cn/chain33/system"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	mty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/common"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	_ "github.com/assetcloud/chain/system"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	mty "github.com/assetcloud/chain/system/dapp/manage/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -1489,10 +1489,10 @@ func TestChain33_CreateNoBalanceTransaction(t *testing.T) {
 	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
-	chain33 := newTestChain33(api)
+	chain := newTestChain33(api)
 	api.On("GetProperFee", mock.Anything).Return(&types.ReplyProperFee{ProperFee: 1000000}, nil)
 	var result string
-	err := chain33.CreateNoBalanceTransaction(&types.NoBalanceTx{TxHex: "0a05636f696e73122c18010a281080c2d72f222131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b7120a08d0630a696c0b3f78dd9ec083a2131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b71"}, &result)
+	err := chain.CreateNoBalanceTransaction(&types.NoBalanceTx{TxHex: "0a05636f696e73122c18010a281080c2d72f222131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b7120a08d0630a696c0b3f78dd9ec083a2131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b71"}, &result)
 	assert.NoError(t, err)
 }
 
@@ -1500,10 +1500,10 @@ func TestChain33_CreateNoBalanceTxs(t *testing.T) {
 	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
-	chain33 := newTestChain33(api)
+	chain := newTestChain33(api)
 	api.On("GetProperFee", mock.Anything).Return(&types.ReplyProperFee{ProperFee: 1000000}, nil)
 	var result string
-	err := chain33.CreateNoBlanaceTxs(&types.NoBalanceTxs{TxHexs: []string{"0a05746f6b656e12413804223d0a0443434e5910a09c011a0d74657374207472616e73666572222231333559774e715367694551787577586650626d526d48325935334564673864343820a08d0630969a9fe6c4b9c7ba5d3a2231333559774e715367694551787577586650626d526d483259353345646738643438", "0a05746f6b656e12413804223d0a0443434e5910b0ea011a0d74657374207472616e73666572222231333559774e715367694551787577586650626d526d48325935334564673864343820a08d0630bca0a2dbc0f182e06f3a2231333559774e715367694551787577586650626d526d483259353345646738643438"}}, &result)
+	err := chain.CreateNoBlanaceTxs(&types.NoBalanceTxs{TxHexs: []string{"0a05746f6b656e12413804223d0a0443434e5910a09c011a0d74657374207472616e73666572222231333559774e715367694551787577586650626d526d48325935334564673864343820a08d0630969a9fe6c4b9c7ba5d3a2231333559774e715367694551787577586650626d526d483259353345646738643438", "0a05746f6b656e12413804223d0a0443434e5910b0ea011a0d74657374207472616e73666572222231333559774e715367694551787577586650626d526d48325935334564673864343820a08d0630bca0a2dbc0f182e06f3a2231333559774e715367694551787577586650626d526d483259353345646738643438"}}, &result)
 	assert.NoError(t, err)
 }
 
@@ -1815,16 +1815,16 @@ func TestChain33_ChainID(t *testing.T) {
 }
 
 func TestChain33_GetCryptoList(t *testing.T) {
-	chain33 := &Chain33{cli: rpcclient.ChannelClient{}}
+	chain := &Chain33{cli: rpcclient.ChannelClient{}}
 	var result interface{}
-	err := chain33.GetCryptoList(&types.ReqNil{}, &result)
+	err := chain.GetCryptoList(&types.ReqNil{}, &result)
 	assert.Nil(t, err)
 }
 
 func TestChain33_GetAddressDrivers(t *testing.T) {
-	chain33 := &Chain33{cli: rpcclient.ChannelClient{}}
+	chain := &Chain33{cli: rpcclient.ChannelClient{}}
 	var result interface{}
-	err := chain33.GetAddressDrivers(&types.ReqNil{}, &result)
+	err := chain.GetAddressDrivers(&types.ReqNil{}, &result)
 	assert.Nil(t, err)
 	assert.True(t, len(result.(*types.AddressDrivers).GetDrivers()) > 0)
 }
@@ -1850,11 +1850,11 @@ func TestChain33_SendDelayTransaction(t *testing.T) {
 
 func TestChain33_WalletRecoverScript(t *testing.T) {
 
-	chain33 := &Chain33{cli: rpcclient.ChannelClient{}}
+	chain := &Chain33{cli: rpcclient.ChannelClient{}}
 	var result interface{}
-	err := chain33.GetWalletRecoverAddress(nil, &result)
+	err := chain.GetWalletRecoverAddress(nil, &result)
 	require.Equal(t, types.ErrInvalidParam, err)
-	err = chain33.SignWalletRecoverTx(nil, &result)
+	err = chain.SignWalletRecoverTx(nil, &result)
 	require.Equal(t, types.ErrInvalidParam, err)
 }
 

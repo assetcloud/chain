@@ -7,7 +7,7 @@ package types
 import (
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/assetcloud/chain/common/address"
 )
 
 /*
@@ -217,7 +217,7 @@ func (c *Chain33Config) IsEnableFork(height int64, fork string, enable bool) boo
 func (c *Chain33Config) initForkConfig(forks *ForkList) {
 	chain33fork := c.forks.GetAll()
 	if chain33fork == nil {
-		panic("chain33 fork not init")
+		panic("chain fork not init")
 	}
 	//开始判断chain33fork中的system部分是否已经设置
 	s := ""

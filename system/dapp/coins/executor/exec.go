@@ -5,9 +5,9 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/common/address"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	drivers "github.com/assetcloud/chain/system/dapp"
+	"github.com/assetcloud/chain/types"
 )
 
 // Exec_Transfer transfer of exec

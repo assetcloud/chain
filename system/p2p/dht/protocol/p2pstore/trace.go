@@ -3,7 +3,7 @@ package p2pstore
 import (
 	"time"
 
-	"github.com/33cn/chain33/system/p2p/dht/types"
+	"github.com/assetcloud/chain/system/p2p/dht/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 

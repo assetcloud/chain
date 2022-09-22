@@ -10,16 +10,16 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/33cn/chain33/system/crypto/common/authority/utils"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/crypto"
 	ecommon "github.com/ethereum/go-ethereum/common"
 
-	//"github.com/33cn/chain33/types"
+	//"github.com/assetcloud/chain/types"
 	"math/big"
 
-	"github.com/33cn/chain33/system/crypto/secp256k1eth/types"
+	"github.com/assetcloud/chain/system/crypto/secp256k1eth/types"
 	secp256k1 "github.com/btcsuite/btcd/btcec"
 	etypes "github.com/ethereum/go-ethereum/core/types"
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"

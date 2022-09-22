@@ -8,9 +8,9 @@ import (
 	"testing"
 	//"fmt"
 
-	"github.com/33cn/chain33/common/address"
-	//"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/address"
+	//"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/require"
 )
 

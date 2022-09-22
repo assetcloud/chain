@@ -6,7 +6,7 @@
 package init
 
 import (
-	_ "github.com/33cn/chain33/system/dapp/coins"  // register coins package
-	_ "github.com/33cn/chain33/system/dapp/manage" // register manage package
-	_ "github.com/33cn/chain33/system/dapp/none"   // register none package
+	_ "github.com/assetcloud/chain/system/dapp/coins"  // register coins package
+	_ "github.com/assetcloud/chain/system/dapp/manage" // register manage package
+	_ "github.com/assetcloud/chain/system/dapp/none"   // register none package
 )

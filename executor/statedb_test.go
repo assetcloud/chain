@@ -7,16 +7,16 @@ package executor_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 
 	"strings"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/store"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -52,7 +52,7 @@ func testStateDBGet(t *testing.T, db dbm.KV) {
 
 func TestStateDBTxGetOld(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	cfg := types.NewChain33Config(new)
 
 	q := queue.New("channel")

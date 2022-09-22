@@ -14,8 +14,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/util"
 	"github.com/BurntSushi/toml"
+	"github.com/assetcloud/chain/cmd/tools/util"
 )
 
 const (
@@ -48,8 +48,8 @@ type importPackageStrategy struct {
 }
 
 func (im *importPackageStrategy) Run() error {
-	mlog.Info("Begin run chain33 import packages.")
-	defer mlog.Info("Run chain33 import packages finish.")
+	mlog.Info("Begin run chain import packages.")
+	defer mlog.Info("Run chain import packages finish.")
 	return im.runImpl()
 }
 

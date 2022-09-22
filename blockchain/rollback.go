@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"syscall"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/types"
 )
 
 // Rollbackblock chain Rollbackblock

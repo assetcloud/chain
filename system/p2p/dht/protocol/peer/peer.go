@@ -6,20 +6,20 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/common/utils"
+	"github.com/assetcloud/chain/common/utils"
 
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/system/p2p/dht/protocol"
+	"github.com/assetcloud/chain/types"
 )
 
 const (
 	// Deprecated: old version, use peerInfo instead
-	peerInfoOld = "/chain33/peerinfoReq/1.0.0" //老版本
-	peerInfo    = "/chain33/peer-info/1.0.0"
+	peerInfoOld = "/chain/peerinfoReq/1.0.0" //老版本
+	peerInfo    = "/chain/peer-info/1.0.0"
 	// Deprecated: old version, use peerVersion instead
-	peerVersionOld = "/chain33/peerVersion/1.0.0"
-	peerVersion    = "/chain33/peer-version/1.0.0"
+	peerVersionOld = "/chain/peerVersion/1.0.0"
+	peerVersion    = "/chain/peer-version/1.0.0"
 )
 
 const (

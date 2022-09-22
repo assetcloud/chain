@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	cert_util "github.com/33cn/chain33/system/crypto/common"
+	cert_util "github.com/assetcloud/chain/system/crypto/common"
 	"github.com/golang/protobuf/proto"
 )
 

@@ -8,7 +8,7 @@ package types
 import (
 	"encoding/json"
 
-	_ "github.com/33cn/chain33/system/address" // init address
+	_ "github.com/assetcloud/chain/system/address" // init address
 )
 
 // TransParm transport parameter

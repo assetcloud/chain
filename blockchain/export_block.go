@@ -14,9 +14,9 @@ import (
 	"sync/atomic"
 	"syscall"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	"github.com/assetcloud/chain/common"
+	dbm "github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/types"
 )
 
 var (
@@ -65,7 +65,7 @@ func (chain *BlockChain) ImportBlockProc(filename string, dir string) {
 }
 
 //ExportBlock 通过指定title和起始高度将block信息导出到一个指定文件中。
-// title:chain33/bityuan
+// title:chain/bityuan
 // startHeight:需要导入/导出的起始高度
 // dbPath:存储到指定路径,默认当前目录下
 func (chain *BlockChain) ExportBlock(title, dbPath string, startHeight int64) error {

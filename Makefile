@@ -5,23 +5,23 @@
 # ...
 
 export GO111MODULE=on
-SRC := github.com/33cn/chain33/cmd/chain33
-SRC_CLI := github.com/33cn/chain33/cmd/cli
-SRC_SIGNATORY := github.com/33cn/chain33/cmd/signatory-server
-SRC_MINER := github.com/33cn/chain33/cmd/miner_accounts
-APP := build/chain33
-CLI := build/chain33-cli
+SRC := github.com/assetcloud/chain/cmd/chain
+SRC_CLI := github.com/assetcloud/chain/cmd/cli
+SRC_SIGNATORY := github.com/assetcloud/chain/cmd/signatory-server
+SRC_MINER := github.com/assetcloud/chain/cmd/miner_accounts
+APP := build/chain
+CLI := build/chain-cli
 SIGNATORY := build/signatory-server
 MINER := build/miner_accounts
 AUTOTEST := build/autotest/autotest
-SRC_AUTOTEST := github.com/33cn/chain33/cmd/autotest
+SRC_AUTOTEST := github.com/assetcloud/chain/cmd/autotest
 LDFLAGS := ' -w -s'
 BUILDTIME:=$(shell date +"%Y-%m-%d %H:%M:%S %A")
 VERSION=$(shell git describe --tags || git rev-parse --short=8 HEAD)
 GitCommit=$(shell git rev-parse --short=8 HEAD)
-BUILD_FLAGS := -ldflags '-X "github.com/33cn/chain33/common/version.GitCommit=$(GitCommit)" \
-                         -X "github.com/33cn/chain33/common/version.Version=$(VERSION)" \
-                         -X "github.com/33cn/chain33/common/version.BuildTime=[$(BUILDTIME)]"'
+BUILD_FLAGS := -ldflags '-X "github.com/assetcloud/chain/common/version.GitCommit=$(GitCommit)" \
+                         -X "github.com/assetcloud/chain/common/version.Version=$(VERSION)" \
+                         -X "github.com/assetcloud/chain/common/version.BuildTime=[$(BUILDTIME)]"'
 
 MKPATH=$(abspath $(lastword $(MAKEFILE_LIST)))
 MKDIR=$(dir $(MKPATH))
@@ -46,15 +46,15 @@ cli: ## Build cli binary
 
 build:cli ## Build the binary file
 	@go build $(BUILD_FLAGS) -v -o  $(APP) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
-	@cp cmd/chain33/bityuan.toml build/
+	@cp cmd/chain/chain.toml build/
+	@cp cmd/chain/bityuan.toml build/
 
 release: ## Build the binary file
 	@go build $(BUILD_FLAGS)$(LDFLAGS) -v -o $(APP) $(SRC)
 	@go build $(BUILD_FLAGS)$(LDFLAGS) -v -o $(CLI) $(SRC_CLI)
-	@cp cmd/chain33/chain33.toml build/
-	@cp cmd/chain33/bityuan.toml build/
-#	@cp cmd/chain33/chain33.para.toml build/
+	@cp cmd/chain/chain.toml build/
+	@cp cmd/chain/bityuan.toml build/
+#	@cp cmd/chain/chain.para.toml build/
 
 PLATFORM_LIST = \
 	darwin-amd64 \
@@ -69,37 +69,37 @@ GOBUILD :=go build $(BUILD_FLAGS)$(LDFLAGS)
 darwin-amd64:
 	GOARCH=amd64 GOOS=darwin $(GOBUILD) -o $(APP)-$@ $(SRC)
 	GOARCH=amd64 GOOS=darwin $(GOBUILD) -o $(CLI)-$@ $(SRC_CLI)
-	cp cmd/chain33/chain33.toml CHANGELOG.md build/ && cd build && \
-	chmod +x chain33-darwin-amd64 && \
-	chmod +x chain33-cli-darwin-amd64 && \
-	tar -zcvf chain33-darwin-amd64.tar.gz chain33-darwin-amd64 chain33-cli-darwin-amd64 chain33.toml CHANGELOG.md
+	cp cmd/chain/chain.toml CHANGELOG.md build/ && cd build && \
+	chmod +x chain-darwin-amd64 && \
+	chmod +x chain-cli-darwin-amd64 && \
+	tar -zcvf chain-darwin-amd64.tar.gz chain-darwin-amd64 chain-cli-darwin-amd64 chain.toml CHANGELOG.md
 
 darwin-arm64:
 	GOARCH=arm64 GOOS=darwin $(GOBUILD) -o $(APP)-$@ $(SRC)
 	GOARCH=arm64 GOOS=darwin $(GOBUILD) -o $(CLI)-$@ $(SRC_CLI)
-	cp cmd/chain33/chain33.toml CHANGELOG.md build/ && cd build && \
-	chmod +x chain33-darwin-arm64 && \
-	chmod +x chain33-cli-darwin-arm64 && \
-	tar -zcvf chain33-darwin-arm64.tar.gz chain33-darwin-arm64 chain33-cli-darwin-arm64 chain33.toml CHANGELOG.md
+	cp cmd/chain/chain.toml CHANGELOG.md build/ && cd build && \
+	chmod +x chain-darwin-arm64 && \
+	chmod +x chain-cli-darwin-arm64 && \
+	tar -zcvf chain-darwin-arm64.tar.gz chain-darwin-arm64 chain-cli-darwin-arm64 chain.toml CHANGELOG.md
 
 linux-amd64:
 	GOARCH=amd64 GOOS=linux $(GOBUILD) -o $(APP)-$@ $(SRC)
 	GOARCH=amd64 GOOS=linux $(GOBUILD) -o $(CLI)-$@ $(SRC_CLI)
-	cp cmd/chain33/chain33.toml CHANGELOG.md build/ && cd build && \
-	chmod +x chain33-linux-amd64 && \
-	chmod +x chain33-cli-linux-amd64 && \
-	tar -zcvf chain33-linux-amd64.tar.gz chain33-linux-amd64 chain33-cli-linux-amd64 chain33.toml CHANGELOG.md
+	cp cmd/chain/chain.toml CHANGELOG.md build/ && cd build && \
+	chmod +x chain-linux-amd64 && \
+	chmod +x chain-cli-linux-amd64 && \
+	tar -zcvf chain-linux-amd64.tar.gz chain-linux-amd64 chain-cli-linux-amd64 chain.toml CHANGELOG.md
 
 windows-amd64:
 	GOARCH=amd64 GOOS=windows $(GOBUILD) -o $(APP)-$@.exe $(SRC)
 	GOARCH=amd64 GOOS=windows $(GOBUILD) -o $(CLI)-$@.exe $(SRC_CLI)
-	cp cmd/chain33/chain33.toml CHANGELOG.md build/ && cd build && \
-	zip -j  chain33-windows-amd64.zip chain33-windows-amd64.exe chain33-cli-windows-amd64.exe chain33.toml CHANGELOG.md
+	cp cmd/chain/chain.toml CHANGELOG.md build/ && cd build && \
+	zip -j  chain-windows-amd64.zip chain-windows-amd64.exe chain-cli-windows-amd64.exe chain.toml CHANGELOG.md
 
 all-arch: $(PLATFORM_LIST) $(WINDOWS_ARCH_LIST)
 
 execblock: ## Build cli binary
-	@go build -v -o build/execblock github.com/33cn/chain33/cmd/execblock
+	@go build -v -o build/execblock github.com/assetcloud/chain/cmd/execblock
 
 
 para:
@@ -126,7 +126,7 @@ miner:
 build_ci: depends ## Build the binary file for CI
 	@go build -v -o $(CLI) $(SRC_CLI)
 	@go build  $(BUILD_FLAGS) -v -o $(APP) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
+	@cp cmd/chain/chain.toml build/
 
 linter: vet ineffassign gosec ## Use gometalinter check code, ignore some unserious warning
 	@./golinter.sh "filter"
@@ -178,28 +178,28 @@ coverage: ## Generate global code coverage report
 coverhtml: ## Generate global code coverage report in HTML
 	@./build/tools/coverage.sh html
 
-docker: ## build docker image for chain33 run
-	@sudo docker build . -f ./build/Dockerfile-run -t chain33:latest
+docker: ## build docker image for chain run
+	@sudo docker build . -f ./build/Dockerfile-run -t chain:latest
 
-docker-compose: ## build docker-compose for chain33 run
+docker-compose: ## build docker-compose for chain run
 	@cd build && if ! [ -d ci ]; then \
 	 make -C ../ ; \
 	 fi; \
-	 cp chain33* Dockerfile  docker-compose* system-test* ci/ && cd ci/ && ./docker-compose-pre.sh run $(PROJ) $(DAPP)  && cd ../..
+	 cp chain* Dockerfile  docker-compose* system-test* ci/ && cd ci/ && ./docker-compose-pre.sh run $(PROJ) $(DAPP)  && cd ../..
 
-docker-compose-down: ## build docker-compose for chain33 run
+docker-compose-down: ## build docker-compose for chain run
 	@cd build && if [ -d ci ]; then \
-	 cp chain33* Dockerfile  docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh down $(PROJ) $(DAPP) && cd .. ; \
+	 cp chain* Dockerfile  docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh down $(PROJ) $(DAPP) && cd .. ; \
 	 fi; \
 	 cd ..
 
-fork-test: ## build fork-test for chain33 run
-	@cd build && cp chain33* Dockerfile system-fork-test.sh docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh forktest $(PROJ) $(DAPP) && cd ../..
+fork-test: ## build fork-test for chain run
+	@cd build && cp chain* Dockerfile system-fork-test.sh docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh forktest $(PROJ) $(DAPP) && cd ../..
 
 
 clean: ## Remove previous build
 	@rm -rf $(shell find . -name 'datadir' -not -path "./vendor/*")
-	@rm -rf build/chain33*
+	@rm -rf build/chain*
 	@rm -rf build/relayd*
 	@rm -rf build/*.log
 	@rm -rf build/logs
@@ -225,7 +225,7 @@ cleandata:
 	rm -rf build/datadir/addrbook
 	rm -rf build/datadir/blockchain.db
 	rm -rf build/datadir/mavltree
-	rm -rf build/chain33.log
+	rm -rf build/chain.log
 
 fmt_go: fmt_shell ## go fmt
 	@go fmt ./...
@@ -311,7 +311,7 @@ webhook_auto_ci: clean fmt_proto fmt_shell protobuf mock
 		  fi;
 
 addupstream:
-	git remote add upstream git@github.com:33cn/chain33.git
+	git remote add upstream git@github.com:assetcloud/chain.git
 	git remote -v
 
 sync:
@@ -336,7 +336,7 @@ push:
 pull:
 	@remotelist=$$(git remote | grep ${name});if [ -z $$remotelist ]; then \
 		echo ${remotelist}; \
-		git remote add ${name} https://github.com/${name}/chain33.git ; \
+		git remote add ${name} https://github.com/${name}/chain.git ; \
 	fi;
 	git fetch ${name}
 	git checkout ${name}/${b}

@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 )
 

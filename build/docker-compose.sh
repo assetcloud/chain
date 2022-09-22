@@ -16,7 +16,7 @@ PWD=$(cd "$(dirname "$0")" && pwd)
 export PATH="$PWD:$PATH"
 
 NODE3="${1}_chain33_1"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+CLI="docker exec ${NODE3} /root/chain-cli"
 
 NODE2="${1}_chain32_1"
 
@@ -25,7 +25,7 @@ NODE1="${1}_chain31_1"
 NODE4="${1}_chain30_1"
 
 NODE5="${1}_chain29_1"
-CLI5="docker exec ${NODE5} /root/chain33-cli"
+CLI5="docker exec ${NODE5} /root/chain-cli"
 
 containers=("${NODE1}" "${NODE2}" "${NODE3}" "${NODE4}")
 export COMPOSE_PROJECT_NAME="$1"
@@ -69,9 +69,9 @@ echo "COMPOSE_PROJECT_NAME=$COMPOSE_PROJECT_NAME"
 echo "CLI=$CLI"
 ####################
 
-testtoml=chain33.toml
+testtoml=chain.toml
 # to close solo miner config in un-miner node
-testtomlsolo=chain33-solo.toml
+testtomlsolo=chain-solo.toml
 
 function base_init() {
 
@@ -80,8 +80,8 @@ function base_init() {
     sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' ${testtoml}
 
     # p2p
-    #sed -i $sedfix 's/^seeds=.*/seeds=["chain33:13802","chain32:13802","chain31:13802"]/g' ${testtoml}
-    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain33.toml
+    #sed -i $sedfix 's/^seeds=.*/seeds=["chain:13802","chain32:13802","chain31:13802"]/g' ${testtoml}
+    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain.toml
     sed -i $sedfix '0,/^enable=.*/s//enable=true/' ${testtoml}
     sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' ${testtoml}
     sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' ${testtoml}
@@ -102,7 +102,7 @@ function base_init() {
     sed -i $sedfix 's/^enableTLS=.*/enableTLS=true/g' ${testtoml}
 
     #autonomy config
-    sed -i $sedfix 's/^autonomyExec =.*/autonomyExec=""/g' chain33.toml
+    sed -i $sedfix 's/^autonomyExec =.*/autonomyExec=""/g' chain.toml
 
     cp ${testtoml} ${testtomlsolo}
     #consens
@@ -208,9 +208,9 @@ function start() {
 function check_docker_status() {
     status=$(docker-compose ps | grep chain33_1 | awk '{print $6}')
     if [ "${status}" == "Exit" ]; then
-        echo "=========== chain33 service Exit logs ========== "
-        docker-compose logs chain33
-        echo "=========== chain33 service Exit logs End========== "
+        echo "=========== chain service Exit logs ========== "
+        docker-compose logs chain
+        echo "=========== chain service Exit logs End========== "
     fi
 
 }

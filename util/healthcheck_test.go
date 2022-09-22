@@ -11,9 +11,9 @@ import (
 
 	"time"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/chain/client/mocks"
+	"github.com/33cn/chain/queue"
+	"github.com/33cn/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,7 +31,7 @@ func TestStart(t *testing.T) {
 	api.On("Close").Return()
 	health.api = api
 
-	cfg, _ := types.InitCfg("../cmd/chain33/chain33.test.toml")
+	cfg, _ := types.InitCfg("../cmd/chain/chain.test.toml")
 	health.Start(cfg.Health)
 	time.Sleep(time.Second * 6)
 

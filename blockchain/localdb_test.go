@@ -3,9 +3,9 @@ package blockchain_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

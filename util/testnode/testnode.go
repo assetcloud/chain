@@ -14,31 +14,31 @@ import (
 	"sync"
 	"time"
 
-	cryptocli "github.com/33cn/chain33/common/crypto/client"
+	cryptocli "github.com/assetcloud/chain/common/crypto/client"
 
-	"github.com/33cn/chain33/p2p"
+	"github.com/assetcloud/chain/p2p"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/common/limits"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/consensus"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/mempool"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/wallet"
+	"github.com/assetcloud/chain/account"
+	"github.com/assetcloud/chain/blockchain"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	"github.com/assetcloud/chain/common/limits"
+	"github.com/assetcloud/chain/common/log"
+	"github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/consensus"
+	"github.com/assetcloud/chain/executor"
+	"github.com/assetcloud/chain/mempool"
+	"github.com/assetcloud/chain/pluginmgr"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/rpc"
+	"github.com/assetcloud/chain/rpc/jsonclient"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/store"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/wallet"
 )
 
 func init() {
@@ -383,7 +383,7 @@ func (mock *Chain33Mock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error
 		data := rpctypes.QueryParm{
 			Hash: common.ToHex(hash),
 		}
-		err = mock.GetJSONC().Call("Chain33.QueryTransaction", data, &testResult)
+		err = mock.GetJSONC().Call("Chain.QueryTransaction", data, &testResult)
 		return &testResult, err
 	}
 }
@@ -417,7 +417,7 @@ func (mock *Chain33Mock) SetLastSend(hash []byte) {
 func (mock *Chain33Mock) SendTxRPC(tx *types.Transaction) []byte {
 	var txhash string
 	hextx := common.ToHex(types.Encode(tx))
-	err := mock.GetJSONC().Call("Chain33.SendTransaction", &rpctypes.RawParm{Data: hextx}, &txhash)
+	err := mock.GetJSONC().Call("Chain.SendTransaction", &rpctypes.RawParm{Data: hextx}, &txhash)
 	if err != nil {
 		panic(err)
 	}

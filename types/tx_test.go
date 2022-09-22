@@ -12,12 +12,12 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/33cn/chain/common"
+	"github.com/33cn/chain/common/crypto"
 
 	"strings"
 
-	_ "github.com/33cn/chain33/system/crypto/init"
+	_ "github.com/33cn/chain/system/crypto/init"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )
@@ -57,7 +57,7 @@ func TestCreateGroupTx(t *testing.T) {
 
 func TestCreateParaGroupTx(t *testing.T) {
 	str := GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	cfg := NewChain33Config(new)
 
 	testHeight := int64(1687250 + 1)

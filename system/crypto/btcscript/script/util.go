@@ -9,7 +9,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
-	"github.com/33cn/chain33/common"
+	"github.com/assetcloud/chain/common"
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
@@ -32,7 +32,7 @@ const (
 
 // Chain33BtcParams 比特币相关区块链参数
 var Chain33BtcParams = &chaincfg.Params{
-	Name: "chain33-btc-Script",
+	Name: "chain-btc-Script",
 
 	// Address encoding magics, bitcoin main net params
 	PubKeyHashAddrID:        0x00, // starts with 1
