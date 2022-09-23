@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain/common"
-	"github.com/33cn/chain/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 

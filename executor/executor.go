@@ -45,20 +45,20 @@ type Executor struct {
 	disableLocal     bool
 	client           queue.Client
 	qclient          client.QueueProtocolAPI
-	grpccli          types.Chain33Client
+	grpccli          types.ChainClient
 	pluginEnable     map[string]bool
 	alias            map[string]string
 	noneDriverPool   *sync.Pool
 }
 
-func execInit(cfg *typ.Chain33Config) {
+func execInit(cfg *typ.ChainConfig) {
 	pluginmgr.InitExec(cfg)
 }
 
 var runonce sync.Once
 
 // New new executor
-func New(cfg *typ.Chain33Config) *Executor {
+func New(cfg *typ.ChainConfig) *Executor {
 	// init executor
 	runonce.Do(func() {
 		execInit(cfg)

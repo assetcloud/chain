@@ -46,7 +46,7 @@ type mainChainAPI struct {
 }
 
 //New 新建接口
-func New(api client.QueueProtocolAPI, grpcClient types.Chain33Client) ExecutorAPI {
+func New(api client.QueueProtocolAPI, grpcClient types.ChainClient) ExecutorAPI {
 	types.AssertConfig(api)
 	types := api.GetConfig()
 	if types.IsPara() {
@@ -83,11 +83,11 @@ func (api *mainChainAPI) GetBlockByHashes(param *types.ReqHashes) (*types.BlockD
 
 type paraChainAPI struct {
 	api        client.QueueProtocolAPI
-	grpcClient types.Chain33Client
+	grpcClient types.ChainClient
 	errflag    int32
 }
 
-func newParaChainAPI(api client.QueueProtocolAPI, grpcClient types.Chain33Client) ExecutorAPI {
+func newParaChainAPI(api client.QueueProtocolAPI, grpcClient types.ChainClient) ExecutorAPI {
 	return &paraChainAPI{api: api, grpcClient: grpcClient}
 }
 

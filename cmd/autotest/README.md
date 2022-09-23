@@ -5,7 +5,7 @@
 内部代码支持用例扩展开发，继承并实现通用接口，即可自定义实现用例类型。
 
 ### 编译
-通过chain33 makefile
+通过chain makefile
 ```
 $ make autotest
 ```
@@ -13,7 +13,7 @@ $ make autotest
 ### 运行
 
 #### **直接执行**
-已启动chain33服务并需要自定义配置用例文件
+已启动chain服务并需要自定义配置用例文件
 ```
 $ ./autotest -f autotest.toml -l autotest.log
 ```
@@ -22,11 +22,11 @@ $ ./autotest -f autotest.toml -l autotest.log
 不指定默认为autotest.toml，autotest.log
 
 
-#### **通过chain33 makefile**
-chain33开发人员修改框架或dapp代码，验证测试
+#### **通过chain makefile**
+chain开发人员修改框架或dapp代码，验证测试
 ```
 
-//启动单节点solo版本chain33，运行默认配置autotest，dapp用于指定需要跑的配置用例
+//启动单节点solo版本chain，运行默认配置autotest，dapp用于指定需要跑的配置用例
 $ make autotest dapp=coins
 $ make autotest dapp="coins token"
 
@@ -40,7 +40,7 @@ $ make autotest dapp=all
 
 配置文件为toml格式，用于指定具体的测试用例文件
 ```
-# 指定内部调用chain33-cli程序文件
+# 指定内部调用chain-cli程序文件
 cliCmd = "./chain-cli"
 
 # 进行用例check时，主要根据交易hash查询回执，多次查询失败总超时，单位秒
@@ -116,7 +116,7 @@ type BaseCase struct {
 
 ### 扩展开发
 分为以下几个步骤
-> 注册dapp的AutoTest类型，以chain33/system/dapp/coins为例
+> 注册dapp的AutoTest类型，以chain/system/dapp/coins为例
 增加autotest目录，并新建coins.go文件
 ```go
 package autotest

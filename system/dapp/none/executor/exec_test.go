@@ -6,26 +6,26 @@ package executor
 import (
 	"testing"
 
-	"github.com/33cn/chain/client"
-	"github.com/33cn/chain/common"
-	"github.com/33cn/chain/common/address"
-	"github.com/33cn/chain/common/db"
-	"github.com/33cn/chain/queue"
-	nty "github.com/33cn/chain/system/dapp/none/types"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/client"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/db"
+	"github.com/assetcloud/chain/queue"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/require"
 )
 
 var (
-	testCfg = types.NewChain33Config(types.GetDefaultCfgstring())
+	testCfg = types.NewChainConfig(types.GetDefaultCfgstring())
 )
 
 func init() {
 	Init(driverName, testCfg, nil)
 }
 
-func initTestNone() (queue.Queue, string, *None, *types.Chain33Config) {
+func initTestNone() (queue.Queue, string, *None, *types.ChainConfig) {
 	q := queue.New("testnone")
 	q.SetConfig(testCfg)
 	api, _ := client.New(q.Client(), nil)

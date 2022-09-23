@@ -16,7 +16,7 @@ import (
 func TestModule(t *testing.T) {
 
 	module := New()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	q := queue.New("test")
 	q.SetConfig(cfg)
 	cli := q.Client()

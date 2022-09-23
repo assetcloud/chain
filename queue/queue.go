@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package queue chain33底层消息队列模块
+// Package queue chain底层消息队列模块
 package queue
 
 import (
@@ -61,8 +61,8 @@ type Queue interface {
 	Start()
 	Client() Client
 	Name() string
-	SetConfig(cfg *types.Chain33Config)
-	GetConfig() *types.Chain33Config
+	SetConfig(cfg *types.ChainConfig)
+	GetConfig() *types.ChainConfig
 }
 
 type queue struct {
@@ -73,7 +73,7 @@ type queue struct {
 	callback  chan *Message
 	isClose   int32
 	name      string
-	cfg       *types.Chain33Config
+	cfg       *types.ChainConfig
 	msgPool   *sync.Pool
 }
 
@@ -109,13 +109,13 @@ func New(name string) Queue {
 	return q
 }
 
-// GetConfig return the queue Chain33Config
-func (q *queue) GetConfig() *types.Chain33Config {
+// GetConfig return the queue ChainConfig
+func (q *queue) GetConfig() *types.ChainConfig {
 	return q.cfg
 }
 
 // Name return the queue name
-func (q *queue) SetConfig(cfg *types.Chain33Config) {
+func (q *queue) SetConfig(cfg *types.ChainConfig) {
 	if cfg == nil {
 		panic("set config is nil")
 	}

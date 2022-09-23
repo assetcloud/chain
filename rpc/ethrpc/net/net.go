@@ -13,11 +13,11 @@ import (
 
 type netHandler struct {
 	cli rpcclient.ChannelClient
-	cfg *ctypes.Chain33Config
+	cfg *ctypes.ChainConfig
 }
 
 //NewNetAPI create a net  api
-func NewNetAPI(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{} {
+func NewNetAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	p := &netHandler{}
 	p.cli.Init(c, api)
 	p.cfg = cfg

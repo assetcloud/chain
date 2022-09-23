@@ -17,7 +17,7 @@ var (
 )
 
 // Init resister a dirver
-func Init(name string, cfg *types.Chain33Config, sub []byte) {
+func Init(name string, cfg *types.ChainConfig, sub []byte) {
 	// 需要先 RegisterDappFork才可以Register dapp
 	drivers.Register(cfg, GetName(), newManage, cfg.GetDappFork(driverName, "Enable"))
 	InitExecType()
@@ -57,7 +57,7 @@ func (c *Manage) CheckTx(tx *types.Transaction, index int) error {
 }
 
 // IsSuperManager is supper manager or not
-func IsSuperManager(cfg *types.Chain33Config, addr string) bool {
+func IsSuperManager(cfg *types.ChainConfig, addr string) bool {
 	conf := types.ConfSub(cfg, driverName)
 	for _, m := range conf.GStrList("superManager") {
 		if addr == m {

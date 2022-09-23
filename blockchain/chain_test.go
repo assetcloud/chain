@@ -32,7 +32,7 @@ import (
 var sendTxWait = time.Millisecond * 5
 var chainlog = log15.New("module", "chain_test")
 
-func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
+func addTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
 	txs := util.GenCoinsTxs(cfg, priv, 1)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -45,7 +45,7 @@ func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtoc
 	return txs, hash, nil
 }
 
-func addTxTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI, height int64) ([]*types.Transaction, string, error) {
+func addTxTxHeight(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI, height int64) ([]*types.Transaction, string, error) {
 	txs := util.GenTxsTxHeight(cfg, priv, 1, height)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -136,7 +136,7 @@ func TestBlockChain(t *testing.T) {
 	testAddChunkBlockMsg(t, mock33, blockchain)
 }
 
-func testGetChunkRecordMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testGetChunkRecordMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetChunkRecordMsg begin --------------------")
 
 	records := &types.ReqChunkRecords{
@@ -151,7 +151,7 @@ func testGetChunkRecordMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchai
 	chainlog.Debug("testGetChunkRecordMsg end --------------------")
 }
 
-func testAddChunkRecordMsg(t *testing.T, mock33 *testnode.Chain33Mock, chain *blockchain.BlockChain) {
+func testAddChunkRecordMsg(t *testing.T, mock33 *testnode.ChainMock, chain *blockchain.BlockChain) {
 	chainlog.Debug("testAddChunkRecordMsg begin --------------------")
 
 	records := &types.ChunkRecords{
@@ -164,7 +164,7 @@ func testAddChunkRecordMsg(t *testing.T, mock33 *testnode.Chain33Mock, chain *bl
 	chainlog.Debug("testAddChunkRecordMsg end --------------------")
 }
 
-func testGetChunkBlockBodyMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testGetChunkBlockBodyMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetChunkBlockBodyMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -193,7 +193,7 @@ func testGetChunkBlockBodyMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockc
 	chainlog.Debug("testGetChunkBlockBodyMsg end --------------------")
 }
 
-func testAddChunkBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testAddChunkBlockMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testAddChunkBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -211,7 +211,7 @@ func testAddChunkBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain
 	chainlog.Debug("testAddChunkBlockMsg end --------------------")
 }
 
-func testProcAddBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testProcAddBlockMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcAddBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -330,7 +330,7 @@ func checkDupTxHeight(cacheTxsTxHeigt []*types.Transaction, blockchain *blockcha
 	return duptxhashlist, nil
 }
 
-func testProcQueryTxMsg(cfg *types.Chain33Config, t *testing.T, blockchain *blockchain.BlockChain) {
+func testProcQueryTxMsg(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("TestProcQueryTxMsg begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	var merkleroothash []byte
@@ -455,7 +455,7 @@ func testProcGetLastHeaderMsg(t *testing.T, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("TestProcGetLastHeaderMsg end --------------------")
 }
 
-func testGetBlockByHash(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testGetBlockByHash(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("TestGetBlockByHash begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block1, err := blockchain.GetBlock(curheight - 5)
@@ -514,7 +514,7 @@ func testGetBlockSequences(t *testing.T, chain *blockchain.BlockChain) {
 	chainlog.Debug("testGetBlockSequences end --------------------")
 }
 
-func testGetBlockByHashes(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testGetBlockByHashes(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetBlockByHashes begin --------------------")
 	lastSequence, _ := blockchain.GetStore().LoadBlockLastSequence()
 	var reqBlock types.ReqBlocks
@@ -567,7 +567,7 @@ func testGetSeqByHash(t *testing.T, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetSeqByHash end --------------------")
 }
 
-func testPrefixCount(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testPrefixCount(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testPrefixCount begin --------------------")
 
 	msgGen := mock33.GetClient().NewMessage("blockchain", types.EventLocalPrefixCount, &types.ReqKey{Key: []byte("TxAddrHash:14KEKbYtKKQm4wMthSK9J4La4nAiidGozt:")})
@@ -580,7 +580,7 @@ func testPrefixCount(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blo
 	chainlog.Debug("testPrefixCount end --------------------")
 }
 
-func testAddrTxCount(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testAddrTxCount(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testAddrTxCount begin --------------------")
 	cfg := mock33.GetClient().GetConfig()
 	var reqkey types.ReqKey
@@ -596,7 +596,7 @@ func testAddrTxCount(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blo
 	chainlog.Debug("testAddrTxCount end --------------------")
 }
 
-func testGetBlockHerderByHash(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testGetBlockHerderByHash(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetBlockHerderByHash begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -653,7 +653,7 @@ func testProcGetTransactionByHashes(t *testing.T, blockchain *blockchain.BlockCh
 	chainlog.Debug("textProcGetTransactionByHashes end --------------------")
 }
 
-func textProcGetBlockOverview(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func textProcGetBlockOverview(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("textProcGetBlockOverview begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -674,7 +674,7 @@ func textProcGetBlockOverview(t *testing.T, cfg *types.Chain33Config, blockchain
 	chainlog.Debug("textProcGetBlockOverview end --------------------")
 }
 
-func testProcGetAddrOverview(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testProcGetAddrOverview(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcGetAddrOverview begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -702,7 +702,7 @@ func testProcGetAddrOverview(t *testing.T, cfg *types.Chain33Config, blockchain 
 	chainlog.Debug("testProcGetAddrOverview end --------------------")
 }
 
-func testProcGetBlockHash(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testProcGetBlockHash(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcGetBlockHash begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -718,7 +718,7 @@ func testProcGetBlockHash(t *testing.T, cfg *types.Chain33Config, blockchain *bl
 	chainlog.Debug("testProcGetBlockHash end --------------------")
 }
 
-func testGetOrphanRoot(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testGetOrphanRoot(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testGetOrphanRoot begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -731,7 +731,7 @@ func testGetOrphanRoot(t *testing.T, cfg *types.Chain33Config, blockchain *block
 	chainlog.Debug("testGetOrphanRoot end --------------------")
 }
 
-func testRemoveOrphanBlock(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testRemoveOrphanBlock(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testRemoveOrphanBlock begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight - 5)
@@ -776,7 +776,7 @@ func testLoadBlockBySequence(t *testing.T, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testLoadBlockBySequence end -------------------------")
 }
 
-func testProcDelParaChainBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testProcDelParaChainBlockMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcDelParaChainBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -796,7 +796,7 @@ func testProcDelParaChainBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, bl
 	chainlog.Debug("testProcDelParaChainBlockMsg end --------------------")
 }
 
-func testProcAddParaChainBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testProcAddParaChainBlockMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcAddParaChainBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -818,7 +818,7 @@ func testProcAddParaChainBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, bl
 	chainlog.Debug("testProcAddParaChainBlockMsg end --------------------")
 }
 
-func testProcGetBlockBySeqMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testProcGetBlockBySeqMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcGetBlockBySeqMsg begin --------------------")
 
 	seq, err := blockchain.GetStore().LoadBlockLastSequence()
@@ -857,7 +857,7 @@ func testIsRecordFaultErr(t *testing.T) {
 	chainlog.Debug("testIsRecordFaultErr end ---------------------")
 }
 
-func testProcDelChainBlockMsg(t *testing.T, mock33 *testnode.Chain33Mock, blockchain *blockchain.BlockChain) {
+func testProcDelChainBlockMsg(t *testing.T, mock33 *testnode.ChainMock, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testProcDelChainBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -896,7 +896,7 @@ func testGetsynBlkHeight(t *testing.T, chain *blockchain.BlockChain) {
 	chainlog.Debug("testGetsynBlkHeight end --------------------")
 }
 
-func testFaultPeer(t *testing.T, cfg *types.Chain33Config, chain *blockchain.BlockChain) {
+func testFaultPeer(t *testing.T, cfg *types.ChainConfig, chain *blockchain.BlockChain) {
 	chainlog.Debug("testFaultPeer begin ---------------------")
 	curheight := chain.GetBlockHeight()
 	block, err := chain.GetBlock(curheight)
@@ -1026,7 +1026,7 @@ func testAddOrphanBlock(t *testing.T, blockchain *blockchain.BlockChain) {
 	blockchain.ProcessBlock(true, &newblock, "1", true, 0)
 	chainlog.Debug("testAddOrphanBlock end --------------------")
 }
-func testCheckBestChainProc(t *testing.T, cfg *types.Chain33Config, blockchain *blockchain.BlockChain) {
+func testCheckBestChainProc(t *testing.T, cfg *types.ChainConfig, blockchain *blockchain.BlockChain) {
 	chainlog.Debug("testCheckBestChainProc begin --------------------")
 	curheight := blockchain.GetBlockHeight()
 	block, err := blockchain.GetBlock(curheight)
@@ -1438,7 +1438,7 @@ func TestDisableCmpBestBlock(t *testing.T) {
 	chainlog.Debug("TestDisableCmpBestBlock end --------------------")
 }
 
-func testCmpBestBlock(t *testing.T, client queue.Client, block *types.Block, cfg *types.Chain33Config) {
+func testCmpBestBlock(t *testing.T, client queue.Client, block *types.Block, cfg *types.ChainConfig) {
 	temblock := types.Clone(block)
 	newblock := temblock.(*types.Block)
 	newblock.GetTxs()[0].Nonce = newblock.GetTxs()[0].Nonce + 1

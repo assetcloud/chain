@@ -286,7 +286,7 @@ type Config struct {
 	JrpcBindAddr         string   `protobuf:"bytes,2,opt,name=jrpcBindAddr,proto3" json:"jrpcBindAddr,omitempty"`
 	DataDir              string   `protobuf:"bytes,3,opt,name=dataDir,proto3" json:"dataDir,omitempty"`
 	MinerAddr            []string `protobuf:"bytes,4,rep,name=minerAddr,proto3" json:"minerAddr,omitempty"`
-	Chain33Host          string   `protobuf:"bytes,5,opt,name=chain33host,proto3" json:"chain33host,omitempty"`
+	ChainHost          string   `protobuf:"bytes,5,opt,name=chainhost,proto3" json:"chainhost,omitempty"`
 	CoinPrecision        int64    `protobuf:"varint,6,opt,name=coinPrecision,proto3" json:"coinPrecision,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -346,9 +346,9 @@ func (m *Config) GetMinerAddr() []string {
 	return nil
 }
 
-func (m *Config) GetChain33Host() string {
+func (m *Config) GetChainHost() string {
 	if m != nil {
-		return m.Chain33Host
+		return m.ChainHost
 	}
 	return ""
 }

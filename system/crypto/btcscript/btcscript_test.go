@@ -9,20 +9,20 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/33cn/chain/common"
-	nty "github.com/33cn/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/common"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
 
-	"github.com/33cn/chain/client/mocks"
-	cryptocli "github.com/33cn/chain/common/crypto/client"
+	"github.com/assetcloud/chain/client/mocks"
+	cryptocli "github.com/assetcloud/chain/common/crypto/client"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcutil"
 
-	"github.com/33cn/chain/system/crypto/btcscript/script"
-	_ "github.com/33cn/chain/system/dapp/init"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/system/crypto/btcscript/script"
+	_ "github.com/assetcloud/chain/system/dapp/init"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/require"
 )
 
@@ -32,7 +32,7 @@ func Test_ExamplePay2PubKey(t *testing.T) {
 	d := Driver{}
 	priv, err := d.GenKey()
 	require.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, nil)
 	signMsg := types.Encode(tx)
 
@@ -66,7 +66,7 @@ func Test_ExamplePay2PubKeyHash(t *testing.T) {
 	d := Driver{}
 	priv, err := d.GenKey()
 	require.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, nil)
 	signMsg := types.Encode(tx)
 
@@ -99,7 +99,7 @@ func Test_ExamplePay2ScriptHash(t *testing.T) {
 	d := Driver{}
 	priv, err := d.GenKey()
 	require.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, nil)
 	signMsg := types.Encode(tx)
 
@@ -143,15 +143,15 @@ func Test_ExampleMultiSig(t *testing.T) {
 	require.Nil(t, err)
 	priv2, err := d.GenKey()
 	require.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, nil)
 	signMsg := types.Encode(tx)
 	key1, pk1 := script.NewBtcKeyFromBytes(priv1.Bytes())
 	key2, pk2 := script.NewBtcKeyFromBytes(priv2.Bytes())
-	addr1, err := btcutil.NewAddressPubKey(pk1.SerializeCompressed(), script.Chain33BtcParams)
+	addr1, err := btcutil.NewAddressPubKey(pk1.SerializeCompressed(), script.ChainBtcParams)
 	require.Nil(t, err)
 
-	addr2, err := btcutil.NewAddressPubKey(pk2.SerializeCompressed(), script.Chain33BtcParams)
+	addr2, err := btcutil.NewAddressPubKey(pk2.SerializeCompressed(), script.ChainBtcParams)
 	require.Nil(t, err)
 
 	pkScript, err := txscript.MultiSigScript([]*btcutil.AddressPubKey{addr1, addr2}, 2)
@@ -290,7 +290,7 @@ func Test_wallet_recover_transaction(t *testing.T) {
 	require.Nil(t, err)
 	//wrAddr := address.PubKeyToAddr(script.Script2PubKey(wrScript))
 	//println(wrAddr)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx1 := util.CreateCoinsTx(cfg, priv1, addr1, 9*types.DefaultCoinPrecision)
 	tx1.Signature = nil
 	tx1.ChainID = 0

@@ -11,7 +11,7 @@ CHAIN33_PATH=../../
 
 function copyAutoTestConfig() {
 
-    declare -a Chain33AutoTestDirs=("${CHAIN33_PATH}/system")
+    declare -a ChainAutoTestDirs=("${CHAIN33_PATH}/system")
     echo "#copy auto test config to path \"$1\""
     local AutoTestConfigFile="$1/autotest.toml"
 
@@ -23,7 +23,7 @@ function copyAutoTestConfig() {
     } >"${AutoTestConfigFile}"
 
     #copy all the dapp test case config file
-    for rootDir in "${Chain33AutoTestDirs[@]}"; do
+    for rootDir in "${ChainAutoTestDirs[@]}"; do
 
         if [[ ! -d ${rootDir} ]]; then
             continue
@@ -54,7 +54,7 @@ function copyAutoTestConfig() {
     done
 }
 
-function copyChain33() {
+function copyChain() {
 
     echo "# copy chain bin to path \"$1\", make sure build chain"
     cp ../chain ../chain-cli ../chain.toml "$1"
@@ -70,7 +70,7 @@ function copyAll() {
     fi
     cp autotest "${dir}"
     copyAutoTestConfig "${dir}"
-    copyChain33 "${dir}"
+    copyChain "${dir}"
     echo "# all copy have done!"
 }
 

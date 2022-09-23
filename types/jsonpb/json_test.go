@@ -17,8 +17,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 
-	pb2 "github.com/33cn/chain/types/jsonpb/jsonpb_proto"
-	pb3 "github.com/33cn/chain/types/jsonpb/proto3_proto"
+	pb2 "github.com/assetcloud/chain/types/jsonpb/jsonpb_proto"
+	pb3 "github.com/assetcloud/chain/types/jsonpb/proto3_proto"
 	descpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	durpb "github.com/golang/protobuf/ptypes/duration"

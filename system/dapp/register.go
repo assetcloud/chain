@@ -33,7 +33,7 @@ var (
 )
 
 // Register register dcriver height in name
-func Register(cfg *types.Chain33Config, name string, create DriverCreate, height int64) {
+func Register(cfg *types.ChainConfig, name string, create DriverCreate, height int64) {
 	if cfg == nil {
 		panic("Execute: GetConfig is nil")
 	}

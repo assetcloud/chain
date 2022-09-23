@@ -17,7 +17,7 @@ import (
 
 func TestBlockCache(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	_, priv := util.Genaddress()
 	cacheSize := int64(5)
 	blockHashCacheSize := int64(10)
@@ -51,8 +51,8 @@ func TestBlockCache(t *testing.T) {
 	require.NotNil(t, cache.GetBlockByHash(cache.GetBlockHash(currHeight)))
 }
 
-func initTxHashCache(txHeightRange int64) (*txHashCache, *BlockChain, *types.Chain33Config) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+func initTxHashCache(txHeightRange int64) (*txHashCache, *BlockChain, *types.ChainConfig) {
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.DefCacheSize = txHeightRange * 4
 	chain := New(cfg)
 	chain.blockStore = &BlockStore{blockCache: chain.blockCache}
@@ -65,7 +65,7 @@ func initTxHashCache(txHeightRange int64) (*txHashCache, *BlockChain, *types.Cha
 
 }
 
-func newTestTxs(cfg *types.Chain33Config, priv crypto.PrivKey, currHeight, txHeightRange int64) []*types.Transaction {
+func newTestTxs(cfg *types.ChainConfig, priv crypto.PrivKey, currHeight, txHeightRange int64) []*types.Transaction {
 
 	txs := util.GenNoneTxs(cfg, priv, 4)
 	//分别设置，最低txHeight， 最高txHeight， 正常txHeight，非txHeight交易
@@ -75,7 +75,7 @@ func newTestTxs(cfg *types.Chain33Config, priv crypto.PrivKey, currHeight, txHei
 	return txs
 }
 
-func addTestBlock(chain *BlockChain, cfg *types.Chain33Config, priv crypto.PrivKey, startHeight, txHeightRange int64, blockNum int) {
+func addTestBlock(chain *BlockChain, cfg *types.ChainConfig, priv crypto.PrivKey, startHeight, txHeightRange int64, blockNum int) {
 
 	for i := 0; i < blockNum; i++ {
 		txs := newTestTxs(cfg, priv, startHeight, txHeightRange)

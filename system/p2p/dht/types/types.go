@@ -44,7 +44,7 @@ type P2PSubConfig struct {
 
 	//配置libp2p库代码日志等级， 支持DEBUG, INFO, WARN, ERROR，默认ERROR
 	Libp2pLogLevel string `json:"libp2pLogLevel,omitempty"`
-	//配置libp2p库日志文件名 如logs/libp2p.log, 禁止和chain33使用一个日志文件, 详见issue #1117
+	//配置libp2p库日志文件名 如logs/libp2p.log, 禁止和chain使用一个日志文件, 详见issue #1117
 	Libp2pLogFile string `json:"libp2pLogFile,omitempty"`
 	// pubsub配置
 	PubSub PubSubConfig `json:"pubsub,omitempty"`

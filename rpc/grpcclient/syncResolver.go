@@ -131,7 +131,7 @@ func getSyncState(addr resolver.Address) int {
 	if err != nil {
 		return UNKNOWN
 	}
-	grpcClient := types.NewChain33Client(conn)
+	grpcClient := types.NewChainClient(conn)
 	req := &types.ReqNil{}
 	reply, err := grpcClient.IsSync(context.Background(), req)
 	if err != nil {

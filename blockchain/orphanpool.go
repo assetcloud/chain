@@ -34,11 +34,11 @@ type OrphanPool struct {
 	orphans      map[string]*orphanBlock
 	prevOrphans  map[string][]*orphanBlock
 	oldestOrphan *orphanBlock
-	param        *types.Chain33Config
+	param        *types.ChainConfig
 }
 
 //NewOrphanPool new
-func NewOrphanPool(param *types.Chain33Config) *OrphanPool {
+func NewOrphanPool(param *types.ChainConfig) *OrphanPool {
 	op := &OrphanPool{
 		orphans:     make(map[string]*orphanBlock),
 		prevOrphans: make(map[string][]*orphanBlock),

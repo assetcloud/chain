@@ -7,8 +7,8 @@ package types
 import (
 	"testing"
 
-	rpctypes "github.com/33cn/chain/rpc/types"
-	"github.com/33cn/chain/types"
+	rpctypes "github.com/assetcloud/chain/rpc/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 

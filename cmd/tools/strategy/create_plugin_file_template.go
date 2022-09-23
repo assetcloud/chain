@@ -21,7 +21,7 @@ import (
 
 func main() {
 	types.S("cfg.${PROJECTNAME}", ${PROJECTNAME})
-	cli.RunChain33("${PROJECTNAME}")
+	cli.RunChain("${PROJECTNAME}")
 }
 `
 
@@ -205,7 +205,7 @@ genesis="14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
 superManager=[
 "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP",
 ]
-#系统中所有的fork,默认用chain33的测试网络的
+#系统中所有的fork,默认用chain的测试网络的
 #但是我们可以替换
 [fork.system]
 ForkChainParamV1= 0

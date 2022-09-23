@@ -27,13 +27,13 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func Init(cfg *types.Chain33Config) {
+func Init(cfg *types.ChainConfig) {
 	slog.SetLogLevel("error")
 	pluginmgr.InitExec(cfg)
 }
 
 func newTestChannelClient() *ChannelClient {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	return &ChannelClient{
@@ -253,7 +253,7 @@ func TestChannelClient_GetAddrOverview(t *testing.T) {
 }
 
 func testChannelClientGetBalanceCoin(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -287,7 +287,7 @@ func testChannelClientGetBalanceCoin(t *testing.T) {
 }
 
 func testChannelClientGetBalanceOther(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -326,7 +326,7 @@ func TestChannelClient_GetBalance(t *testing.T) {
 }
 
 func TestChannelClient_GetTotalCoins(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	client := new(ChannelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -351,7 +351,7 @@ func TestChannelClient_GetTotalCoins(t *testing.T) {
 }
 
 func TestChannelClient_CreateNoBalanceTransaction(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	client := new(ChannelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -456,7 +456,7 @@ func TestChannelClient_GetWalletRecoverScript(t *testing.T) {
 	addr, err := cli.GetWalletRecoverAddr(req)
 	require.Nil(t, err)
 
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	_, priv3 := util.Genaddress()
 	tx := util.CreateNoneTx(cfg, priv3)
 	privKeyHex := hex.EncodeToString(priv1.Bytes())

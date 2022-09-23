@@ -214,7 +214,7 @@ function auto_test() {
     docker exec "${NODE3}" /root/autotest
 }
 
-function stop_chain33() {
+function stop_chain() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
@@ -239,7 +239,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 #trap exit
-trap "stop_chain33" INT TERM EXIT
+trap "stop_chain" INT TERM EXIT
 
 # run script
 main

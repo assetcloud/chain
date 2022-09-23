@@ -77,7 +77,7 @@ func TestJSONClient_Call(t *testing.T) {
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	qm := &qmocks.Client{}
 	qm.On("GetConfig", mock.Anything).Return(cfg)
@@ -158,7 +158,7 @@ func testDecodeTxHex(t *testing.T, txHex string) *types.Transaction {
 	return &tx
 }
 
-func testCreateTxCoins(t *testing.T, cfg *types.Chain33Config, jsonClient *jsonclient.JSONClient) {
+func testCreateTxCoins(t *testing.T, cfg *types.ChainConfig, jsonClient *jsonclient.JSONClient) {
 	req := &rpctypes.CreateTx{
 		To:          "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2",
 		Amount:      10,
@@ -193,7 +193,7 @@ func TestEthRpc_Subscribe(t *testing.T) {
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
 
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	subcfg := cfg.GetSubConfig()
 	sub, _ := types.ModifySubConfig(subcfg.RPC["eth"], "enable", true)
 	subcfg.RPC["eth"] = sub
@@ -309,7 +309,7 @@ func TestGrpc_Call(t *testing.T) {
 	rpcCfg.JrpcFuncWhitelist = []string{"*"}
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	_ = NewGrpcServer()
@@ -331,7 +331,7 @@ func TestGrpc_Call(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, c)
 
-	client := types.NewChain33Client(c)
+	client := types.NewChainClient(c)
 	result, err := client.IsSync(ctx, &types.ReqNil{})
 
 	assert.Nil(t, err)
@@ -352,7 +352,7 @@ func TestGrpc_Call(t *testing.T) {
 }
 
 func TestRPC(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	rpcCfg := cfg.GetModuleConfig().RPC
 	rpcCfg.JrpcBindAddr = "localhost:8801"
 	rpcCfg.GrpcBindAddr = "localhost:8802"

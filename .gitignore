@@ -37,7 +37,7 @@ cmd/write/write
 build/autotest/autotest
 build/autotest/local/*
 !build/autotest/local/autotest.sh
-plugin/consensus/raft/chain33_raft-1/
+plugin/consensus/raft/chain_raft-1/
 common/mavl/datastore
 .DS_Store
 common/.DS_Store
@@ -45,7 +45,7 @@ common/config/.DS_Store
 executor/executor.test
 logs/
 build/wallet
-consensus/drivers/raft/chain33_raft*
+consensus/drivers/raft/chain_raft*
 plugin/store/kvmvcc/1.png
 plugin/store/kvmvcc/cpu.pprof
 plugin/store/kvmvcc/kvmvcc.test

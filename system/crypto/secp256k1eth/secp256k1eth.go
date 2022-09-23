@@ -185,7 +185,7 @@ func (pubKey PubKeySecp256k1Eth) VerifyBytes(msg []byte, sig crypto.Signature) b
 	var hash []byte
 	action, err := types.DecodeTxAction(msg)
 	if err == nil && len(action.Note) == 0 || err != nil {
-		//chain33格式交易，sha3哈希 eth 签名
+		//chain格式交易，sha3哈希 eth 签名
 		hash = common.Sha3(msg)
 	} else { //解析ETH交易数据
 		var etx = new(etypes.Transaction)
@@ -208,7 +208,7 @@ func (pubKey PubKeySecp256k1Eth) VerifyBytes(msg []byte, sig crypto.Signature) b
 		}
 		//checkout amount
 		amount := etx.Value().Div(etx.Value(), big.NewInt(1).SetUint64(1e10))
-		if amount.Uint64() != action.Amount { //防止自组装的chain33 Tx amount 被篡改
+		if amount.Uint64() != action.Amount { //防止自组装的chain Tx amount 被篡改
 			fmt.Println("amount:", amount, "action.Amount", action.Amount)
 			return false
 		}

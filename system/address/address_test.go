@@ -9,16 +9,16 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/33cn/chain/common/address"
-	_ "github.com/33cn/chain/system"
-	"github.com/33cn/chain/system/address/btc"
-	"github.com/33cn/chain/system/address/eth"
-	"github.com/33cn/chain/system/crypto/secp256k1"
-	ctypes "github.com/33cn/chain/system/dapp/coins/types"
-	commandtypes "github.com/33cn/chain/system/dapp/commands/types"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
-	"github.com/33cn/chain/util/testnode"
+	"github.com/assetcloud/chain/common/address"
+	_ "github.com/assetcloud/chain/system"
+	"github.com/assetcloud/chain/system/address/btc"
+	"github.com/assetcloud/chain/system/address/eth"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
+	ctypes "github.com/assetcloud/chain/system/dapp/coins/types"
+	commandtypes "github.com/assetcloud/chain/system/dapp/commands/types"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

@@ -11,11 +11,11 @@ import (
 
 type web3Handler struct {
 	cli rpcclient.ChannelClient
-	cfg *ctypes.Chain33Config
+	cfg *ctypes.ChainConfig
 }
 
 //NewWeb3API nwe web3 api object
-func NewWeb3API(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{} {
+func NewWeb3API(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	w := &web3Handler{}
 	w.cli.Init(c, api)
 	w.cfg = cfg

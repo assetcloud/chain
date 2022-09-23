@@ -365,15 +365,15 @@ func (_m *QueueProtocolAPI) GetBlocks(param *types.ReqBlocks) (*types.BlockDetai
 }
 
 // GetConfig provides a mock function with given fields:
-func (_m *QueueProtocolAPI) GetConfig() *types.Chain33Config {
+func (_m *QueueProtocolAPI) GetConfig() *types.ChainConfig {
 	ret := _m.Called()
 
-	var r0 *types.Chain33Config
-	if rf, ok := ret.Get(0).(func() *types.Chain33Config); ok {
+	var r0 *types.ChainConfig
+	if rf, ok := ret.Get(0).(func() *types.ChainConfig); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*types.Chain33Config)
+			r0 = ret.Get(0).(*types.ChainConfig)
 		}
 	}
 

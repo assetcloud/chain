@@ -11,7 +11,7 @@ function _debug() {
     set +x
 }
 
-function _chain33() {
+function _chain() {
 
     set +x
     # 这是套路
@@ -76,4 +76,4 @@ function _chain33() {
 
 # 用 _subcmd 补全 chain-cli
 # _subcmd 通过当前光标所在的输入参数过滤可选的子命令
-complete -F _chain33 chain-cli guodun
+complete -F _chain chain-cli guodun

@@ -19,7 +19,7 @@ func NewMultiSigScript(pubKeys [][]byte, required int) (script []byte, err error
 
 	btcAddrs := make([]*btcutil.AddressPubKey, 0, 2)
 	for _, pub := range pubKeys {
-		addr, err := btcutil.NewAddressPubKey(pub, Chain33BtcParams)
+		addr, err := btcutil.NewAddressPubKey(pub, ChainBtcParams)
 		if err != nil {
 			return nil, ErrInvalidBtcPubKey
 		}
@@ -39,13 +39,13 @@ func NewWalletRecoveryScript(controlPubKey []byte, recoverPubKeys [][]byte, rela
 		btcLog.Error("NewWalletRecoveryScript", "msg", "recover pub key is nil")
 		return nil, ErrInvalidBtcPubKey
 	}
-	ctrAddr, err := btcutil.NewAddressPubKey(controlPubKey, Chain33BtcParams)
+	ctrAddr, err := btcutil.NewAddressPubKey(controlPubKey, ChainBtcParams)
 	if err != nil {
 		return nil, ErrInvalidBtcPubKey
 	}
 	recovAddrs := make([]*btcutil.AddressPubKey, 0, 1)
 	for _, recover := range recoverPubKeys {
-		addr, err := btcutil.NewAddressPubKey(recover, Chain33BtcParams)
+		addr, err := btcutil.NewAddressPubKey(recover, ChainBtcParams)
 		if err != nil {
 			return nil, ErrInvalidBtcPubKey
 		}

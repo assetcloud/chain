@@ -125,7 +125,7 @@ func BenchmarkSendTx(b *testing.B) {
 	})
 }
 
-func sendTxGrpc(cfg *types.Chain33Config, recvChan <-chan *types.Transaction, batchNum int) {
+func sendTxGrpc(cfg *types.ChainConfig, recvChan <-chan *types.Transaction, batchNum int) {
 	grpcAddr := cfg.GetModuleConfig().RPC.GrpcBindAddr
 	conn, err := grpc.Dial(grpcAddr, grpc.WithInsecure())
 	if err != nil {
@@ -134,7 +134,7 @@ func sendTxGrpc(cfg *types.Chain33Config, recvChan <-chan *types.Transaction, ba
 	defer conn.Close()
 	txs := &types.Transactions{Txs: make([]*types.Transaction, 0, batchNum)}
 	retryTxs := make([]*types.Transaction, 0, batchNum*2)
-	gcli := types.NewChain33Client(conn)
+	gcli := types.NewChainClient(conn)
 	for {
 		tx, ok := <-recvChan
 		if !ok {
@@ -175,7 +175,7 @@ func sendTxGrpc(cfg *types.Chain33Config, recvChan <-chan *types.Transaction, ba
 	}
 }
 
-func sendTxDirect(mock33 *testnode.Chain33Mock, recvChan <-chan *types.Transaction) {
+func sendTxDirect(mock33 *testnode.ChainMock, recvChan <-chan *types.Transaction) {
 
 	for {
 		tx, ok := <-recvChan
@@ -225,7 +225,7 @@ func init() {
 
 }
 
-func createCoinsTx(cfg *types.Chain33Config, to string, txHeight int64) *types.Transaction {
+func createCoinsTx(cfg *types.ChainConfig, to string, txHeight int64) *types.Transaction {
 	action := &cty.CoinsAction{Ty: cty.CoinsActionTransfer}
 	action.Value = &cty.CoinsAction_Transfer{
 		Transfer: &types.AssetsTransfer{
@@ -258,7 +258,7 @@ func BenchmarkSolo(b *testing.B) {
 		str := fmt.Sprintf("maxTxNumber = %d", *maxtxnum)
 		cfgStr = strings.Replace(cfgStr, "maxTxNumber = 10000", str, -1)
 	}
-	cfg := types.NewChain33Config(cfgStr)
+	cfg := types.NewChainConfig(cfgStr)
 	cfg.GetModuleConfig().Exec.DisableAddrIndex = true
 	cfg.GetModuleConfig().Exec.DisableFeeIndex = true
 	cfg.GetModuleConfig().Exec.DisableTxIndex = !*enabletxindex

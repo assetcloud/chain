@@ -8,12 +8,12 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/33cn/chain/common"
-	_ "github.com/33cn/chain/system/dapp/coins"
-	coinstypes "github.com/33cn/chain/system/dapp/coins/types"
-	_ "github.com/33cn/chain/system/dapp/init"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/common"
+	_ "github.com/assetcloud/chain/system/dapp/coins"
+	coinstypes "github.com/assetcloud/chain/system/dapp/coins/types"
+	_ "github.com/assetcloud/chain/system/dapp/init"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -23,7 +23,7 @@ import (
 func Benchmark_CopyProto(b *testing.B) {
 
 	addr, priv := util.Genaddress()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateCoinsTx(cfg, priv, addr, 1)
 	var (
 		tx1 types.Transaction
@@ -95,7 +95,7 @@ func encodeWithBuf(msg types.Message) []byte {
 func Benchmark_EncodeProto(b *testing.B) {
 
 	_, priv := util.Genaddress()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	block := util.CreateNoneBlock(cfg, priv, 100)
 
 	b.ResetTimer()
@@ -141,7 +141,7 @@ func Test_ProtoOneOfReflect(t *testing.T) {
 
 func BenchmarkProtoReset(b *testing.B) {
 	_, priv := util.Genaddress()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, priv)
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -153,7 +153,7 @@ func BenchmarkProtoReset(b *testing.B) {
 func BenchmarkTxHash(b *testing.B) {
 
 	_, priv := util.Genaddress()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, priv)
 	b.ResetTimer()
 	b.ReportAllocs()

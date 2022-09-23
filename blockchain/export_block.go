@@ -378,7 +378,7 @@ func getDataDir(datadir string) string {
 		datadir = filepath.Join(dir, datadir[2:])
 	}
 	if len(datadir) >= 6 && datadir[:6] == "$TEMP/" {
-		dir, err := ioutil.TempDir("", "chain33datadir-")
+		dir, err := ioutil.TempDir("", "chaindatadir-")
 		if err != nil {
 			panic(err)
 		}

@@ -109,7 +109,7 @@ type Push struct {
 	tasks          map[string]*pushNotify
 	mu             sync.Mutex
 	postService    PostService
-	cfg            *types.Chain33Config
+	cfg            *types.ChainConfig
 	postFail2Sleep int32
 	postwg         *sync.WaitGroup
 }
@@ -753,7 +753,7 @@ func (push *Push) getEVMEvent(subscribe *types.PushSubscribeReq, startSeq int64,
 			if !strings.Contains(string(tx.Execer), "evm") {
 				continue
 			}
-			var evmAction types.EVMContractAction4Chain33
+			var evmAction types.EVMContractAction4Chain
 			err := types.Decode(tx.Payload, &evmAction)
 			if nil != err {
 				chainlog.Error("getEVMEvent", "Failed to decode EVMContractAction for evm tx with hash:", common.ToHex(tx.Hash()))

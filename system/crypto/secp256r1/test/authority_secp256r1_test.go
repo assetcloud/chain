@@ -10,19 +10,19 @@ import (
 	"path"
 	"testing"
 
-	"github.com/33cn/chain/system/crypto/secp256r1"
+	"github.com/assetcloud/chain/system/crypto/secp256r1"
 
-	"github.com/33cn/chain/system/crypto/common/authority"
-	"github.com/33cn/chain/system/crypto/common/authority/utils"
+	"github.com/assetcloud/chain/system/crypto/common/authority"
+	"github.com/assetcloud/chain/system/crypto/common/authority/utils"
 
-	"github.com/33cn/chain/common"
-	"github.com/33cn/chain/common/address"
-	"github.com/33cn/chain/common/crypto"
-	cty "github.com/33cn/chain/system/dapp/coins/types"
-	"github.com/33cn/chain/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
+	cty "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 
-	_ "github.com/33cn/chain/system"
+	_ "github.com/assetcloud/chain/system"
 )
 
 var (
@@ -177,8 +177,8 @@ func (loader *UserLoader) Get(userName, orgName string) (*User, error) {
 /**
 初始化Author实例和userloader
 */
-func initEnv() (*types.Chain33Config, error) {
-	cfg := types.NewChain33Config(types.ReadFile("./chain.auth.test.toml"))
+func initEnv() (*types.ChainConfig, error) {
+	cfg := types.NewChainConfig(types.ReadFile("./chain.auth.test.toml"))
 	sub := cfg.GetSubConfig().Crypto[secp256r1.Name]
 	var subcfg authority.SubConfig
 	if sub != nil {

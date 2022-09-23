@@ -47,5 +47,5 @@ enableTypes=["secp256k1", "sm2"]
 ### 相关说明
 > cryptoID主要用于交易签名算法类型判定, cryptoID不等同于交易SignatureID
 
-* 接口chain33/types/ExtractCryptoID, 基于signID解析cryptoID
-* 底层设计, 参考chain33/types/sign.md
+* 接口chain/types/ExtractCryptoID, 基于signID解析cryptoID
+* 底层设计, 参考chain/types/sign.md

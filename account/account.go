@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package account 实现chain33 区块链资产操作
+// Package account 实现chain 区块链资产操作
 package account
 
 //package for account manger
@@ -37,18 +37,18 @@ type DB struct {
 	execer               string
 	symbol               string
 	accountKeyBuffer     []byte
-	cfg                  *types.Chain33Config
+	cfg                  *types.ChainConfig
 }
 
 // NewCoinsAccount 新建账户
-func NewCoinsAccount(cfg *types.Chain33Config) *DB {
+func NewCoinsAccount(cfg *types.ChainConfig) *DB {
 	//缺省"coins"，支持coinsx扩展
 	prefix := "mavl-" + cfg.GetCoinExec() + "-" + cfg.GetCoinSymbol() + "-"
 	return newAccountDB(cfg, prefix)
 }
 
 // NewAccountDB 新建DB账户
-func NewAccountDB(cfg *types.Chain33Config, execer string, symbol string, db dbm.KV) (*DB, error) {
+func NewAccountDB(cfg *types.ChainConfig, execer string, symbol string, db dbm.KV) (*DB, error) {
 	//如果execer 和  symbol 中存在 "-", 那么创建失败
 	if strings.ContainsRune(execer, '-') {
 		return nil, types.ErrExecNameNotAllow
@@ -63,7 +63,7 @@ func NewAccountDB(cfg *types.Chain33Config, execer string, symbol string, db dbm
 	return accDB, nil
 }
 
-func newAccountDB(cfg *types.Chain33Config, prefix string) *DB {
+func newAccountDB(cfg *types.ChainConfig, prefix string) *DB {
 	acc := &DB{cfg: cfg}
 	acc.accountKeyPerfix = []byte(prefix)
 	acc.accountKeyBuffer = make([]byte, 0, len(acc.accountKeyPerfix)+64)

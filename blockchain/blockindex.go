@@ -35,7 +35,7 @@ const (
 	indexCacheLimit = 102400 //目前 暂定index链缓存blocknode的个数
 )
 
-func initBlockNode(cfg *types.Chain33Config, node *blockNode, block *types.Block, broadcast bool, pid string, sequence int64) {
+func initBlockNode(cfg *types.ChainConfig, node *blockNode, block *types.Block, broadcast bool, pid string, sequence int64) {
 	*node = blockNode{
 		hash:       block.Hash(cfg),
 		Difficulty: difficulty.CalcWork(block.Difficulty),
@@ -48,7 +48,7 @@ func initBlockNode(cfg *types.Chain33Config, node *blockNode, block *types.Block
 	}
 }
 
-func newBlockNode(cfg *types.Chain33Config, broadcast bool, block *types.Block, pid string, sequence int64) *blockNode {
+func newBlockNode(cfg *types.ChainConfig, broadcast bool, block *types.Block, pid string, sequence int64) *blockNode {
 	var node blockNode
 	initBlockNode(cfg, &node, block, broadcast, pid, sequence)
 	return &node

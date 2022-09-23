@@ -3,7 +3,7 @@ package metrics
 import (
 	"time"
 
-	chain33log "github.com/assetcloud/chain/common/log/log15"
+	chainlog "github.com/assetcloud/chain/common/log/log15"
 	"github.com/assetcloud/chain/metrics/influxdb"
 	"github.com/assetcloud/chain/types"
 	go_metrics "github.com/rcrowley/go-metrics"
@@ -20,11 +20,11 @@ type influxDBPara struct {
 }
 
 var (
-	log = chain33log.New("module", "chain metrics")
+	log = chainlog.New("module", "chain metrics")
 )
 
 //StartMetrics 根据配置文件相关参数启动m
-func StartMetrics(cfg *types.Chain33Config) {
+func StartMetrics(cfg *types.ChainConfig) {
 	metrics := cfg.GetModuleConfig().Metrics
 	if !metrics.EnableMetrics {
 		log.Info("Metrics data is not enabled to emit")

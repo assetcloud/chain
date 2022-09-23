@@ -133,7 +133,7 @@ cryptoPath="authdir/crypto"
 # 带证书签名类型，支持"auth_ecdsa", "auth_sm2"
 signType="auth_ecdsa"
 
-#系统中所有的fork,默认用chain33的测试网络的
+#系统中所有的fork,默认用chain的测试网络的
 #但是我们可以替换
 [fork.system]
 ForkV1=75260

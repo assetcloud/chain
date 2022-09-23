@@ -52,7 +52,7 @@ type Ticket struct {
 func (x *Ticket) Reset() {
 	*x = Ticket{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ticket_chain33_proto_msgTypes[0]
+		mi := &file_ticket_chain_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -65,7 +65,7 @@ func (x *Ticket) String() string {
 func (*Ticket) ProtoMessage() {}
 
 func (x *Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_ticket_chain33_proto_msgTypes[0]
+	mi := &file_ticket_chain_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -78,7 +78,7 @@ func (x *Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ticket.ProtoReflect.Descriptor instead.
 func (*Ticket) Descriptor() ([]byte, []int) {
-	return file_ticket_chain33_proto_rawDescGZIP(), []int{0}
+	return file_ticket_chain_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Ticket) GetTicketId() string {
@@ -144,9 +144,9 @@ func (x *Ticket) GetPrice() int64 {
 	return 0
 }
 
-var File_ticket_chain33_proto protoreflect.FileDescriptor
+var File_ticket_chain_proto protoreflect.FileDescriptor
 
-var file_ticket_chain33_proto_rawDesc = []byte{
+var file_ticket_chain_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x33, 0x33,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x22, 0x98,
 	0x02, 0x0a, 0x06, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x69, 0x63,
@@ -171,22 +171,22 @@ var file_ticket_chain33_proto_rawDesc = []byte{
 }
 
 var (
-	file_ticket_chain33_proto_rawDescOnce sync.Once
-	file_ticket_chain33_proto_rawDescData = file_ticket_chain33_proto_rawDesc
+	file_ticket_chain_proto_rawDescOnce sync.Once
+	file_ticket_chain_proto_rawDescData = file_ticket_chain_proto_rawDesc
 )
 
-func file_ticket_chain33_proto_rawDescGZIP() []byte {
-	file_ticket_chain33_proto_rawDescOnce.Do(func() {
-		file_ticket_chain33_proto_rawDescData = protoimpl.X.CompressGZIP(file_ticket_chain33_proto_rawDescData)
+func file_ticket_chain_proto_rawDescGZIP() []byte {
+	file_ticket_chain_proto_rawDescOnce.Do(func() {
+		file_ticket_chain_proto_rawDescData = protoimpl.X.CompressGZIP(file_ticket_chain_proto_rawDescData)
 	})
-	return file_ticket_chain33_proto_rawDescData
+	return file_ticket_chain_proto_rawDescData
 }
 
-var file_ticket_chain33_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_ticket_chain33_proto_goTypes = []interface{}{
+var file_ticket_chain_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_ticket_chain_proto_goTypes = []interface{}{
 	(*Ticket)(nil), // 0: ticket.Ticket
 }
-var file_ticket_chain33_proto_depIdxs = []int32{
+var file_ticket_chain_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -194,13 +194,13 @@ var file_ticket_chain33_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_ticket_chain33_proto_init() }
-func file_ticket_chain33_proto_init() {
-	if File_ticket_chain33_proto != nil {
+func init() { file_ticket_chain_proto_init() }
+func file_ticket_chain_proto_init() {
+	if File_ticket_chain_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_ticket_chain33_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_ticket_chain_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Ticket); i {
 			case 0:
 				return &v.state
@@ -217,18 +217,18 @@ func file_ticket_chain33_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_ticket_chain33_proto_rawDesc,
+			RawDescriptor: file_ticket_chain_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_ticket_chain33_proto_goTypes,
-		DependencyIndexes: file_ticket_chain33_proto_depIdxs,
-		MessageInfos:      file_ticket_chain33_proto_msgTypes,
+		GoTypes:           file_ticket_chain_proto_goTypes,
+		DependencyIndexes: file_ticket_chain_proto_depIdxs,
+		MessageInfos:      file_ticket_chain_proto_msgTypes,
 	}.Build()
-	File_ticket_chain33_proto = out.File
-	file_ticket_chain33_proto_rawDesc = nil
-	file_ticket_chain33_proto_goTypes = nil
-	file_ticket_chain33_proto_depIdxs = nil
+	File_ticket_chain_proto = out.File
+	file_ticket_chain_proto_rawDesc = nil
+	file_ticket_chain_proto_goTypes = nil
+	file_ticket_chain_proto_depIdxs = nil
 }

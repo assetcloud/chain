@@ -96,7 +96,7 @@ git merge upstream/master
 注意：不要去修改 master 分支，这样，master 分支永远和upstream/master 保持同步
 ```
 
-* 从最新的33cn/chain代码建立分支开始开发
+* 从最新的assetcloud/chain代码建立分支开始开发
 
 ```
 git fetch upstream

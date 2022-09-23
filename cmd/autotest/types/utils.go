@@ -41,8 +41,8 @@ func AutoTestLogFormat() log15.Format {
 
 }
 
-//RunChain33Cli invoke chain client
-func RunChain33Cli(para []string) (string, error) {
+//RunChainCli invoke chain client
+func RunChainCli(para []string) (string, error) {
 
 	rawOut, err := exec.Command(CliCmd, para[0:]...).CombinedOutput()
 
@@ -69,7 +69,7 @@ func checkTxHashValid(txHash string) bool {
 //SendTxCommand excute
 func SendTxCommand(cmd string) (string, bool) {
 
-	output, err := RunChain33Cli(strings.Fields(cmd))
+	output, err := RunChainCli(strings.Fields(cmd))
 	if err != nil {
 		return err.Error(), false
 	} else if len(output) == 67 {
@@ -93,7 +93,7 @@ func SendTxCommand(cmd string) (string, bool) {
 //SendPrivacyTxCommand 隐私交易执行回执哈希为json格式，需要解析
 func SendPrivacyTxCommand(cmd string) (string, bool) {
 
-	output, err := RunChain33Cli(strings.Fields(cmd))
+	output, err := RunChainCli(strings.Fields(cmd))
 
 	if err != nil {
 		return err.Error(), false
@@ -131,7 +131,7 @@ func GetTxRecpTyname(txInfo map[string]interface{}) (tyname string, bSuccess boo
 func GetTxInfo(txHash string) (string, bool) {
 
 	bReady := false
-	txInfo, err := RunChain33Cli(strings.Fields(fmt.Sprintf("tx query -s %s", txHash)))
+	txInfo, err := RunChainCli(strings.Fields(fmt.Sprintf("tx query -s %s", txHash)))
 
 	if err == nil && txInfo != "tx not exist\n" {
 
@@ -190,7 +190,7 @@ func CalcTxUtxoAmount(log map[string]interface{}, key string) float64 {
 //CalcUtxoAvailAmount calculate available utxo with specific addr and TxHash
 func CalcUtxoAvailAmount(addr string, txHash string) (float64, error) {
 
-	outStr, err := RunChain33Cli(strings.Fields(fmt.Sprintf("privacy showpai -d 1 -a %s", addr)))
+	outStr, err := RunChainCli(strings.Fields(fmt.Sprintf("privacy showpai -d 1 -a %s", addr)))
 
 	if err != nil {
 		return 0, err
@@ -224,7 +224,7 @@ func CalcUtxoAvailAmount(addr string, txHash string) (float64, error) {
 //CalcUtxoSpendAmount calculate spend utxo with specific addr and TxHash
 func CalcUtxoSpendAmount(addr string, txHash string) (float64, error) {
 
-	outStr, err := RunChain33Cli(strings.Fields(fmt.Sprintf("privacy showpas -a %s", addr)))
+	outStr, err := RunChainCli(strings.Fields(fmt.Sprintf("privacy showpas -a %s", addr)))
 
 	if strings.Contains(outStr, "Err") {
 		return 0, errors.New(outStr)

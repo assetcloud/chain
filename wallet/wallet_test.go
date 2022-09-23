@@ -32,7 +32,7 @@ func init() {
 }
 
 func initEnv() (*Wallet, queue.Module, queue.Queue, string) {
-	cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../cmd/chain/chain.test.toml"))
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
 	wallet := New(cfg)

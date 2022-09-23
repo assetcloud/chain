@@ -1,12 +1,12 @@
 
 # chain gendapp
-根据定义的合约protobuf原型文件，自动生成chain33 dapp基本代码
+根据定义的合约protobuf原型文件，自动生成chain dapp基本代码
 
 ### 编译
 ```
-//本地存在chain33代码，该步骤可省略
+//本地存在chain代码，该步骤可省略
 $ go get github.com/assetcloud/chain
-//编译chain33 tools
+//编译chain tools
 $ go build -i -o $GOPATH/bin/chain-tool github.com/assetcloud/chain/cmd/tools
 ```
 
@@ -91,8 +91,8 @@ demo
 
 ```
 ##### 生成pb.go文件
-pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和chain33引用的保持一致，
-具体可以查看chain33项目go.mod文件，github.com/golang/protobuf库的版本
+pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和chain引用的保持一致，
+具体可以查看chain项目go.mod文件，github.com/golang/protobuf库的版本
 ```
 //进入到上述proto目录执行相关脚本，将会在types目录下生成对应pb.go文件
 $ cd proto && make

@@ -9,7 +9,7 @@ import (
 	"errors"
 
 	"github.com/assetcloud/chain/common/log/log15"
-	chain33Type "github.com/assetcloud/chain/system/dapp/commands/types"
+	chainType "github.com/assetcloud/chain/system/dapp/commands/types"
 )
 
 //CaseFunc interface for testCase
@@ -65,7 +65,7 @@ type BaseCase struct {
 }
 
 //check item handler
-//适配autotest早期版本，handlerfunc的参数为json的map形式，后续统一使用chain33的TxDetailResult结构体结构
+//适配autotest早期版本，handlerfunc的参数为json的map形式，后续统一使用chain的TxDetailResult结构体结构
 
 //CheckHandlerFuncDiscard 检查func
 type CheckHandlerFuncDiscard func(map[string]interface{}) bool
@@ -76,7 +76,7 @@ type CheckHandlerMapDiscard map[string]CheckHandlerFuncDiscard
 //建议使用
 
 //CheckHandlerParamType 检查参数类型
-type CheckHandlerParamType *chain33Type.TxDetailResult
+type CheckHandlerParamType *chainType.TxDetailResult
 
 //CheckHandlerFunc 检查func
 type CheckHandlerFunc func(CheckHandlerParamType) bool
@@ -232,7 +232,7 @@ func (pack *BaseCasePack) CheckResult(handlerMap interface{}) (bCheck bool, bSuc
 		bCheck = true
 		var tyname string
 		var jsonMap map[string]interface{}
-		var txRecp chain33Type.TxDetailResult
+		var txRecp chainType.TxDetailResult
 		pack.TxReceipt = txInfo
 		pack.FLog.Info("TxReceiptJson", "TestID", pack.PackID)
 		//hack, for pretty json log

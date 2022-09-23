@@ -5,7 +5,7 @@ import (
 	uurl "net/url"
 	"time"
 
-	chain33log "github.com/assetcloud/chain/common/log/log15"
+	chainlog "github.com/assetcloud/chain/common/log/log15"
 	"github.com/influxdata/influxdb/client"
 	metrics "github.com/rcrowley/go-metrics"
 )
@@ -27,7 +27,7 @@ type reporter struct {
 }
 
 var (
-	log = chain33log.New("module", "influxdb")
+	log = chainlog.New("module", "influxdb")
 )
 
 // InfluxDB starts a InfluxDB reporter which will post the from the given metrics.Registry at each d interval.

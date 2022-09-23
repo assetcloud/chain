@@ -1,5 +1,5 @@
 package executor_test
 
 import (
-	_ "github.com/33cn/chain/system"
+	_ "github.com/assetcloud/chain/system"
 )

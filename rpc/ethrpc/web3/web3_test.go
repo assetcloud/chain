@@ -17,7 +17,7 @@ var (
 
 func init() {
 	qapi = &clientMocks.QueueProtocolAPI{}
-	cfg := ctypes.NewChain33Config(ctypes.GetDefaultCfgstring())
+	cfg := ctypes.NewChainConfig(ctypes.GetDefaultCfgstring())
 	q.SetConfig(cfg)
 	webObj = &web3Handler{}
 	webObj.cfg = cfg

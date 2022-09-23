@@ -40,7 +40,7 @@ type Client interface {
 	CloseQueue() (*types.Reply, error)
 	NewMessage(topic string, ty int64, data interface{}) (msg *Message)
 	FreeMessage(msg ...*Message) //回收msg， 需要注意回收时上下文不再引用
-	GetConfig() *types.Chain33Config
+	GetConfig() *types.ChainConfig
 }
 
 // Module be used for module interface
@@ -70,12 +70,12 @@ func newClient(q *queue) Client {
 	return client
 }
 
-// GetConfig return the queue Chain33Config
-func (client *client) GetConfig() *types.Chain33Config {
+// GetConfig return the queue ChainConfig
+func (client *client) GetConfig() *types.ChainConfig {
 	types.AssertConfig(client.q)
 	cfg := client.q.GetConfig()
 	if cfg == nil {
-		panic("Chain33Config is nil")
+		panic("ChainConfig is nil")
 	}
 	return cfg
 }

@@ -152,7 +152,7 @@ type BlockChain struct {
 }
 
 //New new
-func New(cfg *types.Chain33Config) *BlockChain {
+func New(cfg *types.ChainConfig) *BlockChain {
 	mcfg := cfg.GetModuleConfig().BlockChain
 	futureBlocks, err := lru.New(maxFutureBlocks)
 	if err != nil {
@@ -203,7 +203,7 @@ func New(cfg *types.Chain33Config) *BlockChain {
 	return blockchain
 }
 
-func (chain *BlockChain) initConfig(cfg *types.Chain33Config) {
+func (chain *BlockChain) initConfig(cfg *types.ChainConfig) {
 	mcfg := cfg.GetModuleConfig().BlockChain
 
 	if mcfg.MaxFetchBlockNum > 0 {

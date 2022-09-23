@@ -7,7 +7,7 @@ import (
 )
 
 // New new mempool queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.ChainConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Mempool
 	sub := cfg.GetSubConfig().Mempool
 	con, err := mempool.Load(mcfg.Name)

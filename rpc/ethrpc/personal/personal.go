@@ -22,11 +22,11 @@ var (
 
 type personalHandler struct {
 	cli rpcclient.ChannelClient
-	cfg *ctypes.Chain33Config
+	cfg *ctypes.ChainConfig
 }
 
 //NewPersonalAPI new persional object
-func NewPersonalAPI(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{} {
+func NewPersonalAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	p := &personalHandler{}
 	p.cli.Init(c, api)
 	p.cfg = cfg

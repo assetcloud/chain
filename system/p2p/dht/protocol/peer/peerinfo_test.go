@@ -54,7 +54,7 @@ func initEnv(t *testing.T, q queue.Queue) (*Protocol, context.CancelFunc) {
 		t.Fatal(err)
 	}
 
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[p2pty.DHTTypeName], mcfg)
 	kademliaDHT1, err := dht.New(context.Background(), host1)

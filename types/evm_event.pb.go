@@ -325,7 +325,7 @@ func (x *EVMTxLogsInBlks) GetLogs4EVMPerBlk() []*EVMTxLogPerBlk {
 }
 
 // 创建/调用合约的请求结构
-type EVMContractAction4Chain33 struct {
+type EVMContractAction4Chain struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -348,8 +348,8 @@ type EVMContractAction4Chain33 struct {
 	ContractAddr string `protobuf:"bytes,8,opt,name=contractAddr,proto3" json:"contractAddr,omitempty"`
 }
 
-func (x *EVMContractAction4Chain33) Reset() {
-	*x = EVMContractAction4Chain33{}
+func (x *EVMContractAction4Chain) Reset() {
+	*x = EVMContractAction4Chain{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_evm_event_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -357,13 +357,13 @@ func (x *EVMContractAction4Chain33) Reset() {
 	}
 }
 
-func (x *EVMContractAction4Chain33) String() string {
+func (x *EVMContractAction4Chain) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*EVMContractAction4Chain33) ProtoMessage() {}
+func (*EVMContractAction4Chain) ProtoMessage() {}
 
-func (x *EVMContractAction4Chain33) ProtoReflect() protoreflect.Message {
+func (x *EVMContractAction4Chain) ProtoReflect() protoreflect.Message {
 	mi := &file_evm_event_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -375,61 +375,61 @@ func (x *EVMContractAction4Chain33) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EVMContractAction4Chain33.ProtoReflect.Descriptor instead.
-func (*EVMContractAction4Chain33) Descriptor() ([]byte, []int) {
+// Deprecated: Use EVMContractAction4Chain.ProtoReflect.Descriptor instead.
+func (*EVMContractAction4Chain) Descriptor() ([]byte, []int) {
 	return file_evm_event_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *EVMContractAction4Chain33) GetAmount() uint64 {
+func (x *EVMContractAction4Chain) GetAmount() uint64 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-func (x *EVMContractAction4Chain33) GetGasLimit() uint64 {
+func (x *EVMContractAction4Chain) GetGasLimit() uint64 {
 	if x != nil {
 		return x.GasLimit
 	}
 	return 0
 }
 
-func (x *EVMContractAction4Chain33) GetGasPrice() uint32 {
+func (x *EVMContractAction4Chain) GetGasPrice() uint32 {
 	if x != nil {
 		return x.GasPrice
 	}
 	return 0
 }
 
-func (x *EVMContractAction4Chain33) GetCode() []byte {
+func (x *EVMContractAction4Chain) GetCode() []byte {
 	if x != nil {
 		return x.Code
 	}
 	return nil
 }
 
-func (x *EVMContractAction4Chain33) GetPara() []byte {
+func (x *EVMContractAction4Chain) GetPara() []byte {
 	if x != nil {
 		return x.Para
 	}
 	return nil
 }
 
-func (x *EVMContractAction4Chain33) GetAlias() string {
+func (x *EVMContractAction4Chain) GetAlias() string {
 	if x != nil {
 		return x.Alias
 	}
 	return ""
 }
 
-func (x *EVMContractAction4Chain33) GetNote() string {
+func (x *EVMContractAction4Chain) GetNote() string {
 	if x != nil {
 		return x.Note
 	}
 	return ""
 }
 
-func (x *EVMContractAction4Chain33) GetContractAddr() string {
+func (x *EVMContractAction4Chain) GetContractAddr() string {
 	if x != nil {
 		return x.ContractAddr
 	}
@@ -513,7 +513,7 @@ var file_evm_event_proto_goTypes = []interface{}{
 	(*EVMTxAndLogs)(nil),              // 2: types.EVMTxAndLogs
 	(*EVMTxLogPerBlk)(nil),            // 3: types.EVMTxLogPerBlk
 	(*EVMTxLogsInBlks)(nil),           // 4: types.EVMTxLogsInBlks
-	(*EVMContractAction4Chain33)(nil), // 5: types.EVMContractAction4Chain33
+	(*EVMContractAction4Chain)(nil), // 5: types.EVMContractAction4Chain
 	(*Transaction)(nil),               // 6: types.Transaction
 }
 var file_evm_event_proto_depIdxs = []int32{
@@ -597,7 +597,7 @@ func file_evm_event_proto_init() {
 			}
 		}
 		file_evm_event_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EVMContractAction4Chain33); i {
+			switch v := v.(*EVMContractAction4Chain); i {
 			case 0:
 				return &v.state
 			case 1:

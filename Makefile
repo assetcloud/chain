@@ -255,7 +255,7 @@ mock:
 	@cd common/db && mockery -name=KVDB && mv mocks/KVDB.go mocks/kvdb.go && cd -
 	@cd common/db && mockery -name=DB && mv mocks/DB.go mocks/db.go && cd -
 	@cd queue && mockery -name=Client && mv mocks/Client.go mocks/client.go && cd -
-	@cd types/ && mockery -name=Chain33Client && mv mocks/Chain33Client.go mocks/chain33client.go && cd -
+	@cd types/ && mockery -name=ChainClient && mv mocks/ChainClient.go mocks/chainclient.go && cd -
 
 
 

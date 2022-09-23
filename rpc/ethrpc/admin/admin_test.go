@@ -20,7 +20,7 @@ var (
 
 func init() {
 	qapi = &clientMocks.QueueProtocolAPI{}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	q.SetConfig(cfg)
 	admin = &adminHandler{}
 	admin.cfg = cfg

@@ -29,23 +29,23 @@ if [ "$(uname)" == "Darwin" ]; then
     sedfix=".bak"
 fi
 
-chain33Config="chain.test.toml"
-chain33BlockTime=1
+chainConfig="chain.test.toml"
+chainBlockTime=1
 autoTestConfig="autotest.toml"
 autoTestCheckTimeout=10
 
-function config_chain33() {
+function config_chain() {
 
     # shellcheck disable=SC2015
     echo "# config chain solo test"
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' ${chain33Config}
-    # grep -q '^TestNet' ${chain33Config} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config} || sed -i '/^Title/a TestNet=true' ${chain33Config}
+    sed -i $sedfix 's/^Title.*/Title="local"/g' ${chainConfig}
+    # grep -q '^TestNet' ${chainConfig} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chainConfig} || sed -i '/^Title/a TestNet=true' ${chainConfig}
 
-    if grep -q '^TestNet' ${chain33Config}; then
-        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config}
+    if grep -q '^TestNet' ${chainConfig}; then
+        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chainConfig}
     else
-        sed -i $sedfix '/^Title/a TestNet=true' ${chain33Config}
+        sed -i $sedfix '/^Title/a TestNet=true' ${chainConfig}
     fi
 }
 
@@ -55,7 +55,7 @@ function config_autotest() {
     sed -i $sedfix 's/^checkTimeout.*/checkTimeout='${autoTestCheckTimeout}'/' ${autoTestConfig}
 }
 
-function start_chain33() {
+function start_chain() {
 
     # create and run docker-compose container
     docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml up --build -d
@@ -99,7 +99,7 @@ function start_chain33() {
     echo "=========== #transfer to miner addr ============="
     hash=$(${CLI} send coins transfer -a 10000 -n test -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${chainBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -111,7 +111,7 @@ function start_chain33() {
     hash=$(${CLI} send coins transfer -a 10 -n test -t 1Q8hGLfoGe63efeWa8fJ4Pnukhkngt6poK -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
 
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${chainBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -125,7 +125,7 @@ function start_chain33() {
     hash=$(${CLI} wallet send -d "${signData}")
 
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${chainBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -142,7 +142,7 @@ function start_autotest() {
 
 }
 
-function stop_chain33() {
+function stop_chain() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
@@ -163,14 +163,14 @@ function main() {
     mv ../autotest ../*.toml ./ && mv ../chain* ./
     cp ../compose-autotest.yml ../Dockerfile-autotest ./
 
-    config_chain33
+    config_chain
     config_autotest
-    start_chain33
+    start_chain
     start_autotest
 }
 
 #trap exit
-trap "stop_chain33" INT TERM EXIT
+trap "stop_chain" INT TERM EXIT
 
 # run script
 main

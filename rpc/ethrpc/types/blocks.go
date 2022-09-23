@@ -9,7 +9,7 @@ import (
 )
 
 //BlockDetailToEthBlock chain blockdetails transfer to  eth block format
-func BlockDetailToEthBlock(details *types.BlockDetails, cfg *types.Chain33Config, full bool) (*Block, error) {
+func BlockDetailToEthBlock(details *types.BlockDetails, cfg *types.ChainConfig, full bool) (*Block, error) {
 	var block Block
 	var header Header
 	fullblock := details.GetItems()[0]

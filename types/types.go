@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package types 实现了chain33基础结构体、接口、常量等的定义
+// Package types 实现了chain基础结构体、接口、常量等的定义
 package types
 
 import (
@@ -37,7 +37,7 @@ const Size1Kshiftlen uint = 10
 type Message proto.Message
 
 //ExecName  执行器name
-func (c *Chain33Config) ExecName(name string) string {
+func (c *ChainConfig) ExecName(name string) string {
 	if len(name) > 1 && name[0] == '#' {
 		return name[1:]
 	}
@@ -141,7 +141,7 @@ func FindExecer(key []byte) (execer []byte, err error) {
 }
 
 //GetParaExec  获取平行链执行
-func (c *Chain33Config) GetParaExec(execer []byte) []byte {
+func (c *ChainConfig) GetParaExec(execer []byte) []byte {
 	//必须是平行链
 	if !c.IsPara() {
 		return execer

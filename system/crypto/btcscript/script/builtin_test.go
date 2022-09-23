@@ -4,16 +4,16 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/33cn/chain/client/mocks"
-	cryptocli "github.com/33cn/chain/common/crypto/client"
-	nty "github.com/33cn/chain/system/dapp/none/types"
+	"github.com/assetcloud/chain/client/mocks"
+	cryptocli "github.com/assetcloud/chain/common/crypto/client"
+	nty "github.com/assetcloud/chain/system/dapp/none/types"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/33cn/chain/system/crypto/btcscript"
+	"github.com/assetcloud/chain/system/crypto/btcscript"
 
-	"github.com/33cn/chain/system/crypto/btcscript/script"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/system/crypto/btcscript/script"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/require"
 )
 
@@ -31,7 +31,7 @@ func Test_WalletRecoveryScript(t *testing.T) {
 		delayTime)
 
 	require.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	tx := util.CreateNoneTx(cfg, nil)
 	signMsg := types.Encode(tx)
 

@@ -14,7 +14,7 @@ import (
 )
 
 // New new consensus queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.ChainConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Consensus
 	sub := cfg.GetSubConfig().Consensus
 	con, err := consensus.Load(mcfg.Name)

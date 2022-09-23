@@ -3,9 +3,9 @@ package eth_test
 import (
 	"strings"
 
-	"github.com/33cn/chain/common/address"
-	"github.com/33cn/chain/system/address/eth"
-	"github.com/33cn/chain/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/system/address/eth"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
@@ -24,11 +24,11 @@ func TestFormatEthAddr(t *testing.T) {
 		ethPriv, err := crypto.GenerateKey()
 		require.Nil(t, err)
 		ethAddr := crypto.PubkeyToAddress(ethPriv.PublicKey).Hex()
-		chain33Priv, err := d.PrivKeyFromBytes(crypto.FromECDSA(ethPriv))
+		chainPriv, err := d.PrivKeyFromBytes(crypto.FromECDSA(ethPriv))
 		require.Nil(t, err)
 		err = ethDriver.ValidateAddr(ethAddr)
 		require.Nil(t, err)
-		addr := ethDriver.PubKeyToAddr(chain33Priv.PubKey().Bytes())
+		addr := ethDriver.PubKeyToAddr(chainPriv.PubKey().Bytes())
 		require.Equal(t, address.ToLower(ethAddr), addr)
 	}
 	require.Equal(t, eth.Name, ethDriver.GetName())

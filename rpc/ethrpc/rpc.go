@@ -33,7 +33,7 @@ const (
 	defaultEthWsRPCPort = 8546
 )
 
-type initAPI func(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{}
+type initAPI func(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{}
 type rpcAPIs map[string]initAPI
 
 var (
@@ -74,7 +74,7 @@ type httpServer struct {
 	listener    net.Listener // non-nil when server is running
 	httpHandler *rpcHandler  //http
 	wsHander    *rpcHandler  //websocket
-	cfg         *ctypes.Chain33Config
+	cfg         *ctypes.ChainConfig
 	subCfg      *subConfig
 	qclient     queue.Client
 	api         client.QueueProtocolAPI
@@ -92,7 +92,7 @@ type rpcHandler struct {
 }
 
 //initRpcHandler 注册eth rpc
-func initRPCHandler(apis rpcAPIs, cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) *rpcHandler {
+func initRPCHandler(apis rpcAPIs, cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) *rpcHandler {
 	server := rpc.NewServer()
 	if len(apis) == 0 {
 		apis = defaultApis

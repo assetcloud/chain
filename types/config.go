@@ -21,13 +21,13 @@ import (
 )
 
 //Create ...
-type Create func(cfg *Chain33Config)
+type Create func(cfg *ChainConfig)
 
 //区块链共识相关的参数，重要参数不要随便修改
 var (
 	AllowUserExec = [][]byte{ExecerNone}
 	EmptyValue    = []byte("FFFFFFFFemptyBVBiCj5jvE15pEiwro8TQRGnJSNsJF") //这字符串表示数据库中的空值
-	cliSysParam   = make(map[string]*Chain33Config)                       // map key is title
+	cliSysParam   = make(map[string]*ChainConfig)                         // map key is title
 	regModuleInit = make(map[string]Create)
 	regExecInit   = make(map[string]Create)
 	runonce       = sync.Once{}
@@ -46,8 +46,8 @@ const (
 	DefaultMinFee    int64 = 1e5
 )
 
-//Chain33Config ...
-type Chain33Config struct {
+//ChainConfig ...
+type ChainConfig struct {
 	mcfg       *Config
 	scfg       *ConfigSubModule
 	minerExecs []string
@@ -83,7 +83,7 @@ func RegFork(name string, create Create) {
 }
 
 //RegForkInit ...
-func RegForkInit(cfg *Chain33Config) {
+func RegForkInit(cfg *ChainConfig) {
 	for _, item := range regModuleInit {
 		item(cfg)
 	}
@@ -101,7 +101,7 @@ func RegExec(name string, create Create) {
 }
 
 //RegExecInit ...
-func RegExecInit(cfg *Chain33Config) {
+func RegExecInit(cfg *ChainConfig) {
 	runonce.Do(func() {
 		for _, item := range regExecInit {
 			item(cfg)
@@ -109,17 +109,17 @@ func RegExecInit(cfg *Chain33Config) {
 	})
 }
 
-//NewChain33Config ...
-func NewChain33Config(cfgstring string) *Chain33Config {
-	chain33Cfg := NewChain33ConfigNoInit(cfgstring)
-	chain33Cfg.chain33CfgInit(chain33Cfg.mcfg)
-	return chain33Cfg
+//NewChainConfig ...
+func NewChainConfig(cfgstring string) *ChainConfig {
+	chainCfg := NewChainConfigNoInit(cfgstring)
+	chainCfg.chainCfgInit(chainCfg.mcfg)
+	return chainCfg
 }
 
-//NewChain33ConfigNoInit ...
-func NewChain33ConfigNoInit(cfgstring string) *Chain33Config {
+//NewChainConfigNoInit ...
+func NewChainConfigNoInit(cfgstring string) *ChainConfig {
 	cfg, sub := InitCfgString(cfgstring)
-	chain33Cfg := &Chain33Config{
+	chainCfg := &ChainConfig{
 		mcfg:             cfg,
 		scfg:             sub,
 		minerExecs:       []string{"ticket"}, //挖矿的合约名单，适配旧配置，默认ticket
@@ -133,44 +133,44 @@ func NewChain33ConfigNoInit(cfgstring string) *Chain33Config {
 		chainID:          cfg.ChainID,
 		disableCheckFork: cfg.DisableForkCheck,
 	}
-	// 先将每个模块的fork初始化到Chain33Config中，然后如果需要再将toml中的替换
-	chain33Cfg.setDefaultConfig()
-	chain33Cfg.setFlatConfig(cfgstring)
-	chain33Cfg.setMver(cfgstring)
-	// TODO 需要测试是否与NewChain33Config分开
-	RegForkInit(chain33Cfg)
-	RegExecInit(chain33Cfg)
+	// 先将每个模块的fork初始化到ChainConfig中，然后如果需要再将toml中的替换
+	chainCfg.setDefaultConfig()
+	chainCfg.setFlatConfig(cfgstring)
+	chainCfg.setMver(cfgstring)
+	// TODO 需要测试是否与NewChainConfig分开
+	RegForkInit(chainCfg)
+	RegExecInit(chainCfg)
 
 	//设置生成账户地址的版本号
 	address.SetNormalAddrVer(cfg.AddrVer)
 
-	return chain33Cfg
+	return chainCfg
 }
 
 //GetModuleConfig ...
-func (c *Chain33Config) GetModuleConfig() *Config {
+func (c *ChainConfig) GetModuleConfig() *Config {
 	return c.mcfg
 }
 
 //GetSubConfig ...
-func (c *Chain33Config) GetSubConfig() *ConfigSubModule {
+func (c *ChainConfig) GetSubConfig() *ConfigSubModule {
 	return c.scfg
 }
 
 //DisableCheckFork ...
-func (c *Chain33Config) DisableCheckFork(d bool) {
+func (c *ChainConfig) DisableCheckFork(d bool) {
 	c.disableCheckFork = d
 }
 
 //GetForks ...
-func (c *Chain33Config) GetForks() (map[string]int64, error) {
+func (c *ChainConfig) GetForks() (map[string]int64, error) {
 	if c.forks == nil {
 		return nil, ErrNotFound
 	}
 	return c.forks.forks, nil
 }
 
-func (c *Chain33Config) setDefaultConfig() {
+func (c *ChainConfig) setDefaultConfig() {
 	c.S("TestNet", false)
 	c.SetMinFee(DefaultMinFee)
 	for key, cfg := range chaincfg.LoadAll() {
@@ -185,7 +185,7 @@ func (c *Chain33Config) setDefaultConfig() {
 	}
 }
 
-func (c *Chain33Config) setFlatConfig(cfgstring string) {
+func (c *ChainConfig) setFlatConfig(cfgstring string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	cfg := make(map[string]interface{})
@@ -198,11 +198,11 @@ func (c *Chain33Config) setFlatConfig(cfgstring string) {
 	}
 }
 
-func (c *Chain33Config) setChainConfig(key string, value interface{}) {
+func (c *ChainConfig) setChainConfig(key string, value interface{}) {
 	c.chainConfig[key] = value
 }
 
-func (c *Chain33Config) getChainConfig(key string) (value interface{}, err error) {
+func (c *ChainConfig) getChainConfig(key string) (value interface{}, err error) {
 	if data, ok := c.chainConfig[key]; ok {
 		return data, nil
 	}
@@ -212,7 +212,7 @@ func (c *Chain33Config) getChainConfig(key string) (value interface{}, err error
 }
 
 // Init 初始化
-func (c *Chain33Config) chain33CfgInit(cfg *Config) {
+func (c *ChainConfig) chainCfgInit(cfg *Config) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -310,7 +310,7 @@ func checkPrecision(precision int64) bool {
 	return precision == int64(calc)
 }
 
-func (c *Chain33Config) needSetForkZero() bool {
+func (c *ChainConfig) needSetForkZero() bool {
 	if c.isLocal() {
 		return true
 	} else if c.isPara() &&
@@ -322,7 +322,7 @@ func (c *Chain33Config) needSetForkZero() bool {
 	return false
 }
 
-func (c *Chain33Config) setTestNet(isTestNet bool) {
+func (c *ChainConfig) setTestNet(isTestNet bool) {
 	if !isTestNet {
 		c.setChainConfig("TestNet", false)
 		return
@@ -332,7 +332,7 @@ func (c *Chain33Config) setTestNet(isTestNet bool) {
 }
 
 // GetP 获取ChainParam
-func (c *Chain33Config) GetP(height int64) *ChainParam {
+func (c *ChainConfig) GetP(height int64) *ChainParam {
 	conf := Conf(c, "mver.consensus")
 	chain := &ChainParam{}
 	chain.MaxTxNumber = conf.MGInt("maxTxNumber", height)
@@ -341,23 +341,23 @@ func (c *Chain33Config) GetP(height int64) *ChainParam {
 }
 
 // GetMinerExecs 获取挖矿的合约名单
-func (c *Chain33Config) GetMinerExecs() []string {
+func (c *ChainConfig) GetMinerExecs() []string {
 	return c.minerExecs
 }
 
-func (c *Chain33Config) setMinerExecs(execs []string) {
+func (c *ChainConfig) setMinerExecs(execs []string) {
 	if len(execs) > 0 {
 		c.minerExecs = execs
 	}
 }
 
 // GetFundAddr 获取基金账户地址
-func (c *Chain33Config) GetFundAddr() string {
+func (c *ChainConfig) GetFundAddr() string {
 	return c.MGStr("mver.consensus.fundKeyAddr", 0)
 }
 
 // G 获取ChainConfig中的配置
-func (c *Chain33Config) G(key string) (value interface{}, err error) {
+func (c *ChainConfig) G(key string) (value interface{}, err error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	value, err = c.getChainConfig(key)
@@ -365,7 +365,7 @@ func (c *Chain33Config) G(key string) (value interface{}, err error) {
 }
 
 // MG 获取mver config中的配置
-func (c *Chain33Config) MG(key string, height int64) (value interface{}, err error) {
+func (c *ChainConfig) MG(key string, height int64) (value interface{}, err error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if c.mver == nil {
@@ -375,7 +375,7 @@ func (c *Chain33Config) MG(key string, height int64) (value interface{}, err err
 }
 
 // GStr 获取ChainConfig中的字符串格式
-func (c *Chain33Config) GStr(name string) string {
+func (c *ChainConfig) GStr(name string) string {
 	value, err := c.G(name)
 	if err != nil {
 		return ""
@@ -387,7 +387,7 @@ func (c *Chain33Config) GStr(name string) string {
 }
 
 // MGStr 获取mver config 中的字符串格式
-func (c *Chain33Config) MGStr(name string, height int64) string {
+func (c *ChainConfig) MGStr(name string, height int64) string {
 	value, err := c.MG(name, height)
 	if err != nil {
 		return ""
@@ -414,7 +414,7 @@ func parseInt(value interface{}) int64 {
 }
 
 // GInt 解析ChainConfig配置
-func (c *Chain33Config) GInt(name string) int64 {
+func (c *ChainConfig) GInt(name string) int64 {
 	value, err := c.G(name)
 	if err != nil {
 		return 0
@@ -423,7 +423,7 @@ func (c *Chain33Config) GInt(name string) int64 {
 }
 
 // MGInt 解析mver config 配置
-func (c *Chain33Config) MGInt(name string, height int64) int64 {
+func (c *ChainConfig) MGInt(name string, height int64) int64 {
 	value, err := c.MG(name, height)
 	if err != nil {
 		return 0
@@ -432,7 +432,7 @@ func (c *Chain33Config) MGInt(name string, height int64) int64 {
 }
 
 // IsEnable 解析ChainConfig配置
-func (c *Chain33Config) IsEnable(name string) bool {
+func (c *ChainConfig) IsEnable(name string) bool {
 	isenable, err := c.G(name)
 	if err == nil && isenable.(bool) {
 		return true
@@ -441,7 +441,7 @@ func (c *Chain33Config) IsEnable(name string) bool {
 }
 
 // MIsEnable 解析mver config 配置
-func (c *Chain33Config) MIsEnable(name string, height int64) bool {
+func (c *ChainConfig) MIsEnable(name string, height int64) bool {
 	isenable, err := c.MG(name, height)
 	if err == nil && isenable.(bool) {
 		return true
@@ -450,7 +450,7 @@ func (c *Chain33Config) MIsEnable(name string, height int64) bool {
 }
 
 // HasConf 解析chainConfig配置
-func (c *Chain33Config) HasConf(key string) bool {
+func (c *ChainConfig) HasConf(key string) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	_, ok := c.chainConfig[key]
@@ -458,7 +458,7 @@ func (c *Chain33Config) HasConf(key string) bool {
 }
 
 // S 设置chainConfig配置
-func (c *Chain33Config) S(key string, value interface{}) {
+func (c *ChainConfig) S(key string, value interface{}) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if strings.HasPrefix(key, "config.") {
@@ -472,7 +472,7 @@ func (c *Chain33Config) S(key string, value interface{}) {
 }
 
 //SetTitleOnlyForTest set title only for test use
-func (c *Chain33Config) SetTitleOnlyForTest(ti string) {
+func (c *ChainConfig) SetTitleOnlyForTest(ti string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.title = ti
@@ -480,74 +480,74 @@ func (c *Chain33Config) SetTitleOnlyForTest(ti string) {
 }
 
 // GetTitle 获取title
-func (c *Chain33Config) GetTitle() string {
+func (c *ChainConfig) GetTitle() string {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.title
 }
 
 // GetCoinSymbol 获取 coin symbol
-func (c *Chain33Config) GetCoinSymbol() string {
+func (c *ChainConfig) GetCoinSymbol() string {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.coinSymbol
 }
 
 // GetCoinExec 获取 coin symbol
-func (c *Chain33Config) GetCoinExec() string {
+func (c *ChainConfig) GetCoinExec() string {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.coinExec
 }
 
 // GetCoinPrecision 获取 coin 精度，缺省小数点后8位， 1e8
-func (c *Chain33Config) GetCoinPrecision() int64 {
+func (c *ChainConfig) GetCoinPrecision() int64 {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.coinPrecision
 }
 
 // GetTokenPrecision 获取 token 精度，缺省小数点后8位， 1e8
-func (c *Chain33Config) GetTokenPrecision() int64 {
+func (c *ChainConfig) GetTokenPrecision() int64 {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.tokenPrecision
 }
 
-func (c *Chain33Config) isLocal() bool {
+func (c *ChainConfig) isLocal() bool {
 	return c.title == "local"
 }
 
 // IsLocal 是否locak title
-func (c *Chain33Config) IsLocal() bool {
+func (c *ChainConfig) IsLocal() bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.isLocal()
 }
 
 // GetMinTxFeeRate get min transaction fee rate
-func (c *Chain33Config) GetMinTxFeeRate() int64 {
+func (c *ChainConfig) GetMinTxFeeRate() int64 {
 	return c.GInt("MinTxFeeRate")
 }
 
 // GetMaxTxFeeRate get max transaction fee rate
-func (c *Chain33Config) GetMaxTxFeeRate() int64 {
+func (c *ChainConfig) GetMaxTxFeeRate() int64 {
 	return c.GInt("MaxTxFeeRate")
 }
 
 // GetMaxTxFee get max transaction fee
-func (c *Chain33Config) GetMaxTxFee() int64 {
+func (c *ChainConfig) GetMaxTxFee() int64 {
 	return c.GInt("MaxTxFee")
 }
 
 // SetTxFeeConfig 设置交易费相关配置
-func (c *Chain33Config) SetTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee int64) {
+func (c *ChainConfig) SetTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee int64) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.setTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee)
 }
 
-func (c *Chain33Config) setTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee int64) {
+func (c *ChainConfig) setTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee int64) {
 	if minTxFeeRate < 0 {
 		panic("minTxFeeRate less than zero")
 	}
@@ -562,22 +562,22 @@ func (c *Chain33Config) setTxFeeConfig(minTxFeeRate, maxTxFeeRate, maxTxFee int6
 }
 
 // SetMinFee 设置最小费用
-func (c *Chain33Config) SetMinFee(fee int64) {
+func (c *ChainConfig) SetMinFee(fee int64) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.setTxFeeConfig(fee, fee*100, fee*10000)
 }
 
-func (c *Chain33Config) isPara() bool {
+func (c *ChainConfig) isPara() bool {
 	return strings.Count(c.title, ".") == 3 && strings.HasPrefix(c.title, ParaKeyX)
 }
 
-func (c *Chain33Config) isTestPara() bool {
+func (c *ChainConfig) isTestPara() bool {
 	return strings.Count(c.title, ".") == 3 && strings.HasPrefix(c.title, ParaKeyX) && strings.HasSuffix(c.title, "test.")
 }
 
 // IsPara 是否平行链
-func (c *Chain33Config) IsPara() bool {
+func (c *ChainConfig) IsPara() bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.isPara()
@@ -589,7 +589,7 @@ func IsParaExecName(exec string) bool {
 }
 
 //IsMyParaExecName 是否是我的para链的执行器
-func (c *Chain33Config) IsMyParaExecName(exec string) bool {
+func (c *ChainConfig) IsMyParaExecName(exec string) bool {
 	return IsParaExecName(exec) && strings.HasPrefix(exec, c.GetTitle())
 }
 
@@ -611,12 +611,12 @@ func GetParaExecTitleName(exec string) (string, bool) {
 }
 
 // IsTestNet 是否测试链
-func (c *Chain33Config) IsTestNet() bool {
+func (c *ChainConfig) IsTestNet() bool {
 	return c.IsEnable("TestNet")
 }
 
 // GetParaName 获取平行链name
-func (c *Chain33Config) GetParaName() string {
+func (c *ChainConfig) GetParaName() string {
 	if c.IsPara() {
 		return c.GetTitle()
 	}
@@ -738,7 +738,7 @@ func FlatConfig(conf map[string]interface{}) map[string]interface{} {
 	return flat
 }
 
-func (c *Chain33Config) setMver(cfgstring string) {
+func (c *ChainConfig) setMver(cfgstring string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.mver = newMversion(cfgstring)
@@ -824,12 +824,12 @@ func parseItem(data map[string]interface{}) map[string][]byte {
 
 // ConfQuery 结构体
 type ConfQuery struct {
-	cfg    *Chain33Config
+	cfg    *ChainConfig
 	prefix string
 }
 
 // Conf 配置
-func Conf(cfg *Chain33Config, prefix string) *ConfQuery {
+func Conf(cfg *ChainConfig, prefix string) *ConfQuery {
 	if prefix == "" || (!strings.HasPrefix(prefix, "config.") && !strings.HasPrefix(prefix, "mver.")) {
 		panic("ConfQuery must init buy prefix config. or mver.")
 	}
@@ -837,7 +837,7 @@ func Conf(cfg *Chain33Config, prefix string) *ConfQuery {
 }
 
 // ConfSub 子模块配置
-func ConfSub(cfg *Chain33Config, name string) *ConfQuery {
+func ConfSub(cfg *ChainConfig, name string) *ConfQuery {
 	return Conf(cfg, "config.exec.sub."+name)
 }
 
@@ -913,15 +913,15 @@ func (query *ConfQuery) MIsEnable(key string, height int64) bool {
 }
 
 //SetCliSysParam ...
-func SetCliSysParam(title string, cfg *Chain33Config) {
+func SetCliSysParam(title string, cfg *ChainConfig) {
 	if cfg == nil {
-		panic("set cli system Chain33Config param is nil")
+		panic("set cli system ChainConfig param is nil")
 	}
 	cliSysParam[title] = cfg
 }
 
 //GetCliSysParam ...
-func GetCliSysParam(title string) *Chain33Config {
+func GetCliSysParam(title string) *ChainConfig {
 	if v, ok := cliSysParam[title]; ok {
 		return v
 	}
@@ -931,12 +931,12 @@ func GetCliSysParam(title string) *Chain33Config {
 //AssertConfig ...
 func AssertConfig(check interface{}) {
 	if check == nil {
-		panic("check object is nil (Chain33Config)")
+		panic("check object is nil (ChainConfig)")
 	}
 }
 
 // GetChainID 获取链ID,提供给其他模块使用
-func (c *Chain33Config) GetChainID() int32 {
+func (c *ChainConfig) GetChainID() int32 {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.chainID

@@ -193,7 +193,7 @@ name2="ticket-bityuanv5"
 [mver.exec.sub.coins.Enable]
 name2="ticket-bityuanv5-enable"
 
-#系统中所有的fork,默认用chain33的测试网络的
+#系统中所有的fork,默认用chain的测试网络的
 #但是我们可以替换
 [fork.system]
 ForkChainParamV1= 10

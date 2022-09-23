@@ -1,6 +1,6 @@
 # 命令行自动补全
 
-  目前在ubuntu下用git 等软件你会发现按tab键有提示或补全的功能， 这个功能依赖一个软件包， 叫bash-completion。bash-completion 提供的能力是bash shell 的可编程补全。而chain33-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到chain33-cli里， 应该能提高不少效率。
+  目前在ubuntu下用git 等软件你会发现按tab键有提示或补全的功能， 这个功能依赖一个软件包， 叫bash-completion。bash-completion 提供的能力是bash shell 的可编程补全。而chain-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到chain-cli里， 应该能提高不少效率。
 
 ## bash-completion
 
@@ -115,7 +115,7 @@ declare -- COMP_TYPE="9"
 chain-cli 参数补全
 ```
 #!/bin/bash
-# 通过chain33-cli 的help 找到一级的子命令
+# 通过chain-cli 的help 找到一级的子命令
 subcmd_list=("account" "block" "bty" "close" "coins" "config" "evm" "exec" "hashlock" "help" "mempool" "net" "privacy" "relay" "retrieve" "seed" "send" "stat" "ticket" "token" "trade" "tx" "version" "wallet")
 #
 function _subcmd() {
@@ -151,7 +151,7 @@ account   bty       coins     evm       hashlock  mempool   privacy   retrieve  
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
-### 给chain33-cli 做个 bash-completion
+### 给chain-cli 做个 bash-completion
 
 
  地址: https://gitlab.33.cn/linj/chain-cli-completion

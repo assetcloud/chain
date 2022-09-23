@@ -262,7 +262,7 @@ func initMockBlockchain(q queue.Queue) <-chan *queue.Message {
 }
 
 func makeProtocol(name string, q queue.Queue, h host.Host) *Protocol {
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	mcfg := &types2.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[types2.DHTTypeName], mcfg)
 	mcfg.DisableFindLANPeers = true

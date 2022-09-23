@@ -22,11 +22,11 @@ type BlockCache struct {
 	cacheLock     sync.RWMutex
 	//cacheQueue    *list.List
 	currentHeight int64 //当前区块高度
-	cfg           *types.Chain33Config
+	cfg           *types.ChainConfig
 }
 
 //newBlockCache new
-func newBlockCache(cfg *types.Chain33Config, blockHashCacheSize int64) *BlockCache {
+func newBlockCache(cfg *types.ChainConfig, blockHashCacheSize int64) *BlockCache {
 	blkCacheSize := cfg.GetModuleConfig().BlockChain.DefCacheSize
 	if blkCacheSize > blockHashCacheSize {
 		panic(fmt.Sprintf("newBlockCache: block cache size config must less than hash cache size, "+

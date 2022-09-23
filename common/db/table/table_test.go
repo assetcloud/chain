@@ -30,7 +30,7 @@ func testTxTable(t *testing.T) (string, db.DB, db.KVDB, *Table) {
 func TestTransactinList(t *testing.T) {
 	dir, ldb, kvdb, table := testTxTable(t)
 	defer util.CloseTestDB(dir, ldb)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	addr1, priv := util.Genaddress()
 	tx1 := util.CreateNoneTx(cfg, priv)
 	err := table.Add(tx1)
@@ -167,7 +167,7 @@ func TestTransactinListAuto(t *testing.T) {
 		Primary: "",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -248,7 +248,7 @@ func TestTransactinListAuto(t *testing.T) {
 }
 
 func TestRow(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	rowmeta := NewTransactionRow()
 	row := rowmeta.CreateRow()
 	_, priv := util.Genaddress()
@@ -275,7 +275,7 @@ func TestDel(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -314,7 +314,7 @@ func TestUpdate(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	_, priv := util.Genaddress()
@@ -348,7 +348,7 @@ func TestReplaceTwice(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -392,7 +392,7 @@ func TestReplace(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -459,7 +459,7 @@ func TestTableListPrimary(t *testing.T) {
 	dir, ldb, _, table := testTxTable(t)
 	defer util.CloseTestDB(dir, ldb)
 
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	addr1, priv1 := util.Genaddress()
 	_, priv2 := util.Genaddress()
 	tx1 := util.CreateNoneTx(cfg, priv1)

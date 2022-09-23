@@ -8,7 +8,7 @@ import (
 )
 
 func TestCheckClockDrift(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 

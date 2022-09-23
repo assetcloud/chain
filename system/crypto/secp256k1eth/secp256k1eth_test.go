@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	//_ "github.com/33cn/chain/system/address"
+	//_ "github.com/assetcloud/chain/system/address"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/require"
 )

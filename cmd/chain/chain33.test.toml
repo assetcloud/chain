@@ -269,7 +269,7 @@ dataEmitMode="influxdb"
 #以纳秒为单位的发送间隔
 duration=1000000000
 url="http://influxdb:8086"
-database="chain33metrics"
+database="chainmetrics"
 username=""
 password=""
 namespace=""

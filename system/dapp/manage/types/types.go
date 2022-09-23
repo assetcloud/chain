@@ -42,7 +42,7 @@ func init() {
 }
 
 //InitFork init
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.ChainConfig) {
 	cfg.RegisterDappFork(ManageX, "Enable", 0)
 	cfg.RegisterDappFork(ManageX, ForkManageExec, 0)
 	//支持autonomy委员会审批
@@ -50,7 +50,7 @@ func InitFork(cfg *types.Chain33Config) {
 }
 
 //InitExecutor init Executor
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.ChainConfig) {
 	types.RegistorExecutor(ManageX, NewType(cfg))
 }
 
@@ -60,7 +60,7 @@ type ManageType struct {
 }
 
 // NewType new a managetype object
-func NewType(cfg *types.Chain33Config) *ManageType {
+func NewType(cfg *types.ChainConfig) *ManageType {
 	c := &ManageType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

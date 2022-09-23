@@ -208,7 +208,7 @@ service chain {
     //通过block seq 获取对应的blocks hash 信息
     rpc GetBlockBySeq(Int64) returns (BlockSeq) {}
 
-    //关闭chain33
+    //关闭chain
     rpc CloseQueue(ReqNil) returns (Reply) {}
 
     //获取地址所以合约下的余额

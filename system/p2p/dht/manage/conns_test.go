@@ -114,7 +114,7 @@ func Test_ConnManager(t *testing.T) {
 	defer cancel()
 	netw := swarmt.GenSwarm(t, ctx)
 	h := bhost.NewBlankHost(netw)
-	cfg := types.NewChain33Config(types.ReadFile("../../../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../../../cmd/chain/chain.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P["dht"], mcfg)
 	bandwidthTracker := metrics.NewBandwidthCounter()

@@ -15,7 +15,7 @@ set -o pipefail
 PWD=$(cd "$(dirname "$0")" && pwd)
 export PATH="$PWD:$PATH"
 
-NODE3="${1}_chain33_1"
+NODE3="${1}_chain_1"
 CLI="docker exec ${NODE3} /root/chain-cli"
 
 NODE2="${1}_chain32_1"
@@ -206,7 +206,7 @@ function start() {
 }
 
 function check_docker_status() {
-    status=$(docker-compose ps | grep chain33_1 | awk '{print $6}')
+    status=$(docker-compose ps | grep chain_1 | awk '{print $6}')
     if [ "${status}" == "Exit" ]; then
         echo "=========== chain service Exit logs ========== "
         docker-compose logs chain

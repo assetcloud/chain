@@ -187,7 +187,7 @@ func TestSubStore(t *testing.T) {
 }
 
 func TestRegAndLoad(t *testing.T) {
-	Reg("test", func(cfg *types.Store, sub []byte, chain33cfg *types.Chain33Config) queue.Module {
+	Reg("test", func(cfg *types.Store, sub []byte, chaincfg *types.ChainConfig) queue.Module {
 		return nil
 	})
 

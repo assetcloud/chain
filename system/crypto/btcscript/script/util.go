@@ -30,8 +30,8 @@ const (
 	btcTxVersion = 10
 )
 
-// Chain33BtcParams 比特币相关区块链参数
-var Chain33BtcParams = &chaincfg.Params{
+// ChainBtcParams 比特币相关区块链参数
+var ChainBtcParams = &chaincfg.Params{
 	Name: "chain-btc-Script",
 
 	// Address encoding magics, bitcoin main net params
@@ -62,7 +62,7 @@ func NewBtcKeyFromBytes(priv []byte) (*btcec.PrivateKey, *btcec.PublicKey) {
 // GetBtcLockScript 根据地址类型，生成锁定脚本
 func GetBtcLockScript(scriptTy int32, pkScript []byte) (btcutil.Address, []byte, error) {
 
-	btcAddr, err := getBtcAddr(scriptTy, pkScript, Chain33BtcParams)
+	btcAddr, err := getBtcAddr(scriptTy, pkScript, ChainBtcParams)
 	if err != nil {
 		return nil, nil, errors.New("get btc Addr err:" + err.Error())
 	}
@@ -90,7 +90,7 @@ func GetBtcUnlockScript(signMsg, lockScript, prevScript []byte,
 	kdb txscript.KeyDB, sdb txscript.ScriptDB) ([]byte, error) {
 
 	btcTx := getBindBtcTx(signMsg)
-	sigScript, err := txscript.SignTxOutput(Chain33BtcParams, btcTx, 0,
+	sigScript, err := txscript.SignTxOutput(ChainBtcParams, btcTx, 0,
 		lockScript, txscript.SigHashAll, kdb, sdb, prevScript)
 	if err != nil {
 		return nil, errors.New("sign btc tx output err:" + err.Error())

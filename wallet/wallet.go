@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package wallet wallet chain33钱包功能实现
+// Package wallet wallet chain钱包功能实现
 package wallet
 
 import (
@@ -93,7 +93,7 @@ func DisableLog() {
 }
 
 // New 创建一个钱包对象
-func New(cfg *types.Chain33Config) *Wallet {
+func New(cfg *types.ChainConfig) *Wallet {
 	mcfg := cfg.GetModuleConfig().Wallet
 	//walletStore
 	//accountdb = account.NewCoinsAccount()

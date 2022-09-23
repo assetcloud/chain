@@ -57,7 +57,7 @@ func initWrite() *Config {
 }
 
 func main() {
-	chain33Cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	chainCfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	cfg := initWrite()
 	receiveAddr = cfg.UserWriteConf.ReceiveAddr
 	currentHeight = cfg.UserWriteConf.CurrentHeight
@@ -70,7 +70,7 @@ func main() {
 		return
 	}
 	fmt.Println("starting scaning.............")
-	scanWrite(chain33Cfg)
+	scanWrite(chainCfg)
 }
 
 func ioHeightAndIndex() error {
@@ -107,7 +107,7 @@ func ioHeightAndIndex() error {
 	return nil
 }
 
-func scanWrite(cfg *types.Chain33Config) {
+func scanWrite(cfg *types.ChainConfig) {
 	for {
 		time.Sleep(time.Second * 5)
 		rpc, err := jsonclient.NewJSONClient(rpcAddr)

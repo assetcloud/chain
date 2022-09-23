@@ -7,13 +7,13 @@ package types
 import (
 	"testing"
 
-	"github.com/33cn/chain/system/crypto/secp256k1"
+	"github.com/assetcloud/chain/system/crypto/secp256k1"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestChainConfig(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewChainConfig(GetDefaultCfgstring())
 	cfg.S("a", true)
 	_, err := cfg.G("b")
 	assert.Equal(t, err, ErrNotFound)
@@ -44,15 +44,15 @@ func TestSubConfig(t *testing.T) {
 }
 
 func TestConfInit(t *testing.T) {
-	cfg := NewChain33Config(ReadFile("testdata/chain.toml"))
+	cfg := NewChainConfig(ReadFile("testdata/chain.toml"))
 	assert.True(t, cfg.IsEnable("TxHeight"))
 }
 
 func TestConfigNoInit(t *testing.T) {
-	cfg := NewChain33ConfigNoInit(ReadFile("testdata/chain.toml"))
+	cfg := NewChainConfigNoInit(ReadFile("testdata/chain.toml"))
 	assert.False(t, cfg.IsEnable("TxHeight"))
 	cfg.DisableCheckFork(true)
-	cfg.chain33CfgInit(cfg.GetModuleConfig())
+	cfg.chainCfgInit(cfg.GetModuleConfig())
 	mcfg := cfg.GetModuleConfig()
 	assert.Equal(t, cfg.forks.forks["ForkV16Withdraw"], int64(480000))
 	assert.Equal(t, mcfg.Fork.Sub["token"]["Enable"], int64(100899))
@@ -121,7 +121,7 @@ func TestCheckPrecision(t *testing.T) {
 
 func TestAddressConfig(t *testing.T) {
 
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewChainConfig(GetDefaultCfgstring())
 	addrConfig := cfg.GetModuleConfig().Address
 	assert.Equal(t, "btc", addrConfig.DefaultDriver)
 	assert.Equal(t, int64(-2), addrConfig.EnableHeight["eth"])

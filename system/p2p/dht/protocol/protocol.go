@@ -22,7 +22,7 @@ import (
 // P2PEnv p2p全局公共变量
 type P2PEnv struct {
 	Ctx             context.Context
-	ChainCfg        *types.Chain33Config
+	ChainCfg        *types.ChainConfig
 	SubConfig       *types2.P2PSubConfig
 	API             client.QueueProtocolAPI
 	QueueClient     queue.Client

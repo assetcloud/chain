@@ -58,7 +58,7 @@ func TestBlockTable(t *testing.T) {
 	testBlockTable(cfg, t, blockchain)
 }
 
-func testBlockTable(cfg *types.Chain33Config, t *testing.T, blockchain *blockchain.BlockChain) {
+func testBlockTable(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain) {
 	curheight := blockchain.GetBlockHeight()
 
 	//通过当前高度获取header

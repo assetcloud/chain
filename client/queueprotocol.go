@@ -1075,13 +1075,13 @@ func (q *QueueProtocol) GetParaTxByHeight(param *types.ReqParaTxByHeight) (*type
 }
 
 //GetConfig 通过seq以及title获取对应平行连的交易
-func (q *QueueProtocol) GetConfig() *types.Chain33Config {
+func (q *QueueProtocol) GetConfig() *types.ChainConfig {
 	if q.client == nil {
-		panic("client is nil, can not get Chain33Config")
+		panic("client is nil, can not get ChainConfig")
 	}
 	cfg := q.client.GetConfig()
 	if cfg == nil {
-		panic("Chain33Config is nil")
+		panic("ChainConfig is nil")
 	}
 	return cfg
 }

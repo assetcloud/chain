@@ -11,9 +11,9 @@ import (
 
 	"time"
 
-	"github.com/33cn/chain/client/mocks"
-	"github.com/33cn/chain/queue"
-	"github.com/33cn/chain/types"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 )
 

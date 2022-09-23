@@ -44,29 +44,29 @@ func Run(RPCAddr, ParaName, name string) {
 	}
 
 	exist, _ := pathExists(configPath)
-	var chain33Cfg *types.Chain33Config
+	var chainCfg *types.ChainConfig
 	if exist {
-		chain33Cfg = types.NewChain33Config(types.ReadFile(configPath))
+		chainCfg = types.NewChainConfig(types.ReadFile(configPath))
 	} else {
 		cfgstring := types.GetDefaultCfgstring()
 		if ParaName != "" {
 			cfgstring = strings.Replace(cfgstring, "Title=\"local\"", fmt.Sprintf("Title=\"%s\"", ParaName), 1)
 			cfgstring = strings.Replace(cfgstring, "FixTime=false", "CoinSymbol=\"para\"", 1)
 		}
-		chain33Cfg = types.NewChain33Config(cfgstring)
+		chainCfg = types.NewChainConfig(cfgstring)
 	}
 
-	types.SetCliSysParam(chain33Cfg.GetTitle(), chain33Cfg)
+	types.SetCliSysParam(chainCfg.GetTitle(), chainCfg)
 
 	rootCmd := &cobra.Command{
-		Use:     chain33Cfg.GetTitle() + "-cli",
-		Short:   chain33Cfg.GetTitle() + " client tools",
+		Use:     chainCfg.GetTitle() + "-cli",
+		Short:   chainCfg.GetTitle() + " client tools",
 		Version: fmt.Sprintf("%s %s", version.GetVersion(), version.BuildTime),
 	}
 
 	closeCmd := &cobra.Command{
 		Use:   "close",
-		Short: "Close " + chain33Cfg.GetTitle(),
+		Short: "Close " + chainCfg.GetTitle(),
 		Run: func(cmd *cobra.Command, args []string) {
 			rpcLaddr, err := cmd.Flags().GetString("rpc_laddr")
 			if err != nil {
@@ -107,11 +107,11 @@ func Run(RPCAddr, ParaName, name string) {
 	RPCAddr = testTLS(RPCAddr)
 	pluginmgr.AddCmd(rootCmd)
 	log.SetLogLevel("error")
-	chain33Cfg.S("RPCAddr", RPCAddr)
-	chain33Cfg.S("ParaName", ParaName)
-	rootCmd.PersistentFlags().String("rpc_laddr", chain33Cfg.GStr("RPCAddr"), "http url")
-	rootCmd.PersistentFlags().String("paraName", chain33Cfg.GStr("ParaName"), "parachain")
-	rootCmd.PersistentFlags().String("title", chain33Cfg.GetTitle(), "get title name")
+	chainCfg.S("RPCAddr", RPCAddr)
+	chainCfg.S("ParaName", ParaName)
+	rootCmd.PersistentFlags().String("rpc_laddr", chainCfg.GStr("RPCAddr"), "http url")
+	rootCmd.PersistentFlags().String("paraName", chainCfg.GStr("ParaName"), "parachain")
+	rootCmd.PersistentFlags().String("title", chainCfg.GetTitle(), "get title name")
 	rootCmd.PersistentFlags().MarkHidden("title")
 	rootCmd.PersistentFlags().String("conf", "", "cli config")
 	if err := rootCmd.Execute(); err != nil {

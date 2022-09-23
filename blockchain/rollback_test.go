@@ -19,7 +19,7 @@ import (
 func TestRollbackblock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain/chain.fork.toml"), new))
+	cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile("../cmd/chain/chain.fork.toml"), new))
 	cfg.SetDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 	mfg := cfg.GetModuleConfig()
 	mfg.BlockChain.RollbackBlock = 0
@@ -40,7 +40,7 @@ func TestRollbackblock(t *testing.T) {
 func TestNeedRollback(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
-	cfg := types.NewChain33Config(new)
+	cfg := types.NewChainConfig(new)
 	cfg.SetDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	chain := mock33.GetBlockChain()
@@ -145,7 +145,7 @@ func TestRollbackPara(t *testing.T) {
 	require.Equal(t, int64(2), chain.GetBlockHeight())
 }
 
-func testMockSendTx(t *testing.T, mock33 *testnode.Chain33Mock) {
+func testMockSendTx(t *testing.T, mock33 *testnode.ChainMock) {
 	cfg := mock33.GetClient().GetConfig()
 	txs := util.GenCoinsTxs(cfg, mock33.GetGenesisKey(), 10)
 	for i := 0; i < len(txs); i++ {

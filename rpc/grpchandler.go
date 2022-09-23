@@ -649,7 +649,7 @@ func (g *Grpc) GetPushSeqLastNum(ctx context.Context, in *pb.ReqString) (*pb.Int
 }
 
 //SubEvent 订阅消息推送服务
-func (g *Grpc) SubEvent(in *pb.ReqSubscribe, resp pb.Chain33_SubEventServer) error {
+func (g *Grpc) SubEvent(in *pb.ReqSubscribe, resp pb.Chain_SubEventServer) error {
 	sub := g.hashTopic(in.Name)
 	dataChan := make(chan *queue.Message, 128)
 	if sub == nil {

@@ -171,7 +171,7 @@ func makeDERsignature(rb, sb []byte) []byte {
 	copy(b[offset+2:], sb)
 	return b
 }
-func paraseChain33Tx(itx *ctypes.Transaction, blockHash common.Hash, blockNum int64, index uint64, cfg *ctypes.Chain33Config) *Transaction {
+func paraseChainTx(itx *ctypes.Transaction, blockHash common.Hash, blockNum int64, index uint64, cfg *ctypes.ChainConfig) *Transaction {
 	eipSigner := etypes.LatestSignerForChainID(big.NewInt(secp256k1eth.GetEvmChainID()))
 	var tx Transaction
 	tx.Hash = common.BytesToHash(itx.Hash())
@@ -185,7 +185,7 @@ func paraseChain33Tx(itx *ctypes.Transaction, blockHash common.Hash, blockNum in
 	tx.TransactionIndex = (*hexutil.Uint64)(&index)
 	amount, err := itx.Amount()
 	if err != nil {
-		log.Error("paraseChain33Tx", "err", err)
+		log.Error("paraseChainTx", "err", err)
 		return nil
 	}
 	bamount := big.NewInt(amount)
@@ -193,10 +193,10 @@ func paraseChain33Tx(itx *ctypes.Transaction, blockHash common.Hash, blockNum in
 	tx.Value = (*hexutil.Big)(eamount)
 	tx.Input = hexutil.Bytes{0}
 	if strings.HasSuffix(string(itx.Execer), "evm") {
-		var action ctypes.EVMContractAction4Chain33
+		var action ctypes.EVMContractAction4Chain
 		err := ctypes.Decode(itx.GetPayload(), &action)
 		if err != nil {
-			log.Error("paraseChain33Tx", "err", err)
+			log.Error("paraseChainTx", "err", err)
 			return nil
 		}
 		data := (hexutil.Bytes)(action.Para)
@@ -212,7 +212,7 @@ func paraseChain33Tx(itx *ctypes.Transaction, blockHash common.Hash, blockNum in
 			var action dtypes.CoinsAction
 			err := ctypes.Decode(itx.GetPayload(), &action)
 			if err != nil {
-				log.Error("paraseChain33Tx", "decode coinsAction err", err)
+				log.Error("paraseChainTx", "decode coinsAction err", err)
 				return nil
 			}
 			transfer, ok := action.GetValue().(*dtypes.CoinsAction_Transfer)
@@ -242,10 +242,10 @@ func paraseChain33Tx(itx *ctypes.Transaction, blockHash common.Hash, blockNum in
 	return &tx
 }
 
-func paraseChain33TxPayload(execer string, payload []byte, blockHash common.Hash, blockNum uint64) *Transaction {
+func paraseChainTxPayload(execer string, payload []byte, blockHash common.Hash, blockNum uint64) *Transaction {
 	var note []byte
 	if strings.HasSuffix(execer, "evm") {
-		var evmaction ctypes.EVMContractAction4Chain33
+		var evmaction ctypes.EVMContractAction4Chain
 		err := ctypes.Decode(payload, &evmaction)
 		if err == nil {
 			if evmaction.GetNote() != "" {
@@ -276,7 +276,7 @@ func paraseChain33TxPayload(execer string, payload []byte, blockHash common.Hash
 }
 
 //TxsToEthTxs chain txs format transfer to eth txs format
-func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transaction, cfg *ctypes.Chain33Config, full bool) (txs []interface{}, fee int64, err error) {
+func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transaction, cfg *ctypes.ChainConfig, full bool) (txs []interface{}, fee int64, err error) {
 	for index, itx := range ctxs {
 		fee += itx.GetFee()
 		if !full {
@@ -286,14 +286,14 @@ func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transacti
 		if itx == nil {
 			continue
 		}
-		tx := paraseChain33TxPayload(string(itx.GetExecer()), itx.GetPayload(), blockHash, uint64(blockNum))
+		tx := paraseChainTxPayload(string(itx.GetExecer()), itx.GetPayload(), blockHash, uint64(blockNum))
 		//重置交易哈希
 		if tx != nil {
 			tx.Hash = common.BytesToHash(itx.Hash())
 			txs = append(txs, tx)
 		} else {
 
-			tx = paraseChain33Tx(itx, blockHash, blockNum, uint64(index), cfg)
+			tx = paraseChainTx(itx, blockHash, blockNum, uint64(index), cfg)
 			if tx != nil {
 				txs = append(txs, tx)
 			}
@@ -304,15 +304,15 @@ func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transacti
 }
 
 //TxDetailsToEthReceipts chain txdetails transfer to eth tx receipts
-func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash common.Hash, cfg *ctypes.Chain33Config) (txs Transactions, receipts []*Receipt, err error) {
+func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash common.Hash, cfg *ctypes.ChainConfig) (txs Transactions, receipts []*Receipt, err error) {
 	for index, detail := range txDetails.GetTxs() {
 		if detail.GetTx() == nil {
 			continue
 		}
 
-		tx := paraseChain33TxPayload(string(detail.GetTx().GetExecer()), detail.GetTx().GetPayload(), blockHash, uint64(detail.Height))
+		tx := paraseChainTxPayload(string(detail.GetTx().GetExecer()), detail.GetTx().GetPayload(), blockHash, uint64(detail.Height))
 		if tx == nil {
-			tx = paraseChain33Tx(detail.GetTx(), blockHash, detail.GetHeight(), uint64(index), cfg)
+			tx = paraseChainTx(detail.GetTx(), blockHash, detail.GetHeight(), uint64(index), cfg)
 			if tx == nil {
 				continue
 			}
@@ -479,11 +479,11 @@ func CreateBloom(receipts []*Receipt) etypes.Bloom {
 	return bin
 }
 
-//AssembleChain33Tx 通过eth tx 组装chain33 tx 全部走evm 通道
-func AssembleChain33Tx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.Chain33Config) *ctypes.Transaction {
+//AssembleChainTx 通过eth tx 组装chain tx 全部走evm 通道
+func AssembleChainTx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.ChainConfig) *ctypes.Transaction {
 	rawData, err := etx.MarshalBinary()
 	if err != nil {
-		log.Error("AssembleChain33TxV2", "tx.MarshalBinary err", err.Error())
+		log.Error("AssembleChainTxV2", "tx.MarshalBinary err", err.Error())
 		return nil
 	}
 
@@ -492,7 +492,7 @@ func AssembleChain33Tx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.
 	if etx.Value() != nil {
 		amount = etx.Value().Div(etx.Value(), big.NewInt(1).SetUint64(1e10)).Int64()
 	}
-	action := &ctypes.EVMContractAction4Chain33{
+	action := &ctypes.EVMContractAction4Chain{
 		Amount:       uint64(amount),
 		GasLimit:     etx.Gas(),
 		GasPrice:     1,
@@ -531,7 +531,7 @@ func AssembleChain33Tx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.
 	}
 
 	//全部走Evm 通道，exec=evm
-	var chain33Tx = &ctypes.Transaction{
+	var chainTx = &ctypes.Transaction{
 		ChainID: cfg.GetChainID(), //与链节点的chainID保持一致
 		To:      to,
 		Execer:  []byte(exec),
@@ -544,10 +544,10 @@ func AssembleChain33Tx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.
 		},
 	}
 	//为了防止认为设置过高的nonce,挤占mempool空间，允许最大3小时的超时时间
-	chain33Tx.SetExpire(cfg, time.Hour*3)
-	chain33Tx.Nonce = int64(etx.Nonce())
+	chainTx.SetExpire(cfg, time.Hour*3)
+	chainTx.Nonce = int64(etx.Nonce())
 	if cfg.IsPara() {
-		chain33Tx.To = address.ExecAddress(string(chain33Tx.Execer))
+		chainTx.To = address.ExecAddress(string(chainTx.Execer))
 	}
-	return chain33Tx
+	return chainTx
 }

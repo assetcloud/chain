@@ -982,7 +982,7 @@ func (x *VersionInfo) GetApp() string {
 	return ""
 }
 
-func (x *VersionInfo) GetChain33() string {
+func (x *VersionInfo) GetChain() string {
 	if x != nil {
 		return x.Chain
 	}

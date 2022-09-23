@@ -18,15 +18,15 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/33cn/chain/client"
-	l "github.com/33cn/chain/common/log"
-	p2p2 "github.com/33cn/chain/p2p"
-	"github.com/33cn/chain/queue"
-	cprotocol "github.com/33cn/chain/system/p2p/dht/protocol"
-	p2pty "github.com/33cn/chain/system/p2p/dht/types"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
-	"github.com/33cn/chain/wallet"
+	"github.com/assetcloud/chain/client"
+	l "github.com/assetcloud/chain/common/log"
+	p2p2 "github.com/assetcloud/chain/p2p"
+	"github.com/assetcloud/chain/queue"
+	cprotocol "github.com/assetcloud/chain/system/p2p/dht/protocol"
+	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
+	"github.com/assetcloud/chain/wallet"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -116,7 +116,7 @@ func processMsg(q queue.Queue) {
 	}()
 }
 
-func NewP2p(cfg *types.Chain33Config, cli queue.Client) p2p2.IP2P {
+func NewP2p(cfg *types.ChainConfig, cli queue.Client) p2p2.IP2P {
 	p2pmgr := p2p2.NewP2PMgr(cfg)
 	p2pmgr.SysAPI, _ = client.New(cli, nil)
 	p2pmgr.Client = cli
@@ -442,7 +442,7 @@ func Test_genAddrInfos(t *testing.T) {
 }
 func Test_p2p(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.ReadFile("../../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../../cmd/chain/chain.test.toml"))
 	q := queue.New("channel")
 	datadir := util.ResetDatadir(cfg.GetModuleConfig(), "$TEMP/")
 	cfg.GetModuleConfig().Log.LogFile = ""

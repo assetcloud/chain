@@ -148,7 +148,7 @@ func getprivkey(key string) crypto.PrivKey {
 }
 
 func initEnv3() (queue.Queue, queue.Module, queue.Module, *Mempool) {
-	cfg := types.NewChain33Config(types.ReadFile("../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../cmd/chain/chain.test.toml"))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -174,7 +174,7 @@ func initEnv(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.test.toml"), types.ReadFile("../../cmd/chain/chain.fork.toml")))
+	cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.test.toml"), types.ReadFile("../../cmd/chain/chain.fork.toml")))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -196,7 +196,7 @@ func initEnv4(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.fork.toml"), types.ReadFile("testdata/chain.test.toml")))
+	cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile("../../cmd/chain/chain.fork.toml"), types.ReadFile("testdata/chain.test.toml")))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -213,7 +213,7 @@ func initEnv4(size int) (queue.Queue, *Mempool) {
 	return q, mem
 }
 
-func createTx(cfg *types.Chain33Config, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
+func createTx(cfg *types.ChainConfig, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
 	v := &cty.CoinsAction_Transfer{Transfer: &types.AssetsTransfer{Amount: amount}}
 	transfer := &cty.CoinsAction{Value: v, Ty: cty.CoinsActionTransfer}
 	tx := &types.Transaction{Execer: []byte("coins"), Payload: types.Encode(transfer), Fee: 1e6, To: to}

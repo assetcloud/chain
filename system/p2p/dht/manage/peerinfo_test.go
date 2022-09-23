@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/33cn/chain/queue"
-	"github.com/33cn/chain/types"
+	"github.com/assetcloud/chain/queue"
+	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p"
 	"github.com/stretchr/testify/require"
 )

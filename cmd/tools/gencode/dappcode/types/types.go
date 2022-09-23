@@ -83,12 +83,12 @@ func init() {
 }
 
 // InitFork defines register fork
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.ChainConfig) {
 	cfg.RegisterDappFork(${CLASSNAME}X, "Enable", 0)
 }
 
 // InitExecutor defines register executor
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.ChainConfig) {
 	types.RegistorExecutor(${CLASSNAME}X, NewType(cfg))
 }
 
@@ -96,7 +96,7 @@ type ${EXECNAME}Type struct {
     types.ExecTypeBase
 }
 
-func NewType(cfg *types.Chain33Config) *${EXECNAME}Type {
+func NewType(cfg *types.ChainConfig) *${EXECNAME}Type {
     c := &${EXECNAME}Type{}
     c.SetChild(c)
     c.SetConfig(cfg)

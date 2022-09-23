@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func addTestBlock(t *testing.T, mock33 *testnode.Chain33Mock, blockNum int, isTxHeight bool) []*types.Transaction {
+func addTestBlock(t *testing.T, mock33 *testnode.ChainMock, blockNum int, isTxHeight bool) []*types.Transaction {
 
 	var txs []*types.Transaction
 	for i := 0; i < blockNum; i++ {

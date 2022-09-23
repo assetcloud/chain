@@ -71,7 +71,7 @@ func (_m *Addr) String() string {
 
 	return r0
 }
-func Init(cfg *types.Chain33Config) {
+func Init(cfg *types.ChainConfig) {
 	slog.SetLogLevel("error")
 	pluginmgr.InitExec(cfg)
 }
@@ -80,7 +80,7 @@ func init() {
 	//addr := "192.168.1.1"
 	//remoteIpWhitelist[addr] = true
 	//grpcFuncWhitelist["*"] = true
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	qapi = new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
@@ -131,11 +131,11 @@ func TestSendTransaction(t *testing.T) {
 }
 
 func testVersionOK(t *testing.T) {
-	reply := &types.VersionInfo{Chain33: "6.0.2"}
+	reply := &types.VersionInfo{Chain: "6.0.2"}
 	qapi.On("Version").Return(reply, nil)
 	data, err := g.Version(getOkCtx(), nil)
 	assert.Nil(t, err, "the error should be nil")
-	assert.Equal(t, "6.0.2", data.Chain33, "reply should be ok")
+	assert.Equal(t, "6.0.2", data.Chain, "reply should be ok")
 }
 
 func TestVersion(t *testing.T) {
@@ -716,7 +716,7 @@ func TestGrpc_QueryRandNum(t *testing.T) {
 func TestGrpc_GetFork(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
-	cfg := types.NewChain33Config(newstr)
+	cfg := types.NewChainConfig(newstr)
 	cfg.SetDappFork("para", "fork100", 100)
 	Init(cfg)
 	api := new(mocks.QueueProtocolAPI)
@@ -727,7 +727,7 @@ func TestGrpc_GetFork(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, int64(100), val.Data)
 
-	cfg1 := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg1 := types.NewChainConfig(types.GetDefaultCfgstring())
 	Init(cfg1)
 	api1 := new(mocks.QueueProtocolAPI)
 	api1.On("GetConfig", mock.Anything).Return(cfg1)
@@ -786,7 +786,7 @@ func TestGrpc_GetChainConfig(t *testing.T) {
 
 func TestGrpc_SendTransactions(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	//Init(cfg)
 	g := Grpc{}
 	qapi = new(mocks.QueueProtocolAPI)
@@ -811,7 +811,7 @@ func TestGrpc_SendTransactions(t *testing.T) {
 }
 
 func TestGrpc_ConvertExectoAddr(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	g := Grpc{}
 	qapi = new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
@@ -830,7 +830,7 @@ func TestGrpc_GetCoinSymbol(t *testing.T) {
 }
 
 func TestGrpc_ListPushes(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	g := Grpc{}
 	qapi = new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
@@ -851,7 +851,7 @@ func TestGrpc_ListPushes(t *testing.T) {
 }
 
 func TestGrpc_AddPushSubscribe(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	g := Grpc{}
 	qapi = new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
@@ -901,8 +901,8 @@ func mockblockchain(t *testing.T, client queue.Client) {
 
 func TestGrpc_SubEvent(t *testing.T) {
 	c := queue.New("mytest")
-	chain33Cfg := types.NewChain33Config(types.ReadFile("../cmd/chain/chain.test.toml"))
-	c.SetConfig(chain33Cfg)
+	chainCfg := types.NewChainConfig(types.ReadFile("../cmd/chain/chain.test.toml"))
+	c.SetConfig(chainCfg)
 	go mockblockchain(t, c.Client())
 	rpcCfg = new(types.RPC)
 	rpcCfg.GrpcBindAddr = "127.0.0.1:18802"
@@ -928,7 +928,7 @@ func TestGrpc_SubEvent(t *testing.T) {
 		return
 	}
 
-	gcli := types.NewChain33Client(conn)
+	gcli := types.NewChainClient(conn)
 	var in types.ReqSubscribe
 	in.Name = "test-tx"
 	in.Type = 2

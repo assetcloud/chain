@@ -18,7 +18,7 @@ var pluginItems = make(map[string]Plugin)
 var once = &sync.Once{}
 
 // InitExec init exec
-func InitExec(cfg *typ.Chain33Config) {
+func InitExec(cfg *typ.ChainConfig) {
 	once.Do(func() {
 		for _, item := range pluginItems {
 			item.InitExec(cfg)

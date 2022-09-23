@@ -34,7 +34,7 @@ func init() {
 	}
 }
 
-// eth地址驱动, chain33中统一采用小写格式
+// eth地址驱动, chain中统一采用小写格式
 type eth struct{}
 
 // PubKeyToAddr public key to address

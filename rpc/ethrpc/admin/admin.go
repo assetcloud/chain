@@ -14,11 +14,11 @@ import (
 
 type adminHandler struct {
 	cli rpcclient.ChannelClient
-	cfg *ctypes.Chain33Config
+	cfg *ctypes.ChainConfig
 }
 
 //NewAdminAPI create a admin api
-func NewAdminAPI(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{} {
+func NewAdminAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	p := &adminHandler{}
 	p.cli.Init(c, api)
 	p.cfg = cfg

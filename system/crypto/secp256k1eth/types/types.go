@@ -14,21 +14,21 @@ import (
 type CommonAction struct {
 	Note   []byte //存放metamask 签名后的rawtx hexdata
 	To     string //to地址（目的地址或者合约地址）
-	Amount uint64 //解析组装后的chain33 tx 的amount
+	Amount uint64 //解析组装后的chain tx 的amount
 	Code   []byte //evm 数据
 	Nonce  int64
 }
 
-//DecodeTxAction decode chain33Tx ethTx
+//DecodeTxAction decode chainTx ethTx
 func DecodeTxAction(msg []byte) (*CommonAction, error) {
-	var tx TransactionChain33
+	var tx TransactionChain
 	err := proto.Unmarshal(msg, &tx)
 	if err != nil {
 		return nil, err
 	}
 	if strings.Contains(string(tx.Execer), "evm") {
 		//evm 合约操作
-		var evmaction EVMAction4Chain33
+		var evmaction EVMAction4Chain
 		err = proto.Unmarshal(tx.Payload, &evmaction)
 		if err == nil {
 			var code []byte
@@ -58,10 +58,10 @@ func DecodeTxAction(msg []byte) (*CommonAction, error) {
 	}
 
 	//coins 转账
-	var coinsAction CoinsActionChain33
+	var coinsAction CoinsActionChain
 	err = proto.Unmarshal(tx.Payload, &coinsAction)
 	if err == nil {
-		transfer, ok := coinsAction.GetValue().(*CoinsActionChain33_Transfer)
+		transfer, ok := coinsAction.GetValue().(*CoinsActionChain_Transfer)
 		if ok {
 			return &CommonAction{
 				Note:   transfer.Transfer.Note,

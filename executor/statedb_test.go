@@ -20,13 +20,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func newStateDbForTest(height int64, cfg *types.Chain33Config) dbm.KV {
+func newStateDbForTest(height int64, cfg *types.ChainConfig) dbm.KV {
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	return executor.NewStateDB(q.Client(), nil, nil, &executor.StateDBOption{Height: height})
 }
 func TestStateDBGet(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	db := newStateDbForTest(0, cfg)
 	testStateDBGet(t, db)
 }
@@ -53,7 +53,7 @@ func testStateDBGet(t *testing.T, db dbm.KV) {
 func TestStateDBTxGetOld(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
-	cfg := types.NewChain33Config(new)
+	cfg := types.NewChainConfig(new)
 
 	q := queue.New("channel")
 	q.SetConfig(cfg)
@@ -141,7 +141,7 @@ func testStateDBTxGet(t *testing.T, db dbm.KV) {
 }
 
 func TestStateDBTxGet(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	db := newStateDbForTest(cfg.GetFork("ForkExecRollback"), cfg)
 	testStateDBTxGet(t, db)
 }

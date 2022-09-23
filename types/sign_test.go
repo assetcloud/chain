@@ -6,8 +6,8 @@ package types
 import (
 	"testing"
 
-	"github.com/33cn/chain/common/address"
-	"github.com/33cn/chain/common/crypto"
+	"github.com/assetcloud/chain/common/address"
+	"github.com/assetcloud/chain/common/crypto"
 	"github.com/stretchr/testify/require"
 )
 

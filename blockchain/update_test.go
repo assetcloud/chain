@@ -17,7 +17,7 @@ import (
 )
 
 func TestUpgradePlugin(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 
 	cli := new(clientMocks.Client)
 	cli.On("Sub", "blockchain").Return(nil)

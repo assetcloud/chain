@@ -11,7 +11,7 @@ import (
 )
 
 // Storecreate store queue module
-type Storecreate func(cfg *types.Store, sub []byte, chain33cfg *types.Chain33Config) queue.Module
+type Storecreate func(cfg *types.Store, sub []byte, chaincfg *types.ChainConfig) queue.Module
 
 var regStore = make(map[string]Storecreate)
 

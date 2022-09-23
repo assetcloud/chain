@@ -53,7 +53,7 @@ var (
 type Chain struct {
 	cli rclient.ChannelClient
 	//for communicate with main chain in parallel chain
-	mainGrpcCli types.Chain33Client
+	mainGrpcCli types.ChainClient
 }
 
 // Grpc a channelClient
@@ -289,7 +289,7 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 
 	server := grpc.NewServer(opts...)
 	s.s = server
-	types.RegisterChain33Server(server, s.grpc)
+	types.RegisterChainServer(server, s.grpc)
 	reflection.Register(server)
 	return s
 }
@@ -317,7 +317,7 @@ func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServe
 // RPC a type object
 type RPC struct {
 	cfg    *types.RPC
-	allCfg *types.Chain33Config
+	allCfg *types.ChainConfig
 	gapi   *Grpcserver
 	japi   *JSONRPCServer
 	eapi   ethrpc.ServerAPI
@@ -338,7 +338,7 @@ func InitCfg(rcfg *types.RPC) {
 }
 
 // New produce a rpc by cfg
-func New(cfg *types.Chain33Config) *RPC {
+func New(cfg *types.ChainConfig) *RPC {
 	mcfg := cfg.GetModuleConfig().RPC
 	InitCfg(mcfg)
 	if mcfg.EnableTrace {

@@ -53,7 +53,7 @@ func newHost(port int32) core.Host {
 }
 
 func newTestEnv(q queue.Queue) (*prototypes.P2PEnv, context.CancelFunc) {
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
+	cfg := types.NewChainConfig(types.ReadFile("../../../../../cmd/chain/chain.test.toml"))
 	q.SetConfig(cfg)
 	go q.Start()
 

@@ -23,7 +23,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func addMainTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI) (string, error) {
+func addMainTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) (string, error) {
 	txs := util.GenCoinsTxs(cfg, priv, 1)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -37,7 +37,7 @@ func addMainTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueuePr
 }
 
 //构造单笔para交易
-func addSingleParaTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI, exec string) (string, error) {
+func addSingleParaTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI, exec string) (string, error) {
 	tx := util.CreateTxWithExecer(cfg, priv, exec)
 	hash := common.ToHex(tx.Hash())
 	reply, err := api.SendTx(tx)
@@ -51,7 +51,7 @@ func addSingleParaTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.Q
 }
 
 //构造para交易组
-func addGroupParaTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI, title string, haveMainTx bool) (string, *types.ReplyStrings, error) {
+func addGroupParaTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI, title string, haveMainTx bool) (string, *types.ReplyStrings, error) {
 	var tx0 *types.Transaction
 	if haveMainTx {
 		tx0 = util.CreateTxWithExecer(cfg, priv, "coins")
@@ -221,7 +221,7 @@ func testgetParaTxByTitle(t *testing.T, blockchain *blockchain.BlockChain, req *
 }
 
 //获取当前高度上的所有平行链title
-func testGetParaTxByHeight(cfg *types.Chain33Config, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
+func testGetParaTxByHeight(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
 
 	block, err := blockchain.GetBlock(height)
 	require.NoError(t, err)
@@ -306,7 +306,7 @@ func TestMultiLayerMerkleTree(t *testing.T) {
 }
 
 //获取当前高度上的所有平行链title
-func testParaTxByHeight(cfg *types.Chain33Config, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
+func testParaTxByHeight(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
 
 	block, err := blockchain.GetBlock(height)
 	require.NoError(t, err)

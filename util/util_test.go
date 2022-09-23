@@ -10,18 +10,18 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/33cn/chain/common/merkle"
+	"github.com/assetcloud/chain/common/merkle"
 
 	"strings"
 
-	"github.com/33cn/chain/common"
-	"github.com/33cn/chain/common/address"
-	log "github.com/33cn/chain/common/log/log15"
-	"github.com/33cn/chain/queue"
-	qmocks "github.com/33cn/chain/queue/mocks"
-	_ "github.com/33cn/chain/system/crypto/secp256k1"
-	_ "github.com/33cn/chain/system/dapp/coins/types"
-	"github.com/33cn/chain/types"
+	"github.com/assetcloud/chain/common"
+	"github.com/assetcloud/chain/common/address"
+	log "github.com/assetcloud/chain/common/log/log15"
+	"github.com/assetcloud/chain/queue"
+	qmocks "github.com/assetcloud/chain/queue/mocks"
+	_ "github.com/assetcloud/chain/system/crypto/secp256k1"
+	_ "github.com/assetcloud/chain/system/dapp/coins/types"
+	"github.com/assetcloud/chain/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -112,7 +112,7 @@ func TestUpperLower(t *testing.T) {
 }
 
 func TestGenTx(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -131,7 +131,7 @@ func TestGenTx(t *testing.T) {
 }
 
 func TestGenBlock(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	block2 := CreateNoneBlock(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(block2.Txs))
 
@@ -192,7 +192,7 @@ func BenchmarkDelDupKey(b *testing.B) {
 }
 
 func TestDelDupTx(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -281,7 +281,7 @@ func TestExecBlock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	str = strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
 	str += fmt.Sprintf("\n[fork.sub.coins]\nEnable=0\nForkFriendExecer=0")
-	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain/chain.system.fork.toml"), str))
+	cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile("../cmd/chain/chain.system.fork.toml"), str))
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -305,7 +305,7 @@ func TestExecBlock(t *testing.T) {
 }
 
 func TestExecBlockUpgrade(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -319,7 +319,7 @@ func TestExecBlockUpgrade(t *testing.T) {
 }
 
 func TestExecAndCheckBlock(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -350,7 +350,7 @@ func TestExecKVSetRollback(t *testing.T) {
 }
 
 func TestCheckDupTx(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)

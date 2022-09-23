@@ -33,7 +33,7 @@ type Discovery struct {
 }
 
 // InitDhtDiscovery init dht discovery
-func InitDhtDiscovery(ctx context.Context, host host.Host, peersInfo []peer.AddrInfo, chainCfg *types.Chain33Config, subCfg *p2pty.P2PSubConfig) *Discovery {
+func InitDhtDiscovery(ctx context.Context, host host.Host, peersInfo []peer.AddrInfo, chainCfg *types.ChainConfig, subCfg *p2pty.P2PSubConfig) *Discovery {
 
 	// Make the DHT,不同的ID进入不同的网络。
 	//如果不修改DHTProto 则有可能会连入IPFS网络，dhtproto=/ipfs/kad/1.0.0

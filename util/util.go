@@ -75,7 +75,7 @@ func MakeStringToLower(in string, pos, count int) (out string, err error) {
 }
 
 //GenNoneTxs : 创建一些 none 执行器的 交易列表，一般用于测试
-func GenNoneTxs(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
+func GenNoneTxs(cfg *types.ChainConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
 	for i := 0; i < int(n); i++ {
 		txs = append(txs, CreateNoneTx(cfg, priv))
 	}
@@ -83,7 +83,7 @@ func GenNoneTxs(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) (txs []*
 }
 
 //GenCoinsTxs : generate txs to be executed on exector coin
-func GenCoinsTxs(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
+func GenCoinsTxs(cfg *types.ChainConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
 	to, _ := Genaddress()
 	for i := 0; i < int(n); i++ {
 		txs = append(txs, CreateCoinsTx(cfg, priv, to, n+1))
@@ -106,7 +106,7 @@ func Genaddress() (string, crypto.PrivKey) {
 }
 
 // CreateNoneTx : Create None Tx
-func CreateNoneTx(cfg *types.Chain33Config, priv crypto.PrivKey) *types.Transaction {
+func CreateNoneTx(cfg *types.ChainConfig, priv crypto.PrivKey) *types.Transaction {
 	return CreateTxWithExecer(cfg, priv, "none")
 }
 
@@ -119,7 +119,7 @@ func UpdateExpireWithTxHeight(tx *types.Transaction, priv crypto.PrivKey, txHeig
 }
 
 // CreateCoinsTxWithTxHeight 使用txHeight作为交易过期
-func CreateCoinsTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, to string, amount, txHeight int64) *types.Transaction {
+func CreateCoinsTxWithTxHeight(cfg *types.ChainConfig, priv crypto.PrivKey, to string, amount, txHeight int64) *types.Transaction {
 
 	tx := CreateCoinsTx(cfg, nil, to, amount)
 	UpdateExpireWithTxHeight(tx, priv, txHeight)
@@ -127,7 +127,7 @@ func CreateCoinsTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, to
 }
 
 //CreateNoneTxWithTxHeight 使用txHeight作为交易过期
-func CreateNoneTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, txHeight int64) *types.Transaction {
+func CreateNoneTxWithTxHeight(cfg *types.ChainConfig, priv crypto.PrivKey, txHeight int64) *types.Transaction {
 
 	tx := CreateNoneTx(cfg, nil)
 	UpdateExpireWithTxHeight(tx, priv, txHeight)
@@ -135,7 +135,7 @@ func CreateNoneTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, txH
 }
 
 // CreateTxWithExecer ： Create Tx With Execer
-func CreateTxWithExecer(cfg *types.Chain33Config, priv crypto.PrivKey, execer string) *types.Transaction {
+func CreateTxWithExecer(cfg *types.ChainConfig, priv crypto.PrivKey, execer string) *types.Transaction {
 	if execer == cfg.GetCoinExec() {
 		to, _ := Genaddress()
 		return CreateCoinsTx(cfg, priv, to, cfg.GetCoinPrecision())
@@ -173,7 +173,7 @@ func JSONPrint(t TestingT, input interface{}) {
 }
 
 // CreateManageTx : Create Manage Tx
-func CreateManageTx(cfg *types.Chain33Config, priv crypto.PrivKey, key, op, value string) *types.Transaction {
+func CreateManageTx(cfg *types.ChainConfig, priv crypto.PrivKey, key, op, value string) *types.Transaction {
 	v := &types.ModifyConfig{Key: key, Op: op, Value: value, Addr: ""}
 	exec := types.LoadExecutorType("manage")
 	if exec == nil {
@@ -192,7 +192,7 @@ func CreateManageTx(cfg *types.Chain33Config, priv crypto.PrivKey, key, op, valu
 }
 
 // CreateCoinsTx : Create Coins Tx
-func CreateCoinsTx(cfg *types.Chain33Config, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
+func CreateCoinsTx(cfg *types.ChainConfig, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
 	tx := createCoinsTx(cfg, to, amount)
 	if priv != nil {
 		tx.Sign(types.SECP256K1, priv)
@@ -200,7 +200,7 @@ func CreateCoinsTx(cfg *types.Chain33Config, priv crypto.PrivKey, to string, amo
 	return tx
 }
 
-func createCoinsTx(cfg *types.Chain33Config, to string, amount int64) *types.Transaction {
+func createCoinsTx(cfg *types.ChainConfig, to string, amount int64) *types.Transaction {
 	exec := types.LoadExecutorType(cfg.GetCoinExec())
 	if exec == nil {
 		panic("unknow driver coins")
@@ -221,7 +221,7 @@ func createCoinsTx(cfg *types.Chain33Config, to string, amount int64) *types.Tra
 }
 
 //CreateTxWithTxHeight : Create Tx With Tx Height
-func CreateTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, to string, amount, expire int64) *types.Transaction {
+func CreateTxWithTxHeight(cfg *types.ChainConfig, priv crypto.PrivKey, to string, amount, expire int64) *types.Transaction {
 	tx := createCoinsTx(cfg, to, amount)
 	tx.Expire = expire + types.TxHeightFlag
 	tx.Sign(types.SECP256K1, priv)
@@ -229,7 +229,7 @@ func CreateTxWithTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, to stri
 }
 
 // GenTxsTxHeight : Gen Txs with Heigt
-func GenTxsTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, n, height int64) (txs []*types.Transaction) {
+func GenTxsTxHeight(cfg *types.ChainConfig, priv crypto.PrivKey, n, height int64) (txs []*types.Transaction) {
 	to, _ := Genaddress()
 	for i := 0; i < int(n); i++ {
 		tx := CreateTxWithTxHeight(cfg, priv, to, (n+1)*cfg.GetCoinPrecision(), height)
@@ -241,7 +241,7 @@ func GenTxsTxHeight(cfg *types.Chain33Config, priv crypto.PrivKey, n, height int
 var zeroHash [32]byte
 
 // CreateNoneBlock : Create None Block
-func CreateNoneBlock(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) *types.Block {
+func CreateNoneBlock(cfg *types.ChainConfig, priv crypto.PrivKey, n int64) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = 1
 	newblock.BlockTime = types.Now().Unix()
@@ -252,7 +252,7 @@ func CreateNoneBlock(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) *ty
 }
 
 //CreateCoinsBlock : create coins block, n size
-func CreateCoinsBlock(cfg *types.Chain33Config, priv crypto.PrivKey, n int64) *types.Block {
+func CreateCoinsBlock(cfg *types.ChainConfig, priv crypto.PrivKey, n int64) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = 1
 	newblock.BlockTime = types.Now().Unix()
@@ -498,7 +498,7 @@ func ExecBlockUpgrade(client queue.Client, prevStateRoot []byte, block *types.Bl
 }
 
 //CreateNewBlock : Create a New Block
-func CreateNewBlock(cfg *types.Chain33Config, parent *types.Block, txs []*types.Transaction) *types.Block {
+func CreateNewBlock(cfg *types.ChainConfig, parent *types.Block, txs []*types.Transaction) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = parent.Height + 1
 	newblock.BlockTime = parent.BlockTime + 1
@@ -581,7 +581,7 @@ func ResetDatadir(cfg *types.Config, datadir string) string {
 		datadir = filepath.Join(dir, datadir[2:])
 	}
 	if len(datadir) >= 6 && datadir[:6] == "$TEMP/" {
-		dir, err := ioutil.TempDir("", "chain33datadir-")
+		dir, err := ioutil.TempDir("", "chaindatadir-")
 		if err != nil {
 			panic(err)
 		}

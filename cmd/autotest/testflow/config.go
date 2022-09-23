@@ -87,7 +87,7 @@ func StartAutoTest() bool {
 
 	if len(autoTestConfig.CliCommand) == 0 {
 
-		stdLog.Error("NullChain33Cli")
+		stdLog.Error("NullChainCli")
 		return false
 	}
 	//init types

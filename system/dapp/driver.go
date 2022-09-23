@@ -64,7 +64,7 @@ type Driver interface {
 	Query(funcName string, params []byte) (types.Message, error)
 	IsFree() bool
 	SetAPI(client.QueueProtocolAPI)
-	SetExecutorAPI(queueapi client.QueueProtocolAPI, chain33api types.Chain33Client)
+	SetExecutorAPI(queueapi client.QueueProtocolAPI, chainapi types.ChainClient)
 	SetTxs(txs []*types.Transaction)
 	SetReceipt(receipts []*types.ReceiptData)
 
@@ -155,8 +155,8 @@ func (d *DriverBase) SetAPI(queueapi client.QueueProtocolAPI) {
 }
 
 // SetExecutorAPI set queue protocol api
-func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, chain33api types.Chain33Client) {
-	d.execapi = api.New(queueapi, chain33api)
+func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, chainapi types.ChainClient) {
+	d.execapi = api.New(queueapi, chainapi)
 }
 
 // GetAPI return queue protocol api
@@ -277,7 +277,7 @@ func (d *DriverBase) callLocal(prefix string, tx *types.Transaction, receipt *ty
 }
 
 // CheckAddress check address
-func CheckAddress(cfg *types.Chain33Config, addr string, height int64) error {
+func CheckAddress(cfg *types.ChainConfig, addr string, height int64) error {
 	if IsDriverAddress(addr, height) {
 		return nil
 	}

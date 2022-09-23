@@ -33,8 +33,8 @@ import (
 
 type ethHandler struct {
 	cli        rpcclient.ChannelClient
-	cfg        *ctypes.Chain33Config
-	grpcCli    ctypes.Chain33Client
+	cfg        *ctypes.ChainConfig
+	grpcCli    ctypes.ChainClient
 	evmChainID int64
 }
 
@@ -43,7 +43,7 @@ var (
 )
 
 //NewEthAPI new eth api
-func NewEthAPI(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtocolAPI) interface{} {
+func NewEthAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	e := &ethHandler{}
 	e.cli.Init(c, api)
 	e.cfg = cfg
@@ -58,7 +58,7 @@ func NewEthAPI(cfg *ctypes.Chain33Config, c queue.Client, api client.QueueProtoc
 	}
 	//TODO 改进为内部推送
 	//推送用途
-	e.grpcCli = ctypes.NewChain33Client(conn)
+	e.grpcCli = ctypes.NewChainClient(conn)
 
 	return e
 }
@@ -366,9 +366,9 @@ func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
 		return nil, errors.New("wrong signature")
 	}
 
-	chain33Tx := types.AssembleChain33Tx(ntx, sig, pubkey, e.cfg)
-	log.Debug("SendRawTransaction", "cacuHash", common.Bytes2Hex(chain33Tx.Hash()), "exec", string(chain33Tx.Execer))
-	reply, err := e.cli.SendTx(chain33Tx)
+	chainTx := types.AssembleChainTx(ntx, sig, pubkey, e.cfg)
+	log.Debug("SendRawTransaction", "cacuHash", common.Bytes2Hex(chainTx.Hash()), "exec", string(chainTx.Execer))
+	reply, err := e.cli.SendTx(chainTx)
 	return reply.GetMsg(), err
 
 }
@@ -527,7 +527,7 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 	if callMsg.Value != nil {
 		amount = callMsg.Value.ToInt().Uint64()
 	}
-	action := &ctypes.EVMContractAction4Chain33{Amount: amount, GasLimit: 0, GasPrice: 0, Note: "", ContractAddr: callMsg.To}
+	action := &ctypes.EVMContractAction4Chain{Amount: amount, GasLimit: 0, GasPrice: 0, Note: "", ContractAddr: callMsg.To}
 	if callMsg.To == address.ExecAddress(exec) { //创建合约
 		action.Code = *callMsg.Data
 		action.Para = nil
@@ -568,7 +568,7 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 		bigGas = big.NewInt(fee)
 	}
 
-	//eth交易数据要存放在chain33 tx note 中，做2倍gas 处理
+	//eth交易数据要存放在chain tx note 中，做2倍gas 处理
 	return hexutil.Uint64(bigGas.Uint64() * 2), err
 
 }

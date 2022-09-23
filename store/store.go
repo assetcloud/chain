@@ -12,7 +12,7 @@ import (
 )
 
 // New new store queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.ChainConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Store
 	sub := cfg.GetSubConfig().Store
 	s, err := store.Load(mcfg.Name)

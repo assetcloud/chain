@@ -6,10 +6,10 @@ import (
 
 	"sync"
 
-	"github.com/33cn/chain/client/mocks"
-	"github.com/33cn/chain/rpc/grpcclient"
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/client/mocks"
+	"github.com/assetcloud/chain/rpc/grpcclient"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -44,7 +44,7 @@ func (none *noneApp) GetDriverName() string {
 	return "none"
 }
 
-func Init(cfg *types.Chain33Config) {
+func Init(cfg *types.ChainConfig) {
 	runonce.Do(func() {
 		Register(cfg, "none", newnoneApp, 0)
 		Register(cfg, "demo", newdemoApp, 1)
@@ -52,7 +52,7 @@ func Init(cfg *types.Chain33Config) {
 }
 
 func TestReigister(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -85,7 +85,7 @@ func TestReigister(t *testing.T) {
 }
 
 func TestDriverAPI(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -121,7 +121,7 @@ func TestExecAddress(t *testing.T) {
 }
 
 func TestAllow(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -144,7 +144,7 @@ func TestAllow(t *testing.T) {
 }
 
 func TestDriverBase(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	Init(cfg)

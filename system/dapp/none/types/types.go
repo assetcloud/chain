@@ -65,12 +65,12 @@ func init() {
 }
 
 //InitFork init
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.ChainConfig) {
 	cfg.RegisterDappFork(NoneX, ForkUseTimeDelay, 0)
 }
 
 //InitExecutor init Executor
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.ChainConfig) {
 	types.RegistorExecutor(NoneX, NewType(cfg))
 }
 
@@ -80,7 +80,7 @@ type NoneType struct {
 }
 
 // NewType new a NoneType object
-func NewType(cfg *types.Chain33Config) *NoneType {
+func NewType(cfg *types.ChainConfig) *NoneType {
 	c := &NoneType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

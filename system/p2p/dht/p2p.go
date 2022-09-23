@@ -48,7 +48,7 @@ func init() {
 
 // P2P p2p struct
 type P2P struct {
-	chainCfg        *types.Chain33Config
+	chainCfg        *types.ChainConfig
 	host            core.Host
 	discovery       *Discovery
 	connManager     *manage.ConnManager

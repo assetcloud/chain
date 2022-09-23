@@ -3,8 +3,8 @@ package dapp
 import (
 	"testing"
 
-	"github.com/33cn/chain/types"
-	"github.com/33cn/chain/util"
+	"github.com/assetcloud/chain/types"
+	"github.com/assetcloud/chain/util"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	chain33crypto "github.com/assetcloud/chain/common/crypto"
+	chaincrypto "github.com/assetcloud/chain/common/crypto"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 
@@ -39,7 +39,7 @@ var (
 
 func init() {
 	qapi = &clientMocks.QueueProtocolAPI{}
-	cfg := ctypes.NewChain33Config(ctypes.GetDefaultCfgstring())
+	cfg := ctypes.NewChainConfig(ctypes.GetDefaultCfgstring())
 	q.SetConfig(cfg)
 
 	ethCli = &ethHandler{}
@@ -445,35 +445,35 @@ func TestEthHandler_SendRawTransaction(t *testing.T) {
 	t.Log("txhash", txhash.String())
 	assert.Equal(t, txhash.String(), "0x56385265533f4c17455473508f4bfcfcfd094a88f460de40f22dd4c19e485793")
 
-	chain33Tx := etypes.AssembleChain33Tx(ntx, sig, pubkey, ethCli.cfg)
-	txHash := chain33Tx.Hash()
-	t.Log("chain33Tx hash", common.Bytes2Hex(txHash))
+	chainTx := etypes.AssembleChainTx(ntx, sig, pubkey, ethCli.cfg)
+	txHash := chainTx.Hash()
+	t.Log("chainTx hash", common.Bytes2Hex(txHash))
 	assert.Equal(t, common.Bytes2Hex(txHash), "555560f05a32499f96e0d033d1cfe582b9e09d974cc8ee3a005ea5a5c0164fc9")
 	t.Log("checkchainID", ntx.ChainId(), "support chainid", ethCli.evmChainID)
-	chain33crypto.Init(ethCli.cfg.GetModuleConfig().Crypto, ethCli.cfg.GetSubConfig().Crypto)
-	ok := chain33Tx.CheckSign(-1)
+	chaincrypto.Init(ethCli.cfg.GetModuleConfig().Crypto, ethCli.cfg.GetSubConfig().Crypto)
+	ok := chainTx.CheckSign(-1)
 	require.True(t, ok)
 
-	//测试修改chain33Tx 数据，期望验签失败
+	//测试修改chainTx 数据，期望验签失败
 	//修改Nonce
-	chain33Tx.Nonce = rand.New(rand.NewSource(time.Now().UnixNano())).Int63()
-	ok = chain33Tx.CheckSign(-1)
+	chainTx.Nonce = rand.New(rand.NewSource(time.Now().UnixNano())).Int63()
+	ok = chainTx.CheckSign(-1)
 	require.False(t, ok)
 	//修改to
-	chain33Tx.To = "0xa06c8907eb1c8a266165f5484c5ea3bd4e0520a8"
-	ok = chain33Tx.CheckSign(-1)
+	chainTx.To = "0xa06c8907eb1c8a266165f5484c5ea3bd4e0520a8"
+	ok = chainTx.CheckSign(-1)
 	require.False(t, ok)
 	//修改执行器
-	chain33Tx.Execer = []byte("coinsX")
-	ok = chain33Tx.CheckSign(-1)
+	chainTx.Execer = []byte("coinsX")
+	ok = chainTx.CheckSign(-1)
 	require.False(t, ok)
 	//修改packdata
-	chain33Tx.Payload = append(chain33Tx.GetPayload(), uint8(8))
-	ok = chain33Tx.CheckSign(-1)
+	chainTx.Payload = append(chainTx.GetPayload(), uint8(8))
+	ok = chainTx.CheckSign(-1)
 	require.False(t, ok)
 	//修改chainID
-	chain33Tx.ChainID = 666
-	ok = chain33Tx.CheckSign(-1)
+	chainTx.ChainID = 666
+	ok = chainTx.CheckSign(-1)
 	require.False(t, ok)
 
 }

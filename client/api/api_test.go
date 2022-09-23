@@ -22,7 +22,7 @@ import (
 
 func TestAPI(t *testing.T) {
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	gapi, err := grpcclient.NewMainChainClient(cfg, "")
 	assert.Nil(t, err)
 	api.On("GetConfig", mock.Anything).Return(cfg)

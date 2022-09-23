@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain/common"
+	"github.com/assetcloud/chain/common"
 	"github.com/stretchr/testify/assert"
 )
 

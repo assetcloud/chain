@@ -32,7 +32,7 @@ import (
 
 var sendTxWait = time.Millisecond * 5
 
-type Chain33Mock struct {
+type ChainMock struct {
 	random  *rand.Rand
 	q       queue.Queue
 	client  queue.Client
@@ -51,26 +51,26 @@ type Chain33Mock struct {
 }
 
 //GetAPI :
-func (mock *Chain33Mock) GetAPI() client.QueueProtocolAPI {
+func (mock *ChainMock) GetAPI() client.QueueProtocolAPI {
 	return mock.api
 }
 
 //GetRPC :
-func (mock *Chain33Mock) GetRPC() *rpc.RPC {
+func (mock *ChainMock) GetRPC() *rpc.RPC {
 	return mock.rpc
 }
 
 //GetCfg :
-func (mock *Chain33Mock) GetCfg() *types.Config {
+func (mock *ChainMock) GetCfg() *types.Config {
 	return mock.cfg
 }
 
 //Close :
-func (mock *Chain33Mock) Close() {
+func (mock *ChainMock) Close() {
 	mock.closeNoLock()
 }
 
-func (mock *Chain33Mock) closeNoLock() {
+func (mock *ChainMock) closeNoLock() {
 	mock.network.Close()
 	mock.rpc.Close()
 	mock.mem.Close()
@@ -87,22 +87,22 @@ func (mock *Chain33Mock) closeNoLock() {
 }
 
 //GetClient :
-func (mock *Chain33Mock) GetClient() queue.Client {
+func (mock *ChainMock) GetClient() queue.Client {
 	return mock.client
 }
 
 //GetBlockChain :
-func (mock *Chain33Mock) GetBlockChain() *BlockChain {
+func (mock *ChainMock) GetBlockChain() *BlockChain {
 	return mock.chain
 }
 
 //GetGenesisKey :
-func (mock *Chain33Mock) GetGenesisKey() crypto.PrivKey {
+func (mock *ChainMock) GetGenesisKey() crypto.PrivKey {
 	return util.TestPrivkeyList[1]
 }
 
 //WaitHeight :
-func (mock *Chain33Mock) WaitHeight(height int64) error {
+func (mock *ChainMock) WaitHeight(height int64) error {
 	for {
 		header, err := mock.api.GetLastHeader()
 		if err != nil {
@@ -116,7 +116,7 @@ func (mock *Chain33Mock) WaitHeight(height int64) error {
 	return nil
 }
 
-func (mock *Chain33Mock) GetJSONC() *jsonclient.JSONClient {
+func (mock *ChainMock) GetJSONC() *jsonclient.JSONClient {
 	jsonc, err := jsonclient.NewJSONClient("http://" + mock.cfg.RPC.JrpcBindAddr + "/")
 	if err != nil {
 		return nil
@@ -125,7 +125,7 @@ func (mock *Chain33Mock) GetJSONC() *jsonclient.JSONClient {
 }
 
 //WaitTx :
-func (mock *Chain33Mock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
+func (mock *ChainMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
 	if hash == nil {
 		return nil, nil
 	}
@@ -140,7 +140,7 @@ func (mock *Chain33Mock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error
 		data := rpctypes.QueryParm{
 			Hash: common.ToHex(hash),
 		}
-		err = mock.GetJSONC().Call("Chain33.QueryTransaction", data, &testResult)
+		err = mock.GetJSONC().Call("Chain.QueryTransaction", data, &testResult)
 		return &testResult, err
 	}
 }
@@ -550,7 +550,7 @@ func Test_PostEVMEvent(t *testing.T) {
 		tx.Execer = []byte("evm")
 		tx.To = "165UZpSHske8hryahjM91kAWMJRW47Hn7E"
 
-		evmAction := &types.EVMContractAction4Chain33{
+		evmAction := &types.EVMContractAction4Chain{
 			ContractAddr: "165UZpSHske8hryahjM91kAWMJRW47Hn7E",
 		}
 		payload := types.Encode(evmAction)
@@ -638,7 +638,7 @@ func Test_PostEVMEvent_bigsize(t *testing.T) {
 		tx := &types.Transaction{}
 		tx.Execer = []byte("evm")
 		tx.To = "165UZpSHske8hryahjM91kAWMJRW47Hn7E"
-		evmAction := &types.EVMContractAction4Chain33{
+		evmAction := &types.EVMContractAction4Chain{
 			ContractAddr: "165UZpSHske8hryahjM91kAWMJRW47Hn7E",
 		}
 		payload := types.Encode(evmAction)
@@ -715,7 +715,7 @@ func Test_PostEVMEvent_notJson(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		tx := &types.Transaction{}
 		tx.Execer = []byte("evm")
-		evmAction := &types.EVMContractAction4Chain33{
+		evmAction := &types.EVMContractAction4Chain{
 			ContractAddr: "165UZpSHske8hryahjM91kAWMJRW47Hn7E",
 		}
 		payload := types.Encode(evmAction)
@@ -793,7 +793,7 @@ func Test_PostEVMEvent_badLog(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		tx := &types.Transaction{}
 		tx.Execer = []byte("evm")
-		evmAction := &types.EVMContractAction4Chain33{
+		evmAction := &types.EVMContractAction4Chain{
 			ContractAddr: "165UZpSHske8hryahjM91kAWMJRW47Hn7E",
 		}
 		payload := types.Encode(evmAction)
@@ -867,7 +867,7 @@ func Test_PostEVMEvent_nil(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		tx := &types.Transaction{}
 		tx.Execer = []byte("evm")
-		evmAction := &types.EVMContractAction4Chain33{
+		evmAction := &types.EVMContractAction4Chain{
 			ContractAddr: "165UZpSHske8hryahjM91kAWMJRW47Hn7E",
 		}
 		payload := types.Encode(evmAction)
@@ -1203,7 +1203,7 @@ func Test_RecoverPush(t *testing.T) {
 	require.Equal(t, atomic.LoadInt32(&pushNotifyInfo.status), notRunning)
 	chain.ProcGetLastPushSeq(subscribe.Name)
 
-	//chain33的push服务重启后，不会将其添加到task中，
+	//chain的push服务重启后，不会将其添加到task中，
 	chainAnother := &BlockChain{
 		isRecordBlockSequence: true,
 		enablePushSubscribe:   true,
@@ -1216,26 +1216,26 @@ func Test_RecoverPush(t *testing.T) {
 }
 
 //init work
-func NewChain33Mock(cfgpath string, mockapi client.QueueProtocolAPI) *Chain33Mock {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+func NewChainMock(cfgpath string, mockapi client.QueueProtocolAPI) *ChainMock {
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func NewChain33MockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *Chain33Mock {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+func NewChainMockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *ChainMock {
+	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.IsRecordBlockSequence = isRecordBlockSequence
 	cfg.GetModuleConfig().BlockChain.EnablePushSubscribe = enablePushSubscribe
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func newWithConfigNoLock(cfg *types.Chain33Config, mockapi client.QueueProtocolAPI) *Chain33Mock {
+func newWithConfigNoLock(cfg *types.ChainConfig, mockapi client.QueueProtocolAPI) *ChainMock {
 	mfg := cfg.GetModuleConfig()
 	sub := cfg.GetSubConfig()
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	types.Debug = false
 	datadir := util.ResetDatadir(mfg, "$TEMP/")
-	mock := &Chain33Mock{cfg: mfg, sub: sub, q: q, datadir: datadir}
+	mock := &ChainMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
 	mock.random = rand.New(rand.NewSource(types.Now().UnixNano()))
 
 	mock.exec = executor.New(cfg)
@@ -1285,7 +1285,7 @@ func newWithConfigNoLock(cfg *types.Chain33Config, mockapi client.QueueProtocolA
 	return mock
 }
 
-func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
+func addTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
 	txs := util.GenCoinsTxs(cfg, priv, 1)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -1298,7 +1298,7 @@ func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtoc
 	return txs, hash, nil
 }
 
-func createBlocks(t *testing.T, mock33 *Chain33Mock, blockchain *BlockChain, number int64) {
+func createBlocks(t *testing.T, mock33 *ChainMock, blockchain *BlockChain, number int64) {
 	chainlog.Info("testProcAddBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -1324,8 +1324,8 @@ func createBlocks(t *testing.T, mock33 *Chain33Mock, blockchain *BlockChain, num
 	chainlog.Info("testProcAddBlockMsg end --------------------")
 }
 
-func createBlockChain(t *testing.T) (*BlockChain, *Chain33Mock) {
-	mock33 := NewChain33Mock("", nil)
+func createBlockChain(t *testing.T) (*BlockChain, *ChainMock) {
+	mock33 := NewChainMock("", nil)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()
@@ -1334,8 +1334,8 @@ func createBlockChain(t *testing.T) (*BlockChain, *Chain33Mock) {
 	return blockchain, mock33
 }
 
-func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *Chain33Mock) {
-	mock33 := NewChain33MockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
+func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *ChainMock) {
+	mock33 := NewChainMockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()

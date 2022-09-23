@@ -43,7 +43,7 @@ func resetDatadir(cfg *types.Config, datadir string) {
 }
 
 func initEnv() (queue.Queue, queue.Module, queue.Module) {
-	cfg := types.NewChain33Config(types.ReadFile(*configPath))
+	cfg := types.NewChainConfig(types.ReadFile(*configPath))
 	mcfg := cfg.GetModuleConfig()
 	if *datadir != "" {
 		resetDatadir(mcfg, *datadir)
