@@ -11,15 +11,10 @@ https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/6874
 
 高度模块化, 遵循 KISS原则的区块链开发框架
 
-官方网站 和 文档: https://chain.33.cn
 
 官方插件库: https://github.com/assetcloud/plugin
 
-典型案例: https://github.com/bityuan/bityuan
 
-chain33背后故事: [chain33诞生记](https://mp.weixin.qq.com/s/9g5ZFDKJi9uzR_NFxfeuAA)
-
-视频教程: [视频教程](https://chain.33.cn/document/289)
 
 # 感谢
 
@@ -70,7 +65,7 @@ $ make test
 $ chain -f chain.toml
 ```
 
-## 使用chain33 开发插件注意点
+## 使用chain 开发插件注意点
 
 * 不可以使用 master 分支，要使用 发布分支
 
@@ -81,7 +76,7 @@ $ chain -f chain.toml
 ### 细节过程
 
 * 如果有什么想法，建立 issues, 和我们来讨论。
-* 首先点击 右上角的 fork 图标， 把chain33 fork 到自己的分支 比如我的是 vipwzw/chain
+* 首先点击 右上角的 fork 图标， 把chain fork 到自己的分支 比如我的是 vipwzw/chain
 * `git clone https://github.com/vipwzw/chain.git $GOPATH/src/github.com/assetcloud/chain`
 
 ```
@@ -101,7 +96,7 @@ git merge upstream/master
 注意：不要去修改 master 分支，这样，master 分支永远和upstream/master 保持同步
 ```
 
-* 从最新的33cn/chain33代码建立分支开始开发
+* 从最新的33cn/chain代码建立分支开始开发
 
 ```
 git fetch upstream
@@ -127,7 +122,7 @@ git push origin fixbug_ci
 
 #### 准备阶段
 
-* 首先点击 右上角的 fork 图标， 把chain33 fork 到自己的分支 比如我的是 vipwzw/chain
+* 首先点击 右上角的 fork 图标， 把chain fork 到自己的分支 比如我的是 vipwzw/chain
 * `git clone https://github.com/vipwzw/chain.git $GOPATH/src/github.com/assetcloud/chain`
 
 ```
