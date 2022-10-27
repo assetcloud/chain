@@ -314,7 +314,7 @@ type ExecutorType interface {
 	// collect assets the tx deal with
 	GetAssets(tx *Transaction) ([]*Asset, error)
 
-	// about chainConfig
+	// about chain33Config
 	GetConfig() *ChainConfig
 	SetConfig(cfg *ChainConfig)
 }
@@ -682,9 +682,7 @@ func (base *ExecTypeBase) Create(action string, msg Message) (*Transaction, erro
 	if method, ok := funclist["RPC_"+action]; ok {
 		return base.callRPC(method, action, msg)
 	}
-	if _, ok := msg.(Message); !ok {
-		return nil, ErrInvalidParam
-	}
+
 	typemap := base.child.GetTypeMap()
 	fieldName := base.getActionFieldName(action)
 	if _, ok := typemap[action]; ok && fieldName != "" {

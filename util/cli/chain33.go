@@ -2,10 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build go1.8
-// +build go1.8
-
-// package cli RunChain函数会加载各个模块，组合成区块链程序
+// package cli RunChain33函数会加载各个模块，组合成区块链程序
 //主循环由消息队列驱动。
 //消息队列本身可插拔，可以支持各种队列
 //同时共识模式也是可以插拔的。
@@ -54,7 +51,7 @@ import (
 var (
 	cpuNum      = runtime.NumCPU()
 	configPath  = flag.String("f", "", "configfile")
-	datadir     = flag.String("datadir", "", "data dir of chain, include logs and datas")
+	datadir     = flag.String("datadir", "", "data dir of chain33, include logs and datas")
 	versionCmd  = flag.Bool("v", false, "version")
 	fixtime     = flag.Bool("fixtime", false, "fix time")
 	waitPid     = flag.Bool("waitpid", false, "p2p stuck until seed save info wallet & wallet unlock")
@@ -70,12 +67,12 @@ var (
 func RunChain(name, defCfg string) {
 	flag.Parse()
 	if *versionCmd {
-		fmt.Println(fmt.Sprintf("%s %s", version.GetVersion(), version.BuildTime))
+		fmt.Printf("%s %s\n", version.GetVersion(), version.BuildTime)
 		return
 	}
 	if *configPath == "" {
 		if name == "" {
-			*configPath = "chain.toml"
+			*configPath = "chain33.toml"
 		} else {
 			*configPath = name + ".toml"
 		}
@@ -99,8 +96,8 @@ func RunChain(name, defCfg string) {
 		panic(err)
 	}
 	//set config: bityuan 用 bityuan.toml 这个配置文件
-	chainCfg := types.NewChainConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
-	cfg := chainCfg.GetModuleConfig()
+	chain33Cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
+	cfg := chain33Cfg.GetModuleConfig()
 	if *datadir != "" {
 		util.ResetDatadir(cfg, *datadir)
 	}
@@ -157,44 +154,44 @@ func RunChain(name, defCfg string) {
 	version.SetLocalDBVersion(cfg.Store.LocalDBVersion)
 	version.SetStoreDBVersion(cfg.Store.StoreDBVersion)
 	version.SetAppVersion(cfg.Version)
-	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " chain:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
+	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " chain33:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
 	log.Info("loading queue")
 	q := queue.New("channel")
-	q.SetConfig(chainCfg)
+	q.SetConfig(chain33Cfg)
 
 	address.Init(cfg.Address)
 	crypto := cryptocli.New()
 	crypto.SetQueueClient(q.Client())
 	log.Info("loading mempool module")
-	mem := mempool.New(chainCfg)
+	mem := mempool.New(chain33Cfg)
 	mem.SetQueueClient(q.Client())
 
 	log.Info("loading execs module")
-	exec := executor.New(chainCfg)
+	exec := executor.New(chain33Cfg)
 	exec.SetQueueClient(q.Client())
 
 	log.Info("loading blockchain module")
 	cfg.BlockChain.RollbackBlock = *rollback
 	cfg.BlockChain.RollbackSave = *save
-	chain := blockchain.New(chainCfg)
+	chain := blockchain.New(chain33Cfg)
 	chain.SetQueueClient(q.Client())
 
 	log.Info("loading store module")
-	s := store.New(chainCfg)
+	s := store.New(chain33Cfg)
 	s.SetQueueClient(q.Client())
 
 	chain.Upgrade()
 
 	log.Info("loading consensus module")
-	cs := consensus.New(chainCfg)
+	cs := consensus.New(chain33Cfg)
 	cs.SetQueueClient(q.Client())
 
 	//jsonrpc, grpc, channel 三种模式
-	rpcapi := rpc.New(chainCfg)
+	rpcapi := rpc.New(chain33Cfg)
 	rpcapi.SetQueueClient(q.Client())
 
 	log.Info("loading wallet module")
-	walletm := wallet.New(chainCfg)
+	walletm := wallet.New(chain33Cfg)
 	walletm.SetQueueClient(q.Client())
 
 	chain.Rollbackblock()
@@ -208,7 +205,7 @@ func RunChain(name, defCfg string) {
 	log.Info("loading p2p module")
 	var network queue.Module
 	if cfg.P2P.Enable {
-		network = p2p.NewP2PMgr(chainCfg)
+		network = p2p.NewP2PMgr(chain33Cfg)
 	} else {
 		network = &util.MockModule{Key: "p2p"}
 	}
@@ -216,7 +213,7 @@ func RunChain(name, defCfg string) {
 
 	health := util.NewHealthCheckServer(q.Client())
 	health.Start(cfg.Health)
-	metrics.StartMetrics(chainCfg)
+	metrics.StartMetrics(chain33Cfg)
 	defer func() {
 		//close all module,clean some resource
 		log.Info("begin close health module")

@@ -7,7 +7,6 @@ package rpc
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net/http"
 	"testing"
 	"time"
@@ -51,19 +50,19 @@ func TestCheckBasicAuth(t *testing.T) {
 	rpcCfg = new(types.RPC)
 	var r = &http.Request{Header: make(http.Header)}
 	assert.True(t, checkBasicAuth(r))
-	r.SetBasicAuth("1212121", "chain-mypasswd")
+	r.SetBasicAuth("1212121", "chain33-mypasswd")
 	assert.True(t, checkBasicAuth(r))
-	rpcCfg.JrpcUserName = "chain-user"
-	rpcCfg.JrpcUserPasswd = "chain-mypasswd"
-	r.SetBasicAuth("", "chain-mypasswd")
+	rpcCfg.JrpcUserName = "chain33-user"
+	rpcCfg.JrpcUserPasswd = "chain33-mypasswd"
+	r.SetBasicAuth("", "chain33-mypasswd")
 	assert.False(t, checkBasicAuth(r))
 	r.SetBasicAuth("", "")
 	assert.False(t, checkBasicAuth(r))
-	r.SetBasicAuth("chain-user", "")
+	r.SetBasicAuth("chain33-user", "")
 	assert.False(t, checkBasicAuth(r))
-	r.SetBasicAuth("chain", "1234")
+	r.SetBasicAuth("chain33", "1234")
 	assert.False(t, checkBasicAuth(r))
-	r.SetBasicAuth("chain-user", "chain-mypasswd")
+	r.SetBasicAuth("chain33-user", "chain33-mypasswd")
 	assert.True(t, checkBasicAuth(r))
 
 }
@@ -77,7 +76,7 @@ func TestJSONClient_Call(t *testing.T) {
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	qm := &qmocks.Client{}
 	qm.On("GetConfig", mock.Anything).Return(cfg)
@@ -102,7 +101,7 @@ func TestJSONClient_Call(t *testing.T) {
 	assert.NotNil(t, jsonClient)
 
 	var result = ""
-	err = jsonClient.Call("Chain.Version", nil, &result)
+	err = jsonClient.Call("Chain33.Version", nil, &result)
 	assert.NotNil(t, err)
 	assert.Empty(t, result)
 
@@ -110,37 +109,37 @@ func TestJSONClient_Call(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, jsonClient)
 
-	ver := &types.VersionInfo{Chain: "6.0.2"}
+	ver := &types.VersionInfo{Chain33: "6.0.2"}
 	api.On("Version").Return(ver, nil)
 	var nodeVersion types.VersionInfo
-	err = jsonClient.Call("Chain.Version", nil, &nodeVersion)
+	err = jsonClient.Call("Chain33.Version", nil, &nodeVersion)
 	assert.Nil(t, err)
-	assert.Equal(t, "6.0.2", nodeVersion.Chain)
+	assert.Equal(t, "6.0.2", nodeVersion.Chain33)
 
 	var isSnyc bool
-	err = jsonClient.Call("Chain.IsSync", &types.ReqNil{}, &isSnyc)
+	err = jsonClient.Call("Chain33.IsSync", &types.ReqNil{}, &isSnyc)
 	assert.Nil(t, err)
 	assert.Equal(t, ret.GetIsOk(), isSnyc)
 	var nodeInfo rpctypes.NodeNetinfo
 	api.On("GetNetInfo", mock.Anything).Return(&types.NodeNetInfo{Externaladdr: "123"}, nil)
-	err = jsonClient.Call("Chain.GetNetInfo", &types.ReqNil{}, &nodeInfo)
+	err = jsonClient.Call("Chain33.GetNetInfo", &types.ReqNil{}, &nodeInfo)
 	assert.Nil(t, err)
 	assert.Equal(t, "123", nodeInfo.Externaladdr)
 
 	var singRet = ""
 	api.On("ExecWalletFunc", "wallet", "SignRawTx", mock.Anything).Return(&types.ReplySignRawTx{TxHex: "123"}, nil)
-	err = jsonClient.Call("Chain.SignRawTx", &types.ReqSignRawTx{}, &singRet)
+	err = jsonClient.Call("Chain33.SignRawTx", &types.ReqSignRawTx{}, &singRet)
 	assert.Nil(t, err)
 	assert.Equal(t, "123", singRet)
 
 	var fee types.TotalFee
 	api.On("LocalGet", mock.Anything).Return(nil, errors.New("error value"))
-	err = jsonClient.Call("Chain.QueryTotalFee", &types.LocalDBGet{Keys: [][]byte{[]byte("test")}}, &fee)
+	err = jsonClient.Call("Chain33.QueryTotalFee", &types.LocalDBGet{Keys: [][]byte{[]byte("test")}}, &fee)
 	assert.NotNil(t, err)
 
 	var retNtp bool
 	api.On("IsNtpClockSync", mock.Anything).Return(&types.Reply{IsOk: true, Msg: []byte("yes")}, nil)
-	err = jsonClient.Call("Chain.IsNtpClockSync", &types.ReqNil{}, &retNtp)
+	err = jsonClient.Call("Chain33.IsNtpClockSync", &types.ReqNil{}, &retNtp)
 	assert.Nil(t, err)
 	assert.True(t, retNtp)
 	api.On("GetProperFee", mock.Anything).Return(&types.ReplyProperFee{ProperFee: 2}, nil)
@@ -158,7 +157,7 @@ func testDecodeTxHex(t *testing.T, txHex string) *types.Transaction {
 	return &tx
 }
 
-func testCreateTxCoins(t *testing.T, cfg *types.ChainConfig, jsonClient *jsonclient.JSONClient) {
+func testCreateTxCoins(t *testing.T, cfg *types.Chain33Config, jsonClient *jsonclient.JSONClient) {
 	req := &rpctypes.CreateTx{
 		To:          "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2",
 		Amount:      10,
@@ -170,13 +169,13 @@ func testCreateTxCoins(t *testing.T, cfg *types.ChainConfig, jsonClient *jsoncli
 		ExecName:    cfg.ExecName("coins"),
 	}
 	var res string
-	err := jsonClient.Call("Chain.CreateRawTransaction", req, &res)
+	err := jsonClient.Call("Chain33.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	tx := testDecodeTxHex(t, res)
 	assert.Equal(t, "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2", tx.To)
 	assert.Equal(t, int64(1), tx.Fee)
 	req.Fee = 0
-	err = jsonClient.Call("Chain.CreateRawTransaction", req, &res)
+	err = jsonClient.Call("Chain33.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	tx = testDecodeTxHex(t, res)
 	fee, _ := tx.GetRealFee(2)
@@ -193,7 +192,7 @@ func TestEthRpc_Subscribe(t *testing.T) {
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
 
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	subcfg := cfg.GetSubConfig()
 	sub, _ := types.ModifySubConfig(subcfg.RPC["eth"], "enable", true)
 	subcfg.RPC["eth"] = sub
@@ -226,7 +225,7 @@ func TestEthRpc_Subscribe(t *testing.T) {
 	//websocket client
 	ws, err := websocket.Dial("ws://localhost:8546", "", "http://localhost:8546")
 	assert.Nil(t, err)
-	ws.Write([]byte(fmt.Sprintf(`{"id": 1, "method": "eth_subscribe", "params": ["newHeads"]}`)))
+	ws.Write([]byte(`{"id": 1, "method": "eth_subscribe", "params": ["newHeads"]}`))
 	var data string
 	err = websocket.Message.Receive(ws, &data)
 	assert.Nil(t, err)
@@ -258,7 +257,7 @@ func TestEthRpc_Subscribe(t *testing.T) {
 
 	ws, err = websocket.Dial("ws://localhost:8546", "", "http://localhost:8546")
 	assert.Nil(t, err)
-	ws.Write([]byte(fmt.Sprintf(`{"id": 1, "method": "eth_subscribe", "params": ["logs",{"address":"1JX6b8qpVFZ4FPqP4KT2HRTjYJrzRZGw7t"}]}`)))
+	ws.Write([]byte(`{"id": 1, "method": "eth_subscribe", "params": ["logs",{"address":"1JX6b8qpVFZ4FPqP4KT2HRTjYJrzRZGw7t"}]}`))
 	err = websocket.Message.Receive(ws, &data)
 	assert.Nil(t, err)
 
@@ -309,7 +308,7 @@ func TestGrpc_Call(t *testing.T) {
 	rpcCfg.JrpcFuncWhitelist = []string{"*"}
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	_ = NewGrpcServer()
@@ -331,7 +330,7 @@ func TestGrpc_Call(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, c)
 
-	client := types.NewChainClient(c)
+	client := types.NewChain33Client(c)
 	result, err := client.IsSync(ctx, &types.ReqNil{})
 
 	assert.Nil(t, err)
@@ -352,7 +351,7 @@ func TestGrpc_Call(t *testing.T) {
 }
 
 func TestRPC(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	rpcCfg := cfg.GetModuleConfig().RPC
 	rpcCfg.JrpcBindAddr = "localhost:8801"
 	rpcCfg.GrpcBindAddr = "localhost:8802"

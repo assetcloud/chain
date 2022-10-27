@@ -6,7 +6,6 @@ package util
 
 import (
 	"errors"
-	"fmt"
 	"sync/atomic"
 	"testing"
 
@@ -55,15 +54,15 @@ func TestMakeStringLower(t *testing.T) {
 }
 
 func TestResetDatadir(t *testing.T) {
-	cfg, _ := types.InitCfg("../cmd/chain/chain.toml")
+	cfg, _ := types.InitCfg("../cmd/chain33/chain33.toml")
 	datadir := ResetDatadir(cfg, "$TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/chain/chain.toml")
+	cfg, _ = types.InitCfg("../cmd/chain33/chain33.toml")
 	datadir = ResetDatadir(cfg, "/TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/chain/chain.toml")
+	cfg, _ = types.InitCfg("../cmd/chain33/chain33.toml")
 	datadir = ResetDatadir(cfg, "~/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 }
@@ -112,7 +111,7 @@ func TestUpperLower(t *testing.T) {
 }
 
 func TestGenTx(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -131,7 +130,7 @@ func TestGenTx(t *testing.T) {
 }
 
 func TestGenBlock(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	block2 := CreateNoneBlock(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(block2.Txs))
 
@@ -192,7 +191,7 @@ func BenchmarkDelDupKey(b *testing.B) {
 }
 
 func TestDelDupTx(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -279,9 +278,9 @@ func (t *testClient) Wait(in *queue.Message) (*queue.Message, error) {
 
 func TestExecBlock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	str = strings.Replace(str, "Title=\"local\"", "Title=\"chain\"", 1)
-	str += fmt.Sprintf("\n[fork.sub.coins]\nEnable=0\nForkFriendExecer=0")
-	cfg := types.NewChainConfig(types.MergeCfg(types.ReadFile("../cmd/chain/chain.system.fork.toml"), str))
+	str = strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	str += "\n[fork.sub.coins]\nEnable=0\nForkFriendExecer=0"
+	cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile("../cmd/chain33/chain33.system.fork.toml"), str))
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -305,7 +304,7 @@ func TestExecBlock(t *testing.T) {
 }
 
 func TestExecBlockUpgrade(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -319,7 +318,7 @@ func TestExecBlockUpgrade(t *testing.T) {
 }
 
 func TestExecAndCheckBlock(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -350,7 +349,7 @@ func TestExecKVSetRollback(t *testing.T) {
 }
 
 func TestCheckDupTx(t *testing.T) {
-	cfg := types.NewChainConfig(types.GetDefaultCfgstring())
+	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
