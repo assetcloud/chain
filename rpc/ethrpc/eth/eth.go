@@ -589,7 +589,8 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 //GasPrice  eth_gasPrice default 10 gwei
 func (e *ethHandler) GasPrice() (*hexutil.Big, error) {
 	log.Debug("GasPrice", "eth_gasPrice ", "")
-	return (*hexutil.Big)(big.NewInt(1).SetUint64(1e10)), nil
+	//return (*hexutil.Big)(big.NewInt(1).SetUint64(1e10)), nil
+	return (*hexutil.Big)(new(big.Int).Div(big.NewInt(1e18),big.NewInt(e.cfg.GetCoinPrecision()))),nil
 }
 
 //NewHeads ...
