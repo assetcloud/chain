@@ -366,12 +366,6 @@ func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
 	}
 
 	chain33Tx := types.AssembleChainTx(ntx, sig, pubkey, e.cfg)
-	properFee, _ := e.cli.GetProperFee(&ctypes.ReqProperFee{
-		TxCount: 1,
-		TxSize:  int32(len(ctypes.Encode(chain33Tx))),
-	})
-	realFee, _ := chain33Tx.GetRealFee(e.cfg.GetMinTxFeeRate())
-	fmt.Println("chain33Tx caculate fee:------>", properFee.GetProperFee(), "tx.Fee:", chain33Tx.Fee, "realFee:", realFee)
 
 	log.Debug("SendRawTransaction", "cacuHash", common.Bytes2Hex(chain33Tx.Hash()), "exec", string(chain33Tx.Execer))
 	reply, err := e.cli.SendTx(chain33Tx)
