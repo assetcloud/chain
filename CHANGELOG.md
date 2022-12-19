@@ -1,5 +1,13 @@
 changelog
 
+<a name="1.67.5"></a>
+## [1.67.5](https://github.com/assetcloud/chain/compare/v1.67.4...v1.67.5) (2022-12-15)
+
+
+### Bug Fixes
+
+* fix issue #1279 ([f76cfda](https://github.com/assetcloud/chain/commit/f76cfda)), closes [#1279](https://github.com/assetcloud/chain/issues/1279)
+
 <a name="1.67.4"></a>
 ## [1.67.4](https://github.com/assetcloud/chain/compare/v1.67.3...v1.67.4) (2022-10-11)
 

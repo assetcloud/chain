@@ -185,8 +185,11 @@ func paraseChainTx(itx *ctypes.Transaction, blockHash common.Hash, blockNum int6
 		log.Error("paraseChainTx", "err", err)
 		return nil
 	}
+
 	bamount := big.NewInt(amount)
-	eamount := bamount.Mul(bamount, big.NewInt(1e10))
+	eamount := precisionCoins2Eth(bamount, cfg.GetCoinPrecision())
+	//eamount := bamount.Mul(bamount, big.NewInt(1e10))
+	//
 	tx.Value = (*hexutil.Big)(eamount)
 	tx.Input = hexutil.Bytes{0}
 	if strings.HasSuffix(string(itx.Execer), "evm") {
@@ -233,7 +236,8 @@ func paraseChainTx(itx *ctypes.Transaction, blockHash common.Hash, blockNum int6
 	var nonce = uint64(itx.Nonce)
 	var gas = uint64(itx.GetTxFee())
 	tx.Nonce = (hexutil.Uint64)(nonce)
-	tx.GasPrice = (*hexutil.Big)(big.NewInt(10e9))
+	//tx.GasPrice = (*hexutil.Big)(big.NewInt(10e9))
+	tx.GasPrice = (*hexutil.Big)(new(big.Int).Div(big.NewInt(1e18), big.NewInt(cfg.GetCoinPrecision())))
 	tx.Gas = (hexutil.Uint64)(gas)
 	tx.BlockNumber = (*hexutil.Big)(big.NewInt(blockNum))
 	return &tx
@@ -272,7 +276,7 @@ func paraseChainTxPayload(execer string, payload []byte, blockHash common.Hash, 
 
 }
 
-//TxsToEthTxs Chain txs format transfer to eth txs format
+//TxsToEthTxs chain txs format transfer to eth txs format
 func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transaction, cfg *ctypes.ChainConfig, full bool) (txs []interface{}, fee int64, err error) {
 	for index, itx := range ctxs {
 		fee += itx.GetFee()
@@ -300,7 +304,7 @@ func TxsToEthTxs(blockHash common.Hash, blockNum int64, ctxs []*ctypes.Transacti
 	return txs, fee, nil
 }
 
-//TxDetailsToEthReceipts Chain txdetails transfer to eth tx receipts
+//TxDetailsToEthReceipts chain txdetails transfer to eth tx receipts
 func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash common.Hash, cfg *ctypes.ChainConfig) (txs Transactions, receipts []*Receipt, err error) {
 	for index, detail := range txDetails.GetTxs() {
 		if detail.GetTx() == nil {
@@ -319,7 +323,7 @@ func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash comm
 		tx.Hash = common.BytesToHash(detail.GetTx().Hash())
 		txs = append(txs, tx)
 		var receipt Receipt
-		if tx.Input.String() != "0x" {
+		if len(tx.Input) != 0 {
 			receipt.ContractAddress = tx.To
 		}
 		receipt.From = &tx.From
@@ -328,8 +332,14 @@ func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash comm
 		} else {
 			receipt.Status = 0
 		}
-		var gas uint64
-		receipt.Logs, receipt.ContractAddress, gas = receiptLogs2EvmLog(detail, blockHash, nil)
+
+		logs, caddr, gas := receiptLogs2EvmLog(detail, blockHash)
+
+		receipt.Logs = logs
+		if caddr != nil {
+			receipt.ContractAddress = caddr
+		}
+
 		if receipt.Logs == nil {
 			receipt.Logs = []*EvmLog{}
 		}
@@ -345,28 +355,20 @@ func TxDetailsToEthReceipts(txDetails *ctypes.TransactionDetails, blockHash comm
 		receipt.TxHash = common.BytesToHash(detail.GetTx().Hash())
 		receipt.BlockNumber = (*hexutil.Big)(big.NewInt(detail.Height))
 		receipt.TransactionIndex = hexutil.Uint(uint64(detail.GetIndex()))
+		receipt.BlockHash = blockHash
 		receipts = append(receipts, &receipt)
 	}
 	return
 }
 
-func receiptLogs2EvmLog(detail *ctypes.TransactionDetail, blockHash common.Hash, option *SubLogs) (elogs []*EvmLog, contractorAddr *common.Address, gasused uint64) {
+func receiptLogs2EvmLog(detail *ctypes.TransactionDetail, blockHash common.Hash) (elogs []*EvmLog, contractorAddr *common.Address, gasused uint64) {
 	var cAddr common.Address
-	var filterTopics = make(map[string]bool)
-	if option != nil {
-		for _, topic := range option.Topics {
-			filterTopics[topic] = true
-		}
-	}
 	var index int
-
 	for _, lg := range detail.Receipt.Logs {
-
 		if lg.Ty != 605 && lg.Ty != 603 { //evm event
 			continue
 		}
 		var evmLog ctypes.EVMLog
-
 		if lg.Ty == 605 {
 			err := ctypes.Decode(lg.Log, &evmLog)
 			if nil != err {
@@ -378,12 +380,15 @@ func receiptLogs2EvmLog(detail *ctypes.TransactionDetail, blockHash common.Hash,
 
 		if lg.Ty == 603 { //获取消费的GAS
 			var recp rpctypes.ReceiptData
-			recp.Ty = 2
+			recp.Ty = lg.Ty
 			recp.Logs = append(recp.Logs, &rpctypes.ReceiptLog{Ty: lg.Ty, Log: common.Bytes2Hex(lg.Log)})
-			recpResult, err := rpctypes.DecodeLog([]byte("evm"), &recp)
+			recpResult, err := rpctypes.DecodeLog(detail.GetTx().GetExecer(), &recp)
 			if err != nil {
 				log.Error("receiptLogs2EvmLog", "Failed to DecodeLog for type", err)
 				continue
+			}
+			if recpResult.Logs[0].Log == nil {
+				break
 			}
 			var receiptEVMContract struct {
 				Caller       string ` json:"caller,omitempty"`
@@ -396,89 +401,38 @@ func receiptLogs2EvmLog(detail *ctypes.TransactionDetail, blockHash common.Hash,
 				JSONRet string ` json:"jsonRet,omitempty"`
 			}
 
-			jlg, _ := json.Marshal(recpResult.Logs[0].Log)
-			err = json.Unmarshal(jlg, &receiptEVMContract)
+			err = json.Unmarshal(recpResult.Logs[0].Log, &receiptEVMContract)
 			if nil == err {
-				log.Info("receiptLogs2EvmLog", "gasused:", receiptEVMContract.UsedGas)
+				log.Debug("receiptLogs2EvmLog", "gasused:", receiptEVMContract.UsedGas, "contractAddr:", receiptEVMContract.ContractAddr)
 				bn, ok := big.NewInt(1).SetString(receiptEVMContract.UsedGas, 10)
 				if ok {
 					gasused = bn.Uint64()
 				}
 				cAddr = common.HexToAddress(receiptEVMContract.ContractAddr)
 				contractorAddr = &cAddr
-
+				for _, elog := range elogs {
+					elog.Address = cAddr
+				}
+			} else {
+				log.Error("receiptLogs2EvmLog", " decode receiptEVMContract err:", err.Error(), "log:", string(recpResult.Logs[0].Log))
 			}
-		}
 
+			break
+
+		}
 		var elog EvmLog
 		elog.TxIndex = hexutil.Uint(detail.GetIndex())
 		elog.Index = hexutil.Uint(index)
-		elog.Address = &cAddr
 		elog.TxHash = common.BytesToHash(detail.GetTx().Hash())
 		elog.BlockNumber = hexutil.Uint64(detail.Height)
 		elog.BlockHash = blockHash
+		elog.Data = evmLog.Data
 		for _, topic := range evmLog.Topic {
-			if option != nil {
-				if _, ok := filterTopics[hexutil.Encode(topic)]; !ok {
-					continue
-				}
-			}
 			elog.Topics = append(elog.Topics, common.BytesToHash(topic))
-			if len(evmLog.Data) != 0 {
-				elog.Data = (*hexutil.Bytes)(&evmLog.Data)
-			} else {
-				elog.Data = nil
-			}
-
 		}
+		elogs = append(elogs, &elog) //每个605 事件循环一次
+		index++
 
-		if lg.Ty == 605 {
-			elogs = append(elogs, &elog)
-			index++
-		}
-
-	}
-
-	return
-}
-
-//FilterEvmLogs filter evm logs by option
-func FilterEvmLogs(logs *ctypes.EVMTxLogPerBlk, option *SubLogs) (evmlogs []*EvmLogInfo) {
-	var addr string
-	var filterTopics = make(map[string]bool)
-	if option != nil {
-		for _, topic := range option.Topics {
-			if topic == "" {
-				continue
-			}
-			filterTopics[topic] = true
-		}
-	}
-
-	if option != nil {
-		addr = option.Address
-	}
-	for i, txlog := range logs.TxAndLogs {
-		var info EvmLogInfo
-		if txlog.GetTx().GetTo() == addr {
-			for j, tlog := range txlog.GetLogsPerTx().GetLogs() {
-				var topics []string
-				if _, ok := filterTopics[hexutil.Encode(tlog.Topic[0])]; ok || len(filterTopics) == 0 {
-					topics = append(topics, hexutil.Encode(tlog.Topic[0]))
-				}
-
-				if len(topics) != 0 {
-					info.LogIndex = hexutil.EncodeUint64(uint64(j))
-					info.Topics = topics
-				}
-				info.Address = addr
-				info.TransactionIndex = hexutil.EncodeUint64(uint64(i))
-				info.BlockHash = hexutil.Encode(logs.BlockHash)
-				info.TransactionHash = hexutil.Encode(txlog.GetTx().Hash())
-				info.BlockNumber = hexutil.EncodeUint64(uint64(logs.Height))
-				evmlogs = append(evmlogs, &info)
-			}
-		}
 	}
 
 	return
@@ -489,7 +443,7 @@ func CreateBloom(receipts []*Receipt) etypes.Bloom {
 	var bin etypes.Bloom
 	for _, receipt := range receipts {
 		for _, rlog := range receipt.Logs {
-			if rlog.Address != nil && rlog.Address.Bytes() != nil {
+			if rlog.Address.Bytes() != nil {
 				bin.Add(rlog.Address.Bytes())
 			}
 
@@ -501,18 +455,21 @@ func CreateBloom(receipts []*Receipt) etypes.Bloom {
 	return bin
 }
 
-//AssembleChainTx 通过eth tx 组装Chain tx 全部走evm 通道
+//AssembleChainTx 通过eth tx 组装chain tx 全部走evm 通道
 func AssembleChainTx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.ChainConfig) *ctypes.Transaction {
 	rawData, err := etx.MarshalBinary()
 	if err != nil {
-		log.Error("AssembleChainTxV2", "tx.MarshalBinary err", err.Error())
+		log.Error("AssembleChainTx", "tx.MarshalBinary err", err.Error())
 		return nil
 	}
 
 	var exec = cfg.ExecName("evm")
 	var amount int64
+
 	if etx.Value() != nil {
-		amount = etx.Value().Div(etx.Value(), big.NewInt(1).SetUint64(1e10)).Int64()
+		bigAmount := precisionEth2Coins(etx.Value(), cfg.GetCoinPrecision())
+		amount = bigAmount.Int64()
+
 	}
 	action := &ctypes.EVMContractAction4Chain{
 		Amount:       uint64(amount),
@@ -535,12 +492,12 @@ func AssembleChainTx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.Ch
 		} else {
 			//合约操作
 			action.Para = packdata
-			to = etx.To().String()
+			to = strings.ToLower(etx.To().String())
 		}
 		action.ContractAddr = to
 
 	} else { // coins 操作
-		to = etx.To().String()
+		to = strings.ToLower(etx.To().String())
 		//coins 转账,para为目的地址
 		action.Para = common.FromHex(to)
 		//ContractAddr 为执行器地址
@@ -553,7 +510,7 @@ func AssembleChainTx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.Ch
 	}
 
 	//全部走Evm 通道，exec=evm
-	var ChainTx = &ctypes.Transaction{
+	var chainTx = &ctypes.Transaction{
 		ChainID: cfg.GetChainID(), //与链节点的chainID保持一致
 		To:      to,
 		Execer:  []byte(exec),
@@ -566,10 +523,22 @@ func AssembleChainTx(etx *etypes.Transaction, sig, pubkey []byte, cfg *ctypes.Ch
 		},
 	}
 	//为了防止认为设置过高的nonce,挤占mempool空间，允许最大3小时的超时时间
-	ChainTx.SetExpire(cfg, time.Hour*3)
-	ChainTx.Nonce = int64(etx.Nonce())
+	chainTx.SetExpire(cfg, time.Hour*3)
+	chainTx.Nonce = int64(etx.Nonce())
 	if cfg.IsPara() {
-		ChainTx.To = address.ExecAddress(string(ChainTx.Execer))
+		chainTx.To = address.ExecAddress(string(chainTx.Execer))
 	}
-	return ChainTx
+	return chainTx
+}
+
+func precisionEth2Coins(ethValue *big.Int, coinPrecision int64) *big.Int {
+	ethUnit := big.NewInt(1e18)
+	return new(big.Int).Div(ethValue, ethUnit.Div(ethUnit, big.NewInt(1).SetInt64(coinPrecision)))
+
+}
+
+func precisionCoins2Eth(coinsValue *big.Int, coinPrecision int64) *big.Int {
+	ethUnit := big.NewInt(1e18)
+	mulUnit := new(big.Int).Div(ethUnit, big.NewInt(1).SetInt64(coinPrecision))
+	return new(big.Int).Mul(coinsValue, mulUnit)
 }
