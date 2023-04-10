@@ -1,8 +1,9 @@
 package net
 
 import (
-	"github.com/assetcloud/chain/system/crypto/secp256k1eth"
 	"strconv"
+
+	"github.com/assetcloud/chain/system/crypto/secp256k1eth"
 
 	"github.com/assetcloud/chain/client"
 	"github.com/assetcloud/chain/queue"

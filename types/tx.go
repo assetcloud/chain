@@ -582,7 +582,7 @@ func (tx *Transaction) IsExpire(cfg *ChainConfig, height, blocktime int64) bool 
 //GetTxFee 获取交易的费用，区分单笔交易和交易组
 func (tx *Transaction) GetTxFee() int64 {
 	group, _ := tx.GetTxGroup()
-	if group == nil {
+	if group == nil || len(group.GetTxs()) == 0 {
 		return tx.Fee
 	}
 	return group.Txs[0].Fee

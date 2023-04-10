@@ -9,6 +9,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/assetcloud/chain/client"
+
 	slog "github.com/assetcloud/chain/common/log"
 	"github.com/assetcloud/chain/pluginmgr"
 
@@ -17,8 +19,7 @@ import (
 
 	//"sync"
 	"testing"
-	//"time"
-	"github.com/assetcloud/chain/client"
+
 	"github.com/stretchr/testify/require"
 
 	"strings"
@@ -867,9 +868,12 @@ func mockblockchain(t *testing.T, client queue.Client) {
 		blockchainKey := "blockchain"
 		//client := q.Client()
 		client.Sub(blockchainKey)
+
 		for msg := range client.Recv() {
+
 			switch msg.Ty {
 			case types.EventSubscribePush:
+
 				//checkparam
 				req, _ := msg.GetData().(*types.PushSubscribeReq)
 				if req.GetType() == 2 || req.GetType() == 4 {
@@ -938,8 +942,10 @@ func TestGrpc_SubEvent(t *testing.T) {
 		t.Log("SubEvent err:", err)
 		return
 	}
+
 	_, err = stream.Recv()
 	assert.NotNil(t, err)
+
 	in.Contract = make(map[string]bool)
 	in.Contract["token"] = true
 	stream, err = gcli.SubEvent(context.Background(), &in)
@@ -947,9 +953,8 @@ func TestGrpc_SubEvent(t *testing.T) {
 		t.Log("SubEvent err:", err)
 		return
 	}
-
 	data, err := stream.Recv()
 	assert.Nil(t, err)
 	t.Log("data:", data)
-
+	gcli.UnSubEvent(context.Background(), &types.ReqString{Data: in.Name})
 }
