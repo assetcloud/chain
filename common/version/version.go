@@ -5,8 +5,8 @@
 // Package version 软件版本号
 package version
 
-//Version chain33 version
-var Version = "1.67.5"
+//Version chain version
+var Version = "1.68.0"
 
 //var version key
 var (

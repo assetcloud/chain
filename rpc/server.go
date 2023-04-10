@@ -7,8 +7,8 @@ package rpc
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
-
 	"net"
 	"net/http"
 	"net/rpc"
@@ -26,7 +26,6 @@ import (
 	"github.com/assetcloud/chain/common/log/log15"
 	"github.com/assetcloud/chain/pluginmgr"
 	"github.com/assetcloud/chain/queue"
-	"github.com/assetcloud/chain/rpc/grpcclient"
 	_ "github.com/assetcloud/chain/rpc/grpcclient" // register grpc multiple resolver
 	"github.com/assetcloud/chain/types"
 	"golang.org/x/net/context"
@@ -52,8 +51,6 @@ var (
 // Chain  a channel client
 type Chain struct {
 	cli rclient.ChannelClient
-	//for communicate with main chain in parallel chain
-	mainGrpcCli types.ChainClient
 }
 
 // Grpc a channelClient
@@ -96,16 +93,23 @@ func (g *Grpc) addSubChan(topic string, dch chan *queue.Message) {
 	}
 }
 
-func (g *Grpc) delSubInfo(topic string, dch chan *queue.Message) {
+func (g *Grpc) delSubInfo(topic string, dch chan *queue.Message) error {
 	g.cachelock.Lock()
 	defer g.cachelock.Unlock()
 	info, ok := g.subCache[topic]
 	if ok {
-		delete(info.subChan, dch)
-		if len(info.subChan) == 0 {
+		if dch != nil {
+			delete(info.subChan, dch)
+			if len(info.subChan) == 0 {
+				delete(g.subCache, topic)
+			}
+		} else {
 			delete(g.subCache, topic)
+
 		}
+		return nil
 	}
+	return errors.New("no this topicID")
 
 }
 func (g *Grpc) hashTopic(topic string) *subInfo {
@@ -298,13 +302,6 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServer {
 	j := &JSONRPCServer{jrpc: &Chain{}}
 	j.jrpc.cli.Init(c, api)
-	if c.GetConfig().IsPara() {
-		grpcCli, err := grpcclient.NewMainChainClient(c.GetConfig(), "")
-		if err != nil {
-			panic(err)
-		}
-		j.jrpc.mainGrpcCli = grpcCli
-	}
 	server := rpc.NewServer()
 	j.s = server
 	err := server.RegisterName("Chain", j.jrpc)
@@ -393,7 +390,6 @@ func (r *RPC) handleSysEvent() {
 	var cli rclient.ChannelClient
 	cli.Init(r.cli, r.api)
 	for msg := range r.cli.Recv() {
-
 		switch msg.Ty {
 		case types.EventGetEvmNonce:
 			addr := msg.GetData().(*types.ReqEvmAccountNonce)
@@ -437,29 +433,30 @@ func (r *RPC) handleSysEvent() {
 			currentNonce, _ := strconv.Atoi(nonce.Nonce)
 			msg.Reply(r.cli.NewMessage("", types.EventGetEvmNonce, &types.EvmAccountNonce{Nonce: int64(currentNonce), Addr: addr.String()}))
 
-		default:
+		case types.EventPushEVM, types.EventPushTxReceipt, types.EventPushBlockHeader, types.EventPushBlock, types.EventPushTxResult:
 			topicInfo := r.gapi.grpc.hashTopic(msg.GetData().(*types.PushData).GetName())
 			if topicInfo != nil {
-				go func(rmsg *queue.Message) {
-					ticker := time.NewTicker(time.Millisecond * 200)
-					defer ticker.Stop()
-					for ch := range topicInfo.subChan {
-						select {
-						case <-ticker.C:
-							log.Error("handleSysEvent", "ticker timeout", rmsg.GetData().(*types.PushData).GetName())
-						case ch <- rmsg:
-							rmsg.Reply(r.cli.NewMessage("blockchain", msg.Ty, &types.Reply{IsOk: true}))
+				var ticket = time.NewTicker(time.Second)
+				for ch := range topicInfo.subChan {
+					select {
+					case <-ticket.C:
+						ticket.Reset(time.Second)
+						continue
+					case ch <- msg:
+						msg.Reply(r.cli.NewMessage("blockchain", msg.Ty, &types.Reply{IsOk: true}))
+						ticket.Reset(time.Second)
 
-						}
 					}
-
-				}(msg)
+				}
 
 			} else {
 				//要求blockchain模块停止推送
 				log.Error("handleSysEvent", "no subscriber,all topic", r.gapi.grpc.subCache, "no topic:", msg.GetData().(*types.PushData).GetName(), "subchan:", topicInfo)
 				msg.Reply(r.cli.NewMessage("blockchain", msg.Ty, &types.Reply{IsOk: false, Msg: []byte("no subscriber")}))
 			}
+
+		default:
+			log.Error("rpc.handleSysEvent no support event:", msg.Ty)
 		}
 
 	}

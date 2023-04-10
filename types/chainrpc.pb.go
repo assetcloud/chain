@@ -726,7 +726,7 @@ var file_chainrpc_proto_rawDesc = []byte{
 	0x35, 0x0a, 0x07, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x65, 0x73, 0x12, 0x2a, 0x0a, 0x09, 0x72, 0x65,
 	0x70, 0x6c, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e,
 	0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x52, 0x09, 0x72, 0x65, 0x70,
-	0x6c, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x32, 0x8c, 0x23, 0x0a, 0x05, 0x63, 0x68, 0x61, 0x69, 0x6e,
+	0x6c, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x32, 0xbc, 0x23, 0x0a, 0x05, 0x63, 0x68, 0x61, 0x69, 0x6e,
 	0x12, 0x2d, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x12, 0x10, 0x2e,
 	0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x71, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x1a,
 	0x0c, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12,
@@ -1007,7 +1007,10 @@ var file_chainrpc_proto_rawDesc = []byte{
 	0x34, 0x0a, 0x08, 0x53, 0x75, 0x62, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x13, 0x2e, 0x74, 0x79,
 	0x70, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x71, 0x53, 0x75, 0x62, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65,
 	0x1a, 0x0f, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x50, 0x75, 0x73, 0x68, 0x44, 0x61, 0x74,
-	0x61, 0x22, 0x00, 0x30, 0x01, 0x42, 0x23, 0x5a, 0x21, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x61, 0x22, 0x00, 0x30, 0x01, 0x12, 0x2e, 0x0a, 0x0a, 0x55, 0x6e, 0x53, 0x75, 0x62, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x12, 0x10, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x71, 0x53,
+	0x74, 0x72, 0x69, 0x6e, 0x67, 0x1a, 0x0c, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x23, 0x5a, 0x21, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
 	0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x73, 0x73, 0x65, 0x74, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63,
 	0x68, 0x61, 0x69, 0x6e, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x33,
@@ -1201,85 +1204,87 @@ var file_chainrpc_proto_depIdxs = []int32{
 	13, // 79: types.chain.ListPushes:input_type -> types.ReqNil
 	39, // 80: types.chain.GetPushSeqLastNum:input_type -> types.ReqString
 	55, // 81: types.chain.SubEvent:input_type -> types.ReqSubscribe
-	11, // 82: types.chain.GetBlocks:output_type -> types.Reply
-	56, // 83: types.chain.GetLastHeader:output_type -> types.Header
-	57, // 84: types.chain.CreateRawTransaction:output_type -> types.UnsignTx
-	57, // 85: types.chain.CreateRawTxGroup:output_type -> types.UnsignTx
-	58, // 86: types.chain.QueryTransaction:output_type -> types.TransactionDetail
-	11, // 87: types.chain.SendTransactionSync:output_type -> types.Reply
-	11, // 88: types.chain.SendTransaction:output_type -> types.Reply
-	9,  // 89: types.chain.SendTransactions:output_type -> types.Replies
-	59, // 90: types.chain.GetTransactionByAddr:output_type -> types.ReplyTxInfos
-	60, // 91: types.chain.GetTransactionByHashes:output_type -> types.TransactionDetails
-	61, // 92: types.chain.GetMemPool:output_type -> types.ReplyTxList
-	62, // 93: types.chain.GetAccounts:output_type -> types.WalletAccounts
-	63, // 94: types.chain.GetAccount:output_type -> types.WalletAccount
-	63, // 95: types.chain.NewAccount:output_type -> types.WalletAccount
-	64, // 96: types.chain.WalletTransactionList:output_type -> types.WalletTxDetails
-	63, // 97: types.chain.ImportPrivkey:output_type -> types.WalletAccount
-	65, // 98: types.chain.SendToAddress:output_type -> types.ReplyHash
-	11, // 99: types.chain.SetTxFee:output_type -> types.Reply
-	63, // 100: types.chain.SetLabl:output_type -> types.WalletAccount
-	66, // 101: types.chain.MergeBalance:output_type -> types.ReplyHashes
-	11, // 102: types.chain.SetPasswd:output_type -> types.Reply
-	11, // 103: types.chain.Lock:output_type -> types.Reply
-	11, // 104: types.chain.UnLock:output_type -> types.Reply
-	61, // 105: types.chain.GetLastMemPool:output_type -> types.ReplyTxList
-	67, // 106: types.chain.GetProperFee:output_type -> types.ReplyProperFee
-	68, // 107: types.chain.GetWalletStatus:output_type -> types.WalletStatus
-	69, // 108: types.chain.GetBlockOverview:output_type -> types.BlockOverview
-	70, // 109: types.chain.GetAddrOverview:output_type -> types.AddrOverview
-	65, // 110: types.chain.GetBlockHash:output_type -> types.ReplyHash
-	71, // 111: types.chain.GenSeed:output_type -> types.ReplySeed
-	71, // 112: types.chain.GetSeed:output_type -> types.ReplySeed
-	11, // 113: types.chain.SaveSeed:output_type -> types.Reply
-	72, // 114: types.chain.GetBalance:output_type -> types.Accounts
-	11, // 115: types.chain.QueryChain:output_type -> types.Reply
-	11, // 116: types.chain.ExecWallet:output_type -> types.Reply
-	11, // 117: types.chain.QueryConsensus:output_type -> types.Reply
-	57, // 118: types.chain.CreateTransaction:output_type -> types.UnsignTx
-	73, // 119: types.chain.GetHexTxByHash:output_type -> types.HexTx
-	74, // 120: types.chain.DumpPrivkey:output_type -> types.ReplyString
-	11, // 121: types.chain.DumpPrivkeysFile:output_type -> types.Reply
-	11, // 122: types.chain.ImportPrivkeysFile:output_type -> types.Reply
-	75, // 123: types.chain.Version:output_type -> types.VersionInfo
-	11, // 124: types.chain.IsSync:output_type -> types.Reply
-	76, // 125: types.chain.GetPeerInfo:output_type -> types.PeerList
-	77, // 126: types.chain.NetInfo:output_type -> types.NodeNetInfo
-	11, // 127: types.chain.IsNtpClockSync:output_type -> types.Reply
-	78, // 128: types.chain.GetFatalFailure:output_type -> types.Int32
-	43, // 129: types.chain.GetLastBlockSequence:output_type -> types.Int64
-	43, // 130: types.chain.GetSequenceByHash:output_type -> types.Int64
-	79, // 131: types.chain.GetBlockByHashes:output_type -> types.BlockDetails
-	80, // 132: types.chain.GetBlockBySeq:output_type -> types.BlockSeq
-	11, // 133: types.chain.CloseQueue:output_type -> types.Reply
-	81, // 134: types.chain.GetAllExecBalance:output_type -> types.AllExecBalance
-	82, // 135: types.chain.SignRawTx:output_type -> types.ReplySignRawTx
-	82, // 136: types.chain.CreateNoBalanceTransaction:output_type -> types.ReplySignRawTx
-	65, // 137: types.chain.QueryRandNum:output_type -> types.ReplyHash
-	43, // 138: types.chain.GetFork:output_type -> types.Int64
-	82, // 139: types.chain.CreateNoBalanceTxs:output_type -> types.ReplySignRawTx
-	83, // 140: types.chain.GetParaTxByTitle:output_type -> types.ParaTxDetails
-	84, // 141: types.chain.LoadParaTxByTitle:output_type -> types.ReplyHeightByTitle
-	83, // 142: types.chain.GetParaTxByHeight:output_type -> types.ParaTxDetails
-	85, // 143: types.chain.GetHeaders:output_type -> types.Headers
-	0,  // 144: types.chain.GetServerTime:output_type -> types.serverTime
-	2,  // 145: types.chain.GetCryptoList:output_type -> types.cryptoList
-	4,  // 146: types.chain.GetAddressDrivers:output_type -> types.addressDrivers
-	11, // 147: types.chain.SendDelayTransaction:output_type -> types.Reply
-	74, // 148: types.chain.GetWalletRecoverAddress:output_type -> types.ReplyString
-	82, // 149: types.chain.SignWalletRecoverTx:output_type -> types.ReplySignRawTx
-	8,  // 150: types.chain.GetChainConfig:output_type -> types.ChainConfigInfo
-	74, // 151: types.chain.ConvertExectoAddr:output_type -> types.ReplyString
-	74, // 152: types.chain.GetCoinSymbol:output_type -> types.ReplyString
-	57, // 153: types.chain.ReWriteTx:output_type -> types.UnsignTx
-	86, // 154: types.chain.GetBlockSequences:output_type -> types.BlockSequences
-	87, // 155: types.chain.AddPushSubscribe:output_type -> types.ReplySubscribePush
-	88, // 156: types.chain.ListPushes:output_type -> types.PushSubscribes
-	43, // 157: types.chain.GetPushSeqLastNum:output_type -> types.Int64
-	89, // 158: types.chain.SubEvent:output_type -> types.PushData
-	82, // [82:159] is the sub-list for method output_type
-	5,  // [5:82] is the sub-list for method input_type
+	39, // 82: types.chain.UnSubEvent:input_type -> types.ReqString
+	11, // 83: types.chain.GetBlocks:output_type -> types.Reply
+	56, // 84: types.chain.GetLastHeader:output_type -> types.Header
+	57, // 85: types.chain.CreateRawTransaction:output_type -> types.UnsignTx
+	57, // 86: types.chain.CreateRawTxGroup:output_type -> types.UnsignTx
+	58, // 87: types.chain.QueryTransaction:output_type -> types.TransactionDetail
+	11, // 88: types.chain.SendTransactionSync:output_type -> types.Reply
+	11, // 89: types.chain.SendTransaction:output_type -> types.Reply
+	9,  // 90: types.chain.SendTransactions:output_type -> types.Replies
+	59, // 91: types.chain.GetTransactionByAddr:output_type -> types.ReplyTxInfos
+	60, // 92: types.chain.GetTransactionByHashes:output_type -> types.TransactionDetails
+	61, // 93: types.chain.GetMemPool:output_type -> types.ReplyTxList
+	62, // 94: types.chain.GetAccounts:output_type -> types.WalletAccounts
+	63, // 95: types.chain.GetAccount:output_type -> types.WalletAccount
+	63, // 96: types.chain.NewAccount:output_type -> types.WalletAccount
+	64, // 97: types.chain.WalletTransactionList:output_type -> types.WalletTxDetails
+	63, // 98: types.chain.ImportPrivkey:output_type -> types.WalletAccount
+	65, // 99: types.chain.SendToAddress:output_type -> types.ReplyHash
+	11, // 100: types.chain.SetTxFee:output_type -> types.Reply
+	63, // 101: types.chain.SetLabl:output_type -> types.WalletAccount
+	66, // 102: types.chain.MergeBalance:output_type -> types.ReplyHashes
+	11, // 103: types.chain.SetPasswd:output_type -> types.Reply
+	11, // 104: types.chain.Lock:output_type -> types.Reply
+	11, // 105: types.chain.UnLock:output_type -> types.Reply
+	61, // 106: types.chain.GetLastMemPool:output_type -> types.ReplyTxList
+	67, // 107: types.chain.GetProperFee:output_type -> types.ReplyProperFee
+	68, // 108: types.chain.GetWalletStatus:output_type -> types.WalletStatus
+	69, // 109: types.chain.GetBlockOverview:output_type -> types.BlockOverview
+	70, // 110: types.chain.GetAddrOverview:output_type -> types.AddrOverview
+	65, // 111: types.chain.GetBlockHash:output_type -> types.ReplyHash
+	71, // 112: types.chain.GenSeed:output_type -> types.ReplySeed
+	71, // 113: types.chain.GetSeed:output_type -> types.ReplySeed
+	11, // 114: types.chain.SaveSeed:output_type -> types.Reply
+	72, // 115: types.chain.GetBalance:output_type -> types.Accounts
+	11, // 116: types.chain.QueryChain:output_type -> types.Reply
+	11, // 117: types.chain.ExecWallet:output_type -> types.Reply
+	11, // 118: types.chain.QueryConsensus:output_type -> types.Reply
+	57, // 119: types.chain.CreateTransaction:output_type -> types.UnsignTx
+	73, // 120: types.chain.GetHexTxByHash:output_type -> types.HexTx
+	74, // 121: types.chain.DumpPrivkey:output_type -> types.ReplyString
+	11, // 122: types.chain.DumpPrivkeysFile:output_type -> types.Reply
+	11, // 123: types.chain.ImportPrivkeysFile:output_type -> types.Reply
+	75, // 124: types.chain.Version:output_type -> types.VersionInfo
+	11, // 125: types.chain.IsSync:output_type -> types.Reply
+	76, // 126: types.chain.GetPeerInfo:output_type -> types.PeerList
+	77, // 127: types.chain.NetInfo:output_type -> types.NodeNetInfo
+	11, // 128: types.chain.IsNtpClockSync:output_type -> types.Reply
+	78, // 129: types.chain.GetFatalFailure:output_type -> types.Int32
+	43, // 130: types.chain.GetLastBlockSequence:output_type -> types.Int64
+	43, // 131: types.chain.GetSequenceByHash:output_type -> types.Int64
+	79, // 132: types.chain.GetBlockByHashes:output_type -> types.BlockDetails
+	80, // 133: types.chain.GetBlockBySeq:output_type -> types.BlockSeq
+	11, // 134: types.chain.CloseQueue:output_type -> types.Reply
+	81, // 135: types.chain.GetAllExecBalance:output_type -> types.AllExecBalance
+	82, // 136: types.chain.SignRawTx:output_type -> types.ReplySignRawTx
+	82, // 137: types.chain.CreateNoBalanceTransaction:output_type -> types.ReplySignRawTx
+	65, // 138: types.chain.QueryRandNum:output_type -> types.ReplyHash
+	43, // 139: types.chain.GetFork:output_type -> types.Int64
+	82, // 140: types.chain.CreateNoBalanceTxs:output_type -> types.ReplySignRawTx
+	83, // 141: types.chain.GetParaTxByTitle:output_type -> types.ParaTxDetails
+	84, // 142: types.chain.LoadParaTxByTitle:output_type -> types.ReplyHeightByTitle
+	83, // 143: types.chain.GetParaTxByHeight:output_type -> types.ParaTxDetails
+	85, // 144: types.chain.GetHeaders:output_type -> types.Headers
+	0,  // 145: types.chain.GetServerTime:output_type -> types.serverTime
+	2,  // 146: types.chain.GetCryptoList:output_type -> types.cryptoList
+	4,  // 147: types.chain.GetAddressDrivers:output_type -> types.addressDrivers
+	11, // 148: types.chain.SendDelayTransaction:output_type -> types.Reply
+	74, // 149: types.chain.GetWalletRecoverAddress:output_type -> types.ReplyString
+	82, // 150: types.chain.SignWalletRecoverTx:output_type -> types.ReplySignRawTx
+	8,  // 151: types.chain.GetChainConfig:output_type -> types.ChainConfigInfo
+	74, // 152: types.chain.ConvertExectoAddr:output_type -> types.ReplyString
+	74, // 153: types.chain.GetCoinSymbol:output_type -> types.ReplyString
+	57, // 154: types.chain.ReWriteTx:output_type -> types.UnsignTx
+	86, // 155: types.chain.GetBlockSequences:output_type -> types.BlockSequences
+	87, // 156: types.chain.AddPushSubscribe:output_type -> types.ReplySubscribePush
+	88, // 157: types.chain.ListPushes:output_type -> types.PushSubscribes
+	43, // 158: types.chain.GetPushSeqLastNum:output_type -> types.Int64
+	89, // 159: types.chain.SubEvent:output_type -> types.PushData
+	11, // 160: types.chain.UnSubEvent:output_type -> types.Reply
+	83, // [83:161] is the sub-list for method output_type
+	5,  // [5:83] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1599,6 +1604,8 @@ type ChainClient interface {
 	GetPushSeqLastNum(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*Int64, error)
 	//发送订阅的数据到客户端
 	SubEvent(ctx context.Context, in *ReqSubscribe, opts ...grpc.CallOption) (Chain_SubEventClient, error)
+	//取消订阅
+	UnSubEvent(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*Reply, error)
 }
 
 type chainClient struct {
@@ -2325,6 +2332,15 @@ func (x *chainSubEventClient) Recv() (*PushData, error) {
 	return m, nil
 }
 
+func (c *chainClient) UnSubEvent(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*Reply, error) {
+	out := new(Reply)
+	err := c.cc.Invoke(ctx, "/types.chain/UnSubEvent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChainServer is the server API for Chain service.
 type ChainServer interface {
 	// chain 对外提供服务的接口
@@ -2474,6 +2490,8 @@ type ChainServer interface {
 	GetPushSeqLastNum(context.Context, *ReqString) (*Int64, error)
 	//发送订阅的数据到客户端
 	SubEvent(*ReqSubscribe, Chain_SubEventServer) error
+	//取消订阅
+	UnSubEvent(context.Context, *ReqString) (*Reply, error)
 }
 
 // UnimplementedChainServer can be embedded to have forward compatible implementations.
@@ -2710,6 +2728,9 @@ func (*UnimplementedChainServer) GetPushSeqLastNum(context.Context, *ReqString) 
 }
 func (*UnimplementedChainServer) SubEvent(*ReqSubscribe, Chain_SubEventServer) error {
 	return status.Errorf(codes.Unimplemented, "method SubEvent not implemented")
+}
+func (*UnimplementedChainServer) UnSubEvent(context.Context, *ReqString) (*Reply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnSubEvent not implemented")
 }
 
 func RegisterChainServer(s *grpc.Server, srv ChainServer) {
@@ -4105,6 +4126,24 @@ func (x *chainSubEventServer) Send(m *PushData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Chain_UnSubEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReqString)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChainServer).UnSubEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/types.chain/UnSubEvent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChainServer).UnSubEvent(ctx, req.(*ReqString))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Chain_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "types.chain",
 	HandlerType: (*ChainServer)(nil),
@@ -4412,6 +4451,10 @@ var _Chain_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPushSeqLastNum",
 			Handler:    _Chain_GetPushSeqLastNum_Handler,
+		},
+		{
+			MethodName: "UnSubEvent",
+			Handler:    _Chain_UnSubEvent_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

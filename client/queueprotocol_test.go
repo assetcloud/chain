@@ -49,6 +49,7 @@ func TestQueueProtocolAPI(t *testing.T) {
 	}
 
 	var q = queue.New("channel")
+	q.SetConfig(types.NewChainConfig(types.GetDefaultCfgstring()))
 	qc, err := client.New(q.Client(), &option)
 	if err != nil {
 		t.Errorf("client.New() cause error %v", err)
@@ -1204,7 +1205,7 @@ func TestGetMainSeq(t *testing.T) {
 	chain := &mockBlockChain{}
 	chain.SetQueueClient(net)
 	defer chain.Close()
-
+	net.SetConfig(types.NewChainConfig(types.GetDefaultCfgstring()))
 	api, err := client.New(net.Client(), nil)
 	assert.Nil(t, err)
 
@@ -1285,6 +1286,7 @@ func TestGetParaTxByHeight(t *testing.T) {
 
 func TestQueueProtocol_SendDelayTx(t *testing.T) {
 	q := queue.New("delaytx")
+	q.SetConfig(types.NewChainConfig(types.GetDefaultCfgstring()))
 	defer q.Close()
 	api, err := client.New(q.Client(), nil)
 	require.Nil(t, err)
