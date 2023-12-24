@@ -22,14 +22,14 @@ Usage:
 Flags:
   -h, --help            help for gendapp
   -n, --name string     dapp name
-  -o, --output string   go package for output (default github.com/33cn/plugin/plugin/dapp/)
+  -o, --output string   go package for output (default github.com/assetcloud/plugin/plugin/dapp/)
   -p, --proto string    dapp protobuf file path
 ```
 
 - -n 指定合约名字，不能含有空格和特殊字符
 - -p 指定合约的 protobuf 文件
 - -o 生成代码的输出目录路径，此处是 go 包路径，及相对于$GOPATH/src的路径，
-默认为官方项目路径（$GOPATH/src/github.com/33cn/plugin/plugin/dapp/)
+默认为官方项目路径（$GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/)
 
 举例:
 

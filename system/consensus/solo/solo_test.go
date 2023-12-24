@@ -42,7 +42,7 @@ import (
 	_ "github.com/assetcloud/chain/system/dapp/init"
 	_ "github.com/assetcloud/chain/system/mempool/init"
 	_ "github.com/assetcloud/chain/system/store/init"
-	//_ "github.com/33cn/plugin/plugin/store/kvmvcc"
+	//_ "github.com/assetcloud/plugin/plugin/store/kvmvcc"
 )
 
 // 执行： go test -cover

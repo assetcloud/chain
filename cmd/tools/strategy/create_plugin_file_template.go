@@ -276,7 +276,7 @@ update:
 	cp -Rf vendor/${CHAIN}/vendor/* vendor/
 	rm -rf vendor/${CHAIN}/vendor
 	govendor init
-	go build -i -o tool github.com/33cn/plugin/vendor/github.com/assetcloud/chain/cmd/tools
+	go build -i -o tool github.com/assetcloud/plugin/vendor/github.com/assetcloud/chain/cmd/tools
 	./tool import --path "plugin" --packname "${PROJECTPATH}/plugin" --conf "plugin/plugin.toml"
 
 updatevendor:
@@ -313,28 +313,28 @@ go:
 	CpftPluginToml = `
 # type字段仅支持 consensus  dapp store mempool
 [dapp-ticket]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/ticket"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/ticket"
 
 [consensus-ticket]
-gitrepo = "github.com/33cn/plugin/plugin/consensus/ticket"
+gitrepo = "github.com/assetcloud/plugin/plugin/consensus/ticket"
 
 [dapp-retrieve]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/retrieve"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/retrieve"
 
 [dapp-hashlock]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/hashlock"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/hashlock"
 
 [dapp-token]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/token"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/token"
 
 [dapp-trade]
-gitrepo = "github.com/33cn/plugin/plugin/dapp/trade"
+gitrepo = "github.com/assetcloud/plugin/plugin/dapp/trade"
 
 [mempool-price]
-gitrepo = "github.com/33cn/plugin/plugin/mempool/price"
+gitrepo = "github.com/assetcloud/plugin/plugin/mempool/price"
 
 [mempool-score]
-gitrepo = "github.com/33cn/plugin/plugin/mempool/score"
+gitrepo = "github.com/assetcloud/plugin/plugin/mempool/score"
 `
 	// 项目 cli/main.go 文件模板
 	CpftCliMain = `package main

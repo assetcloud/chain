@@ -2,7 +2,7 @@
 [![pipeline status](https://github.com/assetcloud/chain/actions/workflows/build.yml/badge.svg)](https://github.com/assetcloud/chain/actions/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/assetcloud/chain)](https://goreportcard.com/report/github.com/assetcloud/chain)
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/assetcloud/chain?svg=true&branch=master&passingText=Windows%20-%20OK&failingText=Windows%20-%20failed&pendingText=Windows%20-%20pending)](https://ci.appveyor.com/project/assetcloud/chain)
-[![codecov](https://codecov.io/gh/assetcloud/chain/branch/master/graph/badge.svg)](https://codecov.io/gh/assetcloud/chain) [![Join the chat at https://gitter.im/33cn/Lobby](https://badges.gitter.im/33cn/Lobby.svg)](https://gitter.im/33cn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![codecov](https://codecov.io/gh/assetcloud/chain/branch/master/graph/badge.svg)](https://codecov.io/gh/assetcloud/chain) [![Join the chat at https://gitter.im/assetcloud/Lobby](https://badges.gitter.im/assetcloud/Lobby.svg)](https://gitter.im/assetcloud/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Chain 区块链开发框架
 
@@ -10,7 +10,7 @@
 
 官方网站 和 文档: https://chain.33.cn
 
-官方插件库: https://github.com/33cn/plugin
+官方插件库: https://github.com/assetcloud/plugin
 
 典型案例: https://github.com/bityuan/bityuan
 
@@ -98,7 +98,7 @@ git merge upstream/master
 注意：不要去修改 master 分支，这样，master 分支永远和upstream/master 保持同步
 ```
 
-- 从最新的 33cn/chain 代码建立分支开始开发
+- 从最新的 assetcloud/chain 代码建立分支开始开发
 
 ```
 git fetch upstream

@@ -87,7 +87,7 @@ service calculator {
 //本例默认将calculator生成至官方plugin项目dapp目录下
 $ cd $GOPATH/src/github.com/assetcloud/chain/cmd/tools && go build -o tool
 $ ./tool gendapp -n calculator -p doc/calculator.proto
-$ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator && ls
+$ cd $GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/calculator && ls
 ```
 
 ##### 生成 pb.go 文件
@@ -97,7 +97,7 @@ pb.go 文件基于 protobuf 提供的 proto-gen-go 插件生成，这里 protobu
 
 ```
 //进入生成合约的目录
-$ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator
+$ cd $GOPATH/src/github.com/assetcloud/plugin/plugin/dapp/calculator
 //执行脚本生成calculator.pb.go
 $ cd proto && make
 ```
@@ -366,7 +366,7 @@ import (
 	"github.com/spf13/cobra"
 
 	rpctypes "github.com/assetcloud/chain/rpc/types"
-	calculatortypes "github.com/33cn/plugin/plugin/dapp/calculator/types"
+	calculatortypes "github.com/assetcloud/plugin/plugin/dapp/calculator/types"
 )
 ```
 
@@ -476,7 +476,7 @@ func Cmd() *cobra.Command {
 
 ```go
 import (
- 	_ "github.com/33cn/plugin/plugin/dapp/calculator" //init calculator
+ 	_ "github.com/assetcloud/plugin/plugin/dapp/calculator" //init calculator
 )
 ```
 
@@ -485,7 +485,7 @@ import (
 > 直接通过官方 makefile 文件
 
 ```
-$ cd $GOPATH/src/github.com/33cn/plugin && make
+$ cd $GOPATH/src/github.com/assetcloud/plugin && make
 ```
 
 #### 测试
@@ -517,4 +517,4 @@ curl -kd '{"method":"calculator.QueryCalcCount", "params":[{"action":"Add"}]}' h
 
 ##### 其他例子
 
-官方 [plugin 项目](https://github.com/33cn/plugin) 提供了丰富的插件，可以参考学习
+官方 [plugin 项目](https://github.com/assetcloud/plugin) 提供了丰富的插件，可以参考学习

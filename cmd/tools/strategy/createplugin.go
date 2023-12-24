@@ -48,7 +48,7 @@ func (c *createPluginStrategy) initMember() error {
 		return errors.New("Can't find GOPATH")
 	}
 	c.gopath = gopath
-	c.outRootPath = filepath.Join(gopath, "/src/github.com/33cn")
+	c.outRootPath = filepath.Join(gopath, "/src/github.com/assetcloud")
 	c.projName, _ = c.getParam(types.KeyProjectName)
 	c.execName, _ = c.getParam(types.KeyExecutorName)
 	c.className, _ = c.getParam(types.KeyClassName)
