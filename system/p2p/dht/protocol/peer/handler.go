@@ -5,16 +5,18 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/assetcloud/chain/common/utils"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 
 	"github.com/assetcloud/chain/queue"
 	"github.com/assetcloud/chain/system/p2p/dht/protocol"
 	"github.com/assetcloud/chain/types"
-	"github.com/libp2p/go-libp2p-core/network"
+	"github.com/libp2p/go-libp2p/core/network"
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -192,7 +194,7 @@ func (p *Protocol) handleEventNetInfo(msg *queue.Message) {
 	msg.Reply(p.QueueClient.NewMessage("rpc", types.EventReplyNetInfo, &netinfo))
 }
 
-//add peerName to blacklist
+// add peerName to blacklist
 func (p *Protocol) handleEventAddBlacklist(msg *queue.Message) {
 	var err error
 	defer func() {
@@ -235,7 +237,7 @@ func (p *Protocol) handleEventAddBlacklist(msg *queue.Message) {
 
 }
 
-//delete peerName from blacklist
+// delete peerName from blacklist
 func (p *Protocol) handleEventDelBlacklist(msg *queue.Message) {
 	var err error
 	defer func() {
@@ -258,7 +260,7 @@ func (p *Protocol) handleEventDelBlacklist(msg *queue.Message) {
 	err = errors.New("no this peerName")
 }
 
-//show all peers from blacklist
+// show all peers from blacklist
 func (p *Protocol) handleEventShowBlacklist(msg *queue.Message) {
 	peers := p.P2PEnv.ConnBlackList.List()
 	//添加peer remoteAddr
@@ -378,5 +380,30 @@ func (p *Protocol) setPeerCheck(msg *queue.Message) (multiaddr.Multiaddr, *peer.
 		return nil, nil, err
 	}
 	return maddr, addrinfo, nil
+
+}
+
+func (p *Protocol) checkVersionLimit(version string) (isallow bool) {
+	if p.SubConfig.VerLimit == "" { //允许所有版本
+		return true
+	}
+	//@分割版本号 1.68.0-a612c9a6@6.8.9
+	nodeVers := strings.Split(version, "@")
+	if len(nodeVers) != 2 {
+		return false
+	}
+	verLimits := strings.Split(p.SubConfig.VerLimit, ".")
+	checkVers := strings.Split(nodeVers[1], ".")
+	if len(checkVers) < len(verLimits) {
+		return false
+	}
+	for i, verLimitN := range verLimits {
+		limit, _ := strconv.Atoi(verLimitN)
+		checkVer, _ := strconv.Atoi(checkVers[i])
+		if limit > checkVer {
+			return false
+		}
+	}
+	return true
 
 }

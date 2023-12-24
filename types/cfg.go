@@ -42,7 +42,7 @@ type Config struct {
 	Address          *address.Config `json:"address,omitempty"`
 }
 
-//ConfigSubModule 子模块的配置
+// ConfigSubModule 子模块的配置
 type ConfigSubModule struct {
 	Store     map[string][]byte
 	Exec      map[string][]byte
@@ -118,7 +118,7 @@ type Mempool struct {
 	MaxTxFee int64 `json:"maxTxFee,omitempty"`
 	// 目前execCheck效率较低，支持关闭交易execCheck，提升性能
 	DisableExecCheck bool `json:"disableExecCheck,omitempty"`
-	//开启ETH交易类型的检查
+	// Deprecated:default enable check
 	EnableEthCheck bool `json:"enableEthCheck,omitempty"`
 }
 
@@ -314,12 +314,13 @@ type Exec struct {
 	DisableAddrIndex bool     `json:"disableAddrIndex,omitempty"`
 	Alias            []string `json:"alias,omitempty"`
 	// 是否保存token交易信息
-	SaveTokenTxList    bool `json:"saveTokenTxList,omitempty"`
-	EnableAddrFeeIndex bool `json:"enableAddrFeeIndex,omitempty"`
-	DisableTxIndex     bool `json:"disableTxIndex,omitempty"`
-	DisableFeeIndex    bool `json:"disableFeeIndex,omitempty"`
-	DisableTxDupCheck  bool `json:"disableTxDupCheck,omitempty"`
-	DisableExecLocal   bool `json:"disableExecLocal,omitempty"`
+	SaveTokenTxList    bool   `json:"saveTokenTxList,omitempty"`
+	EnableAddrFeeIndex bool   `json:"enableAddrFeeIndex,omitempty"`
+	DisableTxIndex     bool   `json:"disableTxIndex,omitempty"`
+	DisableFeeIndex    bool   `json:"disableFeeIndex,omitempty"`
+	DisableTxDupCheck  bool   `json:"disableTxDupCheck,omitempty"`
+	DisableExecLocal   bool   `json:"disableExecLocal,omitempty"`
+	ProxyExecAddress   string `json:"proxyExecAddress,omitempty"`
 }
 
 // Pprof 配置

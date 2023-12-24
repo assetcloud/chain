@@ -5,9 +5,9 @@ import (
 	"sync"
 
 	"github.com/assetcloud/chain/queue"
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/protocol"
+	"github.com/libp2p/go-libp2p/core/host"
+	"github.com/libp2p/go-libp2p/core/network"
+	"github.com/libp2p/go-libp2p/core/protocol"
 )
 
 // RegisterStreamHandler registers stream handler
@@ -25,19 +25,19 @@ func RegisterStreamHandler(h host.Host, p protocol.ID, handler network.StreamHan
 	h.SetStreamHandler(p, HandlerWithClose(f))
 }
 
-//Initializer is a initial function which any protocol should have.
+// Initializer is a initial function which any protocol should have.
 type Initializer func(env *P2PEnv)
 
 var (
 	protocolInitializerArray []Initializer
 )
 
-//RegisterProtocolInitializer registers the initial function.
+// RegisterProtocolInitializer registers the initial function.
 func RegisterProtocolInitializer(initializer Initializer) {
 	protocolInitializerArray = append(protocolInitializerArray, initializer)
 }
 
-//InitAllProtocol initials all protocols.
+// InitAllProtocol initials all protocols.
 func InitAllProtocol(env *P2PEnv) {
 	for _, initializer := range protocolInitializerArray {
 		initializer(env)
@@ -69,6 +69,8 @@ func WithEventOptInline(handler *EventHandler) error {
 
 // RegisterEventHandler registers a handler with an event ID.
 func RegisterEventHandler(eventID int64, cb EventHandlerFunc, opts ...EventOpt) {
+	mu.Lock()
+	defer mu.Unlock()
 	if cb == nil {
 		panic(fmt.Sprintf("addEventHandler, handler is nil, id=%d", eventID))
 	}

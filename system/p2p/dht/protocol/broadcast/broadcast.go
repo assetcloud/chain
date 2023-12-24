@@ -15,7 +15,7 @@ import (
 
 	"github.com/assetcloud/chain/p2p/utils"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 
 	"github.com/assetcloud/chain/common/log/log15"
 	"github.com/assetcloud/chain/queue"
@@ -30,7 +30,6 @@ func init() {
 	protocol.RegisterProtocolInitializer(InitProtocol)
 }
 
-//
 type broadcastProtocol struct {
 	*protocol.P2PEnv
 	txFilter    *utils.Filterdata
@@ -278,7 +277,7 @@ func (p *broadcastProtocol) pubPeerMsg(peerID peer.ID, msgID int32, msg types.Me
 }
 
 func (p *broadcastProtocol) postBlockChain(blockHash, receiveFrom string, block *types.Block, publisher peer.ID) error {
-	msg, err := p.P2PManager.PubBroadCast(blockHash, &types.BlockPid{Pid: receiveFrom, Block: block}, types.EventBroadcastAddBlock)
+	msg, err := p.P2PManager.PubBroadCast(blockHash, &types.BlockPid{Pid: publisher.Pretty(), Block: block}, types.EventBroadcastAddBlock)
 	if err == nil {
 		p.val.addBroadcastMsg(&broadcastMsg{msg: msg, publisher: publisher, hash: blockHash})
 	}

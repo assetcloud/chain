@@ -14,17 +14,18 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/common/math"
+
+	"math/big"
+	"strings"
+	"testing"
+	"time"
+
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
-
-	"math/big"
-	"strings"
-	"testing"
-	"time"
 
 	chaincrypto "github.com/assetcloud/chain/common/crypto"
 	"github.com/ethereum/go-ethereum/accounts/abi"

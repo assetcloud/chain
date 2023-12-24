@@ -21,7 +21,7 @@ import (
 	"github.com/assetcloud/chain/system/crypto/ed25519/ed25519/edwards25519"
 )
 
-//const
+// const
 const (
 	PublicKeySize  = 32
 	PrivateKeySize = 64

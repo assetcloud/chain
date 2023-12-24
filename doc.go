@@ -2,21 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/*
-chain 是由复杂美科技有限公司开发的区块链链框架
+package blockchain
 
-1. 高度可定制
-
-2. 丰富的插件库
-
-3. 创新的 合约 调用和组合方式
-*/
-
-package chain
-
-//有些包国内需要翻墙才能下载，我们把部分参见的包含在这里
-import (
-	_ "golang.org/x/crypto/nacl/box" //register box package
-	_ "golang.org/x/crypto/nacl/secretbox"
-	_ "golang.org/x/crypto/ssh"
-)
+//区块链相关的模块：
+//包括区块链的结构，区块链数据的存储
+//接口设计：

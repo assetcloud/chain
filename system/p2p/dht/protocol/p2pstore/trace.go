@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/assetcloud/chain/system/p2p/dht/types"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 func (p *Protocol) cleanTrace() {
@@ -115,7 +115,7 @@ func (p *Protocol) addChunkProviderCache(chunkHash []byte, provider peer.ID) (ex
 	return
 }
 
-//TODO: 按时延对节点排序
+// TODO: 按时延对节点排序
 func (p *Protocol) getChunkProviderCache(chunkHash []byte) []peer.ID {
 	var peers []peer.ID
 	p.chunkProviderCacheMutex.RLock()

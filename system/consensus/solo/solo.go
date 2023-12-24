@@ -17,7 +17,7 @@ import (
 
 var slog = log.New("module", "solo")
 
-//Client 客户端
+// Client 客户端
 type Client struct {
 	*drivers.BaseClient
 	subcfg    *subConfig
@@ -36,7 +36,7 @@ type subConfig struct {
 	BenchMode        bool   `json:"benchMode"`
 }
 
-//New new
+// New new
 func New(cfg *types.Consensus, sub []byte) queue.Module {
 	c := drivers.NewBaseClient(cfg)
 	var subcfg subConfig
@@ -61,17 +61,17 @@ func New(cfg *types.Consensus, sub []byte) queue.Module {
 	return solo
 }
 
-//Close close
+// Close close
 func (client *Client) Close() {
 	slog.Info("consensus solo closed")
 }
 
-//GetGenesisBlockTime 获取创世区块时间
+// GetGenesisBlockTime 获取创世区块时间
 func (client *Client) GetGenesisBlockTime() int64 {
 	return client.subcfg.GenesisBlockTime
 }
 
-//CreateGenesisTx 创建创世交易
+// CreateGenesisTx 创建创世交易
 func (client *Client) CreateGenesisTx() (ret []*types.Transaction) {
 	var tx types.Transaction
 	cfg := client.GetAPI().GetConfig()
@@ -86,12 +86,12 @@ func (client *Client) CreateGenesisTx() (ret []*types.Transaction) {
 	return
 }
 
-//ProcEvent false
+// ProcEvent false
 func (client *Client) ProcEvent(msg *queue.Message) bool {
 	return false
 }
 
-//CheckBlock solo没有交易时返回错误
+// CheckBlock solo没有交易时返回错误
 func (client *Client) CheckBlock(parent *types.Block, current *types.BlockDetail) error {
 	if len(current.Block.Txs) == 0 {
 		return types.ErrEmptyTx
@@ -99,7 +99,7 @@ func (client *Client) CheckBlock(parent *types.Block, current *types.BlockDetail
 	return nil
 }
 
-//CreateBlock 创建区块
+// CreateBlock 创建区块
 func (client *Client) CreateBlock() {
 	issleep := true
 	types.AssertConfig(client.GetAPI())
@@ -157,7 +157,7 @@ func (client *Client) CreateBlock() {
 	}
 }
 
-//CmpBestBlock 比较newBlock是不是最优区块
+// CmpBestBlock 比较newBlock是不是最优区块
 func (client *Client) CmpBestBlock(newBlock *types.Block, cmpBlock *types.Block) bool {
 	return false
 }

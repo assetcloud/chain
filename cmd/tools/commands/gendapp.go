@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-//GenDappCmd advance cmd
+// GenDappCmd advance cmd
 func GenDappCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "gendapp",
@@ -28,7 +28,7 @@ func addGenDappFlag(cmd *cobra.Command) {
 	cmd.MarkFlagRequired("name")
 	cmd.Flags().StringP("proto", "p", "", "dapp protobuf file path")
 	cmd.MarkFlagRequired("proto")
-	cmd.Flags().StringP("output", "o", "", "go package for output (default github.com/assetcloud/plugin/plugin/dapp/)")
+	cmd.Flags().StringP("output", "o", "", "go package for output (default github.com/33cn/plugin/plugin/dapp/)")
 
 }
 

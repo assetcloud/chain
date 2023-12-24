@@ -7,11 +7,11 @@ set -o pipefail
 
 # os: ubuntu16.04 x64
 
-CHAIN33_PATH=../../
+CHAIN_PATH=../../
 
 function copyAutoTestConfig() {
 
-    declare -a ChainAutoTestDirs=("${CHAIN33_PATH}/system")
+    declare -a ChainAutoTestDirs=("${CHAIN_PATH}/system")
     echo "#copy auto test config to path \"$1\""
     local AutoTestConfigFile="$1/autotest.toml"
 
@@ -58,7 +58,7 @@ function copyChain() {
 
     echo "# copy chain bin to path \"$1\", make sure build chain"
     cp ../chain ../chain-cli ../chain.toml "$1"
-    cp "${CHAIN33_PATH}"/cmd/chain/chain.test.toml "$1"
+    cp "${CHAIN_PATH}"/cmd/chain/chain.test.toml "$1"
 }
 
 function copyAll() {

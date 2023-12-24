@@ -1,14 +1,14 @@
 ## 存证合约
 
-
 ### 交易类型
 
 #### 普通存证交易
+
 普通存证交易只在链上存储记录，不做业务逻辑执行
 
 #### 延时存证交易
-将延时交易提交到链上，即交易的payload包含一个需要延时的交易
 
+将延时交易提交到链上，即交易的 payload 包含一个需要延时的交易
 
 ##### 交易请求
 
@@ -20,8 +20,7 @@ message CommitDelayTx {
 }
 ```
 
-[Transaction结构定义](../../../types/proto/transaction.proto#L88)
-
+[Transaction 结构定义](../../../types/proto/transaction.proto#L88)
 
 ##### 交易回执
 
@@ -33,11 +32,9 @@ message CommitDelayTxLog {
 }
 ```
 
-
 ##### 交易构造接口及参数
 
-- 创建交易通用json rpc接口，Chain.CreateTransaction
+- 创建交易通用 json rpc 接口，Chain.CreateTransaction
 - execer: "none"
 - actionName: "CommitDelayTx"
 - payload: [CommitDelayTx](README.md#交易请求)
-

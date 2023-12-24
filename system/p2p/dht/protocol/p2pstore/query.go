@@ -10,8 +10,8 @@ import (
 	"github.com/assetcloud/chain/system/p2p/dht/protocol"
 	types2 "github.com/assetcloud/chain/system/p2p/dht/types"
 	"github.com/assetcloud/chain/types"
-	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/libp2p/go-libp2p-core/peerstore"
+	"github.com/libp2p/go-libp2p/core/peer"
+	"github.com/libp2p/go-libp2p/core/peerstore"
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -162,7 +162,7 @@ func (p *Protocol) fetchShardPeers(key []byte, count int, pid peer.ID) ([]peer.I
 }
 
 // findChunk
-//	1. 检查本地
+//  1. 检查本地
 //  2. 检查缓存中记录的提供数据的节点
 //  3. 异步获取数据
 func (p *Protocol) findChunk(req *types.ChunkInfoMsg) (*types.BlockBodys, peer.ID, error) {
@@ -263,7 +263,7 @@ func (p *Protocol) getBlocks(req *types.ChunkInfoMsg) (*types.Blocks, error) {
 	return &types.Blocks{Items: blockList}, nil
 }
 
-//getChunk gets chunk data from p2pStore or other peers.
+// getChunk gets chunk data from p2pStore or other peers.
 func (p *Protocol) getChunk(req *types.ChunkInfoMsg) (*types.BlockBodys, peer.ID, error) {
 	if req == nil {
 		return nil, "", types2.ErrInvalidParam
@@ -324,7 +324,7 @@ func (p *Protocol) getHeadersFromPeer(param *types.ReqBlocks, pid peer.ID) (*typ
 			ReqBlocks: param,
 		},
 	}
-	err = protocol.SignAndWriteStream(&msg, stream)
+	err = protocol.SignAndWriteStream(&msg, stream, p.Host.Peerstore().PrivKey(p.Host.ID()))
 	if err != nil {
 		log.Error("getHeadersFromPeer", "SignAndWriteStream error", err)
 		return nil, err
@@ -383,7 +383,7 @@ func (p *Protocol) getChunkRecordsFromPeer(param *types.ReqChunkRecords, pid pee
 			ReqChunkRecords: param,
 		},
 	}
-	err = protocol.SignAndWriteStream(&msg, stream)
+	err = protocol.SignAndWriteStream(&msg, stream, p.Host.Peerstore().PrivKey(p.Host.ID()))
 	if err != nil {
 		log.Error("getChunkRecordsFromPeer", "SignAndWriteStream error", err)
 		return nil, err
@@ -400,7 +400,7 @@ func (p *Protocol) getChunkRecordsFromPeer(param *types.ReqChunkRecords, pid pee
 	return res.Response.(*types.P2PResponse_ChunkRecords).ChunkRecords, nil
 }
 
-//若网络中有节点保存了该chunk，该方法可以保证查询到
+// 若网络中有节点保存了该chunk，该方法可以保证查询到
 func (p *Protocol) mustFetchChunk(req *types.ChunkInfoMsg) (*types.BlockBodys, peer.ID, error) {
 	//TODO: temporary
 	for _, conn := range p.Host.Network().Conns() {
@@ -575,7 +575,7 @@ func (p *Protocol) fetchChunkFromPeer(params *types.ChunkInfoMsg, pid peer.ID) (
 			ChunkInfoMsg: params,
 		},
 	}
-	err = protocol.SignAndWriteStream(&msg, stream)
+	err = protocol.SignAndWriteStream(&msg, stream, p.Host.Peerstore().PrivKey(p.Host.ID()))
 	if err != nil {
 		log.Error("fetchChunkFromPeer", "SignAndWriteStream error", err, "start", params.Start)
 		return nil, nil, err
@@ -673,7 +673,7 @@ func (p *Protocol) getChunkRecordFromBlockchain(req *types.ReqChunkRecords) (*ty
 	return nil, types2.ErrNotFound
 }
 
-//TODO: 备用
+// TODO: 备用
 func (p *Protocol) queryAddrInfo(pid peer.ID, queryPeer peer.ID) (*types.PeerInfo, error) {
 	ctx, cancel := context.WithTimeout(p.Ctx, time.Second*3)
 	defer cancel()

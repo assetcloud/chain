@@ -17,9 +17,9 @@ import (
 	"github.com/assetcloud/chain/util"
 )
 
-//ProcessBlock 处理共识模块过来的blockdetail，peer广播过来的block，以及从peer同步过来的block
+// ProcessBlock 处理共识模块过来的blockdetail，peer广播过来的block，以及从peer同步过来的block
 // 共识模块和peer广播过来的block需要广播出去
-//共识模块过来的Receipts不为空,广播和同步过来的Receipts为空
+// 共识模块过来的Receipts不为空,广播和同步过来的Receipts为空
 // 返回参数说明：是否主链，是否孤儿节点，具体err
 func (chain *BlockChain) ProcessBlock(broadcast bool, block *types.BlockDetail, pid string, addBlock bool, sequence int64) (*types.BlockDetail, bool, bool, error) {
 	chainlog.Debug("ProcessBlock:Processing", "height", block.Block.Height, "blockHash", common.ToHex(block.Block.Hash(chain.client.GetConfig())))
@@ -57,11 +57,13 @@ func (chain *BlockChain) ProcessBlock(broadcast bool, block *types.BlockDetail, 
 	//将此block的源peer节点添加到故障peerlist中
 	exists := chain.blockExists(blockHash)
 	if exists {
-		is, err := chain.IsErrExecBlock(block.Block.Height, blockHash)
-		if is {
+		var err error
+		node := chain.index.LookupNode(blockHash)
+		if node != nil && node.errLog != nil {
+			err = node.errLog
 			chain.RecordFaultPeer(pid, block.Block.Height, blockHash, err)
 		}
-		chainlog.Debug("ProcessBlock already have block", "blockHash", common.ToHex(blockHash))
+		chainlog.Error("ProcessBlock block exist", "height", block.Block.Height, "hash", common.ToHex(blockHash), "err", err)
 		return nil, false, false, types.ErrBlockExist
 	}
 
@@ -101,7 +103,7 @@ func (chain *BlockChain) ProcessBlock(broadcast bool, block *types.BlockDetail, 
 	return chain.maybeAddBestChain(broadcast, block, pid, sequence)
 }
 
-//基本检测通过之后尝试将此block添加到主链上
+// 基本检测通过之后尝试将此block添加到主链上
 func (chain *BlockChain) maybeAddBestChain(broadcast bool, block *types.BlockDetail, pid string, sequence int64) (*types.BlockDetail, bool, bool, error) {
 	chain.chainLock.Lock()
 	defer chain.chainLock.Unlock()
@@ -125,7 +127,7 @@ func (chain *BlockChain) maybeAddBestChain(broadcast bool, block *types.BlockDet
 	return blockdetail, isMainChain, false, nil
 }
 
-//检查block是否已经存在index或者数据库中
+// 检查block是否已经存在index或者数据库中
 func (chain *BlockChain) blockExists(hash []byte) bool {
 	// Check block index first (could be main chain or side chain blocks).
 	if chain.index.HaveBlock(hash) {
@@ -190,7 +192,7 @@ func (chain *BlockChain) maybeAcceptBlock(broadcast bool, block *types.BlockDeta
 	return block, isMainChain, nil
 }
 
-//将block添加到主链中
+// 将block添加到主链中
 func (chain *BlockChain) connectBestChain(node *blockNode, block *types.BlockDetail) (*types.BlockDetail, bool, error) {
 
 	enBestBlockCmp := chain.client.GetConfig().GetModuleConfig().Consensus.EnableBestBlockCmp
@@ -258,7 +260,7 @@ func (chain *BlockChain) connectBestChain(node *blockNode, block *types.BlockDet
 	return nil, true, nil
 }
 
-//将本block信息存储到数据库中，并更新bestchain的tip节点
+// 将本block信息存储到数据库中，并更新bestchain的tip节点
 func (chain *BlockChain) connectBlock(node *blockNode, blockdetail *types.BlockDetail) (*types.BlockDetail, error) {
 	//blockchain close 时不再处理block
 	if atomic.LoadInt32(&chain.isclosed) == 1 {
@@ -279,12 +281,12 @@ func (chain *BlockChain) connectBlock(node *blockNode, blockdetail *types.BlockD
 
 	var err error
 	var lastSequence int64
-
+	cfg := chain.client.GetConfig()
 	block := blockdetail.Block
 	prevStateHash := chain.bestChain.Tip().statehash
 	errReturn := (node.pid != "self")
 	blockdetail, _, err = execBlock(chain.client, prevStateHash, block, errReturn, sync)
-	if err != nil {
+	handleErrBlk := func(err error) {
 		//记录执行出错的block信息,需要过滤掉一些特殊的错误，不计入故障中，尝试再次执行
 		//快速下载时执行失败的区块不需要记录错误信息，并删除index中此区块的信息尝试通过普通模式再次下载执行
 		ok := IsRecordFaultErr(err)
@@ -297,11 +299,16 @@ func (chain *BlockChain) connectBlock(node *blockNode, blockdetail *types.BlockD
 			chain.index.DelNode(node.hash)
 		} else {
 			chain.RecordFaultPeer(node.pid, block.Height, node.hash, err)
+			node.errLog = err
 		}
-		chainlog.Error("connectBlock ExecBlock is err!", "height", block.Height, "err", err)
+	}
+	if err != nil {
+		handleErrBlk(err)
+		chainlog.Error("connectBlock ExecBlock is err!", "height", block.GetHeight(),
+			"hash", common.ToHex(node.hash), "err", err)
 		return nil, err
 	}
-	cfg := chain.client.GetConfig()
+
 	//要更新node的信息
 	if node.pid == "self" {
 		prevhash := node.hash
@@ -316,9 +323,11 @@ func (chain *BlockChain) connectBlock(node *blockNode, blockdetail *types.BlockD
 	newbatch.UpdateWriteSync(sync)
 	//保存tx信息到db中
 	beg := types.Now()
+	// exec local
 	err = chain.blockStore.AddTxs(newbatch, blockdetail)
 	if err != nil {
-		chainlog.Error("connectBlock indexTxs:", "height", block.Height, "err", err)
+		handleErrBlk(err)
+		chainlog.Error("connectBlock indexTxs:", "height", block.Height, "hash", common.ToHex(node.hash), "err", err)
 		return nil, err
 	}
 	txCost := types.Since(beg)
@@ -399,7 +408,7 @@ func (chain *BlockChain) connectBlock(node *blockNode, blockdetail *types.BlockD
 	return blockdetail, nil
 }
 
-//从主链中删除blocks
+// 从主链中删除blocks
 func (chain *BlockChain) disconnectBlock(node *blockNode, blockdetail *types.BlockDetail, sequence int64) error {
 	var lastSequence int64
 	// 只能从 best chain tip节点开始删除
@@ -468,7 +477,7 @@ func (chain *BlockChain) disconnectBlock(node *blockNode, blockdetail *types.Blo
 	return nil
 }
 
-//获取重组blockchain需要删除和添加节点
+// 获取重组blockchain需要删除和添加节点
 func (chain *BlockChain) getReorganizeNodes(node *blockNode) (*list.List, *list.List) {
 	attachNodes := list.New()
 	detachNodes := list.New()
@@ -487,7 +496,7 @@ func (chain *BlockChain) getReorganizeNodes(node *blockNode) (*list.List, *list.
 	return detachNodes, attachNodes
 }
 
-//LoadBlockByHash 根据hash值从缓存中查询区块
+// LoadBlockByHash 根据hash值从缓存中查询区块
 func (chain *BlockChain) LoadBlockByHash(hash []byte) (block *types.BlockDetail, err error) {
 
 	//从缓存的最新区块中获取
@@ -515,7 +524,7 @@ func (chain *BlockChain) LoadBlockByHash(hash []byte) (block *types.BlockDetail,
 	return block, err
 }
 
-//重组blockchain
+// 重组blockchain
 func (chain *BlockChain) reorganizeChain(detachNodes, attachNodes *list.List) error {
 	detachBlocks := make([]*types.BlockDetail, 0, detachNodes.Len())
 	attachBlocks := make([]*types.BlockDetail, 0, attachNodes.Len())
@@ -593,7 +602,7 @@ func (chain *BlockChain) reorganizeChain(detachNodes, attachNodes *list.List) er
 	return nil
 }
 
-//ProcessDelParaChainBlock 只能从 best chain tip节点开始删除，目前只提供给平行链使用
+// ProcessDelParaChainBlock 只能从 best chain tip节点开始删除，目前只提供给平行链使用
 func (chain *BlockChain) ProcessDelParaChainBlock(broadcast bool, blockdetail *types.BlockDetail, pid string, sequence int64) (*types.BlockDetail, bool, bool, error) {
 
 	//获取当前的tip节点

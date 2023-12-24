@@ -36,7 +36,7 @@ func TestChainConfig(t *testing.T) {
 	assert.Equal(t, int64(0), height)
 }
 
-//测试实际的配置文件
+// 测试实际的配置文件
 func TestSubConfig(t *testing.T) {
 	cfg, err := initSubModuleString(readFile("testdata/chain.toml"))
 	assert.Equal(t, 0, len(cfg.Consensus))

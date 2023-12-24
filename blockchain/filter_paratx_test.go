@@ -36,7 +36,7 @@ func addMainTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProt
 	return hash, nil
 }
 
-//构造单笔para交易
+// 构造单笔para交易
 func addSingleParaTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI, exec string) (string, error) {
 	tx := util.CreateTxWithExecer(cfg, priv, exec)
 	hash := common.ToHex(tx.Hash())
@@ -50,7 +50,7 @@ func addSingleParaTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.Que
 	return hash, nil
 }
 
-//构造para交易组
+// 构造para交易组
 func addGroupParaTx(cfg *types.ChainConfig, priv crypto.PrivKey, api client.QueueProtocolAPI, title string, haveMainTx bool) (string, *types.ReplyStrings, error) {
 	var tx0 *types.Transaction
 	if haveMainTx {
@@ -220,7 +220,7 @@ func testgetParaTxByTitle(t *testing.T, blockchain *blockchain.BlockChain, req *
 	}
 }
 
-//获取当前高度上的所有平行链title
+// 获取当前高度上的所有平行链title
 func testGetParaTxByHeight(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
 
 	block, err := blockchain.GetBlock(height)
@@ -305,7 +305,7 @@ func TestMultiLayerMerkleTree(t *testing.T) {
 	chainlog.Debug("TestMultiLayerMerkleTree end --------------------")
 }
 
-//获取当前高度上的所有平行链title
+// 获取当前高度上的所有平行链title
 func testParaTxByHeight(cfg *types.ChainConfig, t *testing.T, blockchain *blockchain.BlockChain, height int64) {
 
 	block, err := blockchain.GetBlock(height)

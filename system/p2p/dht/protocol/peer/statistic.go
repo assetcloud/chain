@@ -3,7 +3,7 @@ package peer
 import (
 	"github.com/assetcloud/chain/system/p2p/dht/protocol"
 	"github.com/assetcloud/chain/types"
-	"github.com/libp2p/go-libp2p-core/network"
+	"github.com/libp2p/go-libp2p/core/network"
 )
 
 const (
@@ -11,7 +11,7 @@ const (
 	statisticalInfo = "/chain/statistical/1.0.0"
 )
 
-//handlerStreamStatistical 返回当前连接的节点信息以及网络带宽信息
+// handlerStreamStatistical 返回当前连接的节点信息以及网络带宽信息
 func (p *Protocol) handlerStreamStatistical(stream network.Stream) {
 	defer protocol.CloseStream(stream)
 	var statistical types.Statistical

@@ -15,19 +15,19 @@ import (
 
 	"fmt"
 
+	tml "github.com/BurntSushi/toml"
 	"github.com/assetcloud/chain/common/address"
 	"github.com/assetcloud/chain/types/chaincfg"
-	tml "github.com/BurntSushi/toml"
 )
 
-//Create ...
+// Create ...
 type Create func(cfg *ChainConfig)
 
-//区块链共识相关的参数，重要参数不要随便修改
+// 区块链共识相关的参数，重要参数不要随便修改
 var (
 	AllowUserExec = [][]byte{ExecerNone}
 	EmptyValue    = []byte("FFFFFFFFemptyBVBiCj5jvE15pEiwro8TQRGnJSNsJF") //这字符串表示数据库中的空值
-	cliSysParam   = make(map[string]*ChainConfig)                       // map key is title
+	cliSysParam   = make(map[string]*ChainConfig)                         // map key is title
 	regModuleInit = make(map[string]Create)
 	regExecInit   = make(map[string]Create)
 	runonce       = sync.Once{}
@@ -46,7 +46,7 @@ const (
 	DefaultMinFee    int64 = 1e5
 )
 
-//ChainConfig ...
+// ChainConfig ...
 type ChainConfig struct {
 	mcfg       *Config
 	scfg       *ConfigSubModule
@@ -65,13 +65,13 @@ type ChainConfig struct {
 	chainID          int32
 }
 
-//ChainParam 结构体
+// ChainParam 结构体
 type ChainParam struct {
 	MaxTxNumber  int64
 	PowLimitBits uint32
 }
 
-//RegFork Reg 注册每个模块的自动初始化函数
+// RegFork Reg 注册每个模块的自动初始化函数
 func RegFork(name string, create Create) {
 	if create == nil {
 		panic("config: Register Module Init is nil")
@@ -82,14 +82,14 @@ func RegFork(name string, create Create) {
 	regModuleInit[name] = create
 }
 
-//RegForkInit ...
+// RegForkInit ...
 func RegForkInit(cfg *ChainConfig) {
 	for _, item := range regModuleInit {
 		item(cfg)
 	}
 }
 
-//RegExec ...
+// RegExec ...
 func RegExec(name string, create Create) {
 	if create == nil {
 		panic("config: Register Exec Init is nil")
@@ -100,7 +100,7 @@ func RegExec(name string, create Create) {
 	regExecInit[name] = create
 }
 
-//RegExecInit ...
+// RegExecInit ...
 func RegExecInit(cfg *ChainConfig) {
 	runonce.Do(func() {
 		for _, item := range regExecInit {
@@ -109,14 +109,14 @@ func RegExecInit(cfg *ChainConfig) {
 	})
 }
 
-//NewChainConfig ...
+// NewChainConfig ...
 func NewChainConfig(cfgstring string) *ChainConfig {
 	chainCfg := NewChainConfigNoInit(cfgstring)
 	chainCfg.chainCfgInit(chainCfg.mcfg)
 	return chainCfg
 }
 
-//NewChainConfigNoInit ...
+// NewChainConfigNoInit ...
 func NewChainConfigNoInit(cfgstring string) *ChainConfig {
 	cfg, sub := InitCfgString(cfgstring)
 	chainCfg := &ChainConfig{
@@ -147,22 +147,22 @@ func NewChainConfigNoInit(cfgstring string) *ChainConfig {
 	return chainCfg
 }
 
-//GetModuleConfig ...
+// GetModuleConfig ...
 func (c *ChainConfig) GetModuleConfig() *Config {
 	return c.mcfg
 }
 
-//GetSubConfig ...
+// GetSubConfig ...
 func (c *ChainConfig) GetSubConfig() *ConfigSubModule {
 	return c.scfg
 }
 
-//DisableCheckFork ...
+// DisableCheckFork ...
 func (c *ChainConfig) DisableCheckFork(d bool) {
 	c.disableCheckFork = d
 }
 
-//GetForks ...
+// GetForks ...
 func (c *ChainConfig) GetForks() (map[string]int64, error) {
 	if c.forks == nil {
 		return nil, ErrNotFound
@@ -306,7 +306,7 @@ func (c *ChainConfig) chainCfgInit(cfg *Config) {
 	}
 }
 
-//只检查是否是10的指数，不限制最大精度
+// 只检查是否是10的指数，不限制最大精度
 func checkPrecision(precision int64) bool {
 	s := strconv.Itoa(int(precision))
 	n := strings.Count(s, "0")
@@ -475,7 +475,7 @@ func (c *ChainConfig) S(key string, value interface{}) {
 	c.setChainConfig(key, value)
 }
 
-//SetTitleOnlyForTest set title only for test use
+// SetTitleOnlyForTest set title only for test use
 func (c *ChainConfig) SetTitleOnlyForTest(ti string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -592,12 +592,12 @@ func IsParaExecName(exec string) bool {
 	return strings.HasPrefix(exec, ParaKeyX)
 }
 
-//IsMyParaExecName 是否是我的para链的执行器
+// IsMyParaExecName 是否是我的para链的执行器
 func (c *ChainConfig) IsMyParaExecName(exec string) bool {
 	return IsParaExecName(exec) && strings.HasPrefix(exec, c.GetTitle())
 }
 
-//IsSpecificParaExecName 是否是某一个平行链的执行器
+// IsSpecificParaExecName 是否是某一个平行链的执行器
 func IsSpecificParaExecName(title, exec string) bool {
 	return IsParaExecName(exec) && strings.HasPrefix(exec, title)
 }
@@ -659,7 +659,7 @@ func IsForward2MainChainTx(cfg *ChainConfig, tx *Transaction) bool {
 	return false
 }
 
-//GetParaExecTitleName 如果是平行链执行器，获取对应title
+// GetParaExecTitleName 如果是平行链执行器，获取对应title
 func GetParaExecTitleName(exec string) (string, bool) {
 	if IsParaExecName(exec) {
 		for i := len(ParaKey); i < len(exec); i++ {
@@ -699,7 +699,7 @@ func MergeConfig(conf map[string]interface{}, def map[string]interface{}) string
 	return ""
 }
 
-//检查默认配置文件
+// 检查默认配置文件
 func checkConfig(key string, conf map[string]interface{}, def map[string]interface{}) string {
 	errstr := ""
 	for key1, value1 := range conf {
@@ -738,7 +738,7 @@ func getkey(key, key1 string) string {
 	return key + "." + key1
 }
 
-//MergeCfg ...
+// MergeCfg ...
 func MergeCfg(cfgstring, cfgdefault string) string {
 	if cfgdefault != "" {
 		return mergeCfgString(cfgstring, cfgdefault)
@@ -821,7 +821,7 @@ func InitCfgString(cfgstring string) (*Config, *ConfigSubModule) {
 	return cfg, sub
 }
 
-//ReadFile ...
+// ReadFile ...
 func ReadFile(path string) string {
 	return readFile(path)
 }
@@ -856,7 +856,7 @@ func parseSubModule(cfg *subModule) (*ConfigSubModule, error) {
 	return &subcfg, nil
 }
 
-//ModifySubConfig json data modify
+// ModifySubConfig json data modify
 func ModifySubConfig(sub []byte, key string, value interface{}) ([]byte, error) {
 	var data map[string]interface{}
 	err := json.Unmarshal(sub, &data)
@@ -973,7 +973,7 @@ func (query *ConfQuery) MIsEnable(key string, height int64) bool {
 	return query.cfg.MIsEnable(getkey(query.prefix, key), height)
 }
 
-//SetCliSysParam ...
+// SetCliSysParam ...
 func SetCliSysParam(title string, cfg *ChainConfig) {
 	if cfg == nil {
 		panic("set cli system ChainConfig param is nil")
@@ -981,7 +981,7 @@ func SetCliSysParam(title string, cfg *ChainConfig) {
 	cliSysParam[title] = cfg
 }
 
-//GetCliSysParam ...
+// GetCliSysParam ...
 func GetCliSysParam(title string) *ChainConfig {
 	if v, ok := cliSysParam[title]; ok {
 		return v
@@ -989,7 +989,7 @@ func GetCliSysParam(title string) *ChainConfig {
 	panic(fmt.Sprintln("can not find CliSysParam title", title))
 }
 
-//AssertConfig ...
+// AssertConfig ...
 func AssertConfig(check interface{}) {
 	if check == nil {
 		panic("check object is nil (ChainConfig)")

@@ -17,8 +17,8 @@ const (
 	// TyCommitDelayTxAction commit delay transaction action id
 	TyCommitDelayTxAction = iota + 101
 
-	// UnknownActionName unknown action name, 即存证类型交易
-	UnknownActionName = "UnknownNoneActionName"
+	// UnknownActionName 存证类型交易
+	UnknownActionName = "notary"
 	// NameCommitDelayTxAction commit delay transaction action name
 	NameCommitDelayTxAction = "CommitDelayTx"
 )
@@ -64,12 +64,12 @@ func init() {
 
 }
 
-//InitFork init
+// InitFork init
 func InitFork(cfg *types.ChainConfig) {
 	cfg.RegisterDappFork(NoneX, ForkUseTimeDelay, 0)
 }
 
-//InitExecutor init Executor
+// InitExecutor init Executor
 func InitExecutor(cfg *types.ChainConfig) {
 	types.RegistorExecutor(NoneX, NewType(cfg))
 }
@@ -92,7 +92,7 @@ func (n *NoneType) GetPayload() types.Message {
 	return &NoneAction{}
 }
 
-//DecodePayloadValue decode payload value
+// DecodePayloadValue decode payload value
 func (n *NoneType) DecodePayloadValue(tx *types.Transaction) (string, reflect.Value, error) {
 	name, value, err := decodeNonePayload(tx)
 	return name, value, err

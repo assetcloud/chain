@@ -6,7 +6,7 @@
 
 package strategy
 
-//const
+// const
 const (
 	// 創建main.go的文件模板
 	CpftMainGo = `package main
@@ -252,8 +252,8 @@ ForkTradeAsset= -1
 
 	// 生成项目Makefile文件的模板 Makefile
 	CpftMakefile = `
-CHAIN33=github.com/assetcloud/chain
-CHAIN33_PATH=vendor/${CHAIN33}
+CHAIN=github.com/assetcloud/chain
+CHAIN_PATH=vendor/${CHAIN}
 all: vendor proto build
 
 build:
@@ -269,14 +269,14 @@ proto:
 
 update:
 	go get -u -v github.com/kardianos/govendor
-	rm -rf ${CHAIN33_PATH}
-	git clone --depth 1 -b master https://${CHAIN33}.git ${CHAIN33_PATH}
-	rm -rf vendor/${CHAIN33}/.git
-	rm -rf vendor/${CHAIN33}/vendor/github.com/apache/thrift/tutorial/erl/
-	cp -Rf vendor/${CHAIN33}/vendor/* vendor/
-	rm -rf vendor/${CHAIN33}/vendor
+	rm -rf ${CHAIN_PATH}
+	git clone --depth 1 -b master https://${CHAIN}.git ${CHAIN_PATH}
+	rm -rf vendor/${CHAIN}/.git
+	rm -rf vendor/${CHAIN}/vendor/github.com/apache/thrift/tutorial/erl/
+	cp -Rf vendor/${CHAIN}/vendor/* vendor/
+	rm -rf vendor/${CHAIN}/vendor
 	govendor init
-	go build -i -o tool github.com/assetcloud/plugin/vendor/github.com/assetcloud/chain/cmd/tools
+	go build -i -o tool github.com/33cn/plugin/vendor/github.com/assetcloud/chain/cmd/tools
 	./tool import --path "plugin" --packname "${PROJECTPATH}/plugin" --conf "plugin/plugin.toml"
 
 updatevendor:
@@ -313,28 +313,28 @@ go:
 	CpftPluginToml = `
 # type字段仅支持 consensus  dapp store mempool
 [dapp-ticket]
-gitrepo = "github.com/assetcloud/plugin/plugin/dapp/ticket"
+gitrepo = "github.com/33cn/plugin/plugin/dapp/ticket"
 
 [consensus-ticket]
-gitrepo = "github.com/assetcloud/plugin/plugin/consensus/ticket"
+gitrepo = "github.com/33cn/plugin/plugin/consensus/ticket"
 
 [dapp-retrieve]
-gitrepo = "github.com/assetcloud/plugin/plugin/dapp/retrieve"
+gitrepo = "github.com/33cn/plugin/plugin/dapp/retrieve"
 
 [dapp-hashlock]
-gitrepo = "github.com/assetcloud/plugin/plugin/dapp/hashlock"
+gitrepo = "github.com/33cn/plugin/plugin/dapp/hashlock"
 
 [dapp-token]
-gitrepo = "github.com/assetcloud/plugin/plugin/dapp/token"
+gitrepo = "github.com/33cn/plugin/plugin/dapp/token"
 
 [dapp-trade]
-gitrepo = "github.com/assetcloud/plugin/plugin/dapp/trade"
+gitrepo = "github.com/33cn/plugin/plugin/dapp/trade"
 
 [mempool-price]
-gitrepo = "github.com/assetcloud/plugin/plugin/mempool/price"
+gitrepo = "github.com/33cn/plugin/plugin/mempool/price"
 
 [mempool-score]
-gitrepo = "github.com/assetcloud/plugin/plugin/mempool/score"
+gitrepo = "github.com/33cn/plugin/plugin/mempool/score"
 `
 	// 项目 cli/main.go 文件模板
 	CpftCliMain = `package main

@@ -8,8 +8,8 @@ import (
 
 	"github.com/assetcloud/chain/queue"
 	"github.com/assetcloud/chain/types"
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p/core/host"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // PeerInfoManager peer info manager

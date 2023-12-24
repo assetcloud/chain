@@ -10,12 +10,12 @@ import (
 
 	"github.com/assetcloud/chain/common/log/log15"
 	p2ptypes "github.com/assetcloud/chain/system/p2p/dht/types"
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	"github.com/libp2p/go-libp2p/core/host"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
-var log = log15.New("module", "pubsub")
+var log = log15.New("module", "extension")
 
 var setOnce sync.Once
 

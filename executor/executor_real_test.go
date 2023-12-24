@@ -9,9 +9,8 @@ import (
 	"fmt"
 	"net/http"
 	_ "net/http/pprof"
-	"testing"
-
 	"sync"
+	"testing"
 
 	"github.com/assetcloud/chain/common"
 	"github.com/assetcloud/chain/common/address"
@@ -276,7 +275,7 @@ func TestExecBlock(t *testing.T) {
 //4. 排除掉网络掉影响
 //5. 先对leveldb 做一个性能的测试
 
-//区块执行新能测试
+// 区块执行新能测试
 func BenchmarkExecBlock(b *testing.B) {
 	b.ReportAllocs()
 	mock33 := newMockNode()

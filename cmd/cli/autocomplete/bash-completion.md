@@ -1,23 +1,25 @@
 # 命令行自动补全
 
-  目前在ubuntu下用git 等软件你会发现按tab键有提示或补全的功能， 这个功能依赖一个软件包， 叫bash-completion。bash-completion 提供的能力是bash shell 的可编程补全。而chain-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到chain-cli里， 应该能提高不少效率。
+目前在 ubuntu 下用 git 等软件你会发现按 tab 键有提示或补全的功能， 这个功能依赖一个软件包， 叫 bash-completion。bash-completion 提供的能力是 bash shell 的可编程补全。而 chain-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到 chain-cli 里， 应该能提高不少效率。
 
 ## bash-completion
 
-bash 自带命令行补全功能，但 由于 bash-completion 可编程，他可以带来更好的补全效果。 
+bash 自带命令行补全功能，但 由于 bash-completion 可编程，他可以带来更好的补全效果。
 
 不同的版本安装位置可能不一样， 但工作原理一致。
 
 工作原理：
-  1. 功能入口一个名为 bash_completion 的脚本， 在shell 初始化时加载。
-  1. bash_completion脚本会加载 completions 目录下补全脚本。 
-     1. completions 目录也可能有不一样的名字 如 bash_completion.d
-     1. 目录下一个文件对应一个命令， 和 /etc/init.d/ /etc/rsyslog.d/ 等一样一样的
-  
+
+1. 功能入口一个名为 bash_completion 的脚本， 在 shell 初始化时加载。
+1. bash_completion 脚本会加载 completions 目录下补全脚本。
+   1. completions 目录也可能有不一样的名字 如 bash_completion.d
+   1. 目录下一个文件对应一个命令， 和 /etc/init.d/ /etc/rsyslog.d/ 等一样一样的
+
 ### 熟悉下环境
 
- 先跟踪下我机器上的配置位置，熟悉下环境
-``` 
+先跟踪下我机器上的配置位置，熟悉下环境
+
+```
 # ~/.bashrc:                                # 在shell 初始化时加载
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -28,7 +30,7 @@ if ! shopt -oq posix; then
 fi
 
 # /usr/share/bash-completion/               # 补全脚本目录
-$ find /usr/share/bash-completion/ 
+$ find /usr/share/bash-completion/
 /usr/share/bash-completion/                 # 配置和脚本独立目录
 /usr/share/bash-completion/bash_completion  # 入口脚本
 /usr/share/bash-completion/completions      # 配置脚本目录
@@ -44,11 +46,13 @@ $ find /usr/share/bash-completion/
 ### 补全命令
 
 bash 自带补全命令， 主要有下面一个命令提供支持 (man bash 可以看到说明)
- 1. compgen： 从候选的单词列表中选出匹配的单词， 补全命令
- 1. complete: 补全参数
- 1. compopt:  修改每个名称指定的补全选项
+
+1.  compgen： 从候选的单词列表中选出匹配的单词， 补全命令
+1.  complete: 补全参数
+1.  compopt: 修改每个名称指定的补全选项
 
 compgen 演示
+
 ```
 # 感觉好简单
 $ compgen -W "z1 z2 z3 fz1 fz2 f3" z
@@ -61,11 +65,12 @@ compgen: 用法: compgen [-abcdefgjksuv] [-o 选项]  [-A 动作] [-G 全局模�
 ```
 
 complete 演示
+
 ```
 # 是不是很简单
 $ complete -W "account block bty trade token" chain-cli
 linj@linj-TM1701:~$ chain-cli t
-token  trade  
+token  trade
 
 # 再次打击
 complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [-G 全局模式] [-W 词语列表]  [-F 函数] [-C 命令] [-X 过滤模式] [-P 前缀] [-S 后缀] [名称 ...]
@@ -73,7 +78,7 @@ complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [
 
 ### bash 支持补全相关的内置变量
 
-用过c的应该对 __FILE__ __LINE__ 熟悉， bash 为了支持补全同样内置了相关变量
+用过 c 的应该对 **FILE** **LINE** 熟悉， bash 为了支持补全同样内置了相关变量
 
 ```
 前缀 COMP, 看后面部分表示变量意思
@@ -82,7 +87,7 @@ complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [
  ${COMPREPLY}   	一个数组变量，bash从这个变量中读取可编程补全所调用的shell函数生成的补全条目。
 
 补全函数的输入
- ${COMP_WORDS}          一个数组变量，包含当前命令行的每个单词 
+ ${COMP_WORDS}          一个数组变量，包含当前命令行的每个单词
  ${COMP_CWORD}          光标位置的单词“${COMP_WORDS}”中的下标. 为什么是光标， 输入命令可以可以回到前面修改命令
 
 补全函数的其他变量
@@ -98,21 +103,22 @@ complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [
 ```
 
 ```
-linj@linj-TM1701:~$ chain-cli account 
+linj@linj-TM1701:~$ chain-cli account
 
 declare -a COMP_WORDS='([0]="chain-cli" [1]="account" [2]="")'
 declare -- COMP_CWORD="2"
 declare -- COMP_LINE="chain-cli account "
-declare -- COMP_WORDBREAKS=" 	
+declare -- COMP_WORDBREAKS="
 \"'><=;|&(:"
 declare -- COMP_KEY="9"
 declare -- COMP_POINT="20"
 declare -- COMP_TYPE="9"
 ```
 
-### 演示程序1 子命令补全
+### 演示程序 1 子命令补全
 
 chain-cli 参数补全
+
 ```
 #!/bin/bash
 # 通过chain-cli 的help 找到一级的子命令
@@ -132,13 +138,14 @@ complete -F _subcmd chain-cli
 ```
 
 试用一下
+
 ```
-linj@linj-TM1701:~$ . subcmd.bash  
-linj@linj-TM1701:~$ ./chain/chain-cli 
-account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
-block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
+linj@linj-TM1701:~$ . subcmd.bash
+linj@linj-TM1701:~$ ./chain/chain-cli
+account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version
+block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet
 linj@linj-TM1701:~$ ./chain/chain-cli t
-ticket  token   trade   tx      
+ticket  token   trade   tx
 ```
 
 ### 生效
@@ -146,27 +153,27 @@ ticket  token   trade   tx
 ```
 linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/chain-cli
 # 重新开个窗口就有用了
-linj@linj-TM1701:~$ ./chain/chain-cli 
-account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
-block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
+linj@linj-TM1701:~$ ./chain/chain-cli
+account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version
+block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet
 ```
 
-### 给chain-cli 做个 bash-completion
+### 给 chain-cli 做个 bash-completion
 
-
- 地址: https://gitlab.33.cn/linj/chain-cli-completion
+地址: https://gitlab.33.cn/linj/chain-cli-completion
 
 演示
+
 ```
-linj@linj-TM1701:~$ ./chain/chain-cli 
-account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
-block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
+linj@linj-TM1701:~$ ./chain/chain-cli
+account   bty       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version
+block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet
 linj@linj-TM1701:~$ ./chain/chain-cli b
-block  bty    
-linj@linj-TM1701:~$ ./chain/chain-cli bty 
-priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
+block  bty
+linj@linj-TM1701:~$ ./chain/chain-cli bty
+priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw
 linj@linj-TM1701:~$ ./chain/chain-cli bty t
-transfer  txgroup   
+transfer  txgroup
 linj@linj-TM1701:~$ ./chain/chain-cli bty transfer -
--a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
+-a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to
 ```

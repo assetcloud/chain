@@ -23,6 +23,7 @@ type blockNode struct {
 	pid        string
 	sequence   int64
 	BlockTime  int64
+	errLog     error
 }
 
 type blockIndex struct {
@@ -54,7 +55,7 @@ func newBlockNode(cfg *types.ChainConfig, broadcast bool, block *types.Block, pi
 	return &node
 }
 
-//通过区块头构造blocknode节点
+// 通过区块头构造blocknode节点
 func newBlockNodeByHeader(broadcast bool, header *types.Header, pid string, sequence int64) *blockNode {
 	node := &blockNode{
 		hash:       header.Hash,
@@ -156,7 +157,7 @@ func (bi *blockIndex) UpdateNode(hash []byte, node *blockNode) bool {
 	return true
 }
 
-//删除index节点
+// 删除index节点
 func (bi *blockIndex) DelNode(hash []byte) {
 	bi.Lock()
 	defer bi.Unlock()

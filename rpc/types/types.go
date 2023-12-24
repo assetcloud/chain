@@ -392,7 +392,7 @@ type ExecNameParm struct {
 	ExecName string `json:"execname"`
 }
 
-//CreateTx 为了简化Note 的创建过程，在json rpc 中，note 采用string 格式
+// CreateTx 为了简化Note 的创建过程，在json rpc 中，note 采用string 格式
 type CreateTx struct {
 	To          string `json:"to,omitempty"`
 	Amount      int64  `json:"amount,omitempty"`
@@ -414,25 +414,25 @@ type ReWriteRawTx struct {
 	Index  int32  `json:"index"`
 }
 
-//BlockSeq parameter
+// BlockSeq parameter
 type BlockSeq struct {
 	Num    int64          `json:"num,omitempty"`
 	Seq    *BlockSequence `json:"seq,omitempty"`
 	Detail *BlockDetail   `json:"detail,omitempty"`
 }
 
-//BlockSequence parameter
+// BlockSequence parameter
 type BlockSequence struct {
 	Hash string `json:"hash,omitempty"`
 	Type int64  `json:"type,omitempty"`
 }
 
-//ParaTxDetails parameter
+// ParaTxDetails parameter
 type ParaTxDetails struct {
 	Items []*ParaTxDetail `json:"paraTxDetail"`
 }
 
-//ParaTxDetail parameter
+// ParaTxDetail parameter
 type ParaTxDetail struct {
 	Type      int64       `json:"type,omitempty"`
 	Header    *Header     `json:"header,omitempty"`
@@ -442,7 +442,7 @@ type ParaTxDetail struct {
 	Proofs    []string    `json:"proofs,omitempty"`
 }
 
-//TxDetail parameter
+// TxDetail parameter
 type TxDetail struct {
 	Index   uint32       `json:"index,omitempty"`
 	Tx      *Transaction `json:"tx,omitempty"`
@@ -450,24 +450,24 @@ type TxDetail struct {
 	Proofs  []string     `json:"proofs,omitempty"`
 }
 
-//ReplyHeightByTitle parameter
+// ReplyHeightByTitle parameter
 type ReplyHeightByTitle struct {
 	Title string       `json:"title,omitempty"`
 	Items []*BlockInfo `json:"items,omitempty"`
 }
 
-//BlockInfo parameter
+// BlockInfo parameter
 type BlockInfo struct {
 	Height int64  `json:"height,omitempty"`
 	Hash   string `json:"hash,omitempty"`
 }
 
-//ChainIDInfo parameter
+// ChainIDInfo parameter
 type ChainIDInfo struct {
 	ChainID int32 `json:"chainID"`
 }
 
-//ChainConfigInfo parameter
+// ChainConfigInfo parameter
 type ChainConfigInfo struct {
 	Title            string `json:"title,omitempty"`
 	CoinExec         string `json:"coinExec,omitempty"`

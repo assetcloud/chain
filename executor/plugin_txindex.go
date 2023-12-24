@@ -46,7 +46,7 @@ func (p *txindexPlugin) ExecDelLocal(executor *executor, data *types.BlockDetail
 	return kvs, nil
 }
 
-//获取公共的信息
+// 获取公共的信息
 func getTx(executor *executor, tx *types.Transaction, receipt *types.ReceiptData, index int) []*types.KeyValue {
 	types.AssertConfig(executor.api)
 	cfg := executor.api.GetConfig()
@@ -61,10 +61,10 @@ func getTx(executor *executor, tx *types.Transaction, receipt *types.ReceiptData
 	txresult.ActionName = tx.ActionName()
 	var kvlist []*types.KeyValue
 	kvlist = append(kvlist, &types.KeyValue{Key: cfg.CalcTxKey(txhash), Value: cfg.CalcTxKeyValue(&txresult)})
-	//加入eth 交易哈希与chain33 哈希的映射
+	//加入eth 交易哈希与chain 哈希的映射
 	etxHash := tx.GetEthTxHash()
 	if etxHash != nil {
-		kvlist = append(kvlist, &types.KeyValue{Key: cfg.CalcEtxKey(etxHash), Value: cfg.CalcTxKey(txhash)})
+		kvlist = append(kvlist, &types.KeyValue{Key: cfg.CalcEthTxKey(etxHash), Value: txhash})
 	}
 	//end-----------------------------
 	if cfg.IsEnable("quickIndex") {
@@ -80,7 +80,7 @@ type txIndex struct {
 	index     *types.ReplyTxInfo
 }
 
-//交易中 from/to 的索引
+// 交易中 from/to 的索引
 func getTxIndex(executor *executor, tx *types.Transaction, receipt *types.ReceiptData, index int) *txIndex {
 	var txIndexInfo txIndex
 	var txinf types.ReplyTxInfo

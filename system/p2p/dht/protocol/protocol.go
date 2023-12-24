@@ -12,11 +12,11 @@ import (
 	"github.com/assetcloud/chain/system/p2p/dht/extension"
 	types2 "github.com/assetcloud/chain/system/p2p/dht/types"
 	"github.com/assetcloud/chain/types"
-	"github.com/libp2p/go-libp2p-core/discovery"
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/metrics"
-	"github.com/libp2p/go-libp2p-core/peer"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
+	"github.com/libp2p/go-libp2p/core/discovery"
+	"github.com/libp2p/go-libp2p/core/host"
+	"github.com/libp2p/go-libp2p/core/metrics"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 // P2PEnv p2p全局公共变量

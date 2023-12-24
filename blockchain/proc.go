@@ -14,7 +14,7 @@ import (
 	"github.com/assetcloud/chain/types"
 )
 
-//ProcRecvMsg blockchain模块的消息接收处理
+// ProcRecvMsg blockchain模块的消息接收处理
 func (chain *BlockChain) ProcRecvMsg() {
 	defer chain.recvwg.Done()
 	reqnum := make(chan struct{}, 1000)
@@ -243,8 +243,8 @@ func (chain *BlockChain) getLastHeader(msg *queue.Message) {
 	}
 }
 
-//共识过来的block是没有被执行的，首先判断此block的parent block是否是当前best链的tip
-//在blockchain执行时需要做tx的去重处理，所以在执行成功之后需要将最新区块详情返回给共识模块
+// 共识过来的block是没有被执行的，首先判断此block的parent block是否是当前best链的tip
+// 在blockchain执行时需要做tx的去重处理，所以在执行成功之后需要将最新区块详情返回给共识模块
 func (chain *BlockChain) addBlockDetail(msg *queue.Message) {
 	blockDetail := msg.Data.(*types.BlockDetail)
 	Height := blockDetail.Block.Height
@@ -265,10 +265,10 @@ func (chain *BlockChain) addBlockDetail(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("consensus", types.EventAddBlockDetail, blockDetail))
 }
 
-//超前太多或者落后太多的广播区块都不做处理：
-//当本节点在同步阶段并且远远落后主网最新高度时不处理广播block,暂定落后128个区块
-//以免广播区块占用go goroutine资源
-//目前回滚只支持10000个区块，所以收到落后10000高度之外的广播区块也不做处理
+// 超前太多或者落后太多的广播区块都不做处理：
+// 当本节点在同步阶段并且远远落后主网最新高度时不处理广播block,暂定落后128个区块
+// 以免广播区块占用go goroutine资源
+// 目前回滚只支持10000个区块，所以收到落后10000高度之外的广播区块也不做处理
 func (chain *BlockChain) broadcastAddBlock(msg *queue.Message) {
 	var reply types.Reply
 	reply.IsOk = true
@@ -408,7 +408,7 @@ func (chain *BlockChain) processMsg(msg *queue.Message, reqnum chan struct{}, cb
 	cb(msg)
 }
 
-//获取最新的block执行序列号
+// 获取最新的block执行序列号
 func (chain *BlockChain) getLastBlockSequence(msg *queue.Message) {
 	var lastSequence types.Int64
 	var err error
@@ -419,7 +419,7 @@ func (chain *BlockChain) getLastBlockSequence(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("rpc", types.EventReplyLastBlockSequence, &lastSequence))
 }
 
-//获取指定区间的block执行序列信息，包含blockhash和操作类型：add/del
+// 获取指定区间的block执行序列信息，包含blockhash和操作类型：add/del
 func (chain *BlockChain) getBlockSequences(msg *queue.Message) {
 	requestSequences := (msg.Data).(*types.ReqBlocks)
 	BlockSequences, err := chain.GetBlockSequences(requestSequences)
@@ -468,7 +468,7 @@ func (chain *BlockChain) getBlockBySeq(msg *queue.Message) {
 
 }
 
-//平行链del block的处理
+// 平行链del block的处理
 func (chain *BlockChain) delParaChainBlockDetail(msg *queue.Message) {
 	var parablockDetail *types.ParaChainBlockDetail
 	var reply types.Reply
@@ -488,7 +488,7 @@ func (chain *BlockChain) delParaChainBlockDetail(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("p2p", types.EventReply, &reply))
 }
 
-//平行链add block的处理
+// 平行链add block的处理
 func (chain *BlockChain) addParaChainBlockDetail(msg *queue.Message) {
 	parablockDetail := msg.Data.(*types.ParaChainBlockDetail)
 
@@ -511,7 +511,7 @@ func (chain *BlockChain) addParaChainBlockDetail(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("p2p", types.EventReply, blockDetail))
 }
 
-//parachian 通过blockhash获取对应的seq，只记录了addblock时的seq
+// parachian 通过blockhash获取对应的seq，只记录了addblock时的seq
 func (chain *BlockChain) getSeqByHash(msg *queue.Message) {
 	blockhash := (msg.Data).(*types.ReqHash)
 	seq, err := chain.ProcGetSeqByHash(blockhash.Hash)
@@ -522,7 +522,7 @@ func (chain *BlockChain) getSeqByHash(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("rpc", types.EventGetSeqByHash, &types.Int64{Data: seq}))
 }
 
-//获取指定地址参与的tx交易计数
+// 获取指定地址参与的tx交易计数
 func (chain *BlockChain) localAddrTxCount(msg *queue.Message) {
 	reqkey := (msg.Data).(*types.ReqKey)
 
@@ -553,7 +553,7 @@ func (chain *BlockChain) localAddrTxCount(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("rpc", types.EventLocalReplyValue, &types.Int64{Data: counts}))
 }
 
-//GetLastBlockMainSequence 获取最新的block执行序列号
+// GetLastBlockMainSequence 获取最新的block执行序列号
 func (chain *BlockChain) GetLastBlockMainSequence(msg *queue.Message) {
 	var lastSequence types.Int64
 	var err error
@@ -566,7 +566,7 @@ func (chain *BlockChain) GetLastBlockMainSequence(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("rpc", types.EventReplyLastBlockMainSequence, &lastSequence))
 }
 
-//GetMainSeqByHash parachian 通过blockhash获取对应的seq，只记录了addblock时的seq
+// GetMainSeqByHash parachian 通过blockhash获取对应的seq，只记录了addblock时的seq
 func (chain *BlockChain) GetMainSeqByHash(msg *queue.Message) {
 	blockhash := (msg.Data).(*types.ReqHash)
 	seq, err := chain.ProcGetMainSeqByHash(blockhash.Hash)
@@ -578,7 +578,7 @@ func (chain *BlockChain) GetMainSeqByHash(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("rpc", types.EventReplyMainSeqByHash, &types.Int64{Data: seq}))
 }
 
-//setValueByKey 设置kv对到blockchain db中
+// setValueByKey 设置kv对到blockchain db中
 func (chain *BlockChain) setValueByKey(msg *queue.Message) {
 	var reply types.Reply
 	reply.IsOk = true
@@ -598,7 +598,7 @@ func (chain *BlockChain) setValueByKey(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("", types.EventReply, &reply))
 }
 
-//GetValueByKey 获取value通过key从blockchain db中
+// GetValueByKey 获取value通过key从blockchain db中
 func (chain *BlockChain) getValueByKey(msg *queue.Message) {
 	if !chain.isParaChain {
 		msg.Reply(chain.client.NewMessage("", types.EventLocalReplyValue, nil))
@@ -609,7 +609,7 @@ func (chain *BlockChain) getValueByKey(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("", types.EventLocalReplyValue, values))
 }
 
-//getParaTxByTitle //通过平行链title获取平行链的交易
+// getParaTxByTitle //通过平行链title获取平行链的交易
 func (chain *BlockChain) getParaTxByTitle(msg *queue.Message) {
 	req := (msg.Data).(*types.ReqParaTxByTitle)
 	reply, err := chain.GetParaTxByTitle(req)
@@ -621,7 +621,7 @@ func (chain *BlockChain) getParaTxByTitle(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("", types.EventReplyParaTxByTitle, reply))
 }
 
-//getHeightByTitle //获取拥有此title交易的区块高度
+// getHeightByTitle //获取拥有此title交易的区块高度
 func (chain *BlockChain) getHeightByTitle(msg *queue.Message) {
 	req := (msg.Data).(*types.ReqHeightByTitle)
 	reply, err := chain.LoadParaTxByTitle(req)
@@ -633,7 +633,7 @@ func (chain *BlockChain) getHeightByTitle(msg *queue.Message) {
 	msg.Reply(chain.client.NewMessage("", types.EventReplyHeightByTitle, reply))
 }
 
-//getParaTxByTitleAndHeight //通过区块高度列表+title获取平行链交易
+// getParaTxByTitleAndHeight //通过区块高度列表+title获取平行链交易
 func (chain *BlockChain) getParaTxByTitleAndHeight(msg *queue.Message) {
 	req := (msg.Data).(*types.ReqParaTxByHeight)
 	reply, err := chain.GetParaTxByHeight(req)

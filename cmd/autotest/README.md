@@ -1,11 +1,13 @@
-
 # autotest
+
 自动化系统回归测试工具，外部支持输入测试用例配置文件，
 输出测试用例执行结果并记录详细执行日志。
 内部代码支持用例扩展开发，继承并实现通用接口，即可自定义实现用例类型。
 
 ### 编译
-通过chain makefile
+
+通过 chain makefile
+
 ```
 $ make autotest
 ```
@@ -13,17 +15,20 @@ $ make autotest
 ### 运行
 
 #### **直接执行**
-已启动chain服务并需要自定义配置用例文件
+
+已启动 chain 服务并需要自定义配置用例文件
+
 ```
 $ ./autotest -f autotest.toml -l autotest.log
 ```
 
--f，-l分别指定配置文件和日志文件，
-不指定默认为autotest.toml，autotest.log
+-f，-l 分别指定配置文件和日志文件，
+不指定默认为 autotest.toml，autotest.log
 
+#### **通过 chain makefile**
 
-#### **通过chain makefile**
-chain开发人员修改框架或dapp代码，验证测试
+chain 开发人员修改框架或 dapp 代码，验证测试
+
 ```
 
 //启动单节点solo版本chain，运行默认配置autotest，dapp用于指定需要跑的配置用例
@@ -33,12 +38,13 @@ $ make autotest dapp="coins token"
 //dapp=all，执行所有预配置用例
 $ make autotest dapp=all
 ```
-目前autotest支持的dapp有，coins token trade privacy，后续有待扩展
 
+目前 autotest 支持的 dapp 有，coins token trade privacy，后续有待扩展
 
 ### 配置文件
 
-配置文件为toml格式，用于指定具体的测试用例文件
+配置文件为 toml 格式，用于指定具体的测试用例文件
+
 ```
 # 指定内部调用chain-cli程序文件
 cliCmd = "./chain-cli"
@@ -56,9 +62,10 @@ contract = "token"  # token合约
 filename = "token.toml"
 ```
 
-
 ### 用例文件
-用例文件用于配置具体的测试用例,采用toml格式，dapp的autotest目录下预配置了跑ci的用例文件，如coins.toml:
+
+用例文件用于配置具体的测试用例,采用 toml 格式，dapp 的 autotest 目录下预配置了跑 ci 的用例文件，如 coins.toml:
+
 ```
 [[TransferCase]]
 id = "btyTrans1"
@@ -71,10 +78,12 @@ repeat = 1
 
 ```
 
-
 ### 用例类型
+
 #### 基本类型
+
 **BaseCase**，所有用例的基类类型
+
 ```go
 type BaseCase struct {
 	ID        string   `toml:"id"`  //用例id
@@ -87,37 +96,43 @@ type BaseCase struct {
 ```
 
 **CheckItem**，默认会检查交易回执执行结果，并根据用例不同支持以下字段
-* **balance**，交易双方余额校验
-* **frozon**， 涉及冻结余额操作校验
-* **utxo**， 隐私相关交易，校验utxo余额
 
+- **balance**，交易双方余额校验
+- **frozon**， 涉及冻结余额操作校验
+- **utxo**， 隐私相关交易，校验 utxo 余额
 
-#### Coins合约
-* **TransferCase**，转账
-* **WithdrawCase**，从合约取出
+#### Coins 合约
 
-#### Token合约
-* **TokePreCreateCase**，token预创建
-* **TokenFinishCreateCase**，token完成创建
+- **TransferCase**，转账
+- **WithdrawCase**，从合约取出
 
-#### Trade合约
-* **SellCase**，token出售
-* **DependBuyCase**，token买入，需要在dep字段指定依赖的**SellCase**的id
+#### Token 合约
 
-#### Privacy合约
-* **PubToPrivCase**，公对私转账
-* **PrivToPubCase**，私对公转账
-* **PrivToPrivCase**，私对私转账
+- **TokePreCreateCase**，token 预创建
+- **TokenFinishCreateCase**，token 完成创建
+
+#### Trade 合约
+
+- **SellCase**，token 出售
+- **DependBuyCase**，token 买入，需要在 dep 字段指定依赖的**SellCase**的 id
+
+#### Privacy 合约
+
+- **PubToPrivCase**，公对私转账
+- **PrivToPubCase**，私对公转账
+- **PrivToPrivCase**，私对私转账
 
 #### ...
 
 ### 日志分析
 
-
 ### 扩展开发
+
 分为以下几个步骤
-> 注册dapp的AutoTest类型，以chain/system/dapp/coins为例
-增加autotest目录，并新建coins.go文件
+
+> 注册 dapp 的 AutoTest 类型，以 chain/system/dapp/coins 为例
+> 增加 autotest 目录，并新建 coins.go 文件
+
 ```go
 package autotest
 
@@ -156,8 +171,8 @@ func (config coinsAutoTest) GetTestConfigType() reflect.Type {
 }
 ```
 
-
 > 实现用例的测试行为
+
 ```go
 SendCommand(id string)    //实现用例执行命令的行为
 
@@ -168,4 +183,5 @@ CheckResult(CheckHandlerMap) (bool, bool)
 getCheckHandlerMap() interface{} 返回CheckHandlerMap类型
 
 ```
+
 根据需要重写以上接口，灵活定义用例行为

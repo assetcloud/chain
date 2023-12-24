@@ -124,8 +124,8 @@ func TestMultiTopic(t *testing.T) {
 	q.Start()
 }
 
-//发送100000 低优先级的消息，然后发送一个高优先级的消息
-//高优先级的消息可以即时返回
+// 发送100000 低优先级的消息，然后发送一个高优先级的消息
+// 高优先级的消息可以即时返回
 func TestHighLow(t *testing.T) {
 	q := New("channel")
 
@@ -167,8 +167,8 @@ func TestHighLow(t *testing.T) {
 	q.Start()
 }
 
-//发送100000 低优先级的消息，然后发送一个高优先级的消息
-//高优先级的消息可以即时返回
+// 发送100000 低优先级的消息，然后发送一个高优先级的消息
+// 高优先级的消息可以即时返回
 func TestClientClose(t *testing.T) {
 	q := New("channel")
 	//mempool
@@ -512,6 +512,7 @@ func TestChannelClose(t *testing.T) {
 	go q.Start()
 	//rpc 模块 会向其他模块发送消息，自己本身不需要订阅消息
 	go func() {
+		time.Sleep(time.Millisecond * 100)
 		done <- struct{}{}
 	}()
 	for i := 0; i < 10000; i++ {

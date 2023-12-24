@@ -1,7 +1,9 @@
 package mempool
 
 import (
+	"bytes"
 	"errors"
+	"sort"
 	"sync/atomic"
 	"time"
 
@@ -146,7 +148,7 @@ func (mem *Mempool) checkLevelFee(tx *types.TransactionCache) error {
 	return nil
 }
 
-//checkTxRemote 检查账户余额是否足够，并加入到Mempool，成功则传入goodChan，若加入Mempool失败则传入badChan
+// checkTxRemote 检查账户余额是否足够，并加入到Mempool，成功则传入goodChan，若加入Mempool失败则传入badChan
 func (mem *Mempool) checkTxRemote(msg *queue.Message) *queue.Message {
 	tx := msg.GetData().(types.TxGroup)
 	lastheader := mem.GetHeader()
@@ -198,6 +200,13 @@ func (mem *Mempool) checkTxRemote(msg *queue.Message) *queue.Message {
 		}
 	}
 
+	//检查mempool内是否有相同的tx.nonce
+	err = mem.evmTxNonceCheck(tx.Tx())
+	if err != nil {
+		msg.Data = err
+		return msg
+	}
+
 	err = mem.PushTx(tx.Tx())
 	if err != nil {
 		if err == types.ErrMemFull {
@@ -208,4 +217,38 @@ func (mem *Mempool) checkTxRemote(msg *queue.Message) *queue.Message {
 		msg.Data = err
 	}
 	return msg
+}
+
+// evmTxNonceCheck 检查eth noce 是否有重复值，如果有的话，需要比较txFee大小，用于替换较小的fee的那笔交易
+func (mem *Mempool) evmTxNonceCheck(tx *types.Transaction) error {
+	if !types.IsEthSignID(tx.Tx().GetSignature().GetTy()) {
+		return nil
+	}
+
+	//较小的nonce 则返回错误，不被允许进入mempool
+	if tx.GetNonce() < mem.getCurrentNonce(tx.From()) {
+		return types.ErrLowNonce
+	}
+	details := mem.GetAccTxs(&types.ReqAddrs{Addrs: []string{tx.From()}})
+	txs := details.GetTxs()
+	txs = append(txs, &types.TransactionDetail{Tx: tx, Index: int64(len(txs))})
+	if len(txs) > 1 {
+		sort.SliceStable(txs, func(i, j int) bool { //nonce asc
+			return txs[i].Tx.GetNonce() < txs[j].Tx.GetNonce()
+		})
+		//遇到相同的Nonce ,较低的手续费的交易将被删除
+		for i, stx := range txs {
+			if bytes.Equal(stx.Tx.Hash(), tx.Hash()) {
+				continue
+			}
+			if txs[i].GetTx().GetNonce() == tx.GetNonce() {
+				mlog.Info("evmTxNonceCheck", "from:", tx.From(), "pre tx hash", common.ToHex(txs[i].GetTx().Hash()), "detect transaction acceleration action:", "reject")
+				return errors.New("disable transaction acceleration")
+			}
+		}
+
+	}
+
+	return nil
+
 }

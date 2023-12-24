@@ -1,18 +1,15 @@
-
 os: Visual Studio 2019
 
 build: off
 
-clone_folder: c:\gopath\src\github.com\assetcloud\chain
+clone_folder: c:\gopath\src\github.com\33cn\chain
 
 environment:
   GOPATH: c:\gopath
 
-
 before_test:
-  - set PATH=C:\go116\bin;%PATH%
-  - set GOROOT=C:\go116
-
+  - set PATH=C:\go119\bin;%PATH%
+  - set GOROOT=C:\go119
 
 test_script:
   - go version
@@ -20,4 +17,3 @@ test_script:
   - go env -w CGO_ENABLED=0
   - go build -o build/chain.exe github.com/assetcloud/chain/cmd/chain
   - go build -o build/chain-cli.exe github.com/assetcloud/chain/cmd/cli
-

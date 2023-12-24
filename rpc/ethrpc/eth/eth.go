@@ -44,7 +44,7 @@ var (
 	log = log15.New("module", "ethrpc_eth")
 )
 
-//NewEthAPI new eth api
+// NewEthAPI new eth api
 func NewEthAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocolAPI) interface{} {
 	e := &ethHandler{}
 	e.cli.Init(c, api)
@@ -65,7 +65,7 @@ func NewEthAPI(cfg *ctypes.ChainConfig, c queue.Client, api client.QueueProtocol
 	return e
 }
 
-//GetBalance eth_getBalance  tag:"latest", "earliest" or "pending"
+// GetBalance eth_getBalance  tag:"latest", "earliest" or "pending"
 func (e *ethHandler) GetBalance(address string, tag *string) (hexutil.Big, error) {
 	var req ctypes.ReqBalance
 	var balance hexutil.Big
@@ -82,13 +82,13 @@ func (e *ethHandler) GetBalance(address string, tag *string) (hexutil.Big, error
 	return hexutil.Big(*bn), nil
 }
 
-//nolint
+// nolint
 func (e *ethHandler) ChainId() (hexutil.Big, error) {
 	bigID := big.NewInt(e.evmChainID)
 	return hexutil.Big(*bigID), nil
 }
 
-//BlockNumber eth_blockNumber 获取区块高度
+// BlockNumber eth_blockNumber 获取区块高度
 func (e *ethHandler) BlockNumber() (hexutil.Uint64, error) {
 	log.Debug("eth_blockNumber")
 	header, err := e.cli.GetLastHeader()
@@ -100,7 +100,7 @@ func (e *ethHandler) BlockNumber() (hexutil.Uint64, error) {
 	return hexutil.Uint64(header.Height), nil
 }
 
-//GetBlockByNumber  eth_getBlockByNumber
+// GetBlockByNumber  eth_getBlockByNumber
 func (e *ethHandler) GetBlockByNumber(in string, full bool) (*types.Block, error) {
 	log.Debug("GetBlockByNumber", "param", in, "full", full)
 	var num int64
@@ -132,7 +132,7 @@ func (e *ethHandler) GetBlockByNumber(in string, full bool) (*types.Block, error
 
 }
 
-//GetBlockByHash eth_getBlockByHash 通过区块哈希获取区块交易详情
+// GetBlockByHash eth_getBlockByHash 通过区块哈希获取区块交易详情
 func (e *ethHandler) GetBlockByHash(txhash common.Hash, full bool) (*types.Block, error) {
 	log.Debug("GetBlockByHash", "txhash", txhash, "full", full)
 	var req ctypes.ReqHashes
@@ -146,7 +146,7 @@ func (e *ethHandler) GetBlockByHash(txhash common.Hash, full bool) (*types.Block
 
 }
 
-//GetTransactionByHash eth_getTransactionByHash
+// GetTransactionByHash eth_getTransactionByHash
 func (e *ethHandler) GetTransactionByHash(txhash common.Hash) (*types.Transaction, error) {
 	log.Debug("GetTransactionByHash", "txhash", txhash)
 	var req ctypes.ReqHash
@@ -182,7 +182,7 @@ func (e *ethHandler) GetTransactionByHash(txhash common.Hash) (*types.Transactio
 
 }
 
-//GetTransactionReceipt eth_getTransactionReceipt
+// GetTransactionReceipt eth_getTransactionReceipt
 func (e *ethHandler) GetTransactionReceipt(txhash common.Hash) (*types.Receipt, error) {
 	log.Debug("GetTransactionReceipt", "txhash", txhash)
 	var req ctypes.ReqHashes
@@ -216,7 +216,7 @@ func (e *ethHandler) GetTransactionReceipt(txhash common.Hash) (*types.Receipt, 
 	return nil, nil
 }
 
-//GetBlockTransactionCountByNumber eth_getBlockTransactionCountByNumber
+// GetBlockTransactionCountByNumber eth_getBlockTransactionCountByNumber
 func (e *ethHandler) GetBlockTransactionCountByNumber(blockNum *hexutil.Big) (hexutil.Uint64, error) {
 	log.Debug("GetBlockTransactionCountByNumber", "blockNum", blockNum)
 	var req ctypes.ReqBlocks
@@ -230,10 +230,11 @@ func (e *ethHandler) GetBlockTransactionCountByNumber(blockNum *hexutil.Big) (he
 
 }
 
-//GetBlockTransactionCountByHash
+// GetBlockTransactionCountByHash
+// parameters: 32 Bytes - hash of a block
+// Returns: integer of the number of transactions in this block.
+//
 //method:eth_getBlockTransactionCountByHash
-//parameters: 32 Bytes - hash of a block
-//Returns: integer of the number of transactions in this block.
 func (e *ethHandler) GetBlockTransactionCountByHash(hash common.Hash) (hexutil.Uint64, error) {
 	log.Debug("GetBlockTransactionCountByHash", "hash", hash)
 	var req ctypes.ReqHashes
@@ -247,7 +248,7 @@ func (e *ethHandler) GetBlockTransactionCountByHash(hash common.Hash) (hexutil.U
 	return hexutil.Uint64(len(blockdetails.GetItems()[0].GetBlock().GetTxs())), nil
 }
 
-//Accounts eth_accounts
+// Accounts eth_accounts
 func (e *ethHandler) Accounts() ([]string, error) {
 	log.Debug("Accounts", "Accounts", "")
 	req := &ctypes.ReqAccountList{WithoutBalance: true}
@@ -258,14 +259,17 @@ func (e *ethHandler) Accounts() ([]string, error) {
 	accountsList := msg.(*ctypes.WalletAccounts)
 	var accounts []string
 	for _, wallet := range accountsList.Wallets {
-		accounts = append(accounts, wallet.GetAcc().GetAddr())
+		//过滤base58 格式的地址
+		if common.IsHexAddress(wallet.GetAcc().GetAddr()) {
+			accounts = append(accounts, wallet.GetAcc().GetAddr())
+		}
 	}
 
 	return accounts, nil
 
 }
 
-//Call eth_call evm合约相关操作,合约相关信息查询
+// Call eth_call evm合约相关操作,合约相关信息查询
 func (e *ethHandler) Call(msg types.CallMsg, tag *string) (interface{}, error) {
 	log.Debug("eth_call", "msg", msg)
 	var param rpctypes.Query4Jrpc
@@ -309,9 +313,9 @@ func (e *ethHandler) Call(msg types.CallMsg, tag *string) (interface{}, error) {
 
 }
 
-//SendRawTransaction eth_sendRawTransaction
+// SendRawTransaction eth_sendRawTransaction
 func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
-	log.Debug("eth_sendRawTransaction", "rawData", rawData)
+	log.Info("eth_sendRawTransaction", "rawData", rawData)
 	rawhexData := common.FromHex(rawData)
 	if rawhexData == nil {
 		return nil, errors.New("wrong data")
@@ -341,7 +345,7 @@ func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
 	sig[64] = cv
 
 	if !ethcrypto.ValidateSignatureValues(cv, r, s, false) {
-		log.Error("etgh_SendRawTransaction", "ValidateSignatureValues", false, "RawSignatureValues v:", v, "to:", ntx.To(), "type", ntx.Type(), "sig", common.Bytes2Hex(sig))
+		log.Error("eth_SendRawTransaction", "ValidateSignatureValues", false, "RawSignatureValues v:", v, "to:", ntx.To(), "type", ntx.Type(), "sig", common.Bytes2Hex(sig))
 		return nil, errors.New("wrong signature")
 	}
 	pubkey, err := ethcrypto.Ecrecover(txSha3.Bytes(), sig)
@@ -362,7 +366,7 @@ func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
 		return nil, fmt.Errorf("nonce too low")
 	}
 	if ntx.Nonce() > uint64(nonce) { //非平行链下 允许更高的nonce 通过，在mempool中排序等待
-		log.Error("eth_sendRawTransaction", "nonce too high,tx.From", txFrom, "txnonce", ntx.Nonce(), "stateNonce", nonce)
+		log.Warn("eth_sendRawTransaction", "nonce too high,tx.From", txFrom, "txnonce", ntx.Nonce(), "stateNonce", nonce)
 		if e.cfg.IsPara() { //平行链架构下，交易是要发到主链共识的，无法校验交易的nonce是否正确
 			return nil, fmt.Errorf("nonce too high")
 		}
@@ -374,13 +378,20 @@ func (e *ethHandler) SendRawTransaction(rawData string) (hexutil.Bytes, error) {
 	}
 
 	chainTx := types.AssembleChainTx(ntx, sig, pubkey, e.cfg)
-	log.Debug("SendRawTransaction", "cacuHash", common.Bytes2Hex(chainTx.Hash()), "exec", string(chainTx.Execer))
 	reply, err := e.cli.SendTx(chainTx)
+	log.Info("SendRawTransaction", "cacuHash", common.Bytes2Hex(chainTx.Hash()),
+		"ethHash:", ntx.Hash().String(), "exec", string(chainTx.Execer), "mempool reply:", common.Bytes2Hex(reply.GetMsg()), "err:", err)
+	//调整为返回eth 交易哈希，之前是reply.GteMsg() chain 哈希
+	conf := ctypes.Conf(e.cfg, "config.rpc.sub.eth")
+	//打开 enableRlpTxHash 返回 eth 交易哈希 , 通过此hash 查询交易详情需要配合enableTxQuickIndex =false 使用
+	if conf.IsEnable("enableRlpTxHash") {
+		return ntx.Hash().Bytes(), err
+	}
 	return reply.GetMsg(), err
 
 }
 
-//Sign method:eth_sign
+// Sign method:eth_sign
 func (e *ethHandler) Sign(address string, digestHash *hexutil.Bytes) (string, error) {
 	//导出私钥
 	log.Debug("Sign", "eth_sign,hash", digestHash, "addr", address)
@@ -402,11 +413,12 @@ func (e *ethHandler) Sign(address string, digestHash *hexutil.Bytes) (string, er
 	return hexutil.Encode(sig), nil
 }
 
-//Syncing ...
-//Returns an object with data about the sync status or false.
-//Returns: FALSE:when not syncing,
+// Syncing ...
+// Returns an object with data about the sync status or false.
+// Returns: FALSE:when not syncing,
+// params:[]
+//
 //method:eth_syncing
-//params:[]
 func (e *ethHandler) Syncing() (interface{}, error) {
 	log.Debug("eth_syncing", "eth_syncing", "")
 	var syncing struct {
@@ -453,10 +465,11 @@ func (e *ethHandler) Mining() (bool, error) {
 	return false, err
 }
 
+// Returns:Returns the number of transactions sent from an address.
+// Paramters: address,tag(disable):latest,pending,earliest
+// GetTransactionCount 获取nonce
+//
 //method:eth_getTransactionCount
-//Returns:Returns the number of transactions sent from an address.
-//Paramters: address,tag(disable):latest,pending,earliest
-//GetTransactionCount 获取nonce
 func (e *ethHandler) GetTransactionCount(address, tag string) (hexutil.Uint64, error) {
 	log.Debug("GetTransactionCount", "eth_getTransactionCount address", address)
 	exec := e.cfg.ExecName("evm")
@@ -492,9 +505,11 @@ func (e *ethHandler) GetTransactionCount(address, tag string) (hexutil.Uint64, e
 	return hexutil.Uint64(bigNonce.Uint64()), err
 }
 
+// EstimateGas 获取gas
+//
 //method:eth_estimateGas
-//EstimateGas 获取gas
 func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error) {
+	log.Info("EstimateGas", "callMsg.From", callMsg.From, "callMsg.To:", callMsg.To, "callMsg.Value:", callMsg.Value)
 	if callMsg == nil {
 		return 0, errors.New("callMsg empty")
 	}
@@ -550,6 +565,17 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 	})
 
 	fee := properFee.GetProperFee()
+	//GetMinTxFeeRate 默认1e5
+	realFee, _ := tx.GetRealFee(e.cfg.GetMinTxFeeRate())
+	//判断是否是代理执行的地址，如果是，则直接返回，不会交给evm执行器去模拟执行计算gas.
+	if callMsg.To == e.cfg.GetModuleConfig().Exec.ProxyExecAddress {
+		rightFee := realFee
+		if realFee < fee {
+			rightFee = fee
+		}
+		return hexutil.Uint64(rightFee), nil
+	}
+
 	var minimumGas int64 = 21000
 	if callMsg.Data == nil || len(*callMsg.Data) == 0 {
 		if fee < e.cfg.GetMinTxFeeRate() {
@@ -587,8 +613,6 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 	}
 
 	bigGas, _ := new(big.Int).SetString(gas.Gas, 10)
-	//GetMinTxFeeRate 默认1e5
-	realFee, _ := tx.GetRealFee(e.cfg.GetMinTxFeeRate())
 
 	var finalFee = realFee
 	if bigGas.Uint64() > uint64(realFee) {
@@ -602,14 +626,14 @@ func (e *ethHandler) EstimateGas(callMsg *types.CallMsg) (hexutil.Uint64, error)
 
 }
 
-//GasPrice  eth_gasPrice default 10 gwei
+// GasPrice  eth_gasPrice default 10 gwei
 func (e *ethHandler) GasPrice() (*hexutil.Big, error) {
 	log.Debug("GasPrice", "eth_gasPrice ", "")
 	return (*hexutil.Big)(new(big.Int).Div(big.NewInt(1e18), big.NewInt(e.cfg.GetCoinPrecision()))), nil
 }
 
-//Hashrate
-//method: eth_hashrate
+// Hashrate
+// method: eth_hashrate
 func (e *ethHandler) Hashrate() (hexutil.Uint64, error) {
 	log.Debug("eth_hashrate", "eth_hashrate ", "")
 	header, err := e.cli.GetLastHeader()
@@ -620,7 +644,7 @@ func (e *ethHandler) Hashrate() (hexutil.Uint64, error) {
 	return hexutil.Uint64(header.Difficulty), nil
 }
 
-//GetContractorAddress   eth_getContractorAddress
+// GetContractorAddress   eth_getContractorAddress
 func (e *ethHandler) GetContractorAddress(from common.Address, nonce hexutil.Uint64) (*common.Address, error) {
 	log.Debug("eth_getContractorAddress", "addr", from, "nonce", nonce)
 
@@ -629,7 +653,7 @@ func (e *ethHandler) GetContractorAddress(from common.Address, nonce hexutil.Uin
 
 }
 
-//GetCode eth_getCode 获取部署合约的合约代码
+// GetCode eth_getCode 获取部署合约的合约代码
 func (e *ethHandler) GetCode(addr *common.Address, tag string) (*hexutil.Bytes, error) {
 
 	exec := e.cfg.ExecName("evm")
@@ -681,14 +705,14 @@ func (e *ethHandler) GetCode(addr *common.Address, tag string) (*hexutil.Bytes, 
 
 }
 
-//HistoryParam ...
+// HistoryParam ...
 type HistoryParam struct {
 	BlockCount  hexutil.Uint64
 	NewestBlock string
 	//reward_percentiles []int
 }
 
-//FeeHistory eth_feeHistory feehistory
+// FeeHistory eth_feeHistory feehistory
 func (e *ethHandler) FeeHistory(BlockCount, tag string, options []interface{}) (interface{}, error) {
 	log.Debug("eth_feeHistory", "FeeHistory blockcout", BlockCount)
 	header, err := e.cli.GetLastHeader()
@@ -708,7 +732,7 @@ func (e *ethHandler) FeeHistory(BlockCount, tag string, options []interface{}) (
 	return &result, nil
 }
 
-//GetLogs eth_getLogs
+// GetLogs eth_getLogs
 func (e *ethHandler) GetLogs(options *types.FilterQuery) ([]*types.EvmLog, error) {
 	//通过Grpc 客户端
 	log.Info("GetLogs", "Logs,options:", options)

@@ -556,7 +556,7 @@ func (c *Chain) SetLabl(in *types.ReqWalletSetLabel, result *interface{}) error 
 	return nil
 }
 
-//GetAccount getAddress by lable
+// GetAccount getAddress by lable
 func (c *Chain) GetAccount(in *types.ReqGetAccount, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletGetAccount", in)
 	if err != nil {
@@ -1311,7 +1311,7 @@ func convertBlockDetails(details []*types.BlockDetail, retDetails *rpctypes.Bloc
 		}
 
 		txs := item.Block.GetTxs()
-		if isDetail && len(txs) != len(item.Receipts) { //只有获取详情时才需要校验txs和Receipts的数量是否相等CHAIN33-540
+		if isDetail && len(txs) != len(item.Receipts) { //只有获取详情时才需要校验txs和Receipts的数量是否相等CHAIN-540
 			return types.ErrDecode
 		}
 		for _, tx := range txs {
@@ -1391,7 +1391,7 @@ func (c *Chain) NetProtocols(in *types.ReqNil, result *interface{}) error {
 	return nil
 }
 
-//GetSequenceByHash get sequcen by hashes
+// GetSequenceByHash get sequcen by hashes
 func (c *Chain) GetSequenceByHash(in rpctypes.ReqHashes, result *interface{}) error {
 	if len(in.Hashes) != 0 && common.IsHex(in.Hashes[0]) {
 		var req types.ReqHash
@@ -1409,7 +1409,7 @@ func (c *Chain) GetSequenceByHash(in rpctypes.ReqHashes, result *interface{}) er
 
 }
 
-//GetBlockBySeq get block by seq
+// GetBlockBySeq get block by seq
 func (c *Chain) GetBlockBySeq(in *types.Int64, result *interface{}) error {
 
 	blockSeq, err := c.cli.GetBlockBySeq(in)
@@ -1445,7 +1445,7 @@ func convertHeader(header *types.Header, message *rpctypes.Header) {
 	}
 }
 
-//GetParaTxByTitle get paraTx by title
+// GetParaTxByTitle get paraTx by title
 func (c *Chain) GetParaTxByTitle(req *types.ReqParaTxByTitle, result *interface{}) error {
 	paraTxDetails, err := c.cli.GetParaTxByTitle(req)
 	if err != nil {
@@ -1457,7 +1457,7 @@ func (c *Chain) GetParaTxByTitle(req *types.ReqParaTxByTitle, result *interface{
 	return nil
 }
 
-//LoadParaTxByTitle load paratx by title
+// LoadParaTxByTitle load paratx by title
 func (c *Chain) LoadParaTxByTitle(req *types.ReqHeightByTitle, result *interface{}) error {
 
 	reply, err := c.cli.LoadParaTxByTitle(req)
@@ -1511,7 +1511,7 @@ func convertParaTxDetails(details *types.ParaTxDetails, message *rpctypes.ParaTx
 
 }
 
-//GetParaTxByHeight get paraTx by block height
+// GetParaTxByHeight get paraTx by block height
 func (c *Chain) GetParaTxByHeight(req *types.ReqParaTxByHeight, result *interface{}) error {
 	paraTxDetails, err := c.cli.GetParaTxByHeight(req)
 	if err != nil {
@@ -1524,7 +1524,7 @@ func (c *Chain) GetParaTxByHeight(req *types.ReqParaTxByHeight, result *interfac
 
 }
 
-//QueryChain querychain by chain executor
+// QueryChain querychain by chain executor
 func (c *Chain) QueryChain(in rpctypes.ChainExecutor, result *interface{}) error {
 	var qin = new(types.ChainExecutor)
 	msg, err := types.QueryFunc.DecodeJSON(in.Driver, in.FuncName, in.Payload)
@@ -1631,7 +1631,7 @@ func (c *Chain) GetChainConfig(in *types.ReqNil, result *interface{}) error {
 	return nil
 }
 
-//AddBlacklist add peer to blacklist ,time deadline:10 years
+// AddBlacklist add peer to blacklist ,time deadline:10 years
 func (c *Chain) AddBlacklist(in *types.BlackPeer, result *interface{}) error {
 	reply, err := c.cli.AddBlacklist(in)
 	if err != nil {
@@ -1645,7 +1645,7 @@ func (c *Chain) AddBlacklist(in *types.BlackPeer, result *interface{}) error {
 
 }
 
-//DelBlacklist delete peer from blacklist
+// DelBlacklist delete peer from blacklist
 func (c *Chain) DelBlacklist(in *types.BlackPeer, result *interface{}) error {
 	reply, err := c.cli.DelBlacklist(in)
 	if err != nil {
@@ -1659,7 +1659,7 @@ func (c *Chain) DelBlacklist(in *types.BlackPeer, result *interface{}) error {
 
 }
 
-//ShowBlacklist show all peers from blacklist
+// ShowBlacklist show all peers from blacklist
 func (c *Chain) ShowBlacklist(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.ShowBlacklist(in)
 	if err != nil {
@@ -1670,7 +1670,7 @@ func (c *Chain) ShowBlacklist(in *types.ReqNil, result *interface{}) error {
 	return nil
 }
 
-//DialPeer dial the specified peer
+// DialPeer dial the specified peer
 func (c *Chain) DialPeer(in *types.SetPeer, result *interface{}) error {
 	reply, err := c.cli.DialPeer(in)
 	if err != nil {
@@ -1683,7 +1683,7 @@ func (c *Chain) DialPeer(in *types.SetPeer, result *interface{}) error {
 	return nil
 }
 
-//ClosePeer close the specified peer
+// ClosePeer close the specified peer
 func (c *Chain) ClosePeer(in *types.SetPeer, result *interface{}) error {
 	reply, err := c.cli.ClosePeer(in)
 	if err != nil {

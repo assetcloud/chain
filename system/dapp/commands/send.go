@@ -17,7 +17,7 @@ import (
 	"github.com/assetcloud/chain/common/address"
 )
 
-//OneStepSendCmd send cmd
+// OneStepSendCmd send cmd
 func OneStepSendCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                "send",

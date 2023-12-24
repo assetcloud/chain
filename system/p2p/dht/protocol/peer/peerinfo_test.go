@@ -20,10 +20,10 @@ import (
 	p2pty "github.com/assetcloud/chain/system/p2p/dht/types"
 	"github.com/assetcloud/chain/types"
 	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/libp2p/go-libp2p-core/metrics"
-	"github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
+	"github.com/libp2p/go-libp2p/core/crypto"
+	"github.com/libp2p/go-libp2p/core/metrics"
+	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/require"
 )
@@ -41,7 +41,7 @@ func initEnv(t *testing.T, q queue.Queue) (*Protocol, context.CancelFunc) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	host1, err := libp2p.New(context.Background(), libp2p.ListenAddrs(m1), libp2p.Identity(sk1))
+	host1, err := libp2p.New(libp2p.ListenAddrs(m1), libp2p.Identity(sk1))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -49,7 +49,7 @@ func initEnv(t *testing.T, q queue.Queue) (*Protocol, context.CancelFunc) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	host2, err := libp2p.New(context.Background(), libp2p.ListenAddrs(m2), libp2p.Identity(sk2))
+	host2, err := libp2p.New(libp2p.ListenAddrs(m2), libp2p.Identity(sk2))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,6 +211,8 @@ func TestPeerInfoHandler(t *testing.T) {
 	fmt.Println(p.PeerInfoManager.FetchAll())
 	fmt.Println(p.Host.ID())
 	require.Equal(t, 2, len(p.PeerInfoManager.FetchAll()))
+	//test checkVerionLimit
+	testCheckVerisonLimit(t, p)
 }
 
 func Test_isPublicIP(t *testing.T) {
@@ -279,3 +281,47 @@ func (c *connManager) BandTrackerByProtocol() *types.NetProtocolInfos {
 	return &types.NetProtocolInfos{}
 }
 func (c *connManager) RateCalculate(ratebytes float64) string { return "" }
+
+func testCheckVerisonLimit(t *testing.T, p *Protocol) {
+	testV0 := "1.67.1-64139470@5.7.0"
+	testV1 := "1.67.1-64139470@6.7.0"
+	testV2 := "1.67.3-5b3c44b5@6.8.0"
+	testV3 := "1.68.0-9d3383c5@6.8.8"
+	testV4 := "1.68.0-a612c9a6@6.8.9"
+	testV5 := "1.68.0-a612c9a6"
+	testV6 := "1.68.0-a612c9a6@6.8"
+	testV7 := "1.68.0-a612c9a6@"
+	//初始状态VerLimit 为空
+	var testVs []string
+	testVs = append(testVs, testV1, testV2, testV3, testV4, testV5, testV6, testV7)
+	for _, testV := range testVs {
+		isAllow := p.checkVersionLimit(testV)
+		require.True(t, isAllow)
+	}
+	p.SubConfig.VerLimit = "6.8.8"
+	isAllow := p.checkVersionLimit(testV0)
+	require.False(t, isAllow)
+	isAllow = p.checkVersionLimit(testV1)
+	require.False(t, isAllow)
+	isAllow = p.checkVersionLimit(testV2)
+	require.False(t, isAllow)
+	isAllow = p.checkVersionLimit(testV3)
+	require.True(t, isAllow)
+	isAllow = p.checkVersionLimit(testV4)
+	require.True(t, isAllow)
+	isAllow = p.checkVersionLimit(testV5)
+	require.False(t, isAllow)
+	isAllow = p.checkVersionLimit(testV6)
+	require.False(t, isAllow)
+	isAllow = p.checkVersionLimit(testV7)
+	require.False(t, isAllow)
+	p.SubConfig.VerLimit = "6.8.9"
+	for i, testV := range testVs {
+		isAllow := p.checkVersionLimit(testV)
+		if i == 3 {
+			require.True(t, isAllow)
+			continue
+		}
+		require.False(t, isAllow)
+	}
+}

@@ -49,10 +49,10 @@ func init() {
 	log.SetLogLevel("info")
 }
 
-//保证只有一个chain 会运行
+// 保证只有一个chain 会运行
 var lognode = log15.New("module", "lognode")
 
-//ChainMock :
+// ChainMock :
 type ChainMock struct {
 	random   *rand.Rand
 	q        queue.Queue
@@ -74,12 +74,12 @@ type ChainMock struct {
 	crypto   queue.Module
 }
 
-//GetDefaultConfig :
+// GetDefaultConfig :
 func GetDefaultConfig() *types.ChainConfig {
 	return types.NewChainConfig(types.GetDefaultCfgstring())
 }
 
-//NewWithConfig :
+// NewWithConfig :
 func NewWithConfig(cfg *types.ChainConfig, mockapi client.QueueProtocolAPI) *ChainMock {
 	return newWithConfig(cfg, mockapi)
 }
@@ -162,7 +162,7 @@ func newWithConfigNoLock(cfg *types.ChainConfig, mockapi client.QueueProtocolAPI
 	return mock
 }
 
-//New :
+// New :
 func New(cfgpath string, mockapi client.QueueProtocolAPI) *ChainMock {
 	var cfg *types.ChainConfig
 	if cfgpath == "" || cfgpath == "--notset--" || cfgpath == "--free--" {
@@ -177,7 +177,7 @@ func New(cfgpath string, mockapi client.QueueProtocolAPI) *ChainMock {
 	return newWithConfig(cfg, mockapi)
 }
 
-//Listen :
+// Listen :
 func (mock *ChainMock) Listen() {
 	pluginmgr.AddRPC(mock.rpc)
 	var portgrpc, portjsonrpc int
@@ -198,7 +198,7 @@ func (mock *ChainMock) Listen() {
 	}
 }
 
-//GetBlockChain :
+// GetBlockChain :
 func (mock *ChainMock) GetBlockChain() *blockchain.BlockChain {
 	return mock.chain
 }
@@ -208,7 +208,7 @@ func setFee(cfg *types.Config, fee int64) {
 	cfg.Wallet.MinFee = fee
 }
 
-//GetJSONC :
+// GetJSONC :
 func (mock *ChainMock) GetJSONC() *jsonclient.JSONClient {
 	jsonc, err := jsonclient.NewJSONClient("http://" + mock.cfg.RPC.JrpcBindAddr + "/")
 	if err != nil {
@@ -217,7 +217,7 @@ func (mock *ChainMock) GetJSONC() *jsonclient.JSONClient {
 	return jsonc
 }
 
-//SendAndSign :
+// SendAndSign :
 func (mock *ChainMock) SendAndSign(priv crypto.PrivKey, hextx string) ([]byte, error) {
 	txbytes, err := common.FromHex(hextx)
 	if err != nil {
@@ -237,7 +237,7 @@ func (mock *ChainMock) SendAndSign(priv crypto.PrivKey, hextx string) ([]byte, e
 	return reply.GetMsg(), nil
 }
 
-//SendAndSignNonce 用外部传入的nonce 重写nonce
+// SendAndSignNonce 用外部传入的nonce 重写nonce
 func (mock *ChainMock) SendAndSignNonce(priv crypto.PrivKey, hextx string, nonce int64) ([]byte, error) {
 	txbytes, err := common.FromHex(hextx)
 	if err != nil {
@@ -288,27 +288,27 @@ func newWalletRealize(qAPI client.QueueProtocolAPI) {
 	}
 }
 
-//GetAPI :
+// GetAPI :
 func (mock *ChainMock) GetAPI() client.QueueProtocolAPI {
 	return mock.api
 }
 
-//GetRPC :
+// GetRPC :
 func (mock *ChainMock) GetRPC() *rpc.RPC {
 	return mock.rpc
 }
 
-//GetCfg :
+// GetCfg :
 func (mock *ChainMock) GetCfg() *types.Config {
 	return mock.cfg
 }
 
-//GetLastSendTx :
+// GetLastSendTx :
 func (mock *ChainMock) GetLastSendTx() []byte {
 	return mock.lastsend
 }
 
-//Close :
+// Close :
 func (mock *ChainMock) Close() {
 	mock.closeNoLock()
 }
@@ -364,7 +364,7 @@ func (mock *ChainMock) WaitHeightTimeout(height int64, timeout int64) error {
 
 }
 
-//WaitHeight :
+// WaitHeight :
 func (mock *ChainMock) WaitHeight(height int64) error {
 	for {
 		header, err := mock.api.GetLastHeader()
@@ -379,7 +379,7 @@ func (mock *ChainMock) WaitHeight(height int64) error {
 	return nil
 }
 
-//WaitTx :
+// WaitTx :
 func (mock *ChainMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
 	if hash == nil {
 		return nil, nil
@@ -400,7 +400,7 @@ func (mock *ChainMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) 
 	}
 }
 
-//SendHot :
+// SendHot :
 func (mock *ChainMock) SendHot() error {
 	types.AssertConfig(mock.client)
 	tx := util.CreateCoinsTx(mock.client.GetConfig(), mock.GetGenesisKey(), mock.GetHotAddress(), 10000*types.DefaultCoinPrecision)
@@ -408,7 +408,7 @@ func (mock *ChainMock) SendHot() error {
 	return mock.Wait()
 }
 
-//SendTx :
+// SendTx :
 func (mock *ChainMock) SendTx(tx *types.Transaction) []byte {
 	reply, err := mock.GetAPI().SendTx(tx)
 	if err != nil {
@@ -418,14 +418,14 @@ func (mock *ChainMock) SendTx(tx *types.Transaction) []byte {
 	return reply.GetMsg()
 }
 
-//SetLastSend :
+// SetLastSend :
 func (mock *ChainMock) SetLastSend(hash []byte) {
 	mock.mu.Lock()
 	mock.lastsend = hash
 	mock.mu.Unlock()
 }
 
-//SendTxRPC :
+// SendTxRPC :
 func (mock *ChainMock) SendTxRPC(tx *types.Transaction) []byte {
 	var txhash string
 	hextx := common.ToHex(types.Encode(tx))
@@ -441,7 +441,7 @@ func (mock *ChainMock) SendTxRPC(tx *types.Transaction) []byte {
 	return hash
 }
 
-//Wait :
+// Wait :
 func (mock *ChainMock) Wait() error {
 	if mock.lastsend == nil {
 		return nil
@@ -450,7 +450,7 @@ func (mock *ChainMock) Wait() error {
 	return err
 }
 
-//GetAccount :
+// GetAccount :
 func (mock *ChainMock) GetAccount(stateHash []byte, addr string) *types.Account {
 	statedb := executor.NewStateDB(mock.client, stateHash, nil, nil)
 	types.AssertConfig(mock.client)
@@ -459,7 +459,7 @@ func (mock *ChainMock) GetAccount(stateHash []byte, addr string) *types.Account 
 	return acc.LoadAccount(addr)
 }
 
-//GetExecAccount :get execer account info
+// GetExecAccount :get execer account info
 func (mock *ChainMock) GetExecAccount(stateHash []byte, execer, addr string) *types.Account {
 	statedb := executor.NewStateDB(mock.client, stateHash, nil, nil)
 	types.AssertConfig(mock.client)
@@ -468,7 +468,7 @@ func (mock *ChainMock) GetExecAccount(stateHash []byte, execer, addr string) *ty
 	return acc.LoadExecAccount(addr, address.ExecAddress(execer))
 }
 
-//GetBlock :
+// GetBlock :
 func (mock *ChainMock) GetBlock(height int64) *types.Block {
 	blocks, err := mock.api.GetBlocks(&types.ReqBlocks{Start: height, End: height})
 	if err != nil {
@@ -477,7 +477,7 @@ func (mock *ChainMock) GetBlock(height int64) *types.Block {
 	return blocks.Items[0].Block
 }
 
-//GetLastBlock :
+// GetLastBlock :
 func (mock *ChainMock) GetLastBlock() *types.Block {
 	header, err := mock.api.GetLastHeader()
 	if err != nil {
@@ -486,27 +486,27 @@ func (mock *ChainMock) GetLastBlock() *types.Block {
 	return mock.GetBlock(header.Height)
 }
 
-//GetClient :
+// GetClient :
 func (mock *ChainMock) GetClient() queue.Client {
 	return mock.client
 }
 
-//GetHotKey :
+// GetHotKey :
 func (mock *ChainMock) GetHotKey() crypto.PrivKey {
 	return util.TestPrivkeyList[0]
 }
 
-//GetHotAddress :
+// GetHotAddress :
 func (mock *ChainMock) GetHotAddress() string {
 	return address.PubKeyToAddr(address.DefaultID, mock.GetHotKey().PubKey().Bytes())
 }
 
-//GetGenesisKey :
+// GetGenesisKey :
 func (mock *ChainMock) GetGenesisKey() crypto.PrivKey {
 	return util.TestPrivkeyList[1]
 }
 
-//GetGenesisAddress :
+// GetGenesisAddress :
 func (mock *ChainMock) GetGenesisAddress() string {
 	return address.PubKeyToAddr(address.DefaultID, mock.GetGenesisKey().PubKey().Bytes())
 }
@@ -514,7 +514,7 @@ func (mock *ChainMock) GetGenesisAddress() string {
 type mockP2P struct {
 }
 
-//SetQueueClient :
+// SetQueueClient :
 func (m *mockP2P) SetQueueClient(client queue.Client) {
 	go func() {
 		p2pKey := "p2p"
@@ -534,9 +534,9 @@ func (m *mockP2P) SetQueueClient(client queue.Client) {
 	}()
 }
 
-//Wait for ready
+// Wait for ready
 func (m *mockP2P) Wait() {}
 
-//Close :
+// Close :
 func (m *mockP2P) Close() {
 }
